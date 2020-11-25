@@ -32,7 +32,6 @@ const io = require('socket.io')(http);
 io.on('connection', (socket) => {
     console.log('a user connected');
     socket.emit('message', 'Welcome');
-    socket.broadcast('message', 'hihi')
     socket.on('disconnect', () => {
         console.log('user disconnected');
     });
