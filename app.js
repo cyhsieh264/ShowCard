@@ -59,9 +59,9 @@ app.use(function (err, req, res, next) {
     }
 });
 
-app.listen(port, () => {
-    console.log(`The application is running at http://localhost:${port}`);
-});
+if (NODE_ENV != 'production'){
+    app.listen(port, () => {console.log(`The application is running at http://localhost:${port}`);});
+}
 
 // server.listen(port, () => {
 //     console.log(`App is now running on port: ${port}`);
