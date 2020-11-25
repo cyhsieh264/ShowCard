@@ -26,10 +26,24 @@ app.use((req, res, next) => {
 app.set('json spaces', 2);
 
 // Socket.io
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.emit('message', 'Welcome');
+    socket.broadcast('message', 'hihi')
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+});
+
 // const server = require('http').Server(app);
 // const io = require('socket.io')(server);
 // const { socketCon } = require('./util/socketcon');
 // socketCon(io);
+
+
 
 // // Peerjs
 // const { PeerServer } = require('peer');
@@ -60,7 +74,8 @@ app.use(function (err, req, res, next) {
 });
 
 if (NODE_ENV != 'production'){
-    app.listen(port, () => {console.log(`The application is running at http://localhost:${port}`);});
+    // app.listen(port, () => {console.log(`The application is running on http://localhost:${port}`);});
+    http.listen(port, () => {console.log(`The application is running on http://localhost:${port}`);});
 }
 
 // server.listen(port, () => {
