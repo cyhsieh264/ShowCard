@@ -39,7 +39,7 @@ app.set('json spaces', 2);
 app.use('/api/' + API_VERSION,
     [
         // require('./server/routes/studio_route'),
-        require('./server/routes/canvas_route')
+        require('./server/routes/card_route')
     ]
 );
 

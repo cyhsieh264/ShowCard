@@ -3,9 +3,9 @@ const { wrapAsync } = require('../../util/util');
 
 const {
     test,
-} = require('../controllers/canvas_controller');
+} = require('../controllers/card_controller');
   
-router.route('/canvas/test')
+router.route('/card/test')
     .get(wrapAsync(test));
   
 module.exports = router;
