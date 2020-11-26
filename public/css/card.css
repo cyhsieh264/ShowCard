@@ -1,1 +1,18 @@
 @import "common.css";
+
+.chat {
+    margin-top: 100px;
+    background-color: aliceblue;
+}
+
+.room {
+    margin: 50px;
+    height: 200px;
+    background-color: white;
+}
+
+input {
+    margin-bottom: 50px;
+    width: 600px;
+    height: 20px;
+}

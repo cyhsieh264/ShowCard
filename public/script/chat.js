@@ -1,5 +1,14 @@
-const socket = io('/');
+const socket = io();
+
 socket.on('message', message => {
-    console.log(message)
-    $('#test').append(`<p>${message}</p>`)
+    $('.room').append(`<p>${message}</p>`)
 });
+
+$('#send-btn').click( () => {
+    if ($('#msg').val()) {
+        socket.emit('input msg', $('#msg').val())
+        $('#msg').val('')
+    } else {
+        alert('please enter message')
+    }
+})

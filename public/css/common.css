@@ -6,3 +6,7 @@ body{
 	font-family: "Noto Sans TC", "微軟正黑體", "新細明體", arial, sans-serif;
     background-color: #dfdfdf;
 }
+
+main{
+	text-align: center;
+}
