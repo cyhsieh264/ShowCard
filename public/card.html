@@ -11,11 +11,14 @@
     <body>
         <main>
             <h1>Design Your Card</h1>
-            <div class="canvas">
+            <div class="canvas" id="canvas-base">
                 <canvas id="canvas" style="padding-left: 100;"></canvas>
                 <div id="test"></div>
-                <button id="brush-on">brush on</button>
-                <button id="brush-off">brush off</button>
+                <button id="brush-on">Brush on</button>
+                <button id="brush-off">Brush off</button>
+                <button id="save-canvas">Save</button>
+                <button id="load-canvas">Load</button>
+                <button id="del-obj">Delete</button>
             </div>
             <div class="chat">
                 <h1>Chat Room</h1>
@@ -33,7 +36,7 @@
         <script src="script/common.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.2.0/fabric.min.js"></script>
         <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
-        <script src="script/canvas.js"></script>
         <script src="script/chat.js"></script>
+        <script src="script/canvas.js"></script>
     </body>
 </html>

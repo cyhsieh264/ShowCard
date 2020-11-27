@@ -1,10 +1,195 @@
-const Board = require('../models/card_model');
+const Card = require('../models/card_model');
 const { writeLog } = require('../../util/util');
 
-const test = async (req, res) => {
-    res.status(200).json({ data: 'card test info' });
+// let canvas = {
+//     version: '4.2.0',
+//     objects: [
+//       {
+//         type: 'rect',
+//         version: '4.2.0',
+//         originX: 'left',
+//         originY: 'top',
+//         left: 2,
+//         top: 154,
+//         width: 200,
+//         height: 100,
+//         fill: '#fcba03',
+//         stroke: null,
+//         strokeWidth: 1,
+//         strokeDashArray: null,
+//         strokeLineCap: 'butt',
+//         strokeDashOffset: 0,
+//         strokeLineJoin: 'miter',
+//         strokeMiterLimit: 4,
+//         scaleX: 1.03,
+//         scaleY: 1.03,
+//         angle: 0,
+//         flipX: false,
+//         flipY: false,
+//         opacity: 1,
+//         shadow: null,
+//         visible: true,
+//         backgroundColor: '',
+//         fillRule: 'nonzero',
+//         paintFirst: 'fill',
+//         globalCompositeOperation: 'source-over',
+//         skewX: 0,
+//         skewY: 0,
+//         rx: 0,
+//         ry: 0
+//       },
+//       {
+//         type: 'textbox',
+//         version: '4.2.0',
+//         originX: 'left',
+//         originY: 'top',
+//         left: 150,
+//         top: 100,
+//         width: 300,
+//         height: 45.2,
+//         fill: '#8a91ab',
+//         stroke: null,
+//         strokeWidth: 1,
+//         strokeDashArray: null,
+//         strokeLineCap: 'butt',
+//         strokeDashOffset: 0,
+//         strokeLineJoin: 'miter',
+//         strokeMiterLimit: 4,
+//         scaleX: 1,
+//         scaleY: 1,
+//         angle: 0,
+//         flipX: false,
+//         flipY: false,
+//         opacity: 1,
+//         shadow: null,
+//         visible: true,
+//         backgroundColor: '',
+//         fillRule: 'nonzero',
+//         paintFirst: 'fill',
+//         globalCompositeOperation: 'source-over',
+//         skewX: 0,
+//         skewY: 0,
+//         text: 'hello world',
+//         fontSize: 40,
+//         fontWeight: 'normal',
+//         fontFamily: 'Delicious',
+//         fontStyle: 'normal',
+//         lineHeight: 1.16,
+//         underline: false,
+//         overline: false,
+//         linethrough: false,
+//         textAlign: 'center',
+//         textBackgroundColor: '',
+//         charSpacing: 0,
+//         minWidth: 20,
+//         splitByGrapheme: false,
+//         styles: {}
+//       }
+//     ],
+//     background: '#fff'
+//   }
+
+
+const saveCanvas = async (req, res) => {
+    const data = req.body;
+    console.log(data);
+    console.log(typeof data);
+    res.status(200).json({ data: 'save canvas' });
+};
+
+const loadCanvas = async (req, res) => {
+    let canvas = {
+        version: '4.2.0',
+        objects: [
+          {
+            type: 'rect',
+            version: '4.2.0',
+            originX: 'left',
+            originY: 'top',
+            left: 2,
+            top: 154,
+            width: 200,
+            height: 100,
+            fill: '#fcba03',
+            stroke: null,
+            strokeWidth: 1,
+            strokeDashArray: null,
+            strokeLineCap: 'butt',
+            strokeDashOffset: 0,
+            strokeLineJoin: 'miter',
+            strokeMiterLimit: 4,
+            scaleX: 1.03,
+            scaleY: 1.03,
+            angle: 0,
+            flipX: false,
+            flipY: false,
+            opacity: 1,
+            shadow: null,
+            visible: true,
+            backgroundColor: '',
+            fillRule: 'nonzero',
+            paintFirst: 'fill',
+            globalCompositeOperation: 'source-over',
+            skewX: 0,
+            skewY: 0,
+            rx: 0,
+            ry: 0
+          },
+          {
+            type: 'textbox',
+            version: '4.2.0',
+            originX: 'left',
+            originY: 'top',
+            left: 150,
+            top: 100,
+            width: 300,
+            height: 45.2,
+            fill: '#8a91ab',
+            stroke: null,
+            strokeWidth: 1,
+            strokeDashArray: null,
+            strokeLineCap: 'butt',
+            strokeDashOffset: 0,
+            strokeLineJoin: 'miter',
+            strokeMiterLimit: 4,
+            scaleX: 1,
+            scaleY: 1,
+            angle: 0,
+            flipX: false,
+            flipY: false,
+            opacity: 1,
+            shadow: null,
+            visible: true,
+            backgroundColor: '',
+            fillRule: 'nonzero',
+            paintFirst: 'fill',
+            globalCompositeOperation: 'source-over',
+            skewX: 0,
+            skewY: 0,
+            text: 'hello world',
+            fontSize: 40,
+            fontWeight: 'normal',
+            fontFamily: 'Delicious',
+            fontStyle: 'normal',
+            lineHeight: 1.16,
+            underline: false,
+            overline: false,
+            linethrough: false,
+            textAlign: 'center',
+            textBackgroundColor: '',
+            charSpacing: 0,
+            minWidth: 20,
+            splitByGrapheme: false,
+            styles: {}
+          }
+        ],
+        background: '#fff'
+      }
+    console.log(canvas)
+    res.status(200).json(canvas);
 };
 
 module.exports = {
-    test,
+    saveCanvas,
+    loadCanvas
 }

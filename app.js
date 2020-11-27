@@ -28,37 +28,8 @@ app.set('json spaces', 2);
 // Socket.io
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-
-io.on('connection', (socket) => {   // 相當於 function x (socket) {}
-    console.log('a user connected');
-    const user = 'Server'
-    const msg = 'Welcome!'
-    socket.emit('message', [`${user} :  ${msg} `, (new Date()).toLocaleString()]);
-    socket.on('input msg', (msg) => {
-        if (msg == 'hi') {
-            socket.emit('message', [`You :  ${msg} `, (new Date()).toLocaleString()])
-            setTimeout(() => {
-                socket.emit('message', [`${user} :  Have a nice day!! `, (new Date()).toLocaleString()])
-            }, 500);
-        } else {
-            socket.emit('message', [`You :  ${msg} `, (new Date()).toLocaleString()])
-            setTimeout(() => {
-                socket.emit('message', [`${user} :  Oh, I see. `, (new Date()).toLocaleString()])
-            }, 500);
-        }
-        // socket.emit('message', [`You :  ${msg} `, (new Date()).toLocaleString()])
-    })
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
-});
-
-// const server = require('http').Server(app);
-// const io = require('socket.io')(server);
-// const { socketCon } = require('./util/socketcon');
-// socketCon(io);
-
-
+const { socketCon } = require('./server/sockets/socketcon');
+socketCon(io);
 
 // // Peerjs
 // const { PeerServer } = require('peer');
@@ -67,7 +38,7 @@ io.on('connection', (socket) => {   // 相當於 function x (socket) {}
 // API routes
 app.use('/api/' + API_VERSION,
     [
-        // require('./server/routes/studio_route'),
+        require('./server/routes/studio_route'),
         require('./server/routes/card_route')
     ]
 );
@@ -89,8 +60,9 @@ app.use(function (err, req, res, next) {
 });
 
 if (NODE_ENV != 'production'){
-    // app.listen(port, () => {console.log(`The application is running on http://localhost:${port}`);});
-    http.listen(port, () => {console.log(`The application is running on http://localhost:${port}`);});
+    http.listen(port, () => {
+        console.log(`The application is running on port ${port}`);
+    });
 }
 
 // server.listen(port, () => {

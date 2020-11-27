@@ -43,3 +43,35 @@ $('#brush-off').click(() => canvas.isDrawingMode = false)
 $('.lower-canvas').css({ left: 'auto' })
 
 $('.upper-canvas').css({ left: 'auto' })
+
+$('#save-canvas').click(() => {
+    // socket.emit('save canvas', canvas)
+    data = JSON.stringify(canvas.toJSON());
+    console.log(data.length);
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'api/1.0/canvas/savecanvas');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(data);
+})
+
+$('#load-canvas').click(() => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'api/1.0/canvas/loadcanvas');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send();
+    xhr.onreadystatechange = function() {
+        console.log(this.readyState)
+        if (xhr.readyState === 4) {
+            const result = JSON.parse(xhr.responseText);
+            canvas.clear();
+            canvas.loadFromJSON(result, canvas.renderAll.bind(canvas));
+        }
+    };
+})
+
+$('#del-obj').click(() => {
+    canvas.remove(canvas.getActiveObject())
+})
+
+// savecanvas
+// savechat
