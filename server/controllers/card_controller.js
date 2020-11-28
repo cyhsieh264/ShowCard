@@ -92,8 +92,8 @@ const { writeLog } = require('../../util/util');
 
 const saveCanvas = async (req, res) => {
     const data = req.body;
-    console.log(data);
-    console.log(typeof data);
+    // console.log(data);
+    // console.log(typeof data);
     res.status(200).json({ data: 'save canvas' });
 };
 
