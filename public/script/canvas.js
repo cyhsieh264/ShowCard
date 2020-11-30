@@ -45,28 +45,33 @@ $('.lower-canvas').css({ left: 'auto' })
 $('.upper-canvas').css({ left: 'auto' })
 
 $('#save-canvas').click(() => {
-    // socket.emit('save canvas', canvas)
-    data = JSON.stringify(canvas.toJSON());
+    data = canvas.toJSON();
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'api/1.0/canvas/savecanvas');
     xhr.setRequestHeader("Content-type", "application/json");
-    xhr.send(data);
+    xhr.send(JSON.stringify(data));
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            socket.emit('edit canvas', data)
+        }
+    };
 })
 
-// $('#load-canvas').click(() => {
-//     const xhr = new XMLHttpRequest();
-//     xhr.open('GET', 'api/1.0/canvas/loadcanvas');
-//     xhr.setRequestHeader("Content-type", "application/json");
-//     xhr.send();
-//     xhr.onreadystatechange = function() {
-//         console.log(this.readyState)
-//         if (xhr.readyState === 4) {
-//             const result = JSON.parse(xhr.responseText);
-//             canvas.clear();
-//             canvas.loadFromJSON(result, canvas.renderAll.bind(canvas));
-//         }
-//     };
-// })
+socket.on('change canvas', (otherCanvas) => {
+    let newCanvas = otherCanvas
+    console.log(newCanvas)
+    if (canvas.getActiveObject()) {
+        const activeObject = canvas.getActiveObject()
+        console.log(activeObject)
+        newCanvas = otherCanvas.objects.push(activeObject)
+        
+        canvas.clear();
+        canvas.loadFromJSON(newCanvas, canvas.renderAll.bind(canvas));
+    }
+    // console.log(newCanvas)
+    // canvas.clear();
+    // canvas.loadFromJSON(newCanvas, canvas.renderAll.bind(canvas));
+});
 
 $('#undo-canvas').click(() => {
     const xhr = new XMLHttpRequest();
