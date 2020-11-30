@@ -1,7 +1,7 @@
 require('dotenv').config();
 const mysql = require('mysql');
 const { promisify } = require('util');
-const { DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_DATABASE_TEST } = process.env;
+const { DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_DATABASE_TEST, NODE_ENV } = process.env;
 const env = NODE_ENV || 'production';
 
 const mysqlConfig = {

@@ -3,14 +3,17 @@ const { wrapAsync } = require('../../util/util');
 
 const {
     saveCanvas,
-    loadCanvas
-} = require('../controllers/card_controller');
+    undoCanvas,
+    redoCanvas
+} = require('../controllers/canvas_controller');
   
 router.route('/canvas/savecanvas')
     .post(wrapAsync(saveCanvas));
 
-router.route('/canvas/loadcanvas')
-    .get(wrapAsync(loadCanvas));
+router.route('/canvas/undocanvas')
+    .get(wrapAsync(undoCanvas));
+
+router.route('/canvas/redocanvas')
+    .get(wrapAsync(redoCanvas));
 
 module.exports = router;
-
