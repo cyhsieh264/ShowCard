@@ -57,20 +57,9 @@ $('#save-canvas').click(() => {
     };
 })
 
-socket.on('change canvas', (otherCanvas) => {
-    let newCanvas = otherCanvas
-    console.log(newCanvas)
-    if (canvas.getActiveObject()) {
-        const activeObject = canvas.getActiveObject()
-        console.log(activeObject)
-        newCanvas = otherCanvas.objects.push(activeObject)
-        
-        canvas.clear();
-        canvas.loadFromJSON(newCanvas, canvas.renderAll.bind(canvas));
-    }
-    // console.log(newCanvas)
-    // canvas.clear();
-    // canvas.loadFromJSON(newCanvas, canvas.renderAll.bind(canvas));
+socket.on('change canvas', (objects) => { 
+    canvas.clear();
+    canvas.loadFromJSON(objects, canvas.renderAll.bind(canvas));
 });
 
 $('#undo-canvas').click(() => {
