@@ -24,7 +24,6 @@ const load = async() => {
 const undo = async() => {
     try {
         await transaction();
-        // 這裡可能要用count
         const lastStep = (await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0];
         if (lastStep.init == true) return false
         const data = {
@@ -37,7 +36,6 @@ const undo = async() => {
         }
         await query('INSERT INTO `canvas_undo` SET ?', data);
         await query('DELETE FROM `canvas_done` WHERE `id` = ?', lastStep.id);
-        // 如果剩最後一步可以undo，上面刪完之後就沒得抓了
         const process = await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1');
         await commit();
         return process[0];
