@@ -12,16 +12,33 @@ const saveCanvas = async (req, res) => {
     };
     await Card.save(data);
     res.status(200).json({ data: 'save canvas' });
+    return;
 };
 
 const undoCanvas = async (req, res) => {
     const data = await Card.undo();
+    if (!data || data.error) {
+        res.status(200).json({ message: 'Already the last step'}); 
+        return;
+    }
     res.status(200).json({ data: data });
+    return;
 };
 
 const redoCanvas = async (req, res) => {
     const data = await Card.redo();
+    if (!data || data.error) {
+        res.status(200).json({ message: 'Already the last step'}); 
+        return;
+    }
     res.status(200).json({ data: data });
+    return;
+};
+
+const ifUndo = async (req, res) => {
+    // const data = await Card.redo();
+    res.status(200).json({ data: 'new api?' });
+    return;
 };
 
 module.exports = {
@@ -29,3 +46,6 @@ module.exports = {
     undoCanvas,
     redoCanvas
 };
+
+// new column for tracking room users
+

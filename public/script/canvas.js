@@ -5,8 +5,6 @@ const canvas = new fabric.Canvas('canvas', {
     backgroundColor: '#fff',
 })
 
-// console.log(canvas)
-
 const rect = new fabric.Rect({
     height: 100,
     width: 200,
@@ -16,6 +14,17 @@ const rect = new fabric.Rect({
 })
 
 canvas.add(rect)
+
+const rect2 = new fabric.Rect({
+    height: 100,
+    width: 200,
+    top: 250,
+    left: 80,
+    fill: '#42f587'
+})
+
+canvas.add(rect2)
+canvas.setActiveObject(rect2)
 
 // canvas.isDrawingMode = true;
 // const brush = new fabric.PatternBrush(canvas);
@@ -52,14 +61,14 @@ $('#save-canvas').click(() => {
     xhr.send(JSON.stringify(data));
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
-            socket.emit('edit canvas', data)
+            socket.emit('edit canvas', data);
         }
     };
 })
 
-socket.on('change canvas', (objects) => { 
+socket.on('change canvas', (newCanvas) => { 
     canvas.clear();
-    canvas.loadFromJSON(objects, canvas.renderAll.bind(canvas));
+    canvas.loadFromJSON(newCanvas, canvas.renderAll.bind(canvas));
 });
 
 $('#undo-canvas').click(() => {
@@ -70,8 +79,12 @@ $('#undo-canvas').click(() => {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             const result = JSON.parse(xhr.responseText);
-            canvas.clear();
-            canvas.loadFromJSON(result.data[0].canvas, canvas.renderAll.bind(canvas));
+            if (result.message) {
+                alert(result.message)
+            } else {
+                canvas.clear();
+                canvas.loadFromJSON(result.data[0].canvas, canvas.renderAll.bind(canvas));
+            }
         }
     };
 })
@@ -84,8 +97,12 @@ $('#redo-canvas').click(() => {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             const result = JSON.parse(xhr.responseText);
-            canvas.clear();
-            canvas.loadFromJSON(result.data[0].canvas, canvas.renderAll.bind(canvas));
+            if (result.message) {
+                alert(result.message)
+            } else {
+                canvas.clear();
+                canvas.loadFromJSON(result.data[0].canvas, canvas.renderAll.bind(canvas));
+            }
         }
     };
 })

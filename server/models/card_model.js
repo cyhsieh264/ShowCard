@@ -4,6 +4,7 @@ const save = async(data) => {
     try {
         await transaction();
         await query('INSERT INTO `canvas_done` SET ?', data);
+        await query('DELETE FROM `canvas_undo` WHERE `user_display_name` = ?', data.user_display_name);
         await commit();
         return true;
     } catch (error) {
@@ -16,6 +17,7 @@ const undo = async() => {
     try {
         await transaction();
         const lastProcess = (await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0];
+        if (!lastProcess) return false
         const data = {
             card_id: lastProcess.card_id,
             user_id: lastProcess.user_id,
@@ -38,6 +40,7 @@ const redo = async() => {
     try {
         await transaction();
         const formerProcess = (await query('SELECT * FROM `canvas_undo` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0];
+        if (!formerProcess) return false
         const data = {
             card_id: formerProcess.card_id,
             user_id: formerProcess.user_id,
