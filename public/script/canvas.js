@@ -53,7 +53,7 @@ $('.lower-canvas').css({ left: 'auto' })
 
 $('.upper-canvas').css({ left: 'auto' })
 
-$('#save-canvas').click(() => {
+const saveCanvas = () => {
     data = canvas.toJSON();
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'api/1.0/canvas/savecanvas');
@@ -64,7 +64,13 @@ $('#save-canvas').click(() => {
             socket.emit('edit canvas', data);
         }
     };
-})
+}
+
+$('#save-canvas').click(saveCanvas);
+canvas.on('object:modified', saveCanvas);
+canvas.on('object:created', saveCanvas);
+canvas.on('object:removed', saveCanvas);
+canvas.on('path:created', saveCanvas);
 
 socket.on('change canvas', (newCanvas) => { 
     canvas.clear();
