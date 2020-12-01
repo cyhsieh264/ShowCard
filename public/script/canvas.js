@@ -53,6 +53,41 @@ $('.lower-canvas').css({ left: 'auto' })
 
 $('.upper-canvas').css({ left: 'auto' })
 
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'api/1.0/canvas/checkcanvas');
+xhr.setRequestHeader("Content-type", "application/json");
+xhr.send();
+xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+        const result = JSON.parse(xhr.responseText);
+        if (result.data.count == 0){
+            data = canvas.toJSON();
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'api/1.0/canvas/saveinitcanvas');
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.send(JSON.stringify(data));
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    const result = JSON.parse(xhr.responseText);
+                    console.log(result)
+                }
+            };
+        } else {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'api/1.0/canvas/loadcanvas');
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    const result = JSON.parse(xhr.responseText);
+                    canvas.clear();
+                    canvas.loadFromJSON(result.data.step.canvas, canvas.renderAll.bind(canvas));
+                }
+            };
+        }
+    }
+};
+
 const saveCanvas = () => {
     data = canvas.toJSON();
     const xhr = new XMLHttpRequest();
@@ -89,7 +124,7 @@ $('#undo-canvas').click(() => {
                 alert(result.message)
             } else {
                 canvas.clear();
-                canvas.loadFromJSON(result.data[0].canvas, canvas.renderAll.bind(canvas));
+                canvas.loadFromJSON(result.data.step.canvas, canvas.renderAll.bind(canvas));
             }
         }
     };
@@ -107,7 +142,7 @@ $('#redo-canvas').click(() => {
                 alert(result.message)
             } else {
                 canvas.clear();
-                canvas.loadFromJSON(result.data[0].canvas, canvas.renderAll.bind(canvas));
+                canvas.loadFromJSON(result.data.step.canvas, canvas.renderAll.bind(canvas));
             }
         }
     };

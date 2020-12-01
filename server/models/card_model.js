@@ -13,23 +13,34 @@ const save = async(data) => {
     }
 }
 
+const check = async() => {
+    return await query('SELECT COUNT(`user_display_name`) FROM `canvas_done` WHERE `user_display_name` = ?', 'guest1');
+}
+
+const load = async() => {
+    return (await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0];
+}
+
 const undo = async() => {
     try {
         await transaction();
-        const lastProcess = (await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0];
-        if (!lastProcess) return false
+        // 這裡可能要用count
+        const lastStep = (await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0];
+        if (lastStep.init == true) return false
         const data = {
-            card_id: lastProcess.card_id,
-            user_id: lastProcess.user_id,
-            user_display_name: lastProcess.user_display_name,
-            action: lastProcess.action,
-            canvas: lastProcess.canvas
+            card_id: lastStep.card_id,
+            user_id: lastStep.user_id,
+            user_display_name: lastStep.user_display_name,
+            action: lastStep.action,
+            canvas: lastStep.canvas,
+            init: lastStep.init
         }
         await query('INSERT INTO `canvas_undo` SET ?', data);
-        await query('DELETE FROM `canvas_done` WHERE `id` = ?', lastProcess.id);
+        await query('DELETE FROM `canvas_done` WHERE `id` = ?', lastStep.id);
+        // 如果剩最後一步可以undo，上面刪完之後就沒得抓了
         const process = await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1');
         await commit();
-        return process;
+        return process[0];
     } catch (error) {
         await rollback();
         return { error };
@@ -39,20 +50,21 @@ const undo = async() => {
 const redo = async() => {
     try {
         await transaction();
-        const formerProcess = (await query('SELECT * FROM `canvas_undo` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0];
-        if (!formerProcess) return false
+        const formerStep = (await query('SELECT * FROM `canvas_undo` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0];
+        if (!formerStep) return false
         const data = {
-            card_id: formerProcess.card_id,
-            user_id: formerProcess.user_id,
-            user_display_name: formerProcess.user_display_name,
-            action: formerProcess.action,
-            canvas: formerProcess.canvas
+            card_id: formerStep.card_id,
+            user_id: formerStep.user_id,
+            user_display_name: formerStep.user_display_name,
+            action: formerStep.action,
+            canvas: formerStep.canvas,
+            init: formerStep.init
         }
         await query('INSERT INTO `canvas_done` SET ?', data);
-        await query('DELETE FROM `canvas_undo` WHERE `id` = ?', formerProcess.id);
-        const process = await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1');
+        await query('DELETE FROM `canvas_undo` WHERE `id` = ?', formerStep.id);
+        const step = await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1');
         await commit();
-        return process;
+        return step[0];
     } catch (error) {
         await rollback();
         return { error };
@@ -61,6 +73,8 @@ const redo = async() => {
 
 module.exports = {
     save,
+    check,
+    load,
     undo,
     redo
 }

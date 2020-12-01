@@ -49,15 +49,15 @@ app.use(function (req, res, next) {
 });
 
 // Error handling
-app.use(function (err, req, res, next) {
-    const { status, error } = err;
-    writeLog({ error });
-    if (status && error) {
-        res.status(status).json({ error });
-    } else {
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
+// app.use(function (err, req, res, next) {
+//     const { status, error } = err;
+//     writeLog({ error });
+//     if (status && error) {
+//         res.status(status).json({ error });
+//     } else {
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// });
 
 if (NODE_ENV != 'production'){
     http.listen(port, () => {
