@@ -1,1 +1,12 @@
 @import "common.css";
+
+
+
+/* .hide {
+    display: none !important;
+    z-index: -9999 !important;;
+} */
+
+.btn {
+    background-color: rgb(93, 156, 135);
+}

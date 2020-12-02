@@ -36,9 +36,9 @@ const undo = async() => {
         }
         await query('INSERT INTO `canvas_undo` SET ?', data);
         await query('DELETE FROM `canvas_done` WHERE `id` = ?', lastStep.id);
-        const process = await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1');
+        const step = await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1');
         await commit();
-        return process[0];
+        return step[0];
     } catch (error) {
         await rollback();
         return { error };

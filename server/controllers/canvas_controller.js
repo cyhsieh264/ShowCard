@@ -11,9 +11,12 @@ const saveInitCanvas = async (req, res) => {
         canvas: JSON.stringify(canvas),
         init: true
     };
-    await Card.save(data);
-    res.status(200).json({ message: 'save canvas' });
-    return;
+    const { error, message } = await Card.save(data);
+    if (error) {
+        writeLog({ error });
+        return error
+    } 
+    return res.status(200).json({ message: 'save canvas' });
 };
 
 const saveCanvas = async (req, res) => {
@@ -27,20 +30,17 @@ const saveCanvas = async (req, res) => {
         init: false
     };
     await Card.save(data);
-    res.status(200).json({ message: 'save canvas' });
-    return;
+    return res.status(200).json({ message: 'save canvas' });
 };
 
 const checkCanvas = async (req, res) => {
     const data = ((await Card.check())[0])['COUNT(`user_display_name`)'];
-    res.status(200).json({ data: { count: data } });
-    return;
+    return res.status(200).json({ data: { count: data } });
 };
 
 const loadCanvas = async (req, res) => {
     const data = await Card.load();
-    res.status(200).json({ data: { step: data } });
-    return;
+    return res.status(200).json({ data: { step: data } });
 };
 
 const undoCanvas = async (req, res) => {
@@ -49,18 +49,15 @@ const undoCanvas = async (req, res) => {
         res.status(200).json({ message: 'Already the last step' }); 
         return;
     }
-    res.status(200).json({ data: { step: data } });
-    return;
+    return res.status(200).json({ data: { step: data } });
 };
 
 const redoCanvas = async (req, res) => {
     const data = await Card.redo();
     if (!data || data.error) {
-        res.status(200).json({ message: 'Already the last step' }); 
-        return;
+        return res.status(200).json({ message: 'Already the last step' }); 
     }
-    res.status(200).json({ data: { step: data } });
-    return;
+    return res.status(200).json({ data: { step: data } });
 };
 
 module.exports = {

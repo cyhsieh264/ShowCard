@@ -38,6 +38,7 @@ socketCon(io);
 // API routes
 app.use('/api/' + API_VERSION,
     [
+        require('./server/routes/user_route'),
         require('./server/routes/studio_route'),
         require('./server/routes/card_route')
     ]
@@ -49,15 +50,11 @@ app.use(function (req, res, next) {
 });
 
 // Error handling
-// app.use(function (err, req, res, next) {
-//     const { status, error } = err;
-//     writeLog({ error });
-//     if (status && error) {
-//         res.status(status).json({ error });
-//     } else {
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
+app.use(function (err, req, res, next) {
+    const { stack } = err;
+    writeLog(stack);
+    res.status(500).json({ error: 'Internal Server Error' });
+});
 
 if (NODE_ENV != 'production'){
     http.listen(port, () => {
