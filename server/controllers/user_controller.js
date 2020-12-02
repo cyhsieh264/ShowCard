@@ -17,7 +17,7 @@ const signup = async (req, res) => {
     if (error) {
         const { stack } = error;
         writeLog({ stack });
-        return res.status(500).json({ error: 'Database Query Error' });
+        return res.status(500).json({ error: 'Database query error' });
     }
     // generate token
 

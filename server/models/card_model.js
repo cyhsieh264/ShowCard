@@ -6,7 +6,7 @@ const save = async(data) => {
         await query('INSERT INTO `canvas_done` SET ?', data);
         await query('DELETE FROM `canvas_undo` WHERE `user_display_name` = ?', data.user_display_name);
         await commit();
-        return true;
+        return { message: 'Success' };
     } catch (error) {
         await rollback();
         return { error };
@@ -14,18 +14,29 @@ const save = async(data) => {
 };
 
 const check = async() => {
-    return await query('SELECT COUNT(`user_display_name`) FROM `canvas_done` WHERE `user_display_name` = ?', 'guest1');
+    try {
+        return { result: (await query('SELECT COUNT(`user_display_name`) FROM `canvas_done` WHERE `user_display_name` = ?', 'guest1'))[0]['COUNT(`user_display_name`)'] }
+    } catch (error) {
+        return { error }
+    }
 };
 
 const load = async() => {
-    return (await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0];
+    try {
+        return { result: (await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0] };
+    } catch (error) {
+        return { error }
+    }
 };
 
 const undo = async() => {
     try {
         await transaction();
         const lastStep = (await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0];
-        if (lastStep.init == true) return false
+        if (lastStep.init == true) {
+            await commit();
+            return { message: 'Already the last step' };
+        }
         const data = {
             card_id: lastStep.card_id,
             user_id: lastStep.user_id,
@@ -38,7 +49,7 @@ const undo = async() => {
         await query('DELETE FROM `canvas_done` WHERE `id` = ?', lastStep.id);
         const step = await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1');
         await commit();
-        return step[0];
+        return { result: step[0] };
     } catch (error) {
         await rollback();
         return { error };
@@ -49,7 +60,10 @@ const redo = async() => {
     try {
         await transaction();
         const formerStep = (await query('SELECT * FROM `canvas_undo` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0];
-        if (!formerStep) return false
+        if (!formerStep) {
+            await commit();
+            return { message: 'Already the last step' };
+        }
         const data = {
             card_id: formerStep.card_id,
             user_id: formerStep.user_id,
@@ -62,7 +76,7 @@ const redo = async() => {
         await query('DELETE FROM `canvas_undo` WHERE `id` = ?', formerStep.id);
         const step = await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1');
         await commit();
-        return step[0];
+        return { result: step[0] };
     } catch (error) {
         await rollback();
         return { error };

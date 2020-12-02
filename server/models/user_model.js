@@ -9,7 +9,7 @@ const signup = async(data) => {
         await transaction();
         await query('INSERT INTO `user` SET ?', data);
         await commit();
-        return { message: 'Query Success' };
+        return { message: 'Success' };
     } catch (error) {
         await rollback();
         return { error };

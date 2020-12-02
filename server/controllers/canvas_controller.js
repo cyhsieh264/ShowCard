@@ -16,7 +16,7 @@ const saveInitCanvas = async (req, res) => {
         writeLog({ error });
         return error
     } 
-    return res.status(200).json({ message: 'save canvas' });
+    return res.status(200).json({ message: message });
 };
 
 const saveCanvas = async (req, res) => {
@@ -29,35 +29,55 @@ const saveCanvas = async (req, res) => {
         canvas: JSON.stringify(canvas),
         init: false
     };
-    await Card.save(data);
-    return res.status(200).json({ message: 'save canvas' });
+    const { message, error } = await Card.save(data);
+    if (error) {
+        const { stack } = error;
+        writeLog({ stack });
+        return res.status(500).json({ error: 'Database query error' });
+    }
+    return res.status(200).json({ message: message });
 };
 
 const checkCanvas = async (req, res) => {
-    const data = ((await Card.check())[0])['COUNT(`user_display_name`)'];
-    return res.status(200).json({ data: { count: data } });
+    const { result, error } = await Card.check();
+    if (error) {
+        const { stack } = error;
+        writeLog({ stack });
+        return res.status(500).json({ error: 'Database query error' });
+    }
+    return res.status(200).json({ data: { count: result } });
 };
 
 const loadCanvas = async (req, res) => {
-    const data = await Card.load();
-    return res.status(200).json({ data: { step: data } });
+    const { result, error } = await Card.load();
+    if (error) {
+        const { stack } = error;
+        writeLog({ stack });
+        return res.status(500).json({ error: 'Database query error' });
+    }
+    return res.status(200).json({ data: { step: result } });
 };
 
 const undoCanvas = async (req, res) => {
-    const data = await Card.undo();
-    if (!data || data.error) {
-        res.status(200).json({ message: 'Already the last step' }); 
-        return;
+    const { result, message, error } = await Card.undo();
+    if (message) return res.status(200).json({ message: message });
+    if (error) {
+        const { stack } = error;
+        writeLog({ stack });
+        return res.status(500).json({ error: 'Database query error' });
     }
-    return res.status(200).json({ data: { step: data } });
+    return res.status(200).json({ data: { step: result } });
 };
 
 const redoCanvas = async (req, res) => {
-    const data = await Card.redo();
-    if (!data || data.error) {
-        return res.status(200).json({ message: 'Already the last step' }); 
+    const { result, message, error } = await Card.redo();
+    if (message) return res.status(200).json({ message: message });
+    if (error) {
+        const { stack } = error;
+        writeLog({ stack });
+        return res.status(500).json({ error: 'Database query error' });
     }
-    return res.status(200).json({ data: { step: data } });
+    return res.status(200).json({ data: { step: result } });
 };
 
 module.exports = {
