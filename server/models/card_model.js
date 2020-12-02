@@ -11,15 +11,15 @@ const save = async(data) => {
         await rollback();
         return { error };
     }
-}
+};
 
 const check = async() => {
     return await query('SELECT COUNT(`user_display_name`) FROM `canvas_done` WHERE `user_display_name` = ?', 'guest1');
-}
+};
 
 const load = async() => {
     return (await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0];
-}
+};
 
 const undo = async() => {
     try {
@@ -43,7 +43,7 @@ const undo = async() => {
         await rollback();
         return { error };
     }
-}
+};
 
 const redo = async() => {
     try {
@@ -67,7 +67,7 @@ const redo = async() => {
         await rollback();
         return { error };
     }
-}
+};
 
 module.exports = {
     save,
@@ -75,4 +75,4 @@ module.exports = {
     load,
     undo,
     redo
-}
+};

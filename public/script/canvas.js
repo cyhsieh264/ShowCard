@@ -4,7 +4,7 @@ const canvas = new fabric.Canvas('canvas', {
     height: 400,
     originX: 'center',
     backgroundColor: '#fff',
-})
+});
 
 // Check and Load Canvas When Entering the Room
 const xhr = new XMLHttpRequest();
@@ -42,8 +42,8 @@ xhr.onreadystatechange = function() {
 // Init Brush Function
 const brush = new fabric.PatternBrush(canvas);
 
-$('#brush-on').click(() => canvas.isDrawingMode = true)
-$('#brush-off').click(() => canvas.isDrawingMode = false)
+$('#brush-on').click(() => canvas.isDrawingMode = true);
+$('#brush-off').click(() => canvas.isDrawingMode = false);
 
 // Init Icon Function
 
@@ -73,7 +73,7 @@ const rect = new fabric.Rect({
     fill: '#fcba03'
 })
 
-canvas.add(rect)
+canvas.add(rect);
 
 const rect2 = new fabric.Rect({
     height: 100,
@@ -83,8 +83,8 @@ const rect2 = new fabric.Rect({
     fill: '#42f587'
 })
 
-canvas.add(rect2)
-canvas.setActiveObject(rect2)
+canvas.add(rect2);
+canvas.setActiveObject(rect2);
 
 // canvas.isDrawingMode = true;
 // const brush = new fabric.PatternBrush(canvas);
@@ -95,7 +95,7 @@ canvas.setActiveObject(rect2)
 // Remove Object
 $('#rm-obj').click(() => {
     canvas.remove(canvas.getActiveObject())
-})
+});
 
 // Save and Synchronize Canvas
 const saveCanvas = () => {
@@ -109,7 +109,7 @@ const saveCanvas = () => {
             socket.emit('edit canvas', data);
         }
     };
-}
+};
 
 $('#save-canvas').click(saveCanvas);
 canvas.on('object:modified', saveCanvas);
@@ -139,7 +139,7 @@ $('#undo-canvas').click(() => {
             }
         }
     };
-})
+});
 
 $('#redo-canvas').click(() => {
     const xhr = new XMLHttpRequest();
@@ -157,7 +157,7 @@ $('#redo-canvas').click(() => {
             }
         }
     };
-})
+});
 
 // // Modify CSS Layout
 // $('.lower-canvas').css({ left: 'auto' })
