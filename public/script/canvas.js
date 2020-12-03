@@ -94,7 +94,8 @@ canvas.setActiveObject(rect2);
 
 // Remove Object
 $('#rm-obj').click(() => {
-    canvas.remove(canvas.getActiveObject())
+    const objects = canvas.getActiveObjects();
+    objects.map(obj => canvas.remove(obj));
 });
 
 // Save and Synchronize Canvas
