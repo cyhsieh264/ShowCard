@@ -51,8 +51,9 @@ app.use(function (req, res, next) {
 
 // Error handling
 app.use(function (err, req, res, next) {
+    console.log(err); // 之後刪掉
     const { stack } = err;
-    writeLog(stack);
+    writeLog(stack); // 上ec2前清log
     res.status(500).json({ error: 'Internal Server Error' });
 });
 

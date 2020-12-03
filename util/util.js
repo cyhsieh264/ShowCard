@@ -1,6 +1,7 @@
 require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
+const jwt = require('jsonwebtoken');
 
 // reference: https://thecodebarbarian.com/80-20-guide-to-express-error-handling
 const wrapAsync = (fn) => {
@@ -17,7 +18,17 @@ const writeLog = (content) => {
     fs.appendFile(path.join(__dirname, '../log.txt'), record + '\n', function (err) { });
 };
 
+const verifyToken = (token) => {
+    return new Promise((resolve, reject) => {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
+            if (err) reject(err);
+            else resolve(payload);
+        });
+    });
+};
+
 module.exports = {
     wrapAsync,
-    writeLog
+    writeLog,
+    verifyToken
 };

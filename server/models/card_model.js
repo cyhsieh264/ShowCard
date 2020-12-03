@@ -44,7 +44,7 @@ const undo = async() => {
             action: lastStep.action,
             canvas: lastStep.canvas,
             init: lastStep.init
-        }
+        };
         await query('INSERT INTO `canvas_undo` SET ?', data);
         await query('DELETE FROM `canvas_done` WHERE `id` = ?', lastStep.id);
         const step = await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1');
@@ -71,7 +71,7 @@ const redo = async() => {
             action: formerStep.action,
             canvas: formerStep.canvas,
             init: formerStep.init
-        }
+        };
         await query('INSERT INTO `canvas_done` SET ?', data);
         await query('DELETE FROM `canvas_undo` WHERE `id` = ?', formerStep.id);
         const step = await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1');

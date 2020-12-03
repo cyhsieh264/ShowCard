@@ -1,8 +1,9 @@
 require('dotenv').config();
 const bcrypt = require('bcrypt');
 const salt = parseInt(process.env.BCRYPT_SALT);
+const jwt = require('jsonwebtoken');
 const User = require('../models/user_model');
-const { writeLog } = require('../../util/util');
+const { writeLog, verifyToken } = require('../../util/util');
 
 const signup = async (req, res) => {
     const data = {
@@ -14,15 +15,32 @@ const signup = async (req, res) => {
         active: true
     };
     const { message, error } = await User.signup(data);
+    if (message != 'Success') return res.status(403).json({ message: message });
     if (error) {
         const { stack } = error;
         writeLog({ stack });
         return res.status(500).json({ error: 'Database query error' });
     }
-    // generate token
-
-    // return res.status(200).json({ access_token: '12345' });
+    const accessToken = jwt.sign({
+        username: req.body.username,
+        email: req.body.email 
+    }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 20 });
+    return res.status(200).json({ access_token: accessToken });
 };
+
+const signin = async (req, res) => {
+    const data = {
+        user: req.body.user,
+        password: bcrypt.hashSync(req.body.password, salt)
+    };
+    const { message, error } = await User.signin(data);
+    if (error) {
+        const { stack } = error;
+        writeLog({ stack });
+        return res.status(500).json({ error: 'Database query error' });
+    }
+
+}
 
 const checkExistence = () => {
     
@@ -30,5 +48,6 @@ const checkExistence = () => {
 
 module.exports = {
     signup,
-    checkExistence,
+    signin,
+    checkExistence
 };
