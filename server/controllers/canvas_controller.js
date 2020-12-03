@@ -11,7 +11,7 @@ const saveInitCanvas = async (req, res) => {
         canvas: JSON.stringify(canvas),
         init: true
     };
-    const { error, message } = await Card.save(data);
+    const { message, error } = await Card.save(data);
     if (error) {
         writeLog({ error });
         return error

@@ -1,4 +1,6 @@
 const { query, transaction, commit, rollback } = require('./mysqlcon');
+const { writeLog } = require('../../util/util');
+const bcrypt = require('bcrypt');
 
 const signup = async(data) => {
     try {
@@ -25,10 +27,13 @@ const signup = async(data) => {
 const signin = async(data) => {
     try {
         await transaction();
-        const password = (await query('SELECT `password` FROM `user` WHERE `username` = ? OR `email` = ?', [data.user, data.user]))[0].password;
-
+        const user = (await query('SELECT `username`, `email`, `password` FROM `user` WHERE `username` = ? OR `email` = ?', [data.user, data.user]))[0];
+        if (!bcrypt.compareSync(data.password, user.password)) {
+            await commit();
+            return { message: 'Password is wrong' }
+        }
         await commit();
-        return { message: 'Success' };
+        return { result: { username: user.username, email: user.email } };
     } catch (error) {
         await rollback();
         return { error };
