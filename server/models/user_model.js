@@ -1,41 +1,33 @@
 const { query, transaction, commit, rollback } = require('./mysqlcon');
 const { writeLog } = require('../../util/util');
-const bcrypt = require('bcrypt');
 
 const signup = async(data) => {
     try {
         await transaction();
-        const result = await query('INSERT INTO `user` SET ?', data);
+        await query('INSERT INTO `user` SET ?', data);
         await commit();
-        return { message: 'Success' };
+        return { result: 'Success' };
     } catch (error) {
         if (error.code == 'ER_DUP_ENTRY') {
-            let message = ''
+            let customError;
             if (error.sqlMessage.includes('username')) {
-                message = 'Username already exists, please try another one';
+                customError = 'Username already exists, please try another one';
             } else if (error.sqlMessage.includes('email')) {
-                message = 'Email already exists, please try another one';
+                customError = 'Email already exists, please try another one';
             }
             await rollback();
-            return { message: message };
+            return { error: { customError: customError } };
         }
         await rollback();
+        writeLog(error.stack);
         return { error };
     }
 };
 
-const signin = async(data) => {
+const signin = async(user) => {
     try {
-        await transaction();
-        const user = (await query('SELECT `username`, `email`, `password` FROM `user` WHERE `username` = ? OR `email` = ?', [data.user, data.user]))[0];
-        if (!bcrypt.compareSync(data.password, user.password)) {
-            await commit();
-            return { message: 'Password is wrong' }
-        }
-        await commit();
-        return { result: { username: user.username, email: user.email } };
+        return { result: (await query('SELECT `username`, `email`, `password` FROM `user` WHERE `username` = ? OR `email` = ?', [user, user]))[0] };
     } catch (error) {
-        await rollback();
         return { error };
     }
 };

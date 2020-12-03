@@ -132,8 +132,8 @@ $('#undo-canvas').click(() => {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             const result = JSON.parse(xhr.responseText);
-            if (result.message) {
-                alert(result.message)
+            if (result.error) {
+                alert(result.error)
             } else {
                 canvas.clear();
                 canvas.loadFromJSON(result.data.step.canvas, canvas.renderAll.bind(canvas));
@@ -150,8 +150,8 @@ $('#redo-canvas').click(() => {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             const result = JSON.parse(xhr.responseText);
-            if (result.message) {
-                alert(result.message)
+            if (result.error) {
+                alert(result.error)
             } else {
                 canvas.clear();
                 canvas.loadFromJSON(result.data.step.canvas, canvas.renderAll.bind(canvas));

@@ -1,4 +1,5 @@
 const { query, transaction, commit, rollback } = require('./mysqlcon');
+const { writeLog } = require('../../util/util');
 
 const save = async(data) => {
     try {
@@ -6,9 +7,10 @@ const save = async(data) => {
         await query('INSERT INTO `canvas_done` SET ?', data);
         await query('DELETE FROM `canvas_undo` WHERE `user_display_name` = ?', data.user_display_name);
         await commit();
-        return { message: 'Success' };
+        return { result: 'Success' };
     } catch (error) {
         await rollback();
+        writeLog(error.stack);
         return { error };
     }
 };
@@ -17,6 +19,7 @@ const check = async() => {
     try {
         return { result: (await query('SELECT COUNT(`user_display_name`) FROM `canvas_done` WHERE `user_display_name` = ?', 'guest1'))[0]['COUNT(`user_display_name`)'] }
     } catch (error) {
+        writeLog(error.stack);
         return { error }
     }
 };
@@ -25,6 +28,7 @@ const load = async() => {
     try {
         return { result: (await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0] };
     } catch (error) {
+        writeLog(error.stack);
         return { error }
     }
 };
@@ -35,7 +39,7 @@ const undo = async() => {
         const lastStep = (await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0];
         if (lastStep.init == true) {
             await commit();
-            return { message: 'Already the last step' };
+            return { error: { customError: 'Already the last step' } };
         }
         const data = {
             card_id: lastStep.card_id,
@@ -52,6 +56,7 @@ const undo = async() => {
         return { result: step[0] };
     } catch (error) {
         await rollback();
+        writeLog(error.stack);
         return { error };
     }
 };
@@ -62,7 +67,7 @@ const redo = async() => {
         const formerStep = (await query('SELECT * FROM `canvas_undo` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0];
         if (!formerStep) {
             await commit();
-            return { message: 'Already the last step' };
+            return { error: { customError: 'Already the last step' } };
         }
         const data = {
             card_id: formerStep.card_id,
@@ -79,6 +84,7 @@ const redo = async() => {
         return { result: step[0] };
     } catch (error) {
         await rollback();
+        writeLog(error.stack);
         return { error };
     }
 };
