@@ -26,8 +26,11 @@ const signup = async(data) => {
 
 const signin = async(user) => {
     try {
-        return { result: (await query('SELECT `username`, `email`, `password` FROM `user` WHERE `username` = ? OR `email` = ?', [user, user]))[0] };
+        const result = await query('SELECT `username`, `email`, `password` FROM `user` WHERE `username` = ? OR `email` = ?', [user, user]);
+        if (result.length == 0) return { error: { customError: 'User does not exists' } }
+        return { result: result[0] };
     } catch (error) {
+        writeLog(error.stack);
         return { error };
     }
 };
@@ -36,6 +39,7 @@ const check = async() => {
     try {
         return { result: (await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0] };
     } catch (error) {
+        writeLog(error.stack);
         return { error }
     }
 };

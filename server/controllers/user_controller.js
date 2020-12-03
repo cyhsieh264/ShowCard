@@ -20,7 +20,7 @@ const signup = async (req, res) => {
     const { result, error } = await User.signup(data);
     if (error) {
         if (error.customError) return res.status(403).json({ error: error.customError });
-        return res.status(500).json({ error: 'Database query error' });
+        return res.status(500).json({ error: 'Internal server error' });
     }
     const accessToken = jwt.sign({
         username: req.body.username,
@@ -30,33 +30,22 @@ const signup = async (req, res) => {
 };
 
 const signin = async (req, res) => {
-    const { result, message, error } = await User.signin(req.body.user);
-
-
-    // if (!bcrypt.compareSync(data.password, user.password)) {
-    //     await commit();
-    //     return { message: 'Password is wrong' }
+    // if ( !req.body.email || !password){
+    //     return {error: 'Request Error: email and password are required.', status: 400};
     // }
-
-
-
-
-
-
-    if (message) return res.status(403).json({ message: message });
+    const { result, error } = await User.signin(req.body.user);
     if (error) {
-        const { stack } = error;
-        writeLog({ stack });
-        return res.status(500).json({ error: 'Database query error' });
+        if (error.customError) return res.status(403).json({ error: error.customError });
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+    if (!bcrypt.compareSync(req.body.password, result.password)) {
+        return res.status(403).json({ error: 'Password is wrong' });
     }
     const accessToken = jwt.sign({
         username: result.username,
         email: result.email 
     }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 20 });
     return res.status(200).json({ access_token: accessToken });
-    
-
-
 }
 
 const checkExistence = () => {

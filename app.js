@@ -54,7 +54,7 @@ app.use(function (err, req, res, next) {
     console.log(err); // 之後刪掉
     const { stack } = err;
     writeLog(stack); // 上ec2前清log
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal server error' });
 });
 
 if (NODE_ENV != 'production'){
