@@ -76,7 +76,7 @@
             </div> -->
         </main>
         <div class="form-container hide">
-            <form class="signup-form hide" onsubmit="signup()">
+            <div class="signup-form hide">
                 <div class="title">Sign Up</div>
                 <div class="form-group">
                     <i class="fas fa-user"></i>
@@ -94,10 +94,13 @@
                     <i class="fas fa-lock"></i>
                     <input type="password" id="signupPassword2" name="signupPassword2" class="form-control bottom" placeholder="Confirm Password" />
                 </div>
-                <button type="submit" class="btn btn-block signup-btn">Sign Up now</button>
-            </form>
+                <div class="alert alert-error hidden" id="signup-alert">
+                    <span class="close-alert" type="button">×</span> <span id="signup-alert-msg">Access Denied!</span>
+                </div>
+                <button type="submit" class="btn btn-block signup-btn" id="signup-btn">Sign Up now</button>
+            </div>
             <br>
-            <form class="signin-form hide" onsubmit="signin()">
+            <div class="signin-form hide">
                 <div class="title">Sign in</div>
                 <div class="form-group">
                     <i class="fas fa-envelope"></i>
@@ -107,13 +110,11 @@
                     <i class="fas fa-lock"></i>
                     <input type="password" id="signinPassword" name="signinPassword" class="form-control bottom" placeholder="Password" />
                 </div>
-                <div class="alert alert-error">
-                    <button class="close" data-dismiss="alert" type=
-                    "button">×</button> <strong>Access Denied!</strong>
-                    Please provide valid authorization.
+                <div class="alert alert-error hidden" id="signin-alert">
+                    <span class="close-alert" data-dismiss="modal" type="button">×</span> <span id="signin-alert-msg">Access Denied!</span>
                 </div>
-                <button type="submit" class="btn btn-block signin-btn">Sign In</button>
-            </form>
+                <button type="submit" class="btn btn-block signin-btn" id="signin-btn">Sign In</button>
+            </div>
         </div>
         <script
             src="https://code.jquery.com/jquery-3.5.1.min.js"

@@ -25,8 +25,8 @@ const signup = async (req, res) => {
     const accessToken = jwt.sign({
         username: req.body.username,
         email: req.body.email 
-    }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 20 });
-    return res.status(200).json({ access_token: accessToken });
+    }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 });
+    return res.status(200).json({ data: { access_token: accessToken } });
 };
 
 const signin = async (req, res) => {
@@ -44,8 +44,8 @@ const signin = async (req, res) => {
     const accessToken = jwt.sign({
         username: result.username,
         email: result.email 
-    }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 20 });
-    return res.status(200).json({ access_token: accessToken });
+    }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 });
+    return res.status(200).json({ data: { access_token: accessToken } });
 }
 
 const checkExistence = (category, value) => {

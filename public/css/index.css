@@ -7,6 +7,14 @@
     z-index: -9999 !important;;
 } */
 
+.hidden {
+    display: none;
+}
+
+.alert-error {
+    background-color: rgb(223, 192, 192);
+}
+
 .btn {
     background-color: rgb(93, 156, 135);
 }
