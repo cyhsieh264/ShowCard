@@ -6,9 +6,9 @@ const User = require('../models/user_model');
 const { writeLog, verifyToken } = require('../../util/util');
 
 const signup = async (req, res) => {
-    // if ( !req.body.email || !password){
-    //     return {error: 'Request Error: email and password are required.', status: 400};
-    // }
+    if ( !req.body.username || !req.body.email || !req.body.password ) {
+        return res.status(400).json({ error: 'Sign up information is incomplete' });
+    }
     const data = {
         provider: 'native',
         username: req.body.username,
@@ -30,9 +30,9 @@ const signup = async (req, res) => {
 };
 
 const signin = async (req, res) => {
-    // if ( !req.body.email || !password){
-    //     return {error: 'Request Error: email and password are required.', status: 400};
-    // }
+    if ( !req.body.user || !req.body.password ) {
+        return res.status(400).json({ error: 'Sign up information is incomplete' });
+    }
     const { result, error } = await User.signin(req.body.user);
     if (error) {
         if (error.customError) return res.status(403).json({ error: error.customError });
@@ -48,7 +48,7 @@ const signin = async (req, res) => {
     return res.status(200).json({ access_token: accessToken });
 }
 
-const checkExistence = () => {
+const checkExistence = (category, value) => {
     
 };
 
