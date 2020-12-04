@@ -6,10 +6,15 @@ const canvas = new fabric.Canvas('canvas', {
     backgroundColor: '#fff',
 });
 
+// set username and get token
+// 一進來就確認有沒有token，如果沒有就執行
+
 // Check and Load Canvas When Entering the Room
+// const token = localStorage.getItem('access_token');
 const xhr = new XMLHttpRequest();
 xhr.open('GET', 'api/1.0/canvas/check');
 xhr.setRequestHeader("Content-type", "application/json");
+xhr.setRequestHeader('Authorization', `Bearer ${token}`);
 xhr.send();
 xhr.onreadystatechange = function() {
     if (xhr.readyState === 4) {
@@ -19,11 +24,13 @@ xhr.onreadystatechange = function() {
             const xhr = new XMLHttpRequest();
             xhr.open('POST', 'api/1.0/canvas/init');
             xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader('Authorization', `Bearer ${token}`);
             xhr.send(JSON.stringify(data));
         } else {
             const xhr = new XMLHttpRequest();
             xhr.open('GET', 'api/1.0/canvas/load');
             xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader('Authorization', `Bearer ${token}`);
             xhr.send();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
@@ -104,6 +111,7 @@ const saveCanvas = () => {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'api/1.0/canvas/save');
     xhr.setRequestHeader("Content-type", "application/json");
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`);
     xhr.send(JSON.stringify(data));
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
@@ -128,6 +136,7 @@ $('#undo-canvas').click(() => {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'api/1.0/canvas/undo');
     xhr.setRequestHeader("Content-type", "application/json");
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`);
     xhr.send();
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
@@ -146,6 +155,7 @@ $('#redo-canvas').click(() => {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'api/1.0/canvas/redo');
     xhr.setRequestHeader("Content-type", "application/json");
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`);
     xhr.send();
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {

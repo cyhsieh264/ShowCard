@@ -1,5 +1,57 @@
 const Card = require('../models/card_model');
-const { writeLog } = require('../../util/util');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user_model');
+const { verifyToken } = require('../../util/util');
+
+const joinRoom = async (socket) => {  // 針對每一位user的操作包（一個socket進來時）
+    console.log('a user connected');
+    // console.log(socket.handshake);
+
+    socket.on('check user', (info) => {
+        console.log(info)
+        socket.join(info[0])
+    })
+
+    // const user = socket.id
+    // console.log(user)
+
+    // get parameter if not generate room id
+    // socket.join(room);
+    
+    // const msg = 'Welcome!'
+    // socket.emit('message', [`${user} :  ${msg} `, (new Date()).toLocaleString()]);
+    socket.on('input msg', (msg) => {
+        socket.emit('message', [`You :  ${msg} `, (new Date()).toLocaleString()])
+        socket.broadcast.emit('message', [`${user} :  ${msg} `, (new Date()).toLocaleString()])
+    })
+
+    socket.on('edit canvas', (canvas) => {
+        socket.broadcast.emit('change canvas', canvas);
+    })
+
+    // socket.on('edit canvas', asyncCanvas);
+
+    socket.on('disconnect', leaveRoom);
+    // socket.on('disconnect', () => {
+    //     console.log('user disconnected');
+    // });
+
+}
+
+// const asyncCanvas = async (canvas) => {
+//     socket.broadcast.emit('change canvas', canvas);
+// };
+
+// const sendMessage = async (msg) => {
+//     socket.emit('message', [`You :  ${msg} `, (new Date()).toLocaleString()])
+//     socket.broadcast.emit('message', [`${user} :  ${msg} `, (new Date()).toLocaleString()])
+// }
+
+const leaveRoom = async () => {
+    // 從room的名單中移除user
+    console.log('user disconnected');
+}
+
 
 const initCanvas = async (req, res) => {
     const canvas = req.body;
@@ -67,7 +119,8 @@ module.exports = {
     checkCanvas,
     loadCanvas,
     undoCanvas,
-    redoCanvas
+    redoCanvas,
+    joinRoom,
 };
 
 // new column for tracking room users

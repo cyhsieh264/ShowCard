@@ -6,6 +6,16 @@
     // const password = $('#signupPassword').val();
     // const passwordCheck = $('#signupPassword2').val();
     // console.log(name, email, password, passwordCheck)
+
+
+// $('#new-card-btn').click(newCard);
+
+$('#new-card-btn').click(() => {
+    newCard($('#new-card-link')[0])  // newCard(dom)
+});
+
+
+
 $('#signup-btn').click(() => {
     data = {
         username: $('#signupUsername').val(),
