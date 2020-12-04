@@ -8,7 +8,7 @@ const canvas = new fabric.Canvas('canvas', {
 
 // Check and Load Canvas When Entering the Room
 const xhr = new XMLHttpRequest();
-xhr.open('GET', 'api/1.0/canvas/checkcanvas');
+xhr.open('GET', 'api/1.0/canvas/check');
 xhr.setRequestHeader("Content-type", "application/json");
 xhr.send();
 xhr.onreadystatechange = function() {
@@ -17,12 +17,12 @@ xhr.onreadystatechange = function() {
         if (result.data.count == 0){
             data = canvas.toJSON();
             const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'api/1.0/canvas/saveinitcanvas');
+            xhr.open('POST', 'api/1.0/canvas/init');
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.send(JSON.stringify(data));
         } else {
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', 'api/1.0/canvas/loadcanvas');
+            xhr.open('GET', 'api/1.0/canvas/load');
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.send();
             xhr.onreadystatechange = function() {
@@ -102,7 +102,7 @@ $('#rm-obj').click(() => {
 const saveCanvas = () => {
     data = canvas.toJSON();
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'api/1.0/canvas/savecanvas');
+    xhr.open('POST', 'api/1.0/canvas/save');
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(JSON.stringify(data));
     xhr.onreadystatechange = function() {
@@ -126,7 +126,7 @@ socket.on('change canvas', (newCanvas) => {
 // Undo and Redo
 $('#undo-canvas').click(() => {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'api/1.0/canvas/undocanvas');
+    xhr.open('GET', 'api/1.0/canvas/undo');
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send();
     xhr.onreadystatechange = function() {
@@ -144,7 +144,7 @@ $('#undo-canvas').click(() => {
 
 $('#redo-canvas').click(() => {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'api/1.0/canvas/redocanvas');
+    xhr.open('GET', 'api/1.0/canvas/redo');
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send();
     xhr.onreadystatechange = function() {

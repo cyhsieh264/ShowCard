@@ -1,7 +1,7 @@
 const Card = require('../models/card_model');
 const { writeLog } = require('../../util/util');
 
-const saveInitCanvas = async (req, res) => {
+const initCanvas = async (req, res) => {
     const canvas = req.body;
     const data = {
         card_id: null,
@@ -62,7 +62,7 @@ const redoCanvas = async (req, res) => {
 };
 
 module.exports = {
-    saveInitCanvas,
+    initCanvas,
     saveCanvas,
     checkCanvas,
     loadCanvas,
