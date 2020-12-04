@@ -4,6 +4,7 @@ const { wrapAsync } = require('../../util/util');
 const {
     signup,
     signin,
+    verify,
     checkExistence
 } = require('../controllers/user_controller');
 
@@ -13,7 +14,10 @@ router.route('/user/signup')
 router.route('/user/signin')
     .post(wrapAsync(signin));
 
+router.route('/user/verify')
+    .post(wrapAsync(verify));
+
 router.route('/user/checkexistence')
-    .get(wrapAsync(checkExistence));
+    .post(wrapAsync(checkExistence));
 
 module.exports = router;

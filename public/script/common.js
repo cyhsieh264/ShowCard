@@ -6,3 +6,10 @@ const generateRoomId = () => {
 const newCard = (dom) => {
     dom.href = `card.html?room=${generateRoomId()}`
 };
+
+const verifyUserToken = (token) => {
+    // return userInfo
+
+    // if error, return false
+
+}

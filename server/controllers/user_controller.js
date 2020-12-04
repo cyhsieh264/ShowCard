@@ -46,6 +46,10 @@ const signin = async (req, res) => {
         email: result.email 
     }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 });
     return res.status(200).json({ data: { access_token: accessToken } });
+};
+
+const verify = async (req, res) => {
+    
 }
 
 const checkExistence = (category, value) => {

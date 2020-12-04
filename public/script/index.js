@@ -34,7 +34,7 @@ $('#signup-btn').click(() => {
                 $('#signup-alert-msg')[0].innerHTML = result.error;
             } else {
                 const token = result.data.access_token;
-                localStorage.setItem('access_token', token);
+                localStorage.setItem('user_token', token);
             }
         }
     };
