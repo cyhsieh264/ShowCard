@@ -1,12 +1,12 @@
 const socket = io();
 
-// const urlParams = new URLSearchParams(location.search);
-// const room = urlParams.get('room');
+const urlParams = new URLSearchParams(location.search);
+const room = urlParams.get('room');
 
 // const token = localStorage.getItem('access_token');
 // axios.post('')
 
-socket.emit('check user', [room, token])
+socket.emit('check user', [room, userToken])
 
 socket.on('message', message => {
     $('.room').append(`<p>${message}</p>`)

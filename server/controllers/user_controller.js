@@ -22,11 +22,11 @@ const signup = async (req, res) => {
         if (error.customError) return res.status(403).json({ error: error.customError });
         return res.status(500).json({ error: 'Sign up failed' });
     }
-    const accessToken = jwt.sign({
+    const userToken = jwt.sign({
         email: req.body.email,
-        name: req.body.name,
+        name: req.body.name
     }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 });
-    return res.status(200).json({ data: { user_token: accessToken } });
+    return res.status(200).json({ data: { user_token: userToken } });
 };
 
 const signin = async (req, res) => {
@@ -42,7 +42,8 @@ const signin = async (req, res) => {
         return res.status(403).json({ error: 'Incorrect email or password' });
     }
     const userToken = jwt.sign({
-        name: result.name,
+        email: result.email,
+        name: result.name
     }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 });
     return res.status(200).json({ data: { user_token: userToken } });
 };
@@ -52,7 +53,7 @@ const verify = async (req, res) => {
     const token = authHeader.split(' ')[1];
     try {
         const payload = await verifyToken(token);
-        return res.status(200).json({ data: { name: payload.name } })
+        return res.status(200).json({ data: { email: payload.email, name: payload.name } })
     } catch {
         res.status(403).json( { error: 'Invalid user token' } );
     }

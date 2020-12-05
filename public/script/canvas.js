@@ -6,6 +6,8 @@ const canvas = new fabric.Canvas('canvas', {
     backgroundColor: '#fff',
 });
 
+const token = localStorage.getItem('user_token');
+
 // set username and get token
 // 一進來就確認有沒有token，如果沒有就執行
 
