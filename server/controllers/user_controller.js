@@ -6,13 +6,13 @@ const User = require('../models/user_model');
 const { writeLog, verifyToken } = require('../../util/util');
 
 const signup = async (req, res) => {
-    if ( !req.body.username || !req.body.email || !req.body.password ) {
+    if ( !req.body.email || !req.body.name || !req.body.password ) {
         return res.status(400).json({ error: 'Sign up information is incomplete' });
     }
     const data = {
         provider: 'native',
-        username: req.body.username,
         email: req.body.email,
+        name: req.body.name,
         password: bcrypt.hashSync(req.body.password, salt),
         created_at: Date.now(),
         active: true
@@ -20,44 +20,46 @@ const signup = async (req, res) => {
     const { result, error } = await User.signup(data);
     if (error) {
         if (error.customError) return res.status(403).json({ error: error.customError });
-        return res.status(500).json({ error: 'Internal server error' });
+        return res.status(500).json({ error: 'Sign up failed' });
     }
     const accessToken = jwt.sign({
-        username: req.body.username,
-        email: req.body.email 
+        email: req.body.email,
+        name: req.body.name,
     }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 });
-    return res.status(200).json({ data: { access_token: accessToken } });
+    return res.status(200).json({ data: { user_token: accessToken } });
 };
 
 const signin = async (req, res) => {
-    if ( !req.body.user || !req.body.password ) {
+    if ( !req.body.email || !req.body.password ) {
         return res.status(400).json({ error: 'Sign up information is incomplete' });
     }
-    const { result, error } = await User.signin(req.body.user);
+    const { result, error } = await User.signin(req.body.email);
     if (error) {
         if (error.customError) return res.status(403).json({ error: error.customError });
-        return res.status(500).json({ error: 'Internal server error' });
+        return res.status(500).json({ error: 'Sign in failed' });
     }
     if (!bcrypt.compareSync(req.body.password, result.password)) {
-        return res.status(403).json({ error: 'Password is wrong' });
+        return res.status(403).json({ error: 'Incorrect email or password' });
     }
-    const accessToken = jwt.sign({
-        username: result.username,
-        email: result.email 
+    const userToken = jwt.sign({
+        name: result.name,
     }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 });
-    return res.status(200).json({ data: { access_token: accessToken } });
+    return res.status(200).json({ data: { user_token: userToken } });
 };
 
 const verify = async (req, res) => {
-    
-}
-
-const checkExistence = (category, value) => {
-    
+    const authHeader = req.headers['authorization'];
+    const token = authHeader.split(' ')[1];
+    try {
+        const payload = await verifyToken(token);
+        return res.status(200).json({ data: { name: payload.name } })
+    } catch {
+        res.status(403).json( { error: 'Invalid user token' } );
+    }
 };
 
 module.exports = {
     signup,
     signin,
-    checkExistence
+    verify
 };

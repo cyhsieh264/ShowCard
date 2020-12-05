@@ -10,12 +10,11 @@ const signup = async(data) => {
     } catch (error) {
         if (error.code == 'ER_DUP_ENTRY') {
             let customError;
-            if (error.sqlMessage.includes('username')) {
-                customError = 'Username already exists, please try another one';
-            } else if (error.sqlMessage.includes('email')) {
+            if (error.sqlMessage.includes('email')) {
                 customError = 'Email already exists, please try another one';
             }
             await rollback();
+            writeLog(error.stack);
             return { error: { customError: customError } };
         }
         await rollback();
@@ -24,10 +23,10 @@ const signup = async(data) => {
     }
 };
 
-const signin = async(user) => {
+const signin = async(email) => {
     try {
-        const result = await query('SELECT `username`, `email`, `password` FROM `user` WHERE `username` = ? OR `email` = ?', [user, user]);
-        if (result.length == 0) return { error: { customError: 'User does not exists' } }
+        const result = await query('SELECT `email`, `name`, `password` FROM `user` WHERE `email` = ?', email);
+        if (result.length == 0) return { error: { customError: 'Incorrect email or password' } }
         return { result: result[0] };
     } catch (error) {
         writeLog(error.stack);
@@ -35,17 +34,7 @@ const signin = async(user) => {
     }
 };
 
-const check = async() => {
-    try {
-        return { result: (await query('SELECT * FROM `canvas_done` WHERE `user_display_name` = ? ORDER BY `id` DESC LIMIT 1', 'guest1'))[0] };
-    } catch (error) {
-        writeLog(error.stack);
-        return { error }
-    }
-};
-
 module.exports = {
     signup,
-    signin,
-    // check
+    signin
 };

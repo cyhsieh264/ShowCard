@@ -6,16 +6,16 @@
 const getUserName = () => {
     const token = localStorage.getItem('user_token');
     if (!token) {
-        const inputName = prompt('Please enter the name you want to display:');
-        return inputName; 
+        alert('Please sign in');
+        location.href = '/';
     } else {
         const user = verifyUserToken(token);
-        if (!userInfo) {
+        if (!user) {
             alert('Please sign in again');
             // 將url塞入localstorage，方便登入後跳轉
             location.href = '/'
         } else {
-            return user.username
+            return user.name
         }
     }
 };
@@ -24,14 +24,16 @@ const getUserName = () => {
 const setRoomToken = () => {
     const urlParams = new URLSearchParams(location.search);
     const room = urlParams.get('room');
-    const username = getUserName();
+    const name = getUserName();
+    const color = '#b6b6b6';
     const data = {
         room: room, 
-        username: username
+        name: name,
+        color: color
     };
     // 打ajax，順便response是不是owner跟pin code
-    if (res.username == username) { // 表示是owner
-        localStorage.setItem('room_token', res.token);
+    if (res.name == name) { // 表示是owner
+        localStorage.setItem(room, res.token);
     } else {
         const pinCode = prompt('Please enter the pin code:');
         if (res.pinCode == pinCode) {

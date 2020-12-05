@@ -8,8 +8,22 @@ const newCard = (dom) => {
 };
 
 const verifyUserToken = (token) => {
-    // return userInfo
-
-    // if error, return false
-
-}
+    return new Promise ((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'api/1.0/user/verify');
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                const result = JSON.parse(xhr.responseText);
+                if (result.error) {
+                    console.log(result.error);
+                    resolve(false);
+                } else {
+                    resolve(result.data.name);
+                }
+            }
+        };
+    })
+};

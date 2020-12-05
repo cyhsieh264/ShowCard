@@ -1,12 +1,15 @@
-html, body{
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,body{
 	margin: 0px;
-}
-body{
-	font-size: 16px;
-	font-family: "Noto Sans TC", "微軟正黑體", "新細明體", arial, sans-serif;
-    background-color: #dfdfdf;
+	background-color: #dfdfdf;
+	font-family: 'Numans', sans-serif;
 }
 
 main{
 	text-align: center;
+}
+
+.hide{
+	display: none;
 }
