@@ -41,7 +41,6 @@ $('#signin-btn').click(() => {
         const res = response.data.data
         const token = res.user_token;
         localStorage.setItem('user_token', token);
-        alert('Sign in successfully!');
         location.replace(history);
     }).catch((err) => {
         $('#signin-alert').removeClass('hide');

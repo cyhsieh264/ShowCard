@@ -5,12 +5,27 @@ const { verifyToken } = require('../../util/util');
 
 const joinRoom = async (socket) => {  // 針對每一位user的操作包（一個socket進來時）
     console.log('a user connected');
-    // console.log(socket.handshake);
 
-    socket.on('check user', (info) => {
-        console.log(info)
-        socket.join(info[0])
-    })
+    const handshake = socket.handshake;
+    console.log(handshake.auth);
+
+    socket.join(handshake.auth.room);
+
+    // socket.emit('join', [`You :  ${msg} `, (new Date()).toLocaleString()])
+    socket.broadcast.in(handshake.auth.room).emit('join', [`${handshake.auth.username} join the room`, (new Date()).toLocaleString()])
+
+
+
+    // socket.set('authorization', (handshakeData, cb) => {
+    //     console.log(handshakeData);
+    // })
+
+    // socket.on('check user', (info) => {
+    //     console.log(info)
+    //     socket.join(info[0])
+    // })
+
+    
 
     // const user = socket.id
     // console.log(user)
@@ -22,7 +37,7 @@ const joinRoom = async (socket) => {  // 針對每一位user的操作包（一�
     // socket.emit('message', [`${user} :  ${msg} `, (new Date()).toLocaleString()]);
     socket.on('input msg', (msg) => {
         socket.emit('message', [`You :  ${msg} `, (new Date()).toLocaleString()])
-        socket.broadcast.emit('message', [`${user} :  ${msg} `, (new Date()).toLocaleString()])
+        socket.broadcast.in(handshake.auth.room).emit('message', [`${handshake.auth.username} :  ${msg} `, (new Date()).toLocaleString()])
     })
 
     socket.on('edit canvas', (canvas) => {
@@ -31,10 +46,11 @@ const joinRoom = async (socket) => {  // 針對每一位user的操作包（一�
 
     // socket.on('edit canvas', asyncCanvas);
 
-    socket.on('disconnect', leaveRoom);
-    // socket.on('disconnect', () => {
-    //     console.log('user disconnected');
-    // });
+    // socket.on('disconnect', leaveRoom);
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+        socket.broadcast.in(handshake.auth.room).emit('leave', [`${handshake.auth.username} leave the room`, (new Date()).toLocaleString()])
+    });
 
 }
 

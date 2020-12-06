@@ -1,18 +1,62 @@
 localStorage.setItem('history', location.pathname + location.search)
+const urlParams = new URLSearchParams(location.search);
+const room = urlParams.get('room');
 
 const checkUser = async () => {
     const data = await verifyUserToken(userToken);
+    console.log(data);
     if (userToken && data) {
         $('main').removeClass('hide');
         return data;
     } else {
-        alert('Please Sign in');
         location.replace('/login.html')
     }
 };
 
 checkUser().then( user => {
-    console.log(user)
+    const socket = io({
+        auth: {
+            room: room,
+            username: user.name
+        }
+    });
+    // socket.emit('check user', [room, user.name])
+
+    socket.on('join', message => {
+        $('.room').append(`<p>${message}</p>`)
+    });
+
+    socket.on('leave', message => {
+        $('.room').append(`<p>${message}</p>`)
+    });
+
+
+
+    socket.on('message', message => {
+        $('.room').append(`<p>${message}</p>`)
+    });
+    
+    $('#send-btn').click( () => {
+        if ($('#msg').val()) {
+            socket.emit('input msg', $('#msg').val())
+            $('#msg').val('')
+        } else {
+            alert('Please enter your message')
+        }
+    })
+    
+    $('#msg').keypress(function(e) {
+        code = e.keyCode ? e.keyCode : e.which;
+        if ( $('#msg').val() && code == 13 ) {
+            e.preventDefault();
+            socket.emit('input msg', $('#msg').val())
+            $('#msg').val('')
+        } else if ( !$('#msg').val() && code == 13 ) {
+            alert('Please enter your message')
+        }
+    });
+
+    // console.log(user)
 });
 
 
