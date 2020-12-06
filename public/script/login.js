@@ -3,6 +3,17 @@ const api = axios.create({
     responseType: 'json'
 });
 
+const ifLogin = async () => {
+    const data = await verifyUserToken(userToken);
+    if (userToken && data) {
+        location.replace('/');
+    } else {
+        $('body').removeClass('hide');
+    }
+};
+
+ifLogin();
+
 $('#go-register').click(() => {
     $('.signin-card').addClass('hide');
     $('.signup-card').removeClass('hide');

@@ -40,7 +40,8 @@ app.use('/api/' + API_VERSION,
     [
         require('./server/routes/user_route'),
         require('./server/routes/studio_route'),
-        require('./server/routes/card_route')
+        require('./server/routes/card_route'),
+        require('./server/routes/canvas_route')
     ]
 );
 

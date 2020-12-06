@@ -4,9 +4,9 @@ const { writeLog } = require('../../util/util');
 const signup = async(data) => {
     try {
         await transaction();
-        await query('INSERT INTO `user` SET ?', data);
+        const result = await query('INSERT INTO `user` SET ?', data);
         await commit();
-        return { result: 'Success' };
+        return { result: result };
     } catch (error) {
         if (error.code == 'ER_DUP_ENTRY') {
             let customError;
@@ -25,7 +25,7 @@ const signup = async(data) => {
 
 const signin = async(email) => {
     try {
-        const result = await query('SELECT `email`, `name`, `password` FROM `user` WHERE `email` = ?', email);
+        const result = await query('SELECT `id`, `email`, `name`, `password` FROM `user` WHERE `email` = ?', email);
         if (result.length == 0) return { error: { customError: 'Incorrect email or password' } }
         return { result: result[0] };
     } catch (error) {

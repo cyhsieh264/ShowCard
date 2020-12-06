@@ -23,6 +23,7 @@ const signup = async (req, res) => {
         return res.status(500).json({ error: 'Sign up failed' });
     }
     const userToken = jwt.sign({
+        id: result.insertId,
         email: req.body.email,
         name: req.body.name
     }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 });
@@ -31,7 +32,7 @@ const signup = async (req, res) => {
 
 const signin = async (req, res) => {
     if ( !req.body.email || !req.body.password ) {
-        return res.status(400).json({ error: 'Sign up information is incomplete' });
+        return res.status(400).json({ error: 'Sign in information is incomplete' });
     }
     const { result, error } = await User.signin(req.body.email);
     if (error) {
@@ -42,6 +43,7 @@ const signin = async (req, res) => {
         return res.status(403).json({ error: 'Incorrect email or password' });
     }
     const userToken = jwt.sign({
+        id: result.id,
         email: result.email,
         name: result.name
     }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 });
@@ -53,7 +55,7 @@ const verify = async (req, res) => {
     const token = authHeader.split(' ')[1];
     try {
         const payload = await verifyToken(token);
-        return res.status(200).json({ data: { email: payload.email, name: payload.name } })
+        return res.status(200).json({ data: { payload } })
     } catch {
         res.status(403).json( { error: 'Invalid user token' } );
     }
