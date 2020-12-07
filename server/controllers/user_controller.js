@@ -26,7 +26,7 @@ const signup = async (req, res) => {
         id: result.insertId,
         email: req.body.email,
         name: req.body.name
-    }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 });
+    }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 86400 });
     return res.status(200).json({ data: { user_token: userToken } });
 };
 
@@ -46,7 +46,7 @@ const signin = async (req, res) => {
         id: result.id,
         email: result.email,
         name: result.name
-    }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 });
+    }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 86400 });
     return res.status(200).json({ data: { user_token: userToken } });
 };
 

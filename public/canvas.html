@@ -1,0 +1,385 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html><html lang='en' class=''>
+<head>
+    <script src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/positivestudio/pen/pNGoXX?limit=all&page=41&q=sketch" />
+
+
+<style class="cp-pen-styles">#sketchpad {
+    margin: auto;
+    width: 100%;
+    height: 800px;
+    background-repeat: repeat;
+}
+
+.toolbar {
+  width: 100%;
+  min-width: 228px;
+  background-color: #fafafa;
+  text-align: center;
+  padding: 14px;
+  display: inline-block;
+}
+.toolbar .section {
+  clear:both;
+  margin-bottom: 8px;
+}
+.toolbar .slider {
+  width: 100%;
+}
+
+.toolbar .button {
+  float: left;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.toolbar .button.active {
+  background-color: rgba(0, 0, 0, .5);
+  color: rgba(255, 255, 255, 1);
+}
+</style></head><body>
+<!-- Bootstrap core CSS -->
+<link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Font Awesome -->
+<script src="https://use.fontawesome.com/46af14eb3c.js"></script>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="toolbar" id="tools">
+        <div class="section files">
+          <div id="reset" class="button"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
+          <div id="tool-save" class="button"><i class="fa fa-save" aria-hidden="true"></i></div>
+          <div id="tool-load" class="button"><i class="fa fa-folder-open-o" aria-hidden="true"></i></div>
+          <div id="tool-screenshot" class="button"><i class="fa fa-camera-retro" aria-hidden="true"></i></div>
+        </div>
+
+        <div class="section drawing">
+          <div id="tool-pen" class="button active"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+          <div id="tool-highlighter" class="button"><i class="fa fa-paint-brush" aria-hidden="true"></i></div>
+          <div id="tool-rainbow" class="button rbw"><i class="fa fa-magic" aria-hidden="true"></i></div>
+          <div id="tool-mandala" class="button mandala"><i class="fa fa-snowflake-o" aria-hidden="true"></i></div>
+        </div>
+        <div class="section drawing">
+          <div id="tool-line" class="button line">╱</div>
+          <div id="tool-rectangle" class="button rect"><i class="fa fa-square-o" aria-hidden="true"></i></div>
+          <div id="tool-circle" class="button circ"><i class="fa fa-circle-thin" aria-hidden="true"></i></div>
+          <div id="tool-type" class="button font"><i class="fa fa-font" aria-hidden="true"></i></div>
+
+
+
+          <div class="section rubber">
+            <div id="tool-eraser" class="button"><i class="fa fa-eraser" aria-hidden="true"></i></div>
+            <div id="tool-cutout" class="button"><i class="fa fa-scissors" aria-hidden="true"></i></div>
+          </div>
+          <div class="section special">
+            <div id="tool-rotate-viewport" class="button rotate-viewport"><i class="fa fa-circle-o-notch" aria-hidden="true"></i></div>
+            <div id="tool-move-viewport" class="button move-viewport"><i class="fa fa-hand-paper-o" aria-hidden="true"></i></div>
+          </div>
+          <div class="section special">
+            <div id="tool-zoom-out" class="button"><i class="fa fa-search-minus" aria-hidden="true"></i></div>
+            <div id="tool-zoom-1" class="button"><i class="fa fa-home" aria-hidden="true"></i></div>
+            <div id="tool-zoom-in" class="button"><i class="fa fa-search-plus" aria-hidden="true"></i></div>
+          </div>
+          <div class="section special">
+            <div id="tool-fast-undo" class="button f-backward"><i class="fa fa-fast-backward" aria-hidden="true"></i></div>
+            <div id="tool-undo" class="button undo"><i class="fa fa-backward" aria-hidden="true"></i></div>
+            <div id="tool-redo" class="button redo"><i class="fa fa-forward" aria-hidden="true"></i></div>
+            <div id="tool-fast-redo" class="button f-forward"><i class="fa fa-fast-forward" aria-hidden="true"></i></div>
+          </div>
+          <div class="section special">
+            <hr>
+            <span id="toolName">Tool name</span>
+          </div>
+          <div id="size" class="section size">
+            <input class="slider" id="size-slider" type ="range" min ="1" max="20" step ="1" value ="1"/>
+          </div>
+
+          <div id="colorpaletteSection"  class="section colorpicker">
+            <div id="colorpalette" class="colorpalette"></div>
+          </div>
+          <div id="colorpaletteFillSection" class="section colorpicker">
+            <div id="colorpaletteFill" class="colorpalette"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div id="sketchpad"></div>
+    </div>
+  </div>
+</div>
+
+<!-- http://sketchpad.pro - free online drawing board tool -->
+<script src="https://cdn.sketchpad.pro/dist/current/sketchpad.min.js"></script>
+
+<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+<script >/*global window, Sketchpad, WebSocket, Colorpalette, saveFile, loadFile*/
+
+function initSketchpad() {
+    "use strict";
+    var sketchpadEl = document.getElementById("sketchpad");
+    var sketchpad = new Sketchpad({
+        containerEl: sketchpadEl,
+        features: {
+            displayCrosshair: true,
+            displayGrid: true
+        },
+        createPageConfig: {
+            no: 1,
+            backgroundColor: "rgba(250,250,250,1)"
+        }
+    });
+
+    window.sketchpad = sketchpad;
+
+
+    var colorpalette = new Colorpalette({
+        containerEl: document.getElementById("colorpalette")
+    }).on("change", function (e) {
+        sketchpad.getCurrentTool().setColor(e.color.red, e.color.green, e.color.blue, e.color.alpha);
+    });
+    window.colorpalette = colorpalette;
+
+    var colorpaletteFill = new Colorpalette({
+        containerEl: document.getElementById("colorpaletteFill")
+    }).on("change", function (e) {
+        sketchpad.getCurrentTool().setFillColor(e.color.red, e.color.green, e.color.blue, e.color.alpha);
+    });
+    window.colorpaletteFill = colorpaletteFill;
+
+
+    /**
+     * Changes current tool
+     * @param  {string} toolId  - tool id
+     */
+    function selectTool(toolId) {
+        console.log("selectTool", toolId);
+        sketchpad.setTool(toolId);
+
+        document.querySelectorAll(".toolbar .button").forEach(function (el) {
+            el.classList.remove("active");
+        });
+        document.getElementById("tool-" + toolId).classList.add("active");
+
+        document.getElementById("size").style.display = "none";
+        document.getElementById("colorpaletteSection").style.display = "none";
+        document.getElementById("colorpaletteFillSection").style.display = "none";
+
+        var tool = sketchpad.getCurrentTool();
+
+        document.getElementById("toolName").innerHTML = tool.toolLabel || "Undefined";
+        /**
+         * set toolbar for tool
+         */
+
+        if (typeof tool.getColor === "function") {
+            colorpalette.setColor(tool.getColor(), "noPropagate");
+        }
+
+        if (typeof tool.getFillColor === "function") {
+            colorpaletteFill.setColor(tool.getFillColor(), "noPropagate");
+        }
+
+        if (typeof tool.getSize === "function") {
+            var size = tool.getSize();
+            document.getElementById("size-slider").value = size;
+        }
+
+        switch (toolId) {
+        case "pen":
+            document.getElementById("colorpaletteSection").style.display = "block";
+            document.getElementById("size").style.display = "block";
+            break;
+        case "highlighter":
+            document.getElementById("colorpaletteSection").style.display = "block";
+            document.getElementById("size").style.display = "block";
+            break;
+        case "eraser":
+            break;
+        case "rectangle":
+            document.getElementById("colorpaletteSection").style.display = "block";
+            document.getElementById("colorpaletteFillSection").style.display = "block";
+            document.getElementById("size").style.display = "block";
+            break;
+        case "circle":
+            document.getElementById("colorpaletteSection").style.display = "block";
+            document.getElementById("colorpaletteFillSection").style.display = "block";
+            document.getElementById("size").style.display = "block";
+            break;
+        case "line":
+            document.getElementById("colorpaletteSection").style.display = "block";
+            document.getElementById("size").style.display = "block";
+            break;
+        }
+    }
+
+    selectTool("pen");
+
+    document.getElementById("size-slider").addEventListener("change", function (e) {
+        if (typeof sketchpad.getCurrentTool().setSize === "function") {
+            sketchpad.getCurrentTool().setSize(e.target.value);
+        }
+    });
+
+    //save
+    document.getElementById('tool-save').addEventListener("click", function () {
+        var data = sketchpad.saveSketchpad(true);
+        saveFile(JSON.stringify(data), sketchpad.room.room_token + ".json", "text/json");
+    });
+
+
+    /**
+     * Load sketch from json
+     */
+    function jsonToDraw(sketchpad, inputList) {
+        var i,
+            input;
+
+        sketchpad.reset();
+        sketchpad.receiveMessageFromServer({data: JSON.stringify({cmd: "history-begin"})});
+        sketchpad.sendMessageToServer({cmd: "history-begin"});
+
+        for (i = 0; i < inputList.length; i += 1) {if (window.CP.shouldStopExecution(1)){break;}
+            input = inputList[i];
+            input.bid = 0;
+            input.uid = sketchpad.UID;
+            if (input.config && input.config.sid) {
+                console.log("PAGE: Input.cmd", input.cmd, input.config, input.config.sid);
+            } else {
+                console.log("Input: Input.cmd", input.cmd, input.sid);
+            }
+
+            sketchpad.sendMessageToServer(inputList[i]);
+            sketchpad.receiveMessageFromServer({data: JSON.stringify(inputList[i])});
+        }
+window.CP.exitedLoop(1);
+
+        sketchpad.receiveMessageFromServer({data: JSON.stringify({cmd: "history-end"})});
+        sketchpad.sendMessageToServer({cmd: "history-end"});
+        //select current page?
+        return inputList;
+    }
+
+
+    //load
+    document.getElementById('tool-load').addEventListener("click", function () {
+        loadFile(".json,application/json", function (data) {
+            try {
+                data = JSON.parse(data);
+            } catch (e) {
+                console.error("Error parsing file", e);
+                return;
+            }
+            if (Array.isArray(data)) {
+                return jsonToDraw(sketchpad, data);
+            } else {
+                console.error("Wrong file content");
+                return;
+            }
+        });
+    });
+
+
+    //screenshot
+    document.getElementById('tool-screenshot').addEventListener("click", function () {
+        sketchpad.screenshot(function (blob) {
+            saveFile(blob, sketchpad.room.room_token + ".png", "image/png");
+        }, "image/png", 1);
+
+    });
+
+    //pen
+    document.getElementById('tool-pen').addEventListener("click", function () {
+        selectTool("pen");
+    });
+
+    // marker
+    document.getElementById('tool-highlighter').addEventListener("click", function () {
+        selectTool("highlighter");
+    });
+
+    // mandala
+    document.getElementById('tool-mandala').addEventListener("click", function () {
+        selectTool("mandala");
+    });
+
+    // mandala
+    document.getElementById('tool-type').addEventListener("click", function () {
+        selectTool("type");
+    });
+
+    //eraser
+    document.getElementById('tool-eraser').addEventListener("click", function () {
+        selectTool("eraser");
+    });
+
+
+    //cutout
+    document.getElementById('tool-cutout').addEventListener("click", function () {
+        selectTool("cutout");
+    });
+
+    document.getElementById('tool-rectangle').addEventListener("click", function () {
+        selectTool("rectangle");
+    });
+
+    document.getElementById('tool-line').addEventListener("click", function () {
+        selectTool("line");
+    });
+
+    document.getElementById('tool-circle').addEventListener("click", function () {
+        selectTool("circle");
+    });
+
+    document.getElementById('tool-rainbow').addEventListener("click", function () {
+        selectTool("rainbow");
+    });
+
+    document.getElementById('tool-move-viewport').addEventListener("click", function () {
+        selectTool("move-viewport");
+    });
+
+    document.getElementById('tool-rotate-viewport').addEventListener("click", function () {
+        selectTool("rotate-viewport");
+    });
+
+    document.getElementById('tool-zoom-in').addEventListener("click", function () {
+        sketchpad.setScale(sketchpad.scale * 2);
+    });
+    document.getElementById('tool-zoom-1').addEventListener("click", function () {
+        sketchpad.setScale(1);
+        sketchpad.setViewportPosition(0, 0);
+        sketchpad.setRotation(0);
+    });
+
+    document.getElementById('tool-zoom-out').addEventListener("click", function () {
+        sketchpad.setScale(sketchpad.scale / 2);
+    });
+
+    document.getElementById('reset').addEventListener("click", function () {
+        sketchpad.reset();
+    });
+
+    document.getElementById('tool-undo').addEventListener("click", function () {
+        sketchpad.undo();
+    });
+    document.getElementById('tool-redo').addEventListener("click", function () {
+        sketchpad.redo();
+    });
+
+}
+initSketchpad();
+
+
+//# sourceURL=pen.js
+</script>
+</body></html>

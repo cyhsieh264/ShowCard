@@ -144,12 +144,34 @@ checkUser().then( async (user) => {
         fill: '#42f587'
     })
     canvas.add(rect2);
-    canvas.setActiveObject(rect2);
+    // canvas.setActiveObject(rect2);
     // Remove Object
     $('#rm-obj').click(() => {
         const objects = canvas.getActiveObjects();
         objects.map(obj => canvas.remove(obj));
     });
+
+    // canvas.loadFromJSON(step.canvas, canvas.renderAll.bind(canvas));
+    // {"version":"4.2.0","objects":[{"type":"textbox","version":"4.2.0","originX":"left","originY":"top","left":150,"top":100,"width":300,"height":45.2,"fill":"#8a91ab","stroke":null,"strokeWidth":1,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"text":"hello world","fontSize":40,"fontWeight":"normal","fontFamily":"Delicious","fontStyle":"normal","lineHeight":1.16,"underline":false,"overline":false,"linethrough":false,"textAlign":"center","textBackgroundColor":"","charSpacing":0,"minWidth":20,"splitByGrapheme":false,"styles":{}},{"type":"rect","version":"4.2.0","originX":"left","originY":"top","left":200,"top":200,"width":200,"height":100,"fill":"#fcba03","stroke":null,"strokeWidth":1,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"rx":0,"ry":0},{"type":"rect","version":"4.2.0","originX":"left","originY":"top","left":80,"top":250,"width":200,"height":100,"fill":"#42f587","stroke":null,"strokeWidth":1,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"rx":0,"ry":0}],"background":"#ffffff"}
+
+    const c = {
+        version: "4.2.0",
+        objects: [],
+        background: "#ffffff"
+    }
+    
+    const test = {"type":"rect","version":"4.2.0","originX":"left","originY":"top","left":200,"top":200,"width":200,"height":100,"fill":"#fcba03","stroke":null,"strokeWidth":1,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"rx":0,"ry":0}
+    // const test = (canvas.getObjects())[0].toJSON()
+    c.objects.push(test)
+    console.log(test)
+    // console.log(JSON.stringify(test))
+
+    // canvas.loadFromJSON(c, canvas.renderAll.bind(canvas));
+
+    // canvas.renderAll()
+    console.log(canvas._objects.length)
+    // console.log((canvas.getObjects())[0].toJSON());
+
     // --- CANVAS OPERATE ---
     // Initialize
     const canvasExistence = (await api.get('api/1.0/canvas/check', { params: { card: card, user: user.id } })).data.data.existence;
