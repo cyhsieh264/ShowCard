@@ -21,6 +21,6 @@ $('#logout').click(() => {
 });
 
 $('#new-card-btn').click(() => {
-    const room = generateRoomId();
-    $('#new-card-link')[0].href = `card.html?room=${room}`
+    const card = generateCardId();
+    $('#new-card-link')[0].href = `card.html?card=${card}`
 });

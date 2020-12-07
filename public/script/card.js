@@ -1,6 +1,14 @@
 localStorage.setItem('history', location.pathname + location.search)
 const urlParams = new URLSearchParams(location.search);
-const room = urlParams.get('room');
+const card = urlParams.get('card');
+
+const api = axios.create({
+    headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${userToken}`
+    },
+    responseType: 'json'
+});
 
 const checkUser = async () => {
     const payload = await verifyUserToken(userToken);
@@ -12,69 +20,25 @@ const checkUser = async () => {
     }
 };
 
-const api = axios.create({
-    headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${userToken}`
-    },
-    responseType: 'json'
-});
-
-// const callApi = (method, endpoint, data) => {
-//     if (method == 'get') {
-//         api.get(endpoint, data)
-//         .then((response) => {
-//             const res = response.data;
-//             return res;
-//         }).catch((err) => {
-//             return err.response.data.error;
-//         });
-//     } else if (method == 'post') {
-//         api.get(endpoint, data)
-//         .then((response) => {
-//             const res = response.data;
-//             return res;
-//         }).catch((err) => {
-//             return err.response.data.error;
-//         });
-//     }
-// }
-
-
-// api.post('api/1.0/user/signin', user)
-// .then((response) => {
-//     const res = response.data.data
-//     const token = res.user_token;
-//     localStorage.setItem('user_token', token);
-//     location.replace(history);
-// }).catch((err) => {
-//     $('#signin-alert').removeClass('hide');
-//     $('#signin-alert-msg')[0].innerHTML = err.response.data.error;
-// });
-
-checkUser().then( user => {
-
+checkUser().then( async (user) => {
     const socket = io({
         auth: {
-            room: room,
+            cid: card,
+            uid: user.id,
             username: user.name
         }
     });
-
-    // chat
-
+    // --- CHAT ---
     socket.on('join', message => {
         $('.room').append(`<p>${message}</p>`)
+        // count member and get color?
     });
-
     socket.on('leave', message => {
         $('.room').append(`<p>${message}</p>`)
     });
-
     socket.on('message', message => {
         $('.room').append(`<p>${message}</p>`)
     });
-    
     $('#send-btn').click( () => {
         if ($('#msg').val()) {
             socket.emit('input msg', $('#msg').val())
@@ -82,8 +46,7 @@ checkUser().then( user => {
         } else {
             alert('Please enter your message')
         }
-    })
-    
+    });
     $('#msg').keypress(function(e) {
         code = e.keyCode ? e.keyCode : e.which;
         if ( $('#msg').val() && code == 13 ) {
@@ -94,36 +57,45 @@ checkUser().then( user => {
             alert('Please enter your message')
         }
     });
-
-    // canvas
-
+    // --- Card ---
+    // Check card
+    const cardExistence = (await api.get('api/1.0/card/check', { params: { card: card } })).data.data.existence;
+    if (!cardExistence) {
+        let newCard = {
+            id: card,
+            owner: user.id,
+            title: $('#card-title').val()
+        };
+        await api.post('api/1.0/card/create', newCard);
+    } else {
+        await api.patch('api/1.0/card/member/add');
+    }
+    // --- CANVAS ---
+    // Generate canvas
     const canvas = new fabric.Canvas('canvas', {
         width: 600,
         height: 400,
         originX: 'center',
         backgroundColor: '#fff',
     });
-
-    api.get('api/1.0/canvas/check')
-    .then((response) => {
-        return response.data.data.count
-    }).then((count) => {
-        if (count == 0) {
-            let data = {
-
-                canvas: canvas.toJSON()
-            };
-            api.post('api/1.0/canvas/init', data)
-            .then((response) => {
-
-            })
-
-        }
-
-    });
+    // Initialize
+    const canvasExistence = (await api.get('api/1.0/canvas/check', { params: { card: card } })).data.data.existence;
+    if (!canvasExistence) {
+        let newCanvas = {
+            card_id: card,
+            user_id: user.id,
+            user_name: user.name,
+            canvas: canvas.toJSON()
+        };
+        await api.post('api/1.0/canvas/init', newCanvas);
+    } else {
+        const step = (await api.get('api/1.0/canvas/load', { params: { card: card } })).data.data.step;
+        canvas.clear();
+        canvas.loadFromJSON(step.canvas, canvas.renderAll.bind(canvas));
+    }
 
 
-
+    
 });
 
 // const socketSend = (data) => {

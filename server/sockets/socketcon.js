@@ -1,7 +1,7 @@
-const { joinRoom } = require("../controllers/card_controller");
+const { socketJoin } = require("../controllers/card_controller");
 
 const socketCon = (io) => {
-    io.on('connection', joinRoom)
+    io.on('connection', socketJoin)
 };
 
 // const errorHandling = (io, data) => {

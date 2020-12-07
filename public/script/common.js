@@ -21,6 +21,6 @@ const verifyUserToken = (token) => {
     })
 };
 
-const generateRoomId = () => {
+const generateCardId = () => {
     return Date.now().toString(36) + Math.random().toString(36).split('.')[1].substr(-8);
 };
