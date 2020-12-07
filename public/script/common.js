@@ -10,12 +10,8 @@ const verifyUserToken = (token) => {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 const result = JSON.parse(xhr.responseText);
-                if (result.error) {
-                    console.log(result.error);
-                    resolve(false);
-                } else {
-                    resolve(result.data);
-                }
+                if (result.data) resolve(result.data.payload);
+                else resolve(false);
             }
         };
     })

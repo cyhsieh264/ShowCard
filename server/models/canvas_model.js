@@ -3,9 +3,11 @@ const { writeLog } = require('../../util/util');
 
 const save = async(data) => {
     try {
+        const time = Date.now();
         await transaction();
         await query('INSERT INTO `canvas_done` SET ?', data);
         await query('DELETE FROM `canvas_undo` WHERE `card_id` = ? AND `user_id` = ?', [data.card_id, data.user_id]);
+        await query('UPDATE `card` SET `saved_at` = ? WHERE `id` = ?', [time, data.card_id]);
         await commit();
         return { result: 'Success' };
     } catch (error) {
@@ -15,9 +17,9 @@ const save = async(data) => {
     }
 };
 
-const check = async(cardId) => {
+const check = async(card, user) => {
     try {
-        const result = await query('SELECT 1 FROM `canvas` WHERE `card_id` = ? LIMIT 1', cardId);
+        const result = await query('SELECT 1 FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? LIMIT 1', [card, user]);
         if (result.length == 0) return { result: false };
         else return { result: true };
     } catch (error) {
@@ -36,6 +38,7 @@ const load = async(cardId) => {
 };
 
 const undo = async(card, user) => {
+    const time = Date.now();
     try {
         await transaction();
         const lastStep = (await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? ORDER BY `id` DESC LIMIT 1', [card, user]))[0];
@@ -54,6 +57,7 @@ const undo = async(card, user) => {
         await query('INSERT INTO `canvas_undo` SET ?', data);
         await query('DELETE FROM `canvas_done` WHERE `id` = ?', lastStep.id);
         const step = await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? ORDER BY `id` DESC LIMIT 1', [card, user]);
+        await query('UPDATE `card` SET `saved_at` = ? WHERE `id` = ?', [time, data.card_id]);
         await commit();
         return { result: step[0] };
     } catch (error) {
@@ -64,6 +68,7 @@ const undo = async(card, user) => {
 };
 
 const redo = async(card, user) => {
+    const time = Date.now();
     try {
         await transaction();
         const formerStep = (await query('SELECT * FROM `canvas_undo` WHERE `card_id` = ? AND `user_id` = ? ORDER BY `id` DESC LIMIT 1', [card, user]))[0];
@@ -82,6 +87,7 @@ const redo = async(card, user) => {
         await query('INSERT INTO `canvas_done` SET ?', data);
         await query('DELETE FROM `canvas_undo` WHERE `id` = ?', formerStep.id);
         const step = await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? ORDER BY `id` DESC LIMIT 1', [card, user]);
+        await query('UPDATE `card` SET `saved_at` = ? WHERE `id` = ?', [time, data.card_id]);
         await commit();
         return { result: step[0] };
     } catch (error) {

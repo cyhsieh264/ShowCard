@@ -31,8 +31,8 @@ const saveCanvas = async (req, res) => {
 };
 
 const checkCanvas = async (req, res) => {
-    const cardId = req.query.card;
-    const { result, error } = await Canvas.check(cardId);
+    const data = req.query;
+    const { result, error } = await Canvas.check(data.card, data.user);
     if (error) return res.status(500).json({ error: 'Internal server error' });
     return res.status(200).json({ data: { existence: result } });
 };
@@ -45,8 +45,8 @@ const loadCanvas = async (req, res) => {
 };
 
 const undoCanvas = async (req, res) => {
-    const data = req.body;
-    const { result, error } = await Canvas.undo(data.card_id, data.user_id);
+    const data = req.query;
+    const { result, error } = await Canvas.undo(data.card, data.user);
     if (error) {
         if (error.customError) return res.status(403).json({ error: error.customError });
         return res.status(500).json({ error: 'Internal server error' });
@@ -55,8 +55,8 @@ const undoCanvas = async (req, res) => {
 };
 
 const redoCanvas = async (req, res) => {
-    const data = req.body;
-    const { result, error } = await Canvas.redo(data.card_id, data.user_id);
+    const data = req.query;
+    const { result, error } = await Canvas.redo(data.card, data.user);
     if (error) {
         if (error.customError) return res.status(403).json({ error: error.customError });
         return res.status(500).json({ error: 'Internal server error' });

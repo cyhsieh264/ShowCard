@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const salt = parseInt(process.env.BCRYPT_SALT);
 const jwt = require('jsonwebtoken');
 const User = require('../models/user_model');
-const { writeLog, verifyToken } = require('../../util/util');
+const { verifyToken } = require('../../util/util');
 
 const signup = async (req, res) => {
     if ( !req.body.email || !req.body.name || !req.body.password ) {
@@ -57,7 +57,7 @@ const verify = async (req, res) => {
         const payload = await verifyToken(token);
         return res.status(200).json({ data: { payload } })
     } catch {
-        res.status(403).json( { error: 'Invalid user token' } );
+        res.status(200).json( { message: 'Invalid user token' } );
     }
 };
 

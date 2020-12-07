@@ -13,13 +13,7 @@ router.route('/card/check')
 router.route('/card/create')
     .post(wrapAsync(createCard));
 
-// router.route('/card/user') 用socket做？
-//     .get(wrapAsync(countUser));
-
-router.route('/card/member/add')
+router.route('/card/addmember')
     .patch(wrapAsync(addMember));
-
-// router.route('/card/member/reduce') 用socket做？
-//     .patch(wrapAsync(reduceMember));
 
 module.exports = router;

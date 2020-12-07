@@ -12,26 +12,6 @@ const create = async(data) => {
         writeLog(error.stack);
         return { error };
     }
-
-    // try {
-    //     await transaction();
-    //     const result = await query('INSERT INTO `card` SET ?', data);
-    //     await commit();
-    //     return { result: result };
-    // } catch (error) {
-    //     if (error.code == 'ER_DUP_ENTRY') {
-    //         let customError;
-    //         if (error.sqlMessage.includes('email')) {
-    //             customError = 'Email already exists, please try another one';
-    //         }
-    //         await rollback();
-    //         writeLog(error.stack);
-    //         return { error: { customError: customError } };
-    //     }
-    //     await rollback();
-    //     writeLog(error.stack);
-    //     return { error };
-    // }
 };
 
 const check = async(cardId) => {
@@ -45,7 +25,37 @@ const check = async(cardId) => {
     }
 };
 
+const addMember = async(cardId) => {
+    try {
+        await transaction();
+        await query('UPDATE `card` SET `member_count` = (`member_count` + 1) WHERE `id` = ?', cardId);
+        const result = (await query('SELECT `member_count` FROM `card` WHERE `id` = ?', cardId))[0].member_count;
+        await commit();
+        return { result: result };
+    } catch (error) {
+        await rollback();
+        writeLog(error.stack);
+        return { error }
+    }
+};
+
+const reduceMember = async(cardId) => {
+    try {
+        await transaction();
+        await query('UPDATE `card` SET `member_count` = (`member_count` - 1) WHERE `id` = ?', cardId);
+        await commit();
+        return { result: 'Success' };
+    } catch (error) {
+        await rollback();
+        writeLog(error.stack);
+        return { error }
+    }
+};
+
+
 module.exports = {
     create,
-    check
+    check,
+    addMember,
+    reduceMember
 };
