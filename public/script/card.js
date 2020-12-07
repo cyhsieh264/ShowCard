@@ -82,6 +82,7 @@ checkUser().then( async (user) => {
         await setUserColor();
     }
     // --- CANVAS ---
+
     // Generate canvas
     // function newControls(control, ctx, methodName, left, top) {
     //     if (!this.isControlVisible(control)) {
@@ -94,7 +95,8 @@ checkUser().then( async (user) => {
     //     ctx.stroke();
     // }
     // fabric.Object.prototype._drawControl = newControls;
-    fabric.Object.prototype.padding = 10;
+
+    // fabric.Object.prototype.padding = 10;
 
     const canvas = new fabric.Canvas('canvas', {
         width: 600,
@@ -102,6 +104,7 @@ checkUser().then( async (user) => {
         originX: 'center',
         backgroundColor: '#ffffff',
     });
+    
     // Color Selector
 
     // Brush
