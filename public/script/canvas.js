@@ -190,14 +190,12 @@ checkUser().then( async (user) => {
 
 
     const newObject = async(data) => {
-        canvas.isDrawingMode = false
         const v = {
             card_id: card,
             user_id: user.id,
             user_name: user.name,
             action: 'modify',
-            // canvas: data
-            canvas: canvas.toJSON()
+            canvas: data
         };
         await api.post('api/1.0/canvas/save', v);
         socket.emit('edit canvas', v.canvas);
@@ -327,7 +325,7 @@ checkUser().then( async (user) => {
             user_id: user.id,
             user_name: user.name,
             action: 'origin',
-            canvas: canvas.toJSON()
+            canvas: null
         };
         await api.post('api/1.0/canvas/init', newCanvas);
     } else {
@@ -338,7 +336,7 @@ checkUser().then( async (user) => {
                 user_id: user.id,
                 user_name: user.name,
                 action: 'origin',
-                canvas: canvas.toJSON()
+                canvas: null
             };
             await api.post('api/1.0/canvas/init', newCanvas);
         }
