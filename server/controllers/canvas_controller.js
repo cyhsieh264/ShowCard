@@ -44,6 +44,21 @@ const loadCanvas = async (req, res) => {
     return res.status(200).json({ data: { step: result } });
 };
 
+const saveObj = async (req, res) => {
+    const canvas = req.body;
+    const data = {
+        card_id: canvas.card_id,
+        user_id: canvas.user_id,
+        user_name: canvas.user_name,
+        action: canvas.action,
+        canvas: JSON.stringify(canvas.canvas),
+        init: false
+    };
+    const { result, error } = await Canvas.save(data);
+    if (error) return res.status(500).json({ error: 'Internal server error' });
+    return res.status(200).json({ message: result });
+};
+
 const undoCanvas = async (req, res) => {
     const data = req.query;
     const { result, error } = await Canvas.undo(data.card, data.user);
@@ -69,6 +84,7 @@ module.exports = {
     saveCanvas,
     checkCanvas,
     loadCanvas,
+    saveObj,
     undoCanvas,
     redoCanvas
 };

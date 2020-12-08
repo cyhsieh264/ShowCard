@@ -414,15 +414,31 @@ checkUser().then( async (user) => {
         top: 200,
         left: 100,
         fill: '#000000',
+        // id: 1
     })
 
     canvas.add(rect2)
 
-    console.log(canvas.toJSON(['rec']))
+    // console.log(canvas.toJSON(['rec']))
 
     canvas.setActiveObject(rect2);
+
+    // rect2.set('id', 1);
+
     // const te = canvas.getActiveObjects()[0].toJSON();
-    canvas.getActiveObjects()[0].toJSON().id = 1
+    const te = canvas.getActiveObjects()[0].toJSON()
+    // const te2 = rect2;
+    te.customId = 1
+    te.left = 200
+
+    blankCanvas.objects.push(te);
+
+    canvas.loadFromJSON(blankCanvas, canvas.renderAll.bind(canvas));
+
+
+
+    console.log(te)
+    // console.log(te2)
 
     
 
@@ -431,18 +447,20 @@ checkUser().then( async (user) => {
     // console.log(te.id)
 
     const setId = (te) => {
-        if (!te.id) {
-            te.id = 'rec2'
+        // console.log(te);
+        if (!te.customId) {
+            te.customId = 'rec2'
         } else {
-            te.id = 3
+            te.customId = 3
         }
         // te.id = 'rec2'
-        console.log(te)
-        console.log(te.id)
+        // console.log(te)
+        console.log(te.customId)
     }
 
     $('#test1').click(() => {
         const te = canvas.getActiveObjects()[0].toJSON();
+        console.log(te)
         setId(te);
     })
     
