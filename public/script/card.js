@@ -134,61 +134,6 @@ checkUser().then( async (user) => {
     //     canvas.freeDrawingBrush.width = 5;
     // })
 
-
-
-
-
-    // Icon
-
-    // Text
-    // const textbox = new fabric.Textbox('hello world', { 
-    //     left: 150, 
-    //     top: 100,
-    //     editable: true,
-    //     width: 300,
-    //     textAlign: 'center',
-    //     fill: '#8a91ab', // 字型顏色
-    //     fontFamily: 'Delicious', // 設定字型
-    //     // fontStyle: 'italic',  // 斜體
-    //     // fontSize: 20, // 字型大小
-    //     // fontWeight: 800, // 字型粗細
-    // });
-    // canvas.add(textbox);
-    // Shape
-    // function makeRect(left, top, width, height) {
-    //     rectObj = new fabric.Rect({
-    //       left: left,
-    //       top: top,
-    //       height: height,
-    //       width: width,
-    //       fill: $('#color-selector').val(),
-    //       stroke: '#666'
-    //     });
-    //     rectObj.hasControls = rectObj.hasBorders = false;
-    //   }
-    // $('#add-rect').click(() => makeRect)
-
-    // function makeCircle(left, top, line1, line2) {
-    //     var c = new fabric.Circle({
-    //         left: left,
-    //         top: top,
-    //         strokeWidth: 2,
-    //         radius: 6,
-    //         fill: $('#color-selector').val(),
-    //         stroke: '#666',
-    //         originX: 'center',
-    //         originY: 'center'
-    //     });
-    //     c.hasControls = c.hasBorders = true;
-    
-    //     c.line1 = line1;
-    //     c.line2 = line2;
-    
-    //     return c;
-    // }
-
-
-
     const newObject = async(data) => {
         canvas.isDrawingMode = false
         const v = {
@@ -203,6 +148,8 @@ checkUser().then( async (user) => {
         socket.emit('edit canvas', v.canvas);
     }
 
+
+    // Icon
     $('#add-icon').click(() => {
         fabric.Image.fromURL('../images/material/icons/planet.png', function(myImg) {
         //i create an extra var for to change some image properties
@@ -212,6 +159,7 @@ checkUser().then( async (user) => {
         });
     });
 
+    // Shape
     $('#add-circle').click(() => {
         let c = new fabric.Circle({
             left: 250, 
@@ -245,6 +193,7 @@ checkUser().then( async (user) => {
         newObject(data);
     })
 
+    // Text
     $('#add-text').click(() => {
         // console.log(canvas.getActiveObjects());
         // console.log(canvas.getActiveObjects()[0].toJSON());
@@ -260,7 +209,7 @@ checkUser().then( async (user) => {
             // fontSize: 20, // 字型大小
             // fontWeight: 800, // 字型粗細
         });
-        canvas.add(textbox);
+        canvas.add(textbox); //  newObject(textbox);
         canvas.setActiveObject(textbox);
         const data = canvas.getActiveObjects()[0].toJSON();
         newObject(data);
@@ -396,16 +345,15 @@ checkUser().then( async (user) => {
 
 
 
-    const rect = new fabric.Rect({
-        height: 100,
-        width: 200,
-        top: 200,
-        left: 200,
-        fill: '#fcba03',
-        id: 'rec'
-    })
+    // const rect = new fabric.Rect({
+    //     height: 100,
+    //     width: 200,
+    //     top: 200,
+    //     left: 200,
+    //     fill: '#fcba03',
+    // })
 
-    canvas.add(rect)
+    // canvas.add(rect)
 
 
     const rect2 = new fabric.Rect({
@@ -428,7 +376,7 @@ checkUser().then( async (user) => {
     // const te = canvas.getActiveObjects()[0].toJSON();
     const te = canvas.getActiveObjects()[0].toJSON()
     // const te2 = rect2;
-    te.customId = 1
+    te.objId = 1
     te.left = 200
 
     blankCanvas.objects.push(te);
@@ -437,7 +385,7 @@ checkUser().then( async (user) => {
 
 
 
-    console.log(te)
+    // console.log(te)
     // console.log(te2)
 
     
@@ -463,9 +411,79 @@ checkUser().then( async (user) => {
         console.log(te)
         setId(te);
     })
-    
 
+    let c2 = new fabric.Circle({
+        left: 250, 
+        top: 200,
+        strokeWidth: 5,
+        radius: 60,
+        stroke: $('#color-border').val(),
+        fill: $('#color-fill').val(),
+        originX: 'center',
+        originY: 'center',
+        cornerStyle: 'circle',
+        padding: 3,
+        user: 'cd',
+        hasBorders: false,
+        hasControls: false,
+        status: ' is editing'
 
+        // evented: false,
+        // selectable: false
 
+    })
 
+    let c2t = new fabric.Text(c2.user+c2.status, {
+        fontSize: 20,
+        opacity: 0.3,
+        originX: 'center',
+        originY: 'center',
+        left: c2.left,
+        top: c2.top
+    })
+
+    let group = new fabric.Group([c2, c2t], {
+        objectCaching: false,
+        selectable: false,
+        evented: false
+    })
+
+    canvas.add(group)
+
+    // canvas.add(c2)
+
+    // canvas.on('mouse:down', e => {
+    //     if (e.target != null) {
+    //         e.target.on('mousedown', function(e) { 
+    //             // console.log(e)
+    //             // console.log(e.target)
+    //             // console.log(e.target.status);
+    //             console.log(e.target.objId);
+    //         })
+    //     } else {
+    //         console.log('should be blank')
+    //     }
+    // })
+
+    canvas.on('mouse:down', e => {
+        if (e.target != null) {
+            if (e.target.status != ' is editing') {
+                e.target.on('mousedown', function(e) { 
+                    // console.log(e)
+                    // console.log(e.target)
+                    // console.log(e.target.status);
+                    console.log(e.target.objId);
+                })
+            } else {
+                // e.target.on('mousedown', function(e) { 
+                //     // console.log(e)
+                //     // console.log(e.target)
+                //     console.log(e.target.status);
+                //     // console.log(e.target.objId);
+                // })
+            }
+        } else {
+            console.log('should be blank')
+        }
+    })
 });
