@@ -30,6 +30,7 @@ checkUser().then( async (user) => {
             username: user.name
         }
     });
+
     // --- CHAT ---
     socket.on('join', message => {
         $('.room').append(`<p>${message}</p>`)
@@ -58,56 +59,134 @@ checkUser().then( async (user) => {
             alert('Please enter your message')
         }
     });
-    // --- CARD ---
-    // Check card and set user color
+
+    // --- CARD AND CANVAS INIT ---
     let memberCount;
     const setUserColor = async () => {
         const colors = ['#6e6b64', '#1a326b', '#8c355e', '#cc9543', '#58ad49', '#f5e8cb', '#402745', '#6bc2a6', '#b2bad1', '#f5940c'];
         const index = memberCount % 10;
         localStorage.setItem('color_'+card, colors[index]);
     };
-    const cardExistence = (await api.get('api/1.0/card/check', { params: { card: card } })).data.data.existence;
-    if (!cardExistence) {
-        const newCard = {
-            id: card,
-            owner: user.id, // no id???
-            title: 'untitled'
-        };
-        await api.post('api/1.0/card/create', newCard);
-        memberCount = 1;
-        await setUserColor()
-    } else {
-        // 確認是否開放?
-        memberCount = (await api.patch('api/1.0/card/addmember', { card: card })).data.data.count;
-        await setUserColor();
+    const cardInfo = (await api.get('api/1.0/card/check', { params: { card: card } })).data.data;
+    switch (cardInfo.existence) {
+        case false:
+            const newCard = {
+                id: card,
+                owner: user.id,
+                title: 'untitled'
+            };
+            await api.post('api/1.0/card/create', newCard);
+            memberCount = 1;
+            const newCanvas = {
+                "card_id": card,
+                "user_id": user.id,
+                "action": "origin",
+                "obj_id": null,
+                "obj_type": null,
+                "object": null
+            };
+            await api.post('api/1.0/canvas/save', newCanvas);
+        case true:
+            // backlog: shared or not
+            memberCount = (await api.patch('api/1.0/card/addmember', { card: card })).data.data.count;
+            const userCanvasExistence = (await api.get('api/1.0/canvas/check', { params: { card: card, user: user.id } })).data.data.existence;
+            if (!userCanvasExistence) {
+                const newCanvas = {
+                    "card_id": card,
+                    "user_id": user.id,
+                    "action": "origin",
+                    "obj_id": null,
+                    "obj_type": null,
+                    "object": null
+                };
+                await api.post('api/1.0/canvas/save', newCanvas);
+            }
+            const canvasLoad = (await api.get('api/1.0/canvas/load', { params: { card: card } })).data.data.step;
+            await(canvasLoad);
+        default:
+            await setUserColor();
     }
-    // --- CANVAS ---
 
-    // Generate canvas
-    // function newControls(control, ctx, methodName, left, top) {
-    //     if (!this.isControlVisible(control)) {
-    //         return;
-    //     }
-    //     var size = this.cornerSize;
-    //     this.transparentCorners || ctx.clearRect(left, top, size, size);
-    //     ctx.beginPath();
-    //     ctx.arc(left + size/2, top + size/2, size/2, 0, 2 * Math.PI, false);
-    //     ctx.stroke();
+    // --- CANVAS EVENT ---
+    // Save canvas
+    // const saveObject = async(action) => {
+    //     // getactiveobject
+    //     const target = canvas.getActiveObjects()[0]
+
+
+
+
+
+
+    //     const data = {
+    //         card_id: card,
+    //         user_id: user.id,
+    //         action: 'modify',
+            
+
+    //         canvas: canvas.toJSON()
+    //     };
+    //     await api.post('api/1.0/canvas/save', data);
+    //     socket.emit('edit canvas', data.canvas);
     // }
-    // fabric.Object.prototype._drawControl = newControls;
 
-    // fabric.Object.prototype.padding = 10;
+    const saveCanvas = async() => {
+        const data = {
+            card_id: card,
+            user_id: user.id,
+            user_name: user.name,
+            action: 'modify',
+            canvas: canvas.toJSON()
+        };
+        await api.post('api/1.0/canvas/save', data);
+        socket.emit('edit canvas', data.canvas);
+    }
 
-    const canvas = new fabric.Canvas('canvas', {
-        width: 600,
-        height: 400,
-        originX: 'center',
-        backgroundColor: '#ffffff',
+
+
+    // $('#save-canvas').click(saveCanvas);
+    // canvas.on('object:modified', saveObject('modify'));  // action: modify
+    canvas.on('object:modified', saveCanvas);  // action: modify
+    canvas.on('object:created', saveCanvas);  // action: create 
+    canvas.on('object:removed', saveCanvas);  // action: remove
+    canvas.on('path:created', saveCanvas);  // action: create
+    // Undo canvas
+    $('#undo-canvas').click( async () => {
+        api.get('api/1.0/canvas/undo', { params: { card: card, user: user.id } })
+        .then((response) => {
+            const step = response.data.data.step;
+            canvas.clear();
+            canvas.loadFromJSON(step.canvas, canvas.renderAll.bind(canvas));
+            socket.emit('edit canvas', step.canvas);
+        }).catch((error) => {
+            alert('Already the last step');
+        });
     });
-
-
+    // Redo canvas
+    $('#redo-canvas').click( async () => {
+        api.get('api/1.0/canvas/redo', { params: { card: card, user: user.id } })
+        .then((response) => {
+            const step = response.data.data.step;
+            canvas.clear();
+            canvas.loadFromJSON(step.canvas, canvas.renderAll.bind(canvas));
+            socket.emit('edit canvas', step.canvas);
+        }).catch((error) => {
+            alert('Already the last step');
+        });
+    });
+    // Change canvas
+    socket.on('change canvas', (newCanvas) => { 
+        canvas.clear();
+        canvas.loadFromJSON(newCanvas, canvas.renderAll.bind(canvas));
+    });
     
-    // Color Selector
+
+
+
+
+
+    // --- CANVAS TOOLBOX ---
+    // Selector
 
     // Brush
     // const brush = new fabric.PatternBrush(canvas);
@@ -135,6 +214,7 @@ checkUser().then( async (user) => {
     // })
 
     const newObject = async(data) => {
+        // set object 的 objId、user（在轉json之前）
         canvas.isDrawingMode = false
         const v = {
             card_id: card,
@@ -153,7 +233,7 @@ checkUser().then( async (user) => {
     $('#add-icon').click(() => {
         fabric.Image.fromURL('../images/material/icons/planet.png', function(myImg) {
         //i create an extra var for to change some image properties
-        var img1 = myImg.set({ left: 0, top: 0 ,width:150,height:150});
+        var img1 = myImg.set({ left: 0, top: 0 ,width:150,height:150});  // set objId、user
         canvas.add(img1); 
         saveCanvas();
         });
@@ -161,7 +241,7 @@ checkUser().then( async (user) => {
 
     // Shape
     $('#add-circle').click(() => {
-        let c = new fabric.Circle({
+        let c = new fabric.Circle({  // set objId、user
             left: 250, 
             top: 200,
             strokeWidth: 5,
@@ -178,7 +258,7 @@ checkUser().then( async (user) => {
     })
 
     $('#add-rect').click(() => {
-        let c = new fabric.Rect({
+        let c = new fabric.Rect({  // set objId、user
             height: 100,
             width: 200,
             top: 200,
@@ -197,7 +277,7 @@ checkUser().then( async (user) => {
     $('#add-text').click(() => {
         // console.log(canvas.getActiveObjects());
         // console.log(canvas.getActiveObjects()[0].toJSON());
-        const textbox = new fabric.Textbox('text', { 
+        const textbox = new fabric.Textbox('text', {  // set objId、user
             left: 150, 
             top: 100,
             editable: true,
@@ -249,11 +329,11 @@ checkUser().then( async (user) => {
     // canvas.loadFromJSON(step.canvas, canvas.renderAll.bind(canvas));
     // {"version":"4.2.0","objects":[{"type":"textbox","version":"4.2.0","originX":"left","originY":"top","left":150,"top":100,"width":300,"height":45.2,"fill":"#8a91ab","stroke":null,"strokeWidth":1,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"text":"hello world","fontSize":40,"fontWeight":"normal","fontFamily":"Delicious","fontStyle":"normal","lineHeight":1.16,"underline":false,"overline":false,"linethrough":false,"textAlign":"center","textBackgroundColor":"","charSpacing":0,"minWidth":20,"splitByGrapheme":false,"styles":{}},{"type":"rect","version":"4.2.0","originX":"left","originY":"top","left":200,"top":200,"width":200,"height":100,"fill":"#fcba03","stroke":null,"strokeWidth":1,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"rx":0,"ry":0},{"type":"rect","version":"4.2.0","originX":"left","originY":"top","left":80,"top":250,"width":200,"height":100,"fill":"#42f587","stroke":null,"strokeWidth":1,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"rx":0,"ry":0}],"background":"#ffffff"}
 
-    let blankCanvas = {
-        version: "4.2.0",
-        objects: [],
-        background: "#ffffff"
-    }
+    // let blankCanvas = {
+    //     version: "4.2.0",
+    //     objects: [],
+    //     background: "#ffffff"
+    // }
 
     // canvas.clear()
     // canvas.loadFromJSON(c, canvas.renderAll.bind(canvas));
@@ -272,76 +352,76 @@ checkUser().then( async (user) => {
 
     // --- CANVAS OPERATE ---
     // Initialize
-    const cardLoad = (await api.get('api/1.0/canvas/load', { params: { card: card } })).data.data.step;
-    const userCanvasExistence = (await api.get('api/1.0/canvas/check', { params: { card: card, user: user.id } })).data.data.existence;
-    if (!cardLoad) {
-        const newCanvas = {
-            card_id: card,
-            user_id: user.id,
-            user_name: user.name,
-            action: 'origin',
-            canvas: canvas.toJSON()
-        };
-        await api.post('api/1.0/canvas/init', newCanvas);
-    } else {
-        canvas.loadFromJSON(cardLoad.canvas, canvas.renderAll.bind(canvas));
-        if (!userCanvasExistence) {
-            const newCanvas = {
-                card_id: card,
-                user_id: user.id,
-                user_name: user.name,
-                action: 'origin',
-                canvas: canvas.toJSON()
-            };
-            await api.post('api/1.0/canvas/init', newCanvas);
-        }
-    }
-    // Save canvas
-    const saveCanvas = async() => {
-        const data = {
-            card_id: card,
-            user_id: user.id,
-            user_name: user.name,
-            action: 'modify',
-            canvas: canvas.toJSON()
-        };
-        await api.post('api/1.0/canvas/save', data);
-        socket.emit('edit canvas', data.canvas);
-    }
-    // $('#save-canvas').click(saveCanvas);
-    canvas.on('object:modified', saveCanvas);  // action: modify
-    canvas.on('object:created', saveCanvas);  // action: create 
-    canvas.on('object:removed', saveCanvas);  // action: remove
-    canvas.on('path:created', saveCanvas);  // action: create
-    // Undo canvas
-    $('#undo-canvas').click( async () => {
-        api.get('api/1.0/canvas/undo', { params: { card: card, user: user.id } })
-        .then((response) => {
-            const step = response.data.data.step;
-            canvas.clear();
-            canvas.loadFromJSON(step.canvas, canvas.renderAll.bind(canvas));
-            socket.emit('edit canvas', step.canvas);
-        }).catch((error) => {
-            alert('Already the last step');
-        });
-    });
-    // Redo canvas
-    $('#redo-canvas').click( async () => {
-        api.get('api/1.0/canvas/redo', { params: { card: card, user: user.id } })
-        .then((response) => {
-            const step = response.data.data.step;
-            canvas.clear();
-            canvas.loadFromJSON(step.canvas, canvas.renderAll.bind(canvas));
-            socket.emit('edit canvas', step.canvas);
-        }).catch((error) => {
-            alert('Already the last step');
-        });
-    });
-    // Change canvas
-    socket.on('change canvas', (newCanvas) => { 
-        canvas.clear();
-        canvas.loadFromJSON(newCanvas, canvas.renderAll.bind(canvas));
-    });
+    // const cardLoad = (await api.get('api/1.0/canvas/load', { params: { card: card } })).data.data.step;
+    // const userCanvasExistence = (await api.get('api/1.0/canvas/check', { params: { card: card, user: user.id } })).data.data.existence;
+    // if (!cardLoad) {
+    //     const newCanvas = {
+    //         card_id: card,
+    //         user_id: user.id,
+    //         user_name: user.name,
+    //         action: 'origin',
+    //         canvas: canvas.toJSON()
+    //     };
+    //     await api.post('api/1.0/canvas/init', newCanvas);
+    // } else {
+    //     canvas.loadFromJSON(cardLoad.canvas, canvas.renderAll.bind(canvas));
+    //     if (!userCanvasExistence) {
+    //         const newCanvas = {
+    //             card_id: card,
+    //             user_id: user.id,
+    //             user_name: user.name,
+    //             action: 'origin',
+    //             canvas: canvas.toJSON()
+    //         };
+    //         await api.post('api/1.0/canvas/init', newCanvas);
+    //     }
+    // }
+    // // Save canvas
+    // const saveCanvas = async() => {
+    //     const data = {
+    //         card_id: card,
+    //         user_id: user.id,
+    //         user_name: user.name,
+    //         action: 'modify',
+    //         canvas: canvas.toJSON()
+    //     };
+    //     await api.post('api/1.0/canvas/save', data);
+    //     socket.emit('edit canvas', data.canvas);
+    // }
+    // // $('#save-canvas').click(saveCanvas);
+    // canvas.on('object:modified', saveCanvas);  // action: modify
+    // canvas.on('object:created', saveCanvas);  // action: create 
+    // canvas.on('object:removed', saveCanvas);  // action: remove
+    // canvas.on('path:created', saveCanvas);  // action: create
+    // // Undo canvas
+    // $('#undo-canvas').click( async () => {
+    //     api.get('api/1.0/canvas/undo', { params: { card: card, user: user.id } })
+    //     .then((response) => {
+    //         const step = response.data.data.step;
+    //         canvas.clear();
+    //         canvas.loadFromJSON(step.canvas, canvas.renderAll.bind(canvas));
+    //         socket.emit('edit canvas', step.canvas);
+    //     }).catch((error) => {
+    //         alert('Already the last step');
+    //     });
+    // });
+    // // Redo canvas
+    // $('#redo-canvas').click( async () => {
+    //     api.get('api/1.0/canvas/redo', { params: { card: card, user: user.id } })
+    //     .then((response) => {
+    //         const step = response.data.data.step;
+    //         canvas.clear();
+    //         canvas.loadFromJSON(step.canvas, canvas.renderAll.bind(canvas));
+    //         socket.emit('edit canvas', step.canvas);
+    //     }).catch((error) => {
+    //         alert('Already the last step');
+    //     });
+    // });
+    // // Change canvas
+    // socket.on('change canvas', (newCanvas) => { 
+    //     canvas.clear();
+    //     canvas.loadFromJSON(newCanvas, canvas.renderAll.bind(canvas));
+    // });
 
 
 
@@ -379,9 +459,9 @@ checkUser().then( async (user) => {
     te.objId = 1
     te.left = 200
 
-    blankCanvas.objects.push(te);
+    // blankCanvas.objects.push(te);
 
-    canvas.loadFromJSON(blankCanvas, canvas.renderAll.bind(canvas));
+    // canvas.loadFromJSON(blankCanvas, canvas.renderAll.bind(canvas));
 
 
 

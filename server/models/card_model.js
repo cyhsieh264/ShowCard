@@ -16,9 +16,9 @@ const create = async(data) => {
 
 const check = async(cardId) => {
     try {
-        const result = await query('SELECT 1 FROM `card` WHERE `id` = ? LIMIT 1', cardId);
-        if (result.length == 0) return { result: false };
-        else return { result: true };
+        const result = await query('SELECT * FROM `card` WHERE `id` = ? LIMIT 1', cardId);
+        if (result.length == 0) return { result: { existence: false, owner: false } };
+        else return { result: { existence: true, owner: result.owner } };
     } catch (error) {
         writeLog(error.stack);
         return { error }

@@ -8,7 +8,7 @@ const saveCanvas = async (req, res) => {
         action: canvas.action,
         obj_id: canvas.obj_id,
         obj_type: canvas.obj_type, 
-        object: canvas.object, // 注意json進出的格式
+        object: canvas.object,  // 注意json進出的格式
     };
     const { result, error } = await Canvas.save(data);
     if (error) return res.status(500).json({ error: 'Internal server error' });

@@ -19,12 +19,12 @@
 //             canvas.renderAll();
 //         });
 
-const canvas = new fabric.Canvas('canvas', {
-    width: 600,
-    height: 400,
-    originX: 'center',
-    backgroundColor: '#ffffff',
-});
+// const canvas = new fabric.Canvas('canvas', {
+//     width: 600,
+//     height: 400,
+//     originX: 'center',
+//     backgroundColor: '#ffffff',
+// });
 
 const rect = new fabric.Rect({
     height: 100,
@@ -37,7 +37,8 @@ const rect = new fabric.Rect({
 
 canvas.add(rect)
 
-const test1 = {"objects":[{"objId": "1dsg", "type":"rect","version":"4.2.0","originX":"left","originY":"top","left":200,"top":200,"width":200,"height":100,"fill":"#fcba03","stroke":null,"strokeWidth":1,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"rx":0,"ry":0}]}
+const test1 = {"objects":[{"objId": "1dsg", "type":"rect","version":"4.2.0","originX":"left","originY":"top","left":200,"top":200,"width":200,"height":100,"fill":"#fcba03","stroke":null,"strokeWidth":1,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"rx":0,"ry":0}, {"objId": "1dsg", "type":"rect","version":"4.2.0","originX":"left","originY":"top","left":200,"top":50,"width":200,"height":100,"fill":"#fcba03","stroke":null,"strokeWidth":1,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"rx":0,"ry":0}]}
+// const test1 = {"objects":[{"objId": "1dsg", "type":"rect","version":"4.2.0","originX":"left","originY":"top","left":200,"top":200,"width":200,"height":100,"fill":"#fcba03","stroke":null,"strokeWidth":1,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"rx":0,"ry":0}]}
 const test2 = {"objects":[{"objId": "1dsg", "type":"rect","version":"4.2.0","originX":"left","originY":"top","left":250,"top":230,"width":200,"height":100,"fill":"#000000","stroke":null,"strokeWidth":1,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"rx":0,"ry":0}]}
 
 fabric.util.enlivenObjects(test1.objects, (enlivenedObjects) => { 
@@ -51,20 +52,45 @@ console.log(canvas)
 console.log(canvas.getObjects())
 
 $('#test2').click(() => {
-    const id = test1.objects[0].objId;
+    // const id = test1.objects[0].objId;
+    const id = '1dsg'
+
     // remove test1
-    for (let i = 0; i<canvas.getObjects().length; i++) {
-        if (canvas.getObjects()[i].objId == id) {
-            canvas.remove(canvas.getObjects()[i])
+
+    // for (let i = 0; i<canvas.getObjects().length; i++) {
+    //     if (canvas.getObjects()[i].objId == id) {
+    //         canvas.remove(canvas.getObjects()[i])
+    //     }
+    // }
+
+    // canvas.getObjects().forEach((obj) => {
+    //     if (obj.objId == id) {
+    //         canvas.remove(obj);
+    //     }
+    // })
+
+    canvas.getObjects().every((obj) => {
+        if (obj.objId == id) {
+            canvas.remove(obj)
+            canvas.renderAll()
+            console.log(canvas.getObjects())
+            return false
+        } else {
+            return true
         }
-    }
+    })
+
+
+
+
+
     // add test2
-    fabric.util.enlivenObjects(test2.objects, (enlivenedObjects) => { 
-        enlivenedObjects.forEach((obj) => {
-            canvas.add(obj);
-        });
-        canvas.renderAll();
-    });
+    // fabric.util.enlivenObjects(test2.objects, (enlivenedObjects) => { 
+    //     enlivenedObjects.forEach((obj) => {
+    //         canvas.add(obj);
+    //     });
+    //     canvas.renderAll();
+    // });
 })
 
 

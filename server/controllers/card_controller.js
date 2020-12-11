@@ -4,7 +4,7 @@ const checkCard = async (req, res) => {
     const cardId = req.query.card;
     const { result, error } = await Card.check(cardId);
     if (error) return res.status(500).json({ error: 'Internal server error' });
-    return res.status(200).json({ data: { existence: result } });
+    return res.status(200).json({ data: { existence: result.existence, owner: result.owner } });
 };
 
 const createCard = async (req, res) => {
