@@ -2,16 +2,12 @@ const router = require('express').Router();
 const { wrapAsync } = require('../../util/util');
 
 const {
-    initCanvas,
     saveCanvas,
     checkCanvas,
     loadCanvas,
     undoCanvas,
     redoCanvas
 } = require('../controllers/canvas_controller');
-  
-router.route('/canvas/init')
-    .post(wrapAsync(initCanvas));
 
 router.route('/canvas/save')
     .post(wrapAsync(saveCanvas));

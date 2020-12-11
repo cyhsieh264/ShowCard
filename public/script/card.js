@@ -308,11 +308,11 @@ checkUser().then( async (user) => {
         await api.post('api/1.0/canvas/save', data);
         socket.emit('edit canvas', data.canvas);
     }
-    $('#save-canvas').click(saveCanvas);
-    canvas.on('object:modified', saveCanvas);
-    canvas.on('object:created', saveCanvas);
-    canvas.on('object:removed', saveCanvas);
-    canvas.on('path:created', saveCanvas);
+    // $('#save-canvas').click(saveCanvas);
+    canvas.on('object:modified', saveCanvas);  // action: modify
+    canvas.on('object:created', saveCanvas);  // action: create 
+    canvas.on('object:removed', saveCanvas);  // action: remove
+    canvas.on('path:created', saveCanvas);  // action: create
     // Undo canvas
     $('#undo-canvas').click( async () => {
         api.get('api/1.0/canvas/undo', { params: { card: card, user: user.id } })
@@ -467,12 +467,12 @@ checkUser().then( async (user) => {
 
     canvas.on('mouse:down', e => {
         if (e.target != null) {
-            if (e.target.status != ' is editing') {
+            if (e.target.status != ' is editing') { // unneeded
                 e.target.on('mousedown', function(e) { 
                     // console.log(e)
                     // console.log(e.target)
                     // console.log(e.target.status);
-                    console.log(e.target.objId);
+                    console.log(e.target.user);
                 })
             } else {
                 // e.target.on('mousedown', function(e) { 

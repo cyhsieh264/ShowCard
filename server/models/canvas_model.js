@@ -17,7 +17,7 @@ const save = async(data) => {
     }
 };
 
-const check = async(card, user) => {
+const check = async(card, user) => { // done
     try {
         const result = await query('SELECT 1 FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? LIMIT 1', [card, user]);
         if (result.length == 0) return { result: false };
@@ -28,7 +28,7 @@ const check = async(card, user) => {
     }
 };
 
-const load = async(cardId) => {
+const load = async(cardId) => {  // 回傳 [ {obj1}, {obj2}, {obj3} ]
     try {
         return { result: (await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? ORDER BY `id` DESC LIMIT 1', cardId))[0] };
     } catch (error) {

@@ -17,6 +17,6 @@ const verifyUserToken = (token) => {
     })
 };
 
-const generateCardId = () => {
-    return Date.now().toString(36) + Math.random().toString(36).split('.')[1].substr(-8);
+const generateId = () => {
+    return Math.random().toString(36).substring(2) + Date.now().toString(36).substring(4);
 };

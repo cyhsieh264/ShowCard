@@ -2,8 +2,7 @@
  fabric.Object.prototype.toObject = (function(toObject) {
     return function() {
         return fabric.util.object.extend(toObject.call(this), {
-            objId: this.objId,  // custom property
-            status: this.status,
+            objId: this.objId,  
             user: this.user
         });
     };

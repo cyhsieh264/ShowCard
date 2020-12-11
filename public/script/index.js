@@ -21,6 +21,6 @@ $('#logout').click(() => {
 });
 
 $('#new-card-btn').click(() => {
-    const card = generateCardId();
+    const card = generateId();
     $('#new-card-link')[0].href = `card.html?card=${card}`
 });

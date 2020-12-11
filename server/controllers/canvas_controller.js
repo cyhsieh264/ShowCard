@@ -1,19 +1,19 @@
 const Canvas = require('../models/canvas_model');
 
-const initCanvas = async (req, res) => {
-    const canvas = req.body;
-    const data = {
-        card_id: canvas.card_id,
-        user_id: canvas.user_id,
-        user_name: canvas.user_name,
-        action: 'origin',
-        canvas: JSON.stringify(canvas.canvas),
-        init: true
-    };
-    const { result, error } = await Canvas.save(data);
-    if (error) return res.status(500).json({ error: 'Internal server error' });
-    return res.status(200).json({ message: result });
-};
+// const initCanvas = async (req, res) => {
+//     const canvas = req.body;
+//     const data = {
+//         card_id: canvas.card_id,
+//         user_id: canvas.user_id,
+//         user_name: canvas.user_name,
+//         action: 'origin',
+//         canvas: JSON.stringify(canvas.canvas),
+//         init: true
+//     };
+//     const { result, error } = await Canvas.save(data);
+//     if (error) return res.status(500).json({ error: 'Internal server error' });
+//     return res.status(200).json({ message: result });
+// };
 
 const saveCanvas = async (req, res) => {
     const canvas = req.body;
@@ -30,7 +30,7 @@ const saveCanvas = async (req, res) => {
     return res.status(200).json({ message: result });
 };
 
-const checkCanvas = async (req, res) => {
+const checkCanvas = async (req, res) => { // done
     const data = req.query;
     const { result, error } = await Canvas.check(data.card, data.user);
     if (error) return res.status(500).json({ error: 'Internal server error' });
@@ -41,7 +41,7 @@ const loadCanvas = async (req, res) => {
     const cardId = req.query.card;
     const { result, error } = await Canvas.load(cardId);
     if (error) return res.status(500).json({ error: 'Internal server error' });
-    return res.status(200).json({ data: { step: result } });
+    return res.status(200).json({ data: { step: [ { action: 'create', 'object': result } ] } });
 };
 
 const saveObj = async (req, res) => {
@@ -80,7 +80,6 @@ const redoCanvas = async (req, res) => {
 };
 
 module.exports = {
-    initCanvas,
     saveCanvas,
     checkCanvas,
     loadCanvas,
