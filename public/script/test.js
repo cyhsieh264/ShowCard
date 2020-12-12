@@ -94,6 +94,53 @@ $('#test2').click(() => {
 })
 
 
+const generateId = () => {
+    return Math.random().toString(36).substring(2) + Date.now().toString(36).substring(4);
+};
+
+$('#brush-on').click(() => {
+    canvas.freeDrawingBrush.color = $('#color-fill').val();
+    canvas.freeDrawingBrush.width = 5;
+    canvas.freeDrawingBrush.user = 'john';
+    canvas.freeDrawingBrush.objId = generateId();
+    canvas.isDrawingMode = true
+});
+$('#brush-off').click(() => canvas.isDrawingMode = false);
+
+canvas.on('path:created', () => {
+    console.log(canvas.getObjects())
+    // console.log(canvas.getObjects()[canvas.getObjects().length-1])
+    const a = canvas.getObjects()[canvas.getObjects().length-1]
+    a.user = 'jjj'
+    a.objId = generateId()
+    // console.log(a)
+    console.log(canvas.getObjects()[canvas.getObjects().length-1].toJSON())
+});
+
+
+canvas.on('object:modified', () => {
+    console.log('momo')
+    console.log(canvas.getActiveObjects()[0].toJSON())
+    // save api
+
+});
+
+// canvas.on('object:created', () => {
+//     console.log('add')
+//     console.log(canvas.getActiveObjects()[0].toJSON())
+//     // save api
+// }); 
+
+$('#rm-obj').click(() => {
+    const objects = canvas.getActiveObjects()[0];
+    console.log(objects.toJSON())
+    // save api
+    canvas.remove(objects)
+
+    // objects.map(obj => canvas.remove(obj));
+});
+// canvas.on('object:removed', saveObject('remove'));
+
 
 
 
@@ -113,22 +160,33 @@ $('#test2').click(() => {
 //     canvas.add(img1); 
 //     });
 // });
-// $('#add-circle').click(() => {
-//     let c = new fabric.Circle({
-//         left: 250, 
-//         top: 200,
-//         strokeWidth: 5,
-//         radius: 60,
-//         stroke: $('#color-border').val(),
-//         fill: $('#color-fill').val(),
-//         originX: 'center',
-//         originY: 'center'
-//     })
-//     canvas.add(c)
-//     canvas.setActiveObject(c);
-//     const data = canvas.getActiveObjects()[0].toJSON();
-//     newObject(data);
-// })
+
+
+
+$('#add-circle').click(() => {
+    let c = new fabric.Circle({
+        left: 250, 
+        top: 200,
+        strokeWidth: 5,
+        radius: 60,
+        stroke: $('#color-border').val(),
+        fill: $('#color-fill').val(),
+        originX: 'center',
+        originY: 'center',
+        objId: generateId(),
+        user: 'aaa'
+    })
+    canvas.add(c)
+    // c.objId = generateId()
+    // c.user = 'asdf'
+    canvas.setActiveObject(c);
+    const data = canvas.getActiveObjects()[0].toJSON();
+    console.log(data)
+    const data1 = c.toJSON();
+    console.log(data1)
+    // newObject(data);
+    console.log(data==data1)
+})
 // $('#add-rect').click(() => {
 //     let c = new fabric.Rect({
 //         height: 100,

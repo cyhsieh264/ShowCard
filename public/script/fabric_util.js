@@ -2,6 +2,11 @@
  fabric.Object.prototype.toObject = (function(toObject) {
     return function() {
         return fabric.util.object.extend(toObject.call(this), {
+            radius: this.radius,
+            text: this.text,
+            textAlign: this.textAlign,
+            textLines: this.textLines,
+            fontFamily: this.fontFamily,
             objId: this.objId,  // custom property
             user: this.user  // custom property
         });
@@ -20,8 +25,9 @@ const canvas = new fabric.Canvas('canvas', {
 });
 
 // Canvas operation
-const addObj = (object) => {  // if action is create, call addObj(object)
-    fabric.util.enlivenObjects(object, (enlivenedObjects) => { 
+const addObj = (data) => {  // if action is create, call addObj(object)
+    const objects = data.map(obj => JSON.parse(obj));
+    fabric.util.enlivenObjects(objects, (enlivenedObjects) => { 
         enlivenedObjects.map(obj => canvas.add(obj));
         canvas.renderAll();
     });
@@ -45,11 +51,12 @@ const parseObj = (data) => {  // data is an array
             switch (step.action) {
                 case 'create':
                     addObj(step.object);
+                    break;
                 case 'remove':
                     removeObj(step.object);
-                default:
-                    resolve();
+                    break;
             }
+            resolve();
         })
     })
 }
