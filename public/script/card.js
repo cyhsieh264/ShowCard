@@ -159,7 +159,6 @@ checkUser().then( async (user) => {
         });
         canvas.add(rect);
         canvas.setActiveObject(rect);
-        console.log(canvas.getActiveObjects()[0])
         const object = rect.toJSON();
         await newObject(object);
     });
@@ -182,7 +181,6 @@ checkUser().then( async (user) => {
         });
         canvas.add(textbox);
         canvas.setActiveObject(textbox);
-        console.log(canvas.getActiveObjects()[0])
         const object = textbox.toJSON();
         await newObject(object);
     }); 

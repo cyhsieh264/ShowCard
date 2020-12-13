@@ -26,7 +26,7 @@ const loadCanvas = async (req, res) => {
     const cardId = req.query.card;
     const { result, error } = await Canvas.load(cardId);
     if (error) return res.status(500).json({ error: 'Internal server error' });
-    return res.status(200).json({ data: { step: [ { action: 'create', 'object': result } ] } });
+    return res.status(200).json({ data: { step: [ { action: 'create', object: result } ] } });
 };
 
 const undoCanvas = async (req, res) => {

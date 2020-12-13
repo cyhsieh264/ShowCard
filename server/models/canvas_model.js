@@ -8,7 +8,6 @@ const save = async(data) => {
             const existence = await query('SELECT 1 FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? AND `obj_id` = ? LIMIT 1', [data.card_id, data.user_id, data.obj_id]);
             if (existence.length == 0) {
                 const lastStatus = (await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `obj_id` = ? ORDER BY `id` DESC LIMIT 1', [data.card_id, data.obj_id]))[0];
-                console.log(lastStatus);
                 const status = {
                     card_id: data.card_id,
                     user_id: data.user_id,
@@ -86,11 +85,6 @@ const undo = async(card, user) => {
                 ]
                 break;
             case 'modify':
-                // const lastStatus = await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `obj_id` = ? ORDER BY `id` DESC LIMIT 2', [card, lastStep[0].obj_id]);
-                // const last2Action = lastStep[1].action;
-                // if (last2Action == 'create') {
-
-                // }
                 result = [
                     {
                         action: 'remove',
