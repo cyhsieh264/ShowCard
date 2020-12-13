@@ -216,7 +216,7 @@ checkUser().then( async (user) => {
             object: JSON.stringify(object)
         };
         await api.post('api/1.0/canvas/save', data);
-        socket.emit('edit canvas', [{action: 'remove', object: 'temp_' + object.objId}, { action: 'create', object: [JSON.stringify(object)] }] );
+        socket.emit('edit canvas', [{action: 'remove', object: object.objId}, { action: 'create', object: [JSON.stringify(object)] }] );
     });
 
     // Remove Object
@@ -267,17 +267,20 @@ checkUser().then( async (user) => {
     // Lock Object
     canvas.on('mouse:down', e => {
         if (e.target != null) {
-            e.target.on('mousedown', function(e) { 
+            e.target.on('mousedown', e => { 
                 const editObject = fabric.util.object.clone(canvas.getActiveObject());
                 editObject.set('opacity', 0.5);
                 editObject.opacity = 0.5;
                 editObject.selectable = false;
                 editObject.evented = false;
-                editObject.objId = 'temp_' + editObject.objId;
                 socket.emit('edit canvas', [{action: 'remove', object: e.target.objId}, { action: 'create', object: [JSON.stringify(editObject.toJSON())] }] );
-            })
+            });
         }
-    })
+    });
+    
+    canvas.on('before:selection:cleared', e => {
+        socket.emit('edit canvas', [{action: 'remove', object: e.target.objId}, { action: 'create', object: [JSON.stringify(e.target.toJSON())] }] );
+    });
 
     // --- CANVAS TOOLBOX ---
     // Brush

@@ -7,6 +7,8 @@
             textAlign: this.textAlign,
             textLines: this.textLines,
             fontFamily: this.fontFamily,
+            evented: this.evented,
+            selectable: this.selectable,
             objId: this.objId,  // custom property
             user: this.user  // custom property
         });
