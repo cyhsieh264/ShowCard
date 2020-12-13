@@ -95,7 +95,7 @@ checkUser().then( async (user) => {
             }
             await setUserColor(memberCount);
             const canvasLoad = (await api.get('api/1.0/canvas/load', { params: { card: card } })).data.data.step;
-            await parseObj(canvasLoad);
+            parseObj(canvasLoad);
             break;
     }
     
@@ -243,9 +243,9 @@ checkUser().then( async (user) => {
     // Undo canvas
     $('#undo-canvas').click( async () => {
         api.get('api/1.0/canvas/undo', { params: { card: card, user: user.id } })
-        .then( async (response) => {
+        .then( response => {
             const step = response.data.data.step;
-            await parseObj(step);
+            parseObj(step);
             socket.emit('edit canvas', step);
         }).catch((error) => {
             alert('Already the last step');
@@ -255,9 +255,9 @@ checkUser().then( async (user) => {
     // Redo canvas
     $('#redo-canvas').click( async () => {
         api.get('api/1.0/canvas/redo', { params: { card: card, user: user.id } })
-        .then( async (response) => {
+        .then( response => {
             const step = response.data.data.step;
-            await parseObj(step);
+            parseObj(step);
             socket.emit('edit canvas', step);
         }).catch((error) => {
             alert('Already the last step');

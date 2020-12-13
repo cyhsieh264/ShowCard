@@ -25,15 +25,19 @@ const canvas = new fabric.Canvas('canvas', {
 });
 
 // Canvas operation
-const addObj = (data) => {  // if action is create, call addObj(object)
+const addObj = (data) => { 
+    let idSet = new Set();
+    canvas.getObjects().map( item => idSet.add(item.objId));
     const objects = data.map(obj => JSON.parse(obj));
     fabric.util.enlivenObjects(objects, (enlivenedObjects) => { 
-        enlivenedObjects.map(obj => canvas.add(obj));
+        enlivenedObjects.map(obj => {
+            if (!idSet.has(obj.objId)) canvas.add(obj)
+        });
         canvas.renderAll();
     });
 };
 
-const removeObj = (objId) => {  // if action is remove, call removeObj(objId)
+const removeObj = (objId) => { 
     canvas.getObjects().every((obj) => {
         if (obj.objId == objId) {
             canvas.remove(obj);
@@ -45,18 +49,12 @@ const removeObj = (objId) => {  // if action is remove, call removeObj(objId)
     });
 };
 
-const parseObj = (data) => {  // data is an array
-    return new Promise((resolve, reject) => {
-        data.map(step => {
-            switch (step.action) {
-                case 'create':
-                    addObj(step.object);
-                    break;
-                case 'remove':
-                    removeObj(step.object);
-                    break;
-            }
-            resolve();
-        })
-    })
-}
+const parseObj = (data) => {
+    data.map(step => {
+        if (step.action == 'create') {
+            addObj(step.object);
+        } else if (step.action == 'remove') {
+            removeObj(step.object);
+        }
+    });
+};
