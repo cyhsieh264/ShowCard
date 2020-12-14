@@ -1,4 +1,5 @@
 @import "common.css";
+@import "index.css";
 
 .chat {
     margin-top: 100px;
@@ -15,4 +16,9 @@ input {
     margin-bottom: 50px;
     width: 600px;
     height: 20px;
+}
+
+canvas {
+    text-align: center;
+    box-shadow: 4px 0px 3px 2px rgba(41,41,41,.25); 
 }

@@ -4,7 +4,7 @@ const displayUser = async () => {
         $('#login').addClass('hide');
         $('#user').removeClass('hide');
         $('#logout').removeClass('hide');
-        $('#user')[0].innerHTML = `Hello, ${userName}`;
+        $('#user')[0].innerHTML = `${userName}`;
     }
 };
 

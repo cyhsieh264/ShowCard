@@ -174,15 +174,19 @@ max-width: calc(100% - 3rem); } }
 #logo {
     color: #483558;
     text-decoration: none;
-    margin-left: 50px;
+    margin-left: 80px;
 }
 
 #logo-text:hover {
     text-decoration: none;
 }
 
-nav>a {
+nav {
     margin-right: 50px;
+}
+
+nav>a {
+    margin-right:30px;
     color: #483558;
     text-decoration: none;
 }
@@ -240,19 +244,18 @@ nav>a:hover {
     font-size: 24px;
 }
 
-#main-btn {
+#new-card-btn {
     color: #ffffff;
     background-color: #483558;
     border: none;
     text-decoration: none;
 }
 
-#main-btn:hover {
+#new-card-btn:hover {
     background-color: #ffffff;
     box-shadow: inset 0 0 0 1px #483558;
     color: #483558 !important;
 }
-
 
 /* Main */
 #main .content {
