@@ -266,7 +266,7 @@ checkUser().then( async (user) => {
 
     // Lock Object
     canvas.on('mouse:down', e => {
-        if (e.target != null) {
+        if (e.target != null && canvas.getActiveObjects().length != 0) {
             e.target.on('mousedown', e => { 
                 const editObject = fabric.util.object.clone(canvas.getActiveObject());
                 editObject.set('opacity', 0.5);
