@@ -2,22 +2,17 @@ require('dotenv').config();
 const mysql = require('mysql');
 const { promisify } = require('util');
 const { DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_DATABASE_TEST, NODE_ENV } = process.env;
-const env = NODE_ENV || 'production';
+const env = NODE_ENV;
 
 const mysqlConfig = {
-    production: { // for EC2 machine
+    production: { 
         host: DB_HOST,
         user: DB_USERNAME,
         password: DB_PASSWORD,
-        database: DB_DATABASE
+        database: DB_DATABASE,
+        useConnectionPooling: true
     },
-    development: { // for localhost development
-        host: DB_HOST,
-        user: DB_USERNAME,
-        password: DB_PASSWORD,
-        database: DB_DATABASE
-    },
-    test: { // for automation testing (command: npm run test)
+    test: { 
         host: DB_HOST,
         user: DB_USERNAME,
         password: DB_PASSWORD,

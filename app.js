@@ -54,12 +54,10 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
     console.log(err); // 之後刪掉
     const { stack } = err;
-    writeLog(stack); // 上ec2前清log
+    writeLog(stack);
     res.status(500).json({ error: 'Internal server error' });
 });
 
-if (NODE_ENV != 'production'){
-    http.listen(port, () => {
-        console.log(`The application is running on port ${port}`);
-    });
-}
+http.listen(port, () => {
+    console.log(`The application is running on port ${port}`);
+});
