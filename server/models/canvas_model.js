@@ -145,7 +145,6 @@ const redo = async(card, user) => {
                 ]
                 break;
             case 'modify':
-                // const formerStatus = (await query('SELECT * FROM `canvas_undo` WHERE `card_id` = ? AND `user_id` = ? ORDER BY `id` DESC LIMIT 1', [card, user]))[0];
                 result = [
                     {
                         action: 'remove',
