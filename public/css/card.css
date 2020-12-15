@@ -1,6 +1,11 @@
 @import "common.css";
 @import "index.css";
 
+body {
+    background-image: url("../../images/image/card_background.jpg");
+    background-size: 70%;
+}
+
 .chat {
     margin-top: 100px;
     background-color: aliceblue;

@@ -61,7 +61,7 @@ const undo = async(card, user) => {
     const time = Date.now();
     try {
         await transaction();
-        const lastStep = await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? ORDER BY `id` DESC LIMIT 2', [card, user]);
+        const lastStep = await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? ORDER BY `id` DESC LIMIT 1', [card, user]);
         if (lastStep[0].action == 'origin' || lastStep[0].action == 'recreate') {
             await commit();
             return { error: { customError: 'Already the last step' } };
@@ -80,11 +80,12 @@ const undo = async(card, user) => {
                 result = [
                     {
                         action: 'create',
-                        object: [lastStep[1].object]
+                        object: [lastStep[0].object]
                     }
                 ]
                 break;
             case 'modify':
+                const objLastStep = await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? AND `obj_id` = ? ORDER BY `id` DESC LIMIT 2', [card, user, lastStep[0].obj_id]);
                 result = [
                     {
                         action: 'remove',
@@ -92,7 +93,7 @@ const undo = async(card, user) => {
                     },
                     {
                         action: 'create',
-                        object: [lastStep[1].object]
+                        object: [objLastStep[1].object]
                     }
                 ]
                 break;
