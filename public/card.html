@@ -21,18 +21,21 @@
         <main class="hide">
             <h1 id="card-title">Design Your Card</h1>
             <div class="canvas" id="canvas-base">
-                <canvas id="canvas"></canvas>
-                <div id="test"></div>
-                <button id="brush-on">Brush on</button>
-                <button id="brush-off">Brush off</button>
-                <button id="add-circle">Circle</button>
-                <button id="add-rect">Rect</button>
-                <button id="add-icon">Icon</button>
-                <button id="add-text">Text</button>
-                <button id="undo-canvas">Undo</button>
-                <button id="redo-canvas">Redo</button>
-                <button id="rm-obj">Delete</button>
+                <canvas id="canvas"></canvas><br><br>
+                <button class="btn btn-primary" id="brush-on">Brush on</button>
+                <button class="btn btn-primary" id="brush-off">Brush off</button>
+                <button class="btn btn-primary" id="add-circle">Circle</button>
+                <button class="btn btn-primary" id="add-rect">Rect</button>
+                <button class="btn btn-primary" id="add-icon">Icon</button>
+                <button class="btn btn-primary" id="add-text">Text</button>
+                <button class="btn btn-primary" id="undo-canvas">Undo</button>
+                <button class="btn btn-primary" id="redo-canvas">Redo</button>
+                <button class="btn btn-primary" id="rm-obj">Delete</button>
+                <br><br>
+                <p>Fill Color: </p>
                 <input type="color" class="tool colorSelector" id="color-fill" value="#EED42B" data-tool-tip="Select Colour">
+                <br>
+                <p>Stroke Color: </p>
                 <input type="color" class="tool colorSelector" id="color-border" value="#FFFFFF" data-tool-tip="Select Colour">
             </div>
             <div class="chat">
