@@ -35,7 +35,7 @@ const addObj = (data) => {
     const objects = data.map(obj => JSON.parse(obj));
     fabric.util.enlivenObjects(objects, (enlivenedObjects) => { 
         enlivenedObjects.map(obj => {
-            if (!idSet.has(obj.objId)) canvas.add(obj)
+            if (!idSet.has(obj.objId)) canvas.add(obj);
         });
         canvas.renderAll();
     });

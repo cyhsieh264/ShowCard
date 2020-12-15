@@ -50,7 +50,6 @@ checkUser().then( async (user) => {
                 title: 'Notification',
                 text: 'Please Enter Your Message',
                 type: 'warning',
-                showCancelButton: true,
                 confirmButtonText: 'OK'
             });
         }
@@ -66,7 +65,6 @@ checkUser().then( async (user) => {
                 title: 'Notification',
                 text: 'Please Enter Your Message',
                 type: 'warning',
-                showCancelButton: true,
                 confirmButtonText: 'OK'
             });
         }
@@ -239,7 +237,6 @@ checkUser().then( async (user) => {
                 title: 'Notification',
                 text: 'Please Select An Object',
                 type: 'warning',
-                showCancelButton: true,
                 confirmButtonText: 'OK'
             });
             return;
@@ -270,7 +267,6 @@ checkUser().then( async (user) => {
                 title: 'Notification',
                 text: 'Already The Last Step',
                 type: 'warning',
-                showCancelButton: true,
                 confirmButtonText: 'OK'
             });
         });
@@ -288,7 +284,6 @@ checkUser().then( async (user) => {
                 title: 'Notification',
                 text: 'Already The Last Step',
                 type: 'warning',
-                showCancelButton: true,
                 confirmButtonText: 'OK'
             });
         });

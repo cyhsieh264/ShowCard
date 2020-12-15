@@ -106,10 +106,10 @@ $('#signup-btn').click(() => {
             title: 'Notification',
             text: 'Sign Up Successfully',
             type: 'warning',
-            showCancelButton: true,
             confirmButtonText: 'OK'
+        }).then(() => {
+            location.replace(history);
         });
-        location.replace(history);
     }).catch((err) => {
         console.log(err)
         $('#signup-alert').removeClass('hide');
