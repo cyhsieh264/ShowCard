@@ -12,3 +12,11 @@ main{
 .hide{
 	display: none;
 }
+
+.swal-button--confirm {
+	background-color: #483558;
+}
+
+.swal-footer {
+	text-align: center;
+}

@@ -16,7 +16,13 @@ $('#login').click(() => {
 
 $('#logout').click(() => {
     localStorage.removeItem('user_token');
-    alert('Sign out successfully!');
+    swal({
+        title: 'Notification',
+        text: 'Sign Out Successfully',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'OK'
+    });
     location.replace('/');
 });
 

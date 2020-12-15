@@ -46,7 +46,13 @@ checkUser().then( async (user) => {
             socket.emit('input msg', $('#msg').val())
             $('#msg').val('')
         } else {
-            alert('Please enter your message')
+            swal({
+                title: 'Notification',
+                text: 'Please Enter Your Message',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'OK'
+            });
         }
     });
     $('#msg').keypress(function(e) {
@@ -56,7 +62,13 @@ checkUser().then( async (user) => {
             socket.emit('input msg', $('#msg').val())
             $('#msg').val('')
         } else if ( !$('#msg').val() && code == 13 ) {
-            alert('Please enter your message')
+            swal({
+                title: 'Notification',
+                text: 'Please Enter Your Message',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'OK'
+            });
         }
     });
 
@@ -223,7 +235,13 @@ checkUser().then( async (user) => {
     $('#rm-obj').click( async () => {
         const target = canvas.getActiveObjects()[0];
         if (!target) {
-            alert('Please select an object');
+            swal({
+                title: 'Notification',
+                text: 'Please Select An Object',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'OK'
+            });
             return;
         }
         const object = target.toJSON();
@@ -248,7 +266,13 @@ checkUser().then( async (user) => {
             parseObj(step);
             socket.emit('edit canvas', step);
         }).catch((error) => {
-            alert('Already the last step');
+            swal({
+                title: 'Notification',
+                text: 'Already The Last Step',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'OK'
+            });
         });
     });
 
@@ -260,7 +284,13 @@ checkUser().then( async (user) => {
             parseObj(step);
             socket.emit('edit canvas', step);
         }).catch((error) => {
-            alert('Already the last step');
+            swal({
+                title: 'Notification',
+                text: 'Already The Last Step',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'OK'
+            });
         });
     });
 

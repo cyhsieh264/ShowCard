@@ -102,7 +102,13 @@ $('#signup-btn').click(() => {
         const res = response.data.data
         const token = res.user_token;
         localStorage.setItem('user_token', token);
-        alert('Sign up successfully!');
+        swal({
+            title: 'Notification',
+            text: 'Sign Up Successfully',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'OK'
+        });
         location.replace(history);
     }).catch((err) => {
         console.log(err)
