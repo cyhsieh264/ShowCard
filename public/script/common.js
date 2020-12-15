@@ -20,3 +20,12 @@ const verifyUserToken = (token) => {
 const generateId = () => {
     return Math.random().toString(36).substring(2) + Date.now().toString(36).substring(4);
 };
+
+const isValidEmailAddress = (email) => {
+    let length = email.length
+    if(email.indexOf('@') == -1 || email.indexOf('@') == 0 || email.indexOf('@') == length-1){
+        return false
+    }else{
+        return true
+    }
+}

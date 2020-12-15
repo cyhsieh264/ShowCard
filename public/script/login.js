@@ -38,7 +38,7 @@ $('#signin-btn').click(() => {
         $('#signin-alert-msg')[0].innerHTML = 'Password is required';
         return;
     }
-    if (!email.includes('@')) {
+    if (!isValidEmailAddress(email)) {
         $('#signin-alert').removeClass('hide');
         $('#signin-alert-msg')[0].innerHTML = 'Invalid Email Address';
         return;
@@ -75,7 +75,7 @@ $('#signup-btn').click(() => {
         $('#signup-alert-msg')[0].innerHTML = 'Name is required';
         return;
     }
-    if (!email.includes('@')) {
+    if (!isValidEmailAddress(email)) {
         $('#signup-alert').removeClass('hide');
         $('#signup-alert-msg')[0].innerHTML = 'Invalid Email Address';
         return;
