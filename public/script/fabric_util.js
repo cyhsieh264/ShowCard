@@ -26,6 +26,8 @@ const canvas = new fabric.Canvas('canvas', {
     backgroundColor: '#ffffff',
 });
 
+canvas.selection = false;
+
 // Canvas operation
 const addObj = (data) => { 
     let idSet = new Set();

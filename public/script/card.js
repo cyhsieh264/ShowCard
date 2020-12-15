@@ -282,6 +282,10 @@ checkUser().then( async (user) => {
         socket.emit('edit canvas', [{action: 'remove', object: e.target.objId}, { action: 'create', object: [JSON.stringify(e.target.toJSON())] }] );
     });
 
+    canvas.on('selection:updated', e => {
+        socket.emit('edit canvas', [{action: 'remove', object: e.deselected[0].objId}, { action: 'create', object: [JSON.stringify(e.deselected[0].toJSON())] }] );
+    });
+
     // --- CANVAS TOOLBOX ---
     // Brush
     // const brush = new fabric.PatternBrush(canvas);
