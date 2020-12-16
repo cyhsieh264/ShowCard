@@ -16,16 +16,14 @@ $('#login').click(() => {
 
 $('#logout').click(() => {
     localStorage.removeItem('user_token');
-    alert('Sign Out Successfully');
-
-    // swal({
-    //     title: 'Notification',
-    //     text: 'Sign Out Successfully',
-    //     type: 'warning',
-    //     confirmButtonText: 'OK'
-    // }).then(() => {
-
-    // });
+    swal({
+        title: 'Notification',
+        text: 'Sign Out Successfully',
+        type: 'warning',
+        confirmButtonText: 'OK'
+    }).then(() => {
+        location.href = '/';
+    });
 });
 
 $('#new-card-btn').click(() => {
