@@ -5,18 +5,10 @@ main {
     background-color: #dfdfdf;
 }
 
-#content {
-    height: 680px;
-    text-align: center;
-    background-image: url("../../images/image/cover.jpg");
-    background-size: 100%;
-    background-repeat: no-repeat;
-}
-
 #oops {
     color: #483558;
     font-size: 80px;
-    margin-top: 300px;
+    margin-top: 250px;
 }
 
 #msg {
