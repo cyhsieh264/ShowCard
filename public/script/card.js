@@ -292,13 +292,15 @@ checkUser().then( async (user) => {
     // Lock Object
     canvas.on('mouse:down', e => {
         if (e.target != null && canvas.getActiveObjects().length != 0) {
-            e.target.on('mousedown', e => { 
-                const editObject = fabric.util.object.clone(canvas.getActiveObject());
-                editObject.set('opacity', 0.5);
-                editObject.opacity = 0.5;
-                editObject.selectable = false;
-                editObject.evented = false;
-                socket.emit('edit canvas', [{action: 'remove', object: e.target.objId}, { action: 'create', object: [JSON.stringify(editObject.toJSON())] }] );
+            e.target.on('mousedown', e => {                
+                if (e.transform) {
+                    const editObject = fabric.util.object.clone(canvas.getActiveObject());
+                    editObject.set('opacity', 0.5);
+                    editObject.opacity = 0.5;
+                    editObject.selectable = false;
+                    editObject.evented = false;
+                    socket.emit('edit canvas', [{action: 'remove', object: e.target.objId}, { action: 'create', object: [JSON.stringify(editObject.toJSON())] }] );
+                }
             });
         }
     });
@@ -315,6 +317,7 @@ checkUser().then( async (user) => {
     // Brush
     // const brush = new fabric.PatternBrush(canvas);
     $('#brush-on').click(() => {
+        if (canvas.getActiveObject()) canvas.discardActiveObject().renderAll();
         canvas.freeDrawingBrush.color = $('#color-fill').val();
         canvas.freeDrawingBrush.width = 5;
         canvas.isDrawingMode = true
@@ -336,4 +339,10 @@ window.addEventListener('load', () => {
     body.style.backgroundImage = "url('../../images/image/card_background.jpg')";
     body.style.backgroundSize = '70%';
     body.style.height = 'unset';
+});
+
+$('#save').on('click', function () {
+    if (canvas.getActiveObject()) canvas.discardActiveObject().renderAll();
+    const _canvas = document.getElementsByTagName('canvas')[0];
+    this.href = _canvas.toDataURL();
 });
