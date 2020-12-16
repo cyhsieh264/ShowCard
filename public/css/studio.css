@@ -1,10 +1,6 @@
 @import "common.css";
 @import "index.css";
 
-main {
-    background-color: #dfdfdf !important;
-}
-
 #title {
     margin-top: 70px;
     padding: 50px;

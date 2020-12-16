@@ -28,4 +28,4 @@ const isValidEmailAddress = (email) => {
     }else{
         return true
     }
-}
+};
