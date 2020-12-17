@@ -27,7 +27,7 @@ $('#go-login').click(() => {
 $('#signin-btn').click(() => {
     const history = localStorage.getItem('history') || '/';
     const email = $('#signin-email').val();
-    const password = $('#signin-password').val();
+    const password = btoa($('#signin-password').val());
     if (!email) {
         $('#signin-alert').removeClass('hide');
         $('#signin-alert-msg')[0].innerHTML = 'Email is required';
@@ -63,8 +63,8 @@ $('#signup-btn').click(() => {
     const history = localStorage.getItem('history') || '/';
     const email = $('#signup-email').val();
     const name = $('#signup-name').val();
-    const password = $('#signup-password').val();
-    const confirmPassword = $('#signup-confirm-password').val();
+    const password = btoa($('#signup-password').val());
+    const confirmPassword = btoa($('#signup-confirm-password').val());
     if (!email) {
         $('#signup-alert').removeClass('hide');
         $('#signup-alert-msg')[0].innerHTML = 'Email is required';
