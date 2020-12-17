@@ -2,8 +2,6 @@ localStorage.setItem('history', location.pathname + location.search)
 const urlParams = new URLSearchParams(location.search);
 const card = urlParams.get('card');
 
-if (!card) location.replace('/');
-
 const api = axios.create({
     headers: { 
         'Content-Type': 'application/json',
@@ -12,17 +10,21 @@ const api = axios.create({
     responseType: 'json'
 });
 
-const checkUser = async () => {
-    const payload = await verifyUserToken(userToken);
-    if (userToken && payload) {
+const check = async () => {
+    const cardStatus = (await api.get('api/1.0/card/check', { params: { card: card } })).data.data;
+    if (cardStatus.existence == false) location.replace('/404.html');
+    const userInfo = await verifyUserToken(userToken);
+    if (userToken && userInfo) {
         $('main').removeClass('hide');
-        return payload;
+        return { owner: cardStatus.owner, user: userInfo };
     } else {
         location.replace('/login.html');
     }
 };
 
-checkUser().then( async (user) => {
+check().then( async (res) => {
+    const cardOwner = res.owner;
+    const user = res.user;
     const socket = io({
         auth: {
             cid: card,
@@ -84,29 +86,24 @@ checkUser().then( async (user) => {
         const index = num % 10;
         localStorage.setItem('color_'+card, colors[index]);
     };
-    const cardInfo = (await api.get('api/1.0/card/check', { params: { card: card } })).data.data;
-    switch (cardInfo.existence) {
-        case false:
-            const newCard = {
-                id: card,
-                owner: user.id,
-                title: 'untitled'
-            };
-            await api.post('api/1.0/card/create', newCard);
+    if (!cardOwner) {
+        const newCard = {
+            id: card,
+            owner: user.id,
+            title: 'untitled'
+        };
+        await api.post('api/1.0/card/create', newCard);
+        await api.post('api/1.0/canvas/save', newCanvas);
+        await setUserColor(1);
+    } else {
+        const memberCount = (await api.patch('api/1.0/card/addmember', { card: card })).data.data.count;
+        const userCanvasExistence = (await api.get('api/1.0/canvas/check', { params: { card: card, user: user.id } })).data.data.existence;
+        if (!userCanvasExistence) {
             await api.post('api/1.0/canvas/save', newCanvas);
-            await setUserColor(1);
-            break;
-        case true:
-            // backlog: shared or not
-            const memberCount = (await api.patch('api/1.0/card/addmember', { card: card })).data.data.count;
-            const userCanvasExistence = (await api.get('api/1.0/canvas/check', { params: { card: card, user: user.id } })).data.data.existence;
-            if (!userCanvasExistence) {
-                await api.post('api/1.0/canvas/save', newCanvas);
-            }
-            await setUserColor(memberCount);
-            const canvasLoad = (await api.get('api/1.0/canvas/load', { params: { card: card } })).data.data.step;
-            parseObj(canvasLoad);
-            break;
+        }
+        await setUserColor(memberCount);
+        const canvasLoad = (await api.get('api/1.0/canvas/load', { params: { card: card } })).data.data.step;
+        parseObj(canvasLoad);
     }
     
     // --- CANVAS EVENT ---

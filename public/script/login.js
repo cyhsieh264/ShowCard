@@ -106,6 +106,7 @@ $('#signup-btn').click(() => {
             title: 'Notification',
             text: 'Sign Up Successfully',
             type: 'warning',
+            icon: 'success',
             confirmButtonText: 'OK'
         }).then(() => {
             location.replace(history);

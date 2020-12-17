@@ -64,7 +64,7 @@ const undo = async(card, user) => {
         const lastStep = await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? ORDER BY `id` DESC LIMIT 1', [card, user]);
         if (lastStep[0].action == 'origin' || lastStep[0].action == 'recreate') {
             await commit();
-            return { error: { customError: 'Already the last step' } };
+            return { error: { customError: 'Already The Last Step' } };
         }
         let result;
         switch (lastStep[0].action) {
@@ -125,7 +125,7 @@ const redo = async(card, user) => {
         const formerStep = (await query('SELECT * FROM `canvas_undo` WHERE `card_id` = ? AND `user_id` = ? ORDER BY `id` DESC LIMIT 1', [card, user]))[0];
         if (!formerStep) {
             await commit();
-            return { error: { customError: 'Already the last step' } };
+            return { error: { customError: 'Already The Last Step' } };
         }
         let result;
         switch (formerStep.action) {

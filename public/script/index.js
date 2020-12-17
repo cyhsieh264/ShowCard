@@ -20,13 +20,18 @@ $('#logout').click(() => {
         title: 'Notification',
         text: 'Sign Out Successfully',
         type: 'warning',
+        icon: 'success',
         confirmButtonText: 'OK'
     }).then(() => {
         location.href = '/';
     });
 });
 
-$('#new-card-btn').click(() => {
-    const card = generateId();
-    $('#new-card-link')[0].href = `card.html?card=${card}`
+$('#new-card-btn').on('click', () => {
+    axios.get('api/1.0/card/enroll')
+        .then((res) => {
+            const card = res.data.data.card;
+            location.href = `card.html?card=${card}`
+        })
+        .catch((error) => { console.error(error) });
 });
