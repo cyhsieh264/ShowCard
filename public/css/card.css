@@ -12,12 +12,6 @@
     background-color: white;
 }
 
-input {
-    margin-bottom: 50px;
-    width: 600px;
-    height: 20px;
-}
-
 canvas {
     box-shadow: 3px 3px 3px 2px rgba(41,41,41,.25); 
     width: 100%;
@@ -40,14 +34,25 @@ canvas {
     color: #483558 !important;
 }
 
+#card-title {
+    width: 540px;
+    text-align: center;
+    border: transparent;
+    background-color: transparent;
+    font-size: 30px;
+    margin-top: 70px;
+    margin-bottom: 10px;
+}
+
 #toolbox {
-    background-color: #e7e7e7;
+    background-color: #ffffff;
+    box-shadow: 2px 2px 2px 2px rgba(41,41,41,.25); 
     text-align: center;
     padding-top: 80px;
     min-height: 100vh;
     float: left;
-    margin-left: 30px;
-    width: 100px;
+    margin-left: 0px;
+    width: 120px;
 }
 
 .tool {
@@ -56,4 +61,14 @@ canvas {
 
 .colorSelector {
     width: 50px;
+}
+
+#chatbox-btn {
+    text-align: center;
+    border-radius: 8px 0px 0px 8px;
+    height: 50px;
+    margin-top: 130px;
+    box-shadow: 2px 2px 2px rgba(41,41,41,.25), 2px 2px 2px rgba(41,41,41,.25), 2px 2px 2px rgba(41,41,41,.25);
+    width: 100px;
+    background-color: #fdfdfd;
 }

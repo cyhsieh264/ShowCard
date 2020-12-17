@@ -344,7 +344,7 @@ $('#save').on('click', function () {
     this.href = _canvas.toDataURL();
 });
 
-$("#menu-toggle").click(function(e) {
+$("#chatbox-btn").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
 });

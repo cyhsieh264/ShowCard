@@ -98,9 +98,9 @@
             <div class="toolbox" id="toolbox">
                 <div class="tool-wrapper">
                     <p>Toolbox</p>
-                    Fill Color:
+                    <p>Fill Color:</p>
                     <input type="color" class="tool colorSelector" id="color-fill" value="#EED42B" data-tool-tip="Select Colour">
-                    Stroke Color:
+                    <p>Stroke Color:</p>
                     <input type="color" class="tool colorSelector" id="color-border" value="#FFFFFF" data-tool-tip="Select Colour">
                     <button class="btn btn-primary tool" id="brush-on">Brush on</button>
                     <button class="btn btn-primary tool" id="brush-off">Brush off</button>
@@ -111,12 +111,13 @@
                     <button class="btn btn-primary tool" id="undo-canvas">Undo</button>
                     <button class="btn btn-primary tool" id="redo-canvas">Redo</button>
                     <button class="btn btn-primary tool" id="rm-obj">Delete</button>
+                    <a id="save" href="#" download="aShareaDay.png" class="color-btn-green">Save Canvas</a>
                 </div>
             </div>
             <div class="d-flex" id="wrapper">
                 <div id="page-content-wrapper">
                     <div class="container-fluid">
-                        <h1 id="card-title">Design Your Card</h1>
+                        <input id="card-title" type="text" value="Untitled">
                         <div class="canvas" id="canvas-base">
                             <canvas id="canvas"></canvas><br><br>
                             <!-- <button class="btn btn-primary" id="brush-on">Brush on</button>
@@ -128,7 +129,7 @@
                             <button class="btn btn-primary" id="undo-canvas">Undo</button>
                             <button class="btn btn-primary" id="redo-canvas">Redo</button>
                             <button class="btn btn-primary" id="rm-obj">Delete</button> -->
-                            <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+                            <!-- <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button> -->
                             <!-- <a id="save" href="#" download="aShareaDay.png" class="color-btn-green">Save Canvas</a>
                             <br><br>
                             <p>Fill Color: </p>
@@ -147,6 +148,7 @@
                         </div>      -->
                     </div>
                 </div>     
+                <div id="chatbox-btn">CHAT<br>ROOM</div>
                 <div class="bg-light border-left" id="sidebar-wrapper">
                     <div class="sidebar-heading">Start Bootstrap </div>
                     <div class="list-group list-group-flush">
