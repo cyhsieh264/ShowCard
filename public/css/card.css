@@ -67,8 +67,27 @@ canvas {
     text-align: center;
     border-radius: 8px 0px 0px 8px;
     height: 50px;
-    margin-top: 130px;
+    margin-top: 300px;
     box-shadow: 2px 2px 2px rgba(41,41,41,.25), 2px 2px 2px rgba(41,41,41,.25), 2px 2px 2px rgba(41,41,41,.25);
     width: 100px;
     background-color: #fdfdfd;
+}
+
+#share-link {
+    display: scroll;
+    position: fixed;
+    bottom: 30px;
+    right: 0px;
+    width: 20rem;
+    background-color: rgb(228, 209, 243);
+    border-radius: 15px 0px 0px 15px;
+}
+
+#share-link-content {
+    display: inline;
+}
+
+#share-link-input {
+    width: 15rem;
+    margin-bottom: 15px;
 }

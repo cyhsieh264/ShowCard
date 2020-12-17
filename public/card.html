@@ -111,7 +111,7 @@
                     <button class="btn btn-primary tool" id="undo-canvas">Undo</button>
                     <button class="btn btn-primary tool" id="redo-canvas">Redo</button>
                     <button class="btn btn-primary tool" id="rm-obj">Delete</button>
-                    <a id="save" href="#" download="aShareaDay.png" class="color-btn-green">Save Canvas</a>
+                    <!-- <a id="save" href="#" download="aShareaDay.png" class="color-btn-green">Save Canvas</a> -->
                 </div>
             </div>
             <div class="d-flex" id="wrapper">
@@ -119,7 +119,7 @@
                     <div class="container-fluid">
                         <input id="card-title" type="text" value="Untitled">
                         <div class="canvas" id="canvas-base">
-                            <canvas id="canvas"></canvas><br><br>
+                            <canvas id="canvas"></canvas>
                             <!-- <button class="btn btn-primary" id="brush-on">Brush on</button>
                             <button class="btn btn-primary" id="brush-off">Brush off</button>
                             <button class="btn btn-primary" id="add-circle">Circle</button>
@@ -161,6 +161,13 @@
                     </div>
                 </div>  
             </div>  
+            <div id="share-link">
+                <div id="share-link-title">Invite Other Editors</div>
+                <div id="share-link-content">
+                    <input id="share-link-input" value="hello" readonly="readonly">
+                    <button class="btn btn-primary" id="share-link-btn"><img src="圖片網址"></button>
+                </div>
+            </div>
         </main>
         <div class="loader-wrap" id="loader">
             <div class="loading">

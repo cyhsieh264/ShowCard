@@ -344,7 +344,13 @@ $('#save').on('click', function () {
     this.href = _canvas.toDataURL();
 });
 
-$("#chatbox-btn").click(function(e) {
+$('#chatbox-btn').click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
+});
+
+$('#share-link-btn').click(() => {
+    const text = $('#share-link-input')[0];
+    text.select();
+    document.execCommand('copy');
 });
