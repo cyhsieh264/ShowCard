@@ -83,6 +83,7 @@
         <link rel="bookmark" href="./images/icons/favicon.png" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/card.css" media="all" />
+        <link rel="stylesheet" href="css/sidebar.css">
     </head>
     <body>
         <header id="header">
@@ -94,34 +95,66 @@
             </nav>
         </header>
         <main class="hide">
-            <h1 id="card-title">Design Your Card</h1>
-            <div class="canvas" id="canvas-base">
-                <canvas id="canvas"></canvas><br><br>
-                <button class="btn btn-primary" id="brush-on">Brush on</button>
-                <button class="btn btn-primary" id="brush-off">Brush off</button>
-                <button class="btn btn-primary" id="add-circle">Circle</button>
-                <button class="btn btn-primary" id="add-rect">Rect</button>
-                <button class="btn btn-primary" id="add-icon">Icon</button>
-                <button class="btn btn-primary" id="add-text">Text</button>
-                <button class="btn btn-primary" id="undo-canvas">Undo</button>
-                <button class="btn btn-primary" id="redo-canvas">Redo</button>
-                <button class="btn btn-primary" id="rm-obj">Delete</button>
-                <a id="save" href="#" download="aShareaDay.png" class="color-btn-green">Save Canvas</a>
-                <br><br>
-                <p>Fill Color: </p>
-                <input type="color" class="tool colorSelector" id="color-fill" value="#EED42B" data-tool-tip="Select Colour">
-                <br>
-                <p>Stroke Color: </p>
-                <input type="color" class="tool colorSelector" id="color-border" value="#FFFFFF" data-tool-tip="Select Colour">
-            </div>
-            <div class="chat">
-                <h1>Chat Room</h1>
-                <div class="room"></div>
-                <div class="send">
-                    <input type="text" id="msg" placeholder="Enter your message here" />
-                    <button id="send-btn">Send</button>
+            <div class="toolbox" id="toolbox">
+                <div class="tool-wrapper">
+                    Toolbox
+                    <button class="btn btn-primary btn-tool" id="brush-on">Brush on</button>
+                    <button class="btn btn-primary btn-tool" id="brush-off">Brush off</button>
+                    <button class="btn btn-primary btn-tool" id="add-circle">Circle</button>
+                    <button class="btn btn-primary btn-tool" id="add-rect">Rect</button>
+                    <button class="btn btn-primary btn-tool" id="add-icon">Icon</button>
+                    <button class="btn btn-primary btn-tool" id="add-text">Text</button>
+                    <button class="btn btn-primary btn-tool" id="undo-canvas">Undo</button>
+                    <button class="btn btn-primary btn-tool" id="redo-canvas">Redo</button>
+                    <button class="btn btn-primary btn-tool" id="rm-obj">Delete</button>
                 </div>
             </div>
+            <div class="d-flex" id="wrapper">
+                <div id="page-content-wrapper">
+                    <div class="container-fluid">
+                        <h1 id="card-title">Design Your Card</h1>
+                        <div class="canvas" id="canvas-base">
+                            <canvas id="canvas"></canvas><br><br>
+                            <!-- <button class="btn btn-primary" id="brush-on">Brush on</button>
+                            <button class="btn btn-primary" id="brush-off">Brush off</button>
+                            <button class="btn btn-primary" id="add-circle">Circle</button>
+                            <button class="btn btn-primary" id="add-rect">Rect</button>
+                            <button class="btn btn-primary" id="add-icon">Icon</button>
+                            <button class="btn btn-primary" id="add-text">Text</button>
+                            <button class="btn btn-primary" id="undo-canvas">Undo</button>
+                            <button class="btn btn-primary" id="redo-canvas">Redo</button>
+                            <button class="btn btn-primary" id="rm-obj">Delete</button> -->
+                            <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+                            <a id="save" href="#" download="aShareaDay.png" class="color-btn-green">Save Canvas</a>
+                            <br><br>
+                            <p>Fill Color: </p>
+                            <input type="color" class="tool colorSelector" id="color-fill" value="#EED42B" data-tool-tip="Select Colour">
+                            <br>
+                            <p>Stroke Color: </p>
+                            <input type="color" class="tool colorSelector" id="color-border" value="#FFFFFF" data-tool-tip="Select Colour">
+                        </div>          
+                        <!-- <div class="chat">
+                            <h1>Chat Room</h1>
+                            <div class="room"></div>
+                            <div class="send">
+                                <input type="text" id="msg" placeholder="Enter your message here" />
+                                <button id="send-btn">Send</button>
+                            </div>
+                        </div>      -->
+                    </div>
+                </div>     
+                <div class="bg-light border-left" id="sidebar-wrapper">
+                    <div class="sidebar-heading">Start Bootstrap </div>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+                    </div>
+                </div>  
+            </div>  
         </main>
         <div class="loader-wrap" id="loader">
             <div class="loading">

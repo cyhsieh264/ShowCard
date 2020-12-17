@@ -343,3 +343,8 @@ $('#save').on('click', function () {
     const _canvas = document.getElementsByTagName('canvas')[0];
     this.href = _canvas.toDataURL();
 });
+
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+});
