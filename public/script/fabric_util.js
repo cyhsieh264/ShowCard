@@ -20,8 +20,8 @@ fabric.Object.prototype.padding = 8;
 
 // Create canvas
 const canvas = new fabric.Canvas('canvas', {
-    width: 400,
-    height: 400,
+    width: 600,
+    height: 600,
     originX: 'center',
     backgroundColor: '#ffffff',
 });

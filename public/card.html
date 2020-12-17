@@ -97,16 +97,20 @@
         <main class="hide">
             <div class="toolbox" id="toolbox">
                 <div class="tool-wrapper">
-                    Toolbox
-                    <button class="btn btn-primary btn-tool" id="brush-on">Brush on</button>
-                    <button class="btn btn-primary btn-tool" id="brush-off">Brush off</button>
-                    <button class="btn btn-primary btn-tool" id="add-circle">Circle</button>
-                    <button class="btn btn-primary btn-tool" id="add-rect">Rect</button>
-                    <button class="btn btn-primary btn-tool" id="add-icon">Icon</button>
-                    <button class="btn btn-primary btn-tool" id="add-text">Text</button>
-                    <button class="btn btn-primary btn-tool" id="undo-canvas">Undo</button>
-                    <button class="btn btn-primary btn-tool" id="redo-canvas">Redo</button>
-                    <button class="btn btn-primary btn-tool" id="rm-obj">Delete</button>
+                    <p>Toolbox</p>
+                    Fill Color:
+                    <input type="color" class="tool colorSelector" id="color-fill" value="#EED42B" data-tool-tip="Select Colour">
+                    Stroke Color:
+                    <input type="color" class="tool colorSelector" id="color-border" value="#FFFFFF" data-tool-tip="Select Colour">
+                    <button class="btn btn-primary tool" id="brush-on">Brush on</button>
+                    <button class="btn btn-primary tool" id="brush-off">Brush off</button>
+                    <button class="btn btn-primary tool" id="add-circle">Circle</button>
+                    <button class="btn btn-primary tool" id="add-rect">Rect</button>
+                    <button class="btn btn-primary tool" id="add-icon">Icon</button>
+                    <button class="btn btn-primary tool" id="add-text">Text</button>
+                    <button class="btn btn-primary tool" id="undo-canvas">Undo</button>
+                    <button class="btn btn-primary tool" id="redo-canvas">Redo</button>
+                    <button class="btn btn-primary tool" id="rm-obj">Delete</button>
                 </div>
             </div>
             <div class="d-flex" id="wrapper">
@@ -125,13 +129,13 @@
                             <button class="btn btn-primary" id="redo-canvas">Redo</button>
                             <button class="btn btn-primary" id="rm-obj">Delete</button> -->
                             <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
-                            <a id="save" href="#" download="aShareaDay.png" class="color-btn-green">Save Canvas</a>
+                            <!-- <a id="save" href="#" download="aShareaDay.png" class="color-btn-green">Save Canvas</a>
                             <br><br>
                             <p>Fill Color: </p>
                             <input type="color" class="tool colorSelector" id="color-fill" value="#EED42B" data-tool-tip="Select Colour">
                             <br>
                             <p>Stroke Color: </p>
-                            <input type="color" class="tool colorSelector" id="color-border" value="#FFFFFF" data-tool-tip="Select Colour">
+                            <input type="color" class="tool colorSelector" id="color-border" value="#FFFFFF" data-tool-tip="Select Colour"> -->
                         </div>          
                         <!-- <div class="chat">
                             <h1>Chat Room</h1>
