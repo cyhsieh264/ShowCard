@@ -193,7 +193,7 @@ check().then( async (res) => {
     }); 
 
     $('#add-icon').click( async () => {
-        const url = '../images/material/icons/planet.png';
+        const url = '../images/assets/icons/planet.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 0,
@@ -333,7 +333,7 @@ const body = document.getElementsByTagName('body')[0];
 body.style.height = '100vh';
 window.addEventListener('load', () => {
     loader.style.display = 'none';
-    body.style.backgroundImage = "url('../../images/image/card_background.jpg')";
+    body.style.backgroundImage = "url('../../images/backgrounds/grid.jpg')";
     body.style.backgroundSize = '70%';
     body.style.height = 'unset';
 });
