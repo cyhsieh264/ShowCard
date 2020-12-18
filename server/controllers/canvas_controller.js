@@ -2,6 +2,7 @@ const Canvas = require('../models/canvas_model');
 
 const saveCanvas = async (req, res) => {
     const canvas = req.body;
+    // console.log(canvas.screenshot)
     const data = {
         card_id: canvas.card_id,
         user_id: canvas.user_id,

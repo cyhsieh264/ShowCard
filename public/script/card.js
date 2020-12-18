@@ -1,5 +1,6 @@
 localStorage.setItem('history', location.pathname + location.search)
 const urlParams = new URLSearchParams(location.search);
+const _canvas = document.getElementsByTagName('canvas')[0];
 const card = urlParams.get('card');
 
 const api = axios.create({
@@ -111,13 +112,15 @@ check().then( async (res) => {
 
     // Create Object
     const newObject = async(object) => {
+        const screenshot = _canvas.toDataURL();
         const data = {
             card_id: card,
             user_id: user.id,
             action: 'create',
             obj_id: object.objId,
             obj_type: object.type,
-            object: JSON.stringify(object)
+            object: JSON.stringify(object),
+            screenshot: screenshot
         };
         await api.post('api/1.0/canvas/save', data);
         socket.emit('edit canvas', [{ action: 'create', object: [JSON.stringify(object)] }] );
@@ -328,6 +331,7 @@ check().then( async (res) => {
     });
 });
 
+// --- PRELOADER ---
 const loader = document.getElementById('loader');
 const body = document.getElementsByTagName('body')[0];
 body.style.height = '100vh';
@@ -338,12 +342,13 @@ window.addEventListener('load', () => {
     body.style.height = 'unset';
 });
 
+// --- DOWNLOAD IMAGE ---
 $('#save').on('click', function () {
     if (canvas.getActiveObject()) canvas.discardActiveObject().renderAll();
-    const _canvas = document.getElementsByTagName('canvas')[0];
     this.href = _canvas.toDataURL();
 });
 
+// --- CHAT BOX ---
 $('#open-chat-btn').click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
@@ -362,3 +367,9 @@ $('#share-link-btn').hover(() => {
         $('#share-link-copy').attr('src', './images/icons/copy.png')
     }
 );
+
+// --- SAVE SCREENSHOT ---
+$('#canvas').change(() => {
+    console.log('chan')
+})
+
