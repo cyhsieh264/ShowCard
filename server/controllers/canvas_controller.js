@@ -1,8 +1,10 @@
+require('dotenv').config();
+const { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_STORAGE_BUCKET_NAME, AWS_REGION } = process.env;
 const Canvas = require('../models/canvas_model');
+const aws = require('aws-sdk');
 
 const saveCanvas = async (req, res) => {
     const canvas = req.body;
-    // console.log(canvas.screenshot)
     const data = {
         card_id: canvas.card_id,
         user_id: canvas.user_id,
@@ -14,6 +16,32 @@ const saveCanvas = async (req, res) => {
     const { result, error } = await Canvas.save(data);
     if (error) return res.status(500).json({ error: 'Internal server error' });
     return res.status(200).json({ message: result });
+};
+
+const uploadScreenshot = async (req, res) => {
+    const canvas = req.body;
+    aws.config.update({
+        secretAccessKey: AWS_SECRET_ACCESS_KEY,
+        accessKeyId: AWS_ACCESS_KEY_ID,
+        region: AWS_REGION
+    });
+    const screenshot = canvas.screenshot;
+    if (screenshot) {
+        const s3 = new aws.S3();
+        const base64Data = new Buffer.from(screenshot.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+        const params = {
+            Bucket: AWS_STORAGE_BUCKET_NAME,
+            Key: 'card_screenshot/' + canvas.card + '.jpg',
+            Body: base64Data,
+            ACL: 'public-read',
+            ContentEncoding: 'base64', 
+            ContentType: 'image/jpeg' 
+        };
+        s3.putObject(params, (err, data) => {
+            if (err) res.status(400).json({ data: { message: 'Screenshot Upload Failed' } });
+        });
+    }
+    return res.status(200).json({ data: { message: 'Success' } });
 };
 
 const checkCanvas = async (req, res) => { 
@@ -52,6 +80,7 @@ const redoCanvas = async (req, res) => {
 
 module.exports = {
     saveCanvas,
+    uploadScreenshot,
     checkCanvas,
     loadCanvas,
     undoCanvas,

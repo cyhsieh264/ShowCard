@@ -1,6 +1,5 @@
 localStorage.setItem('history', location.pathname + location.search)
 const urlParams = new URLSearchParams(location.search);
-const _canvas = document.getElementsByTagName('canvas')[0];
 const card = urlParams.get('card');
 
 const api = axios.create({
@@ -10,6 +9,17 @@ const api = axios.create({
     },
     responseType: 'json'
 });
+
+const uploadScreenshot = () => {
+    return new Promise((resolve, reject) => {
+        const _canvas = document.getElementsByTagName('canvas')[0];
+        const screenshot = _canvas.toDataURL('image/jpeg', 1.0);
+        const data = { card: card, screenshot: screenshot };
+        api.post('api/1.0/canvas/screenshot', data)
+        .then((res) => resolve(res))
+        .catch((err) => reject(err));
+    })
+}
 
 const check = async () => {
     const cardStatus = (await api.get('api/1.0/card/check', { params: { card: card } })).data.data;
@@ -112,15 +122,13 @@ check().then( async (res) => {
 
     // Create Object
     const newObject = async(object) => {
-        const screenshot = _canvas.toDataURL();
         const data = {
             card_id: card,
             user_id: user.id,
             action: 'create',
             obj_id: object.objId,
             obj_type: object.type,
-            object: JSON.stringify(object),
-            screenshot: screenshot
+            object: JSON.stringify(object)
         };
         await api.post('api/1.0/canvas/save', data);
         socket.emit('edit canvas', [{ action: 'create', object: [JSON.stringify(object)] }] );
@@ -132,6 +140,7 @@ check().then( async (res) => {
         path.user = user.name;
         const object = path.toJSON();
         await newObject(object);
+        await uploadScreenshot();
     });
 
     $('#add-circle').click( async () => {
@@ -345,6 +354,7 @@ window.addEventListener('load', () => {
 // --- DOWNLOAD IMAGE ---
 $('#save').on('click', function () {
     if (canvas.getActiveObject()) canvas.discardActiveObject().renderAll();
+    const _canvas = document.getElementsByTagName('canvas')[0];
     this.href = _canvas.toDataURL();
 });
 
@@ -371,5 +381,5 @@ $('#share-link-btn').hover(() => {
 // --- SAVE SCREENSHOT ---
 $('#canvas').change(() => {
     console.log('chan')
-})
+});
 

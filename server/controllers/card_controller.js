@@ -25,7 +25,7 @@ const createCard = async (req, res) => {
         saved_at: time,
         shared: true,
         member_count: 1,
-        picture: null
+        picture: `card_screenshot/${card.id}.jpg`
     };
     const { result, error } = await Card.create(data);
     if (error) return res.status(500).json({ error: 'Internal server error' });

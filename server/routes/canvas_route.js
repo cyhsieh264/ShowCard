@@ -3,6 +3,7 @@ const { wrapAsync } = require('../../util/util');
 
 const {
     saveCanvas,
+    uploadScreenshot,
     checkCanvas,
     loadCanvas,
     undoCanvas,
@@ -11,6 +12,9 @@ const {
 
 router.route('/canvas/save')
     .post(wrapAsync(saveCanvas));
+
+router.route('/canvas/screenshot')
+    .post(wrapAsync(uploadScreenshot));
 
 router.route('/canvas/check')
     .get(wrapAsync(checkCanvas));
