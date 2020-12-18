@@ -83,11 +83,34 @@ canvas {
     border-radius: 15px 0px 0px 15px;
 }
 
+#share-link-box {
+    width: 310px;
+    padding-right: 8px;
+}
+
+#share-link-title {
+    margin-top: 9px;
+}
+
 #share-link-content {
     display: inline;
 }
 
 #share-link-input {
-    width: 15rem;
+    font-size: 15px;
+    width: 14.5rem;
+    margin-top: 5px;
     margin-bottom: 15px;
+}
+
+#share-link-btn {
+    margin-left: -1px;
+    margin-bottom: 3px;
+    height: 30px;
+    display: inline-flex;
+}
+
+#share-link-copy {
+    margin-top: 2px;
+    width: 16px;
 }

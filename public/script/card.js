@@ -354,3 +354,11 @@ $('#share-link-btn').click(() => {
     text.select();
     document.execCommand('copy');
 });
+
+$('#share-link-input').val(location.href);
+
+$('#share-link-btn').hover(() => {
+    $('#share-link-copy').attr('src', './images/icons/copy_hover.png')}, () => {
+        $('#share-link-copy').attr('src', './images/icons/copy.png')
+    }
+);
