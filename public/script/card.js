@@ -166,7 +166,7 @@ check().then( async (res) => {
         canvas.setActiveObject(circle);
         const object = circle.toJSON();
         await newObject(object);
-        // await uploadScreenshot();
+        await uploadScreenshot();
     });
 
     $('#add-rect').click( async () => {
@@ -186,7 +186,7 @@ check().then( async (res) => {
         canvas.setActiveObject(rect);
         const object = rect.toJSON();
         await newObject(object);
-        // await uploadScreenshot();
+        await uploadScreenshot();
     });
 
     $('#add-text').click( async () => {
@@ -209,7 +209,7 @@ check().then( async (res) => {
         canvas.setActiveObject(textbox);
         const object = textbox.toJSON();
         await newObject(object);
-        // await uploadScreenshot();
+        await uploadScreenshot();
     }); 
 
     $('#add-icon').click( async () => {
@@ -227,7 +227,7 @@ check().then( async (res) => {
             canvas.setActiveObject(icon);
             const object = icon.toJSON();
             await newObject(object);
-            // await uploadScreenshot();
+            await uploadScreenshot();
         });
     });
 
@@ -245,7 +245,7 @@ check().then( async (res) => {
             object: JSON.stringify(object)
         };
         await api.post('api/1.0/canvas/save', data);
-        // await uploadScreenshot();
+        await uploadScreenshot();
         socket.emit('edit canvas', [{action: 'remove', object: object.objId}, { action: 'create', object: [JSON.stringify(object)] }] );
     });
 
@@ -272,7 +272,7 @@ check().then( async (res) => {
         };
         await api.post('api/1.0/canvas/save', data);
         canvas.remove(target);
-        // await uploadScreenshot();
+        await uploadScreenshot();
         socket.emit('edit canvas', [{action: 'remove', object: object.objId}] );
     });
 
@@ -282,7 +282,7 @@ check().then( async (res) => {
         .then( response => {
             const step = response.data.data.step;
             parseObj(step);
-            // await uploadScreenshot();
+            await uploadScreenshot();
             socket.emit('edit canvas', step);
         }).catch((error) => {
             swal({
@@ -300,7 +300,7 @@ check().then( async (res) => {
         .then( response => {
             const step = response.data.data.step;
             parseObj(step);
-            // await uploadScreenshot();
+            await uploadScreenshot();
             socket.emit('edit canvas', step);
         }).catch((error) => {
             swal({
