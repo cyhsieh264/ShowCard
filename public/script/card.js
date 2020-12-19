@@ -13,10 +13,10 @@ const api = axios.create({
 const uploadScreenshot = () => {
     return new Promise((resolve, reject) => {
         const obj = canvas.getActiveObject()
-        if (obj) canvas.discardActiveObject().renderAll();
-        const _canvas = document.getElementsByTagName('canvas')[0];
-        const screenshot = _canvas.toDataURL('image/jpeg', 1.0);
-        if (obj) canvas.setActiveObject(obj).renderAll();
+        if (obj) canvas.discardActiveObject();
+        const screenshot = canvas.toDataURL('image/jpeg', 1.0);
+        if (obj) canvas.setActiveObject(obj);
+        canvas.renderAll()
         const data = { card: card, screenshot: screenshot };
         api.post('api/1.0/canvas/screenshot', data)
         .then((res) => resolve(res))
