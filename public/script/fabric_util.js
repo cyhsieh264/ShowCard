@@ -29,13 +29,21 @@ const canvas = new fabric.Canvas('canvas', {
 canvas.selection = false;
 
 // Canvas operation
-const addObj = (data) => { 
+const addObj = (data, index) => { 
     let idSet = new Set();
     canvas.getObjects().map( item => idSet.add(item.objId));
     const objects = data.map(obj => JSON.parse(obj));
     fabric.util.enlivenObjects(objects, (enlivenedObjects) => { 
         enlivenedObjects.map(obj => {
             if (!idSet.has(obj.objId)) canvas.add(obj);
+            // if (index) {
+            //     console.log(index)
+            //     canvas.sendToBack(obj);
+            //     for (let i = 0; i < index; i++) {
+            //         console.log('hi')
+            //         canvas.bringForward(obj);
+            //     }
+            // }
         });
         canvas.renderAll();
     });
@@ -56,7 +64,8 @@ const removeObj = (objId) => {
 const parseObj = (data) => {
     data.map(step => {
         if (step.action == 'create') {
-            addObj(step.object);
+            if (step.index) addObj(step.object, step.index);
+            else addObj(step.object, null)
         } else if (step.action == 'remove') {
             removeObj(step.object);
         }

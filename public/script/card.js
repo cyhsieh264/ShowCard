@@ -134,6 +134,11 @@ check().then( async (res) => {
         socket.emit('edit canvas', [{ action: 'create', object: [JSON.stringify(object)] }] );
     };
 
+    $('#test').click( async () => {
+        const obj = canvas.getActiveObject();
+        canvas.sendToBack(obj);
+    })
+
     canvas.on('path:created', async () => {
         const path = canvas.getObjects()[canvas.getObjects().length-1]
         path.objId = generateId();
@@ -161,6 +166,7 @@ check().then( async (res) => {
         canvas.setActiveObject(circle);
         const object = circle.toJSON();
         await newObject(object);
+        // await uploadScreenshot();
     });
 
     $('#add-rect').click( async () => {
@@ -180,6 +186,7 @@ check().then( async (res) => {
         canvas.setActiveObject(rect);
         const object = rect.toJSON();
         await newObject(object);
+        // await uploadScreenshot();
     });
 
     $('#add-text').click( async () => {
@@ -202,6 +209,7 @@ check().then( async (res) => {
         canvas.setActiveObject(textbox);
         const object = textbox.toJSON();
         await newObject(object);
+        // await uploadScreenshot();
     }); 
 
     $('#add-icon').click( async () => {
@@ -219,11 +227,13 @@ check().then( async (res) => {
             canvas.setActiveObject(icon);
             const object = icon.toJSON();
             await newObject(object);
+            // await uploadScreenshot();
         });
     });
 
     // Modify Object
     canvas.on('object:modified', async () => {
+        canvas.bringToFront(canvas.getActiveObject())
         const object = canvas.getActiveObjects()[0].toJSON();
         object.user = user.name;
         const data = {
@@ -235,6 +245,7 @@ check().then( async (res) => {
             object: JSON.stringify(object)
         };
         await api.post('api/1.0/canvas/save', data);
+        // await uploadScreenshot();
         socket.emit('edit canvas', [{action: 'remove', object: object.objId}, { action: 'create', object: [JSON.stringify(object)] }] );
     });
 
@@ -261,6 +272,7 @@ check().then( async (res) => {
         };
         await api.post('api/1.0/canvas/save', data);
         canvas.remove(target);
+        // await uploadScreenshot();
         socket.emit('edit canvas', [{action: 'remove', object: object.objId}] );
     });
 
@@ -270,6 +282,7 @@ check().then( async (res) => {
         .then( response => {
             const step = response.data.data.step;
             parseObj(step);
+            // await uploadScreenshot();
             socket.emit('edit canvas', step);
         }).catch((error) => {
             swal({
@@ -287,6 +300,7 @@ check().then( async (res) => {
         .then( response => {
             const step = response.data.data.step;
             parseObj(step);
+            // await uploadScreenshot();
             socket.emit('edit canvas', step);
         }).catch((error) => {
             swal({
