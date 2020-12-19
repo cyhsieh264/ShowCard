@@ -16,7 +16,7 @@ const uploadScreenshot = () => {
         if (obj) canvas.discardActiveObject();
         const screenshot = canvas.toDataURL('image/jpeg', 1.0);
         if (obj) canvas.setActiveObject(obj);
-        canvas.renderAll()
+        canvas.renderAll();
         const data = { card: card, screenshot: screenshot };
         api.post('api/1.0/canvas/screenshot', data)
         .then((res) => resolve(res))
