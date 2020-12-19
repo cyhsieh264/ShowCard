@@ -12,8 +12,11 @@ const api = axios.create({
 
 const uploadScreenshot = () => {
     return new Promise((resolve, reject) => {
+        const obj = canvas.getActiveObject()
+        if (obj) canvas.discardActiveObject().renderAll();
         const _canvas = document.getElementsByTagName('canvas')[0];
         const screenshot = _canvas.toDataURL('image/jpeg', 1.0);
+        if (obj) canvas.setActiveObject(obj).renderAll();
         const data = { card: card, screenshot: screenshot };
         api.post('api/1.0/canvas/screenshot', data)
         .then((res) => resolve(res))
@@ -105,6 +108,7 @@ check().then( async (res) => {
         };
         await api.post('api/1.0/card/create', newCard);
         await api.post('api/1.0/canvas/save', newCanvas);
+        await uploadScreenshot();
         await setUserColor(1);
     } else {
         const memberCount = (await api.patch('api/1.0/card/addmember', { card: card })).data.data.count;
@@ -279,7 +283,7 @@ check().then( async (res) => {
     // Undo canvas
     $('#undo-canvas').click( async () => {
         api.get('api/1.0/canvas/undo', { params: { card: card, user: user.id } })
-        .then( response => {
+        .then( async (response) => {
             const step = response.data.data.step;
             parseObj(step);
             await uploadScreenshot();
@@ -297,7 +301,7 @@ check().then( async (res) => {
     // Redo canvas
     $('#redo-canvas').click( async () => {
         api.get('api/1.0/canvas/redo', { params: { card: card, user: user.id } })
-        .then( response => {
+        .then( async (response) => {
             const step = response.data.data.step;
             parseObj(step);
             await uploadScreenshot();
