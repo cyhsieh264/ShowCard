@@ -44,6 +44,8 @@ canvas {
     margin-bottom: 10px;
 }
 
+/* tool box */
+
 #toolbox {
     background-color: #ffffff;
     box-shadow: 2px 2px 2px 2px rgba(41,41,41,.25); 
@@ -64,15 +66,88 @@ canvas {
     min-height: 100%;
     width: 200px;
     background-color: #d9e0e6;
+    text-align: center;
 }
 
 .tool {
     margin: 5px;
 }
 
+.menu-icon {
+    width: 30px;
+}
+
+.submenu-container {
+    margin-top: 10px;
+    width: 180px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    min-height: 88vh;
+    max-height: 89vh;
+}
+
 .colorSelector {
     width: 50px;
 }
+
+/* submenu tab */
+
+#tab-demo { 
+    width:180px; 
+    min-height: 87vh;
+    max-height: 88vh;
+}
+
+#tab-demo > ul{ 
+    display:block; 
+    margin:0;
+    list-style:none;
+}
+
+.tab-title{
+    list-style:none;
+    padding-inline-start: 0;
+}
+
+#tab-demo > ul > li{ 
+    display:inline-block; 
+    vertical-align:top;
+    margin: 5px -1px -1px 0; 
+    height:25px; 
+    line-height:25px; 
+    padding:0 15px;
+    list-style:none; 
+    box-sizing:border-box;
+}
+
+#tab-demo >  ul > li a{ 
+    color: #483558;
+    text-decoration:none;
+}
+
+#tab-demo > ul > li.active{ 
+    border-bottom:1px solid #fff; 
+    background:#fff;
+}
+
+#tab-demo > .tab-inner{ 
+    clear:both; 
+    color:#483558;
+}
+
+.tab-inner{ 
+    min-height: 86vh;
+    max-height: 87vh;
+    display: contents;
+    overflow: scroll;
+}
+
+.explore-item {
+    margin: 20px 5px 10px 5px;
+    width: 70px;
+}
+
+/* chat room */
 
 #open-chat-btn {
     text-align: center;
@@ -96,6 +171,8 @@ canvas {
     margin: 1rem 1rem 1rem 1rem; 
     border-radius: 10px;
 }
+
+/* share link */
 
 #share-link {
     display: scroll;

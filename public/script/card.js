@@ -405,7 +405,7 @@ const hideSubmenu = () => {
 
 const submenuControl = (target) => {
     hideSubmenu();
-    if (target.id == 'explore-tool' || target.id == 'explore-box') {
+    if (target.classList.contains('explore-tool')) {
         $('#explore-tool').css('cssText', 'background-color: #d9e0e6 !important;');
         $('#explore-box').removeClass('hide');
     } else if (target.id == 'brush-tool' || target.id == 'brush-box') {
@@ -430,5 +430,15 @@ $('#wrapper').click(() => {
 
 $('#toolbox').click((e) => {
     submenuControl(e.target)
+});
+
+$(function() {
+    let $li = $('ul.tab-title li');
+    $($li. eq(0) .addClass('active').find('a').attr('href')).siblings('.tab-inner').hide();
+    $($li. eq(0) .css('cssText', 'border-bottom: 2px solid #BCBCBC;'));
+    $li.click(function() {
+        $($(this).find('a'). attr ('href')).show().siblings ('.tab-inner').hide();
+        $(this).addClass('active').css('cssText', 'border-bottom: 2px solid #BCBCBC;'). siblings ('.active').removeClass('active').css('cssText', 'border-bottom: 0px solid #BCBCBC;');
+    });
 });
 
