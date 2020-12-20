@@ -12,7 +12,7 @@ const api = axios.create({
 
 const uploadScreenshot = () => {
     return new Promise((resolve, reject) => {
-        const obj = canvas.getActiveObject()
+        const obj = canvas.getActiveObject();
         if (obj) canvas.discardActiveObject();
         const screenshot = canvas.toDataURL('image/jpeg', 1.0);
         if (obj) canvas.setActiveObject(obj);
@@ -22,7 +22,7 @@ const uploadScreenshot = () => {
         .then((res) => resolve(res))
         .catch((err) => reject(err));
     })
-}
+};
 
 const check = async () => {
     const cardStatus = (await api.get('api/1.0/card/check', { params: { card: card } })).data.data;

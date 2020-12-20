@@ -36,14 +36,6 @@ const addObj = (data, index) => {
     fabric.util.enlivenObjects(objects, (enlivenedObjects) => { 
         enlivenedObjects.map(obj => {
             if (!idSet.has(obj.objId)) canvas.add(obj);
-            // if (index) {
-            //     console.log(index)
-            //     canvas.sendToBack(obj);
-            //     for (let i = 0; i < index; i++) {
-            //         console.log('hi')
-            //         canvas.bringForward(obj);
-            //     }
-            // }
         });
         canvas.renderAll();
     });
