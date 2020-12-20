@@ -138,11 +138,6 @@ check().then( async (res) => {
         socket.emit('edit canvas', [{ action: 'create', object: [JSON.stringify(object)] }] );
     };
 
-    $('#test').click( async () => {
-        const obj = canvas.getActiveObject();
-        canvas.sendToBack(obj);
-    })
-
     canvas.on('path:created', async () => {
         const path = canvas.getObjects()[canvas.getObjects().length-1]
         path.objId = generateId();
@@ -396,8 +391,44 @@ $('#share-link-btn').hover(() => {
     }
 );
 
-// --- SAVE SCREENSHOT ---
-$('#canvas').change(() => {
-    console.log('chan')
+// --- SUBMENU ---
+const hideSubmenu = () => {
+    $('#explore-box').addClass('hide');
+    $('#explore-tool').css('background-color', '#f8f9fa');
+    $('#brush-box').addClass('hide');
+    $('#brush-tool').css('background-color', '#f8f9fa');
+    $('#shape-box').addClass('hide');
+    $('#shape-tool').css('background-color', '#f8f9fa');
+    $('#text-box').addClass('hide');
+    $('#text-tool').css('background-color', '#f8f9fa');
+};
+
+const submenuControl = (target) => {
+    hideSubmenu();
+    if (target.id == 'explore-tool' || target.id == 'explore-box') {
+        $('#explore-tool').css('cssText', 'background-color: #d9e0e6 !important;');
+        $('#explore-box').removeClass('hide');
+    } else if (target.id == 'brush-tool' || target.id == 'brush-box') {
+        $('#brush-tool').css('cssText', 'background-color: #d9e0e6 !important;');
+        $('#brush-box').removeClass('hide');
+    } else if (target.id == 'shape-tool' || target.id == 'shape-box') {
+        $('#shape-tool').css('cssText', 'background-color: #d9e0e6 !important;');
+        $('#shape-box').removeClass('hide');
+    } else if (target.id == 'text-tool' || target.id == 'text-box') {
+        $('#text-tool').css('cssText', 'background-color: #d9e0e6 !important;');
+        $('#text-box').removeClass('hide');
+    }
+};
+
+$('#header').click(() => {
+    hideSubmenu();
+});
+
+$('#wrapper').click(() => {
+    hideSubmenu();
+});
+
+$('#toolbox').click((e) => {
+    submenuControl(e.target)
 });
 

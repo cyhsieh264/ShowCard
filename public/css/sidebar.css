@@ -35,6 +35,10 @@ min-width: 100vw;
 margin-right: 0;
 }
 
+.list-group-item {
+  text-decoration: none;
+}
+
 @media (min-width: 768px) {
   #sidebar-wrapper {
     margin-right: 0;

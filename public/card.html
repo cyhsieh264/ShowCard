@@ -96,29 +96,50 @@
         </header>
         <main class="hide">
             <div class="toolbox" id="toolbox">
-                <div class="tool-wrapper">
+                <div class="tool-wrapper" id="tool-wrapper">
                     <!-- <p>Toolbox</p> -->
-                    <p>Fill Color:</p>
+                    Fill Color:
                     <input type="color" class="tool colorSelector" id="color-fill" value="#EED42B" data-tool-tip="Select Colour">
-                    <p>Stroke Color:</p>
+                    Stroke Color:
                     <input type="color" class="tool colorSelector" id="color-border" value="#FFFFFF" data-tool-tip="Select Colour">
                     <div class="list-group list-group-flush">
-                        <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-                        <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
-                        <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
-                        <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
+                        <div class="list-group-item list-group-item-action bg-light" id="explore-tool">Explore</div>
+                        <div class="list-group-item list-group-item-action bg-light" id="brush-tool">Brush</div>
+                        <div class="list-group-item list-group-item-action bg-light" id="shape-tool">Shape</div>
+                        <div class="list-group-item list-group-item-action bg-light" id="text-tool">Text</div>
                     </div>
-                    <button class="btn btn-primary tool" id="test">test</button>
-                    <button class="btn btn-primary tool" id="brush-on">Brush on</button>
-                    <button class="btn btn-primary tool" id="brush-off">Brush off</button>
-                    <button class="btn btn-primary tool" id="add-circle">Circle</button>
-                    <button class="btn btn-primary tool" id="add-rect">Rect</button>
-                    <button class="btn btn-primary tool" id="add-icon">Icon</button>
-                    <button class="btn btn-primary tool" id="add-text">Text</button>
+                    <!-- <button class="btn btn-primary tool" id="brush-on">Brush on</button>
+                    <button class="btn btn-primary tool" id="brush-off">Brush off</button> -->
+                    <!-- <button class="btn btn-primary tool" id="add-circle">Circle</button>
+                    <button class="btn btn-primary tool" id="add-rect">Rect</button> -->
+                    <!-- <button class="btn btn-primary tool" id="add-icon">Icon</button> -->
+                    <!-- <button class="btn btn-primary tool" id="add-text">Text</button> -->
                     <button class="btn btn-primary tool" id="undo-canvas">Undo</button>
                     <button class="btn btn-primary tool" id="redo-canvas">Redo</button>
                     <button class="btn btn-primary tool" id="rm-obj">Delete</button>
                     <a id="save" href="#" download="aShareaDay.png" class="color-btn-green">Save Canvas</a>
+                </div>
+                <div class="hide tool-submenu" id="explore-box">
+                    <div class="d-flex">
+                        <button class="btn btn-primary tool" id="add-icon">Icon</button>
+                    </div>
+                </div>
+                <div class="hide tool-submenu" id="brush-box">
+                    <div class="d-flex">
+                        <button class="btn btn-primary tool" id="brush-on">Brush on</button>
+                        <button class="btn btn-primary tool" id="brush-off">Brush off</button>
+                    </div>
+                </div>
+                <div class="hide tool-submenu" id="shape-box">
+                    <div class="d-flex">
+                        <button class="btn btn-primary tool" id="add-circle">Circle</button>
+                        <button class="btn btn-primary tool" id="add-rect">Rect</button>
+                    </div>
+                </div>
+                <div class="hide tool-submenu" id="text-box">
+                    <div class="d-flex">
+                        <button class="btn btn-primary tool" id="add-text">Text</button>
+                    </div>
                 </div>
             </div>
             <div class="d-flex" id="wrapper">
