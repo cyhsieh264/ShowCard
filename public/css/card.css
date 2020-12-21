@@ -96,6 +96,7 @@ canvas {
 .tab-title{
     list-style:none;
     padding-inline-start: 0;
+    font-size: 14px;
 }
 
 #tab-demo > ul > li{ 
@@ -132,7 +133,7 @@ canvas {
 }
 
 .explore-item {
-    margin: 20px 5px 10px 5px;
+    margin: 19px 5px 10px 5px;
     width: 70px;
 }
 
@@ -199,7 +200,7 @@ canvas {
 
 .send {
     padding-top: 5px;
-    bottom: 110px;
+    bottom: 115px;
     position: fixed;
     width: 18rem;
 }

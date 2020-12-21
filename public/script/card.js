@@ -142,6 +142,7 @@ check().then( async (res) => {
         const path = canvas.getObjects()[canvas.getObjects().length-1]
         path.objId = generateId();
         path.user = user.name;
+        path.isBackground = false;
         const object = path.toJSON();
         await newObject(object);
         await uploadScreenshot();
@@ -159,7 +160,8 @@ check().then( async (res) => {
             originX: 'center',
             originY: 'center',
             objId: generateId(),
-            user: user.name
+            user: user.name,
+            isBackground: false
         });
         canvas.add(circle);
         canvas.setActiveObject(circle);
@@ -179,7 +181,8 @@ check().then( async (res) => {
             stroke: $('#color-border').val(),
             strokeWidth: 5,
             objId: generateId(),
-            user: user.name
+            user: user.name,
+            isBackground: false
         });
         canvas.add(rect);
         canvas.setActiveObject(rect);
@@ -202,7 +205,8 @@ check().then( async (res) => {
             // fontSize: 20, // 字型大小
             // fontWeight: 800, // 字型粗細
             objId: generateId(),
-            user: user.name
+            user: user.name,
+            isBackground: false
         });
         canvas.add(textbox);
         canvas.setActiveObject(textbox);
@@ -211,20 +215,504 @@ check().then( async (res) => {
         await uploadScreenshot();
     }); 
 
-    $('#add-icon').click( async () => {
-        const url = '../images/assets/icons/planet.png';
+    // $('#add-icon').click( async () => {
+    //     const url = '../images/assets/icons/planet.png';
+    //     fabric.Image.fromURL( url, async (item) => {
+    //         const icon = item.set({
+    //             left: 0,
+    //             top: 0, 
+    //             width: 150,
+    //             height: 150,
+    //             objId: generateId(),
+    //             user: user.name
+    //         });
+    //         canvas.add(icon);
+    //         canvas.setActiveObject(icon);
+    //         const object = icon.toJSON();
+    //         await newObject(object);
+    //         await uploadScreenshot();
+    //     });
+    // });
+
+    // icon
+
+    $('#christmas_hat').click(() => {
+        const url = '../images/assets/icons/christmas_hat.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
-                left: 0,
-                top: 0, 
-                width: 150,
-                height: 150,
+                left: 150,
+                top: 150, 
+                width: 256,
+                height: 256,
                 objId: generateId(),
                 user: user.name
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
             const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#mistletoe_1').click(() => {
+        const url = '../images/assets/icons/mistletoe_1.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 150,
+                top: 150, 
+                width: 256,
+                height: 256,
+                objId: generateId(),
+                user: user.name
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#christmas_presents').click(() => {
+        const url = '../images/assets/icons/christmas_presents.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 70,
+                top: 100, 
+                width: 400,
+                height: 400,
+                objId: generateId(),
+                user: user.name
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#christmas_sock').click(() => {
+        const url = '../images/assets/icons/christmas_sock.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 150,
+                top: 150, 
+                width: 256,
+                height: 256,
+                objId: generateId(),
+                user: user.name
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#candy_cane').click(() => {
+        const url = '../images/assets/icons/candy_cane.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 150,
+                top: 150, 
+                width: 256,
+                height: 256,
+                objId: generateId(),
+                user: user.name
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#gingerbread_man').click(() => {
+        const url = '../images/assets/icons/gingerbread_man.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 150,
+                top: 150, 
+                width: 256,
+                height: 256,
+                objId: generateId(),
+                user: user.name
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#mistletoe_2').click(() => {
+        const url = '../images/assets/icons/mistletoe_2.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 150,
+                top: 150, 
+                width: 256,
+                height: 256,
+                objId: generateId(),
+                user: user.name
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#santa_claus_1').click(() => {
+        const url = '../images/assets/icons/santa_claus_1.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 70,
+                top: 100, 
+                width: 400,
+                height: 400,
+                objId: generateId(),
+                user: user.name
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#santa_claus_2').click(() => {
+        const url = '../images/assets/icons/santa_claus_2.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 70,
+                top: 100, 
+                width: 400,
+                height: 400,
+                objId: generateId(),
+                user: user.name
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#santa_claus_3').click(() => {
+        const url = '../images/assets/icons/santa_claus_3.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 70,
+                top: 100, 
+                width: 400,
+                height: 400,
+                objId: generateId(),
+                user: user.name
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#christmas_greeting').click(() => {
+        const url = '../images/assets/icons/christmas_greeting.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 10,
+                top: 80, 
+                width: 520,
+                height: 400,
+                objId: generateId(),
+                user: user.name
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#christmas_decoration_border').click(() => {
+        const url = '../images/assets/icons/christmas_decoration_border.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 0,
+                top: 80, 
+                width: 530,
+                height: 300,
+                objId: generateId(),
+                user: user.name
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    // background
+
+    $('#color_background_1').click(() => {
+        const url = '../images/assets/backgrounds/color_background_1.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const background = item.set({
+                left: 0,
+                top: 0, 
+                width: 540,
+                height: 540,
+                objId: generateId(),
+                user: user.name,
+                isBackground: true
+            });
+            removeBackground();
+            canvas.add(background);
+            canvas.sendToBack(background);
+            const object = background.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#color_background_2').click(() => {
+        const url = '../images/assets/backgrounds/color_background_2.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const background = item.set({
+                left: 0,
+                top: 0, 
+                width: 540,
+                height: 540,
+                objId: generateId(),
+                user: user.name,
+                isBackground: true
+            });
+            removeBackground();
+            canvas.add(background);
+            canvas.sendToBack(background);
+            const object = background.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#color_background_3').click(() => {
+        const url = '../images/assets/backgrounds/color_background_3.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const background = item.set({
+                left: 0,
+                top: 0, 
+                width: 540,
+                height: 540,
+                objId: generateId(),
+                user: user.name,
+                isBackground: true
+            });
+            removeBackground();
+            canvas.add(background);
+            canvas.sendToBack(background);
+            const object = background.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#color_background_4').click(() => {
+        const url = '../images/assets/backgrounds/color_background_4.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const background = item.set({
+                left: 0,
+                top: 0, 
+                width: 540,
+                height: 540,
+                objId: generateId(),
+                user: user.name,
+                isBackground: true
+            });
+            removeBackground();
+            canvas.add(background);
+            canvas.sendToBack(background);
+            const object = background.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#background_1').click(() => {
+        const url = '../images/assets/backgrounds/background_1.jpg';
+        fabric.Image.fromURL( url, async (item) => {
+            const background = item.set({
+                left: 0,
+                top: 0, 
+                width: 540,
+                height: 540,
+                objId: generateId(),
+                user: user.name,
+                isBackground: true
+            });
+            removeBackground();
+            canvas.add(background);
+            canvas.sendToBack(background);
+            const object = background.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#background_2').click(() => {
+        const url = '../images/assets/backgrounds/background_2.jpg';
+        fabric.Image.fromURL( url, async (item) => {
+            const background = item.set({
+                left: 0,
+                top: 0, 
+                width: 540,
+                height: 540,
+                objId: generateId(),
+                user: user.name,
+                isBackground: true
+            });
+            removeBackground();
+            canvas.add(background);
+            canvas.sendToBack(background);
+            const object = background.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#background_3').click(() => {
+        const url = '../images/assets/backgrounds/background_3.jpg';
+        fabric.Image.fromURL( url, async (item) => {
+            const background = item.set({
+                left: 0,
+                top: 0, 
+                width: 540,
+                height: 540,
+                objId: generateId(),
+                user: user.name,
+                isBackground: true
+            });
+            removeBackground();
+            canvas.add(background);
+            canvas.sendToBack(background);
+            const object = background.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#background_4').click(() => {
+        const url = '../images/assets/backgrounds/background_4.jpg';
+        fabric.Image.fromURL( url, async (item) => {
+            const background = item.set({
+                left: 0,
+                top: 0, 
+                width: 540,
+                height: 540,
+                objId: generateId(),
+                user: user.name,
+                isBackground: true
+            });
+            removeBackground();
+            canvas.add(background);
+            canvas.sendToBack(background);
+            const object = background.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#background_5').click(() => {
+        const url = '../images/assets/backgrounds/background_5.jpg';
+        fabric.Image.fromURL( url, async (item) => {
+            const background = item.set({
+                left: 0,
+                top: 0, 
+                width: 540,
+                height: 540,
+                objId: generateId(),
+                user: user.name,
+                isBackground: true
+            });
+            removeBackground();
+            canvas.add(background);
+            canvas.sendToBack(background);
+            const object = background.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#background_6').click(() => {
+        const url = '../images/assets/backgrounds/background_6.jpg';
+        fabric.Image.fromURL( url, async (item) => {
+            const background = item.set({
+                left: 0,
+                top: 0, 
+                width: 540,
+                height: 540,
+                objId: generateId(),
+                user: user.name,
+                isBackground: true
+            });
+            removeBackground();
+            canvas.add(background);
+            canvas.sendToBack(background);
+            const object = background.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#background_7').click(() => {
+        const url = '../images/assets/backgrounds/background_7.jpg';
+        fabric.Image.fromURL( url, async (item) => {
+            const background = item.set({
+                left: 0,
+                top: 0, 
+                width: 540,
+                height: 540,
+                objId: generateId(),
+                user: user.name,
+                isBackground: true
+            });
+            removeBackground();
+            canvas.add(background);
+            canvas.sendToBack(background);
+            const object = background.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#background_8').click(() => {
+        const url = '../images/assets/backgrounds/background_8.jpg';
+        fabric.Image.fromURL( url, async (item) => {
+            const background = item.set({
+                left: 0,
+                top: 0, 
+                width: 540,
+                height: 540,
+                objId: generateId(),
+                user: user.name,
+                isBackground: true
+            });
+            removeBackground();
+            canvas.add(background);
+            canvas.sendToBack(background);
+            const object = background.toJSON();
             await newObject(object);
             await uploadScreenshot();
         });
@@ -441,4 +929,3 @@ $(function() {
         $(this).addClass('active').css('cssText', 'border-bottom: 2px solid #BCBCBC;'). siblings ('.active').removeClass('active').css('cssText', 'border-bottom: 0px solid #BCBCBC;');
     });
 });
-

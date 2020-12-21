@@ -10,7 +10,8 @@
             evented: this.evented,
             selectable: this.selectable,
             objId: this.objId,  // custom property
-            user: this.user  // custom property
+            user: this.user,  // custom property
+            isBackground: this.isBackground  // custom property
         });
     };
 })(fabric.Object.prototype.toObject);
@@ -44,6 +45,18 @@ const addObj = (data, index) => {
 const removeObj = (objId) => { 
     canvas.getObjects().every((obj) => {
         if (obj.objId == objId) {
+            canvas.remove(obj);
+            canvas.renderAll();
+            return false
+        } else {
+            return true
+        }
+    });
+};
+
+const removeBackground = () => { 
+    canvas.getObjects().every((obj) => {
+        if (obj.isBackground == true) {
             canvas.remove(obj);
             canvas.renderAll();
             return false
