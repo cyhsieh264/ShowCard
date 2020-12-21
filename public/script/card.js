@@ -359,7 +359,7 @@ const body = document.getElementsByTagName('body')[0];
 body.style.height = '100vh';
 window.addEventListener('load', () => {
     loader.style.display = 'none';
-    body.style.backgroundImage = "url('../../images/backgrounds/grid.jpg')";
+    body.style.backgroundImage = "url('../../images/backgrounds/card_background.jpg')";
     body.style.backgroundSize = '70%';
     body.style.height = 'unset';
 });
