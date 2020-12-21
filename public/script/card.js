@@ -464,6 +464,25 @@ check().then( async (res) => {
         });
     });
 
+    $('#christmas_light_border').click(() => {
+        const url = '../images/assets/icons/christmas_light_border.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 0,
+                top: 80, 
+                width: 520,
+                height: 100,
+                objId: generateId(),
+                user: user.name
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
     // background
 
     $('#color_background_1').click(() => {

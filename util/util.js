@@ -15,7 +15,7 @@ const wrapAsync = (fn) => {
 const writeLog = (content) => {
     const timeTaipei = new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei', hour12: false });
     let record = `Timestamp: ${Date.now()} Time: ${timeTaipei}\n${JSON.stringify(content)}\n`;
-    fs.appendFile(path.join(__dirname, '../log.txt'), record + '\n', function (err) { });
+    fs.appendFile(path.join(__dirname, '../error.log'), record + '\n', function (err) { });
 };
 
 const verifyToken = (token) => {

@@ -30,14 +30,19 @@ const canvas = new fabric.Canvas('canvas', {
 canvas.selection = false;
 
 // Canvas operation
-const addObj = (data, index) => { 
+const addObj = (data) => { 
     let idSet = new Set();
     canvas.getObjects().map( item => idSet.add(item.objId));
     const objects = data.map(obj => JSON.parse(obj));
     fabric.util.enlivenObjects(objects, (enlivenedObjects) => { 
         enlivenedObjects.map(obj => {
-            if (obj.isBackground == true) removeBackground();
-            if (!idSet.has(obj.objId)) canvas.add(obj);
+            if (obj.isBackground == true) {
+                removeBackground();
+                canvas.add(obj);
+                canvas.sendToBack(obj);
+            } else {
+                if (!idSet.has(obj.objId)) canvas.add(obj);
+            }
         });
         canvas.renderAll();
     });
