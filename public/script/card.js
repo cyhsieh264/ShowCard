@@ -474,6 +474,8 @@ check().then( async (res) => {
                 top: 0, 
                 width: 540,
                 height: 540,
+                evented: false,
+                selected: false,
                 objId: generateId(),
                 user: user.name,
                 isBackground: true
@@ -495,6 +497,8 @@ check().then( async (res) => {
                 top: 0, 
                 width: 540,
                 height: 540,
+                evented: false,
+                selected: false,
                 objId: generateId(),
                 user: user.name,
                 isBackground: true
@@ -516,6 +520,8 @@ check().then( async (res) => {
                 top: 0, 
                 width: 540,
                 height: 540,
+                evented: false,
+                selected: false,
                 objId: generateId(),
                 user: user.name,
                 isBackground: true
@@ -537,6 +543,8 @@ check().then( async (res) => {
                 top: 0, 
                 width: 540,
                 height: 540,
+                evented: false,
+                selected: false,
                 objId: generateId(),
                 user: user.name,
                 isBackground: true
@@ -558,6 +566,8 @@ check().then( async (res) => {
                 top: 0, 
                 width: 540,
                 height: 540,
+                evented: false,
+                selected: false,
                 objId: generateId(),
                 user: user.name,
                 isBackground: true
@@ -579,6 +589,8 @@ check().then( async (res) => {
                 top: 0, 
                 width: 540,
                 height: 540,
+                evented: false,
+                selected: false,
                 objId: generateId(),
                 user: user.name,
                 isBackground: true
@@ -600,6 +612,8 @@ check().then( async (res) => {
                 top: 0, 
                 width: 540,
                 height: 540,
+                evented: false,
+                selected: false,
                 objId: generateId(),
                 user: user.name,
                 isBackground: true
@@ -621,6 +635,8 @@ check().then( async (res) => {
                 top: 0, 
                 width: 540,
                 height: 540,
+                evented: false,
+                selected: false,
                 objId: generateId(),
                 user: user.name,
                 isBackground: true
@@ -642,6 +658,8 @@ check().then( async (res) => {
                 top: 0, 
                 width: 540,
                 height: 540,
+                evented: false,
+                selected: false,
                 objId: generateId(),
                 user: user.name,
                 isBackground: true
@@ -663,6 +681,8 @@ check().then( async (res) => {
                 top: 0, 
                 width: 540,
                 height: 540,
+                evented: false,
+                selected: false,
                 objId: generateId(),
                 user: user.name,
                 isBackground: true
@@ -684,6 +704,8 @@ check().then( async (res) => {
                 top: 0, 
                 width: 540,
                 height: 540,
+                evented: false,
+                selected: false,
                 objId: generateId(),
                 user: user.name,
                 isBackground: true
@@ -705,6 +727,8 @@ check().then( async (res) => {
                 top: 0, 
                 width: 540,
                 height: 540,
+                evented: false,
+                selected: false,
                 objId: generateId(),
                 user: user.name,
                 isBackground: true
