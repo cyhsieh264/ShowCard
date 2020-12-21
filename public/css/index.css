@@ -270,3 +270,25 @@ nav>a:hover {
     @media screen and (max-width: 480px) {
       #main .content {
         padding: 1.5rem; } }
+
+/* footer */
+footer{
+    text-align: center;
+    background-color: #483558;
+    padding-bottom: 100px;
+    box-shadow: 5px 5px 4px 1px rgba(0, 0, 0, 0.025);
+}
+
+footer .view{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+footer .copyright{
+    display: flex;
+    font-size: 20px;
+    padding-top: 100px;
+    color: #ffffff;
+} 
