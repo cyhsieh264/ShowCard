@@ -52,6 +52,7 @@ const create = async(data) => {
 const rename = async(cardTitle, cardId) => {
     try {
         await transaction();
+        await query('SELECT `title` FROM `card` WHERE `id` = ? FOR UPDATE', cardId);
         await query('UPDATE `card` SET `title` = ? WHERE `id` = ?', [cardTitle, cardId]);
         await commit();
         return { result: 'Success' };

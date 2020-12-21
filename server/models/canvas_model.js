@@ -24,6 +24,7 @@ const save = async(data) => {
         await transaction();
         await query('INSERT INTO `canvas_done` SET ?', data);
         await query('DELETE FROM `canvas_undo` WHERE `card_id` = ? AND `obj_id` = ?', [data.card_id, data.obj_id]);
+        await query('SELECT `saved_at` FROM `card` WHERE `id` = ? FOR UPDATE', data.card_id);
         await query('UPDATE `card` SET `saved_at` = ? WHERE `id` = ?', [time, data.card_id]);
         await commit();
         return { result: 'Success' };
@@ -108,6 +109,7 @@ const undo = async(card, user) => {
         };
         await query('INSERT INTO `canvas_undo` SET ?', data);
         await query('DELETE FROM `canvas_done` WHERE `id` = ?', lastStep[0].id);
+        await query('SELECT `saved_at` FROM `card` WHERE `id` = ? FOR UPDATE', card);
         await query('UPDATE `card` SET `saved_at` = ? WHERE `id` = ?', [time, card]);
         await commit();
         return { result: result };
@@ -168,6 +170,7 @@ const redo = async(card, user) => {
         };
         await query('INSERT INTO `canvas_done` SET ?', data);
         await query('DELETE FROM `canvas_undo` WHERE `id` = ?', formerStep.id);
+        await query('SELECT `saved_at` FROM `card` WHERE `id` = ? FOR UPDATE', card);
         await query('UPDATE `card` SET `saved_at` = ? WHERE `id` = ?', [time, card]);
         await commit();
         return { result: result };
