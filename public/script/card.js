@@ -30,7 +30,7 @@ const check = async () => {
     const userInfo = await verifyUserToken(userToken);
     if (userToken && userInfo) {
         $('main').removeClass('hide');
-        return { owner: cardStatus.owner, user: userInfo };
+        return { owner: cardStatus.owner, title: cardStatus.title, user: userInfo };
     } else {
         location.replace('/login.html');
     }
@@ -101,21 +101,28 @@ check().then( async (res) => {
         localStorage.setItem('color_'+card, colors[index]);
     };
     if (!cardOwner) {
+        const cardTitle = (await api.get('api/1.0/card/title', { params: { user: user.id } })).data.data.title;
+        $('#card-title').val(cardTitle);
         const newCard = {
             id: card,
             owner: user.id,
-            title: 'untitled'
+            title: cardTitle
         };
         await api.post('api/1.0/card/create', newCard);
         await api.post('api/1.0/canvas/save', newCanvas);
         await uploadScreenshot();
         await setUserColor(1);
     } else {
-        const memberCount = (await api.patch('api/1.0/card/addmember', { card: card })).data.data.count;
-        const userCanvasExistence = (await api.get('api/1.0/canvas/check', { params: { card: card, user: user.id } })).data.data.existence;
-        if (!userCanvasExistence) {
-            await api.post('api/1.0/canvas/save', newCanvas);
+        const cardTitle = res.title;
+        $('#card-title').val(cardTitle);
+        if (cardOwner != user.id) {
+            $('#card-title').attr('readonly', 'readonly');
+            const userCanvasExistence = (await api.get('api/1.0/canvas/check', { params: { card: card, user: user.id } })).data.data.existence;
+            if (!userCanvasExistence) {
+                await api.post('api/1.0/canvas/save', newCanvas);
+            }
         }
+        const memberCount = (await api.patch('api/1.0/card/addmember', { card: card })).data.data.count;
         await setUserColor(memberCount);
         const canvasLoad = (await api.get('api/1.0/canvas/load', { params: { card: card } })).data.data.step;
         parseObj(canvasLoad);
@@ -893,6 +900,12 @@ window.addEventListener('load', () => {
     body.style.backgroundImage = "url('../../images/backgrounds/card_background.jpg')";
     body.style.backgroundSize = '70%';
     body.style.height = 'unset';
+});
+
+// --- RENAME CARD ---
+$('#card-title').change( async () => {
+    const title = $('#card-title').val();
+    await api.patch('api/1.0/card/rename', { card: card, title: title });
 });
 
 // --- DOWNLOAD IMAGE ---

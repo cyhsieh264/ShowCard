@@ -4,7 +4,7 @@ const checkCard = async (req, res) => {
     const cardId = req.query.card;
     const { result, error } = await Card.check(cardId);
     if (error) return res.status(500).json({ error: 'Internal server error' });
-    return res.status(200).json({ data: { existence: result.existence, owner: result.owner } });
+    return res.status(200).json({ data: { existence: result.existence, owner: result.owner, title: result.title } });
 };
 
 const enrollCard = async (req, res) => {
@@ -32,6 +32,21 @@ const createCard = async (req, res) => {
     return res.status(200).json({ message: result });
 };
 
+const renameCard = async (req, res) => {
+    const cardTitle = req.body.title;
+    const cardId = req.body.card;
+    const { result, error } = await Card.rename(cardTitle, cardId);
+    if (error) return res.status(500).json({ error: 'Internal server error' });
+    return res.status(200).json({ message: result });
+};
+
+const getTitle = async (req, res) => {
+    const userId = req.query.user;
+    const { result, error } = await Card.title(userId);
+    if (error) return res.status(500).json({ error: 'Internal server error' });
+    return res.status(200).json({ data: { title: result.title } });
+};
+
 const addMember = async (req, res) => {
     const cardId = req.body.card;
     const { result, error } = await Card.addMember(cardId);
@@ -43,5 +58,7 @@ module.exports = {
     checkCard,
     enrollCard,
     createCard,
+    renameCard,
+    getTitle,
     addMember
 };

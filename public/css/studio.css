@@ -40,7 +40,7 @@ main {
 .title {
     text-align: center;
     display: inline-flex;
-    min-width: 330px;
+    min-width: 320px;
 }
 
 #template-container {

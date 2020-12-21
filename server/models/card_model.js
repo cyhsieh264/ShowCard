@@ -5,12 +5,23 @@ const check = async(cardId) => {
     try {
         const result = await query('SELECT * FROM `card` WHERE `id` = ? LIMIT 1', cardId);
         if (result.length == 0) return { result: { existence: false } };
-        else return { result: { existence: true, owner: result[0].owner } };
+        else return { result: { existence: true, owner: result[0].owner, title: result[0].title } };
     } catch (error) {
         writeLog(error.stack);
         return { error }
     }
 };
+
+const title = async(userId) => {
+    try {
+        const result = await query('SELECT * FROM `card` WHERE `owner` = ? AND `title` LIKE ? \'%\'', [userId, 'Untitled']);
+        if (result.length == 0) return { result: { title: 'Untitled' } };
+        else return { result: { title: 'Untitled' + (result.length + 1).toString() } };
+    } catch (error) {
+        writeLog(error.stack);
+        return { error }
+    }
+}
 
 const enroll = async(cardId) => {
     try {
@@ -38,9 +49,23 @@ const create = async(data) => {
     }
 };
 
+const rename = async(cardTitle, cardId) => {
+    try {
+        await transaction();
+        await query('UPDATE `card` SET `title` = ? WHERE `id` = ?', [cardTitle, cardId]);
+        await commit();
+        return { result: 'Success' };
+    } catch (error) {
+        await rollback();
+        writeLog(error.stack);
+        return { error }
+    }
+}
+
 const addMember = async(cardId) => {
     try {
         await transaction();
+        await query('SELECT `member_count` FROM `card` WHERE `id` = ? FOR UPDATE', cardId)
         await query('UPDATE `card` SET `member_count` = (`member_count` + 1) WHERE `id` = ?', cardId);
         const result = (await query('SELECT `member_count` FROM `card` WHERE `id` = ?', cardId))[0].member_count;
         await commit();
@@ -55,6 +80,7 @@ const addMember = async(cardId) => {
 const reduceMember = async(cardId) => {
     try {
         await transaction();
+        await query('SELECT `member_count` FROM `card` WHERE `id` = ? FOR UPDATE', cardId)
         await query('UPDATE `card` SET `member_count` = (`member_count` - 1) WHERE `id` = ?', cardId);
         await commit();
         return { result: 'Success' };
@@ -68,8 +94,10 @@ const reduceMember = async(cardId) => {
 
 module.exports = {
     check,
+    title,
     enroll,
     create,
+    rename,
     addMember,
     reduceMember
 };
