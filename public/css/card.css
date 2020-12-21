@@ -1,17 +1,6 @@
 @import "common.css";
 @import "index.css";
 
-.chat {
-    margin-top: 100px;
-    background-color: aliceblue;
-}
-
-.room {
-    margin: 50px;
-    height: 200px;
-    background-color: white;
-}
-
 canvas {
     box-shadow: 3px 3px 3px 2px rgba(41,41,41,.25); 
     width: 100%;
@@ -166,22 +155,79 @@ canvas {
 
 #chat-room {
     width: 18rem;
-    height: 85vh;
+    min-height: 76vh;
+    max-height: 150vh;
     background-color: rgb(254, 255, 255);
     margin: 1rem 1rem 1rem 1rem; 
     border-radius: 10px;
 }
 
+.room {
+    padding: 13px;
+}
+
+.message-item {
+    margin: 10px 0px;
+}
+
+.join-message {
+    height: 50px;
+    min-width: 60px;
+    max-width: 70px;
+    float: unset;
+    background-color: #e9e8e8;
+}
+
+.self-message {
+    padding: 5px 15px;
+    min-height: 35px;
+    width: 85px;
+    background-color: rgb(244, 240, 248);
+    position: relative;
+    /* right: 25px; */
+    border-radius: 10px;
+}
+
+.other-message {
+    padding: 5px 15px;
+    min-height: 35px;
+    max-width: 80px;
+    background-color: #ebeff3;
+    position: relative;
+    border-radius: 10px;
+}
+
+.send {
+    padding-top: 5px;
+    bottom: 110px;
+    position: fixed;
+    width: 18rem;
+}
+
+.send>input {
+    width: 13.5rem;
+    height: 35px;
+    border-radius: 10px;
+    border: 1px;
+    background-color: rgb(244, 240, 248);
+}
+
+#send-btn {
+    margin-left: 5px;
+    width: 27px;
+}
+
 /* share link */
 
 #share-link {
+    height: 6rem;
     display: scroll;
     position: fixed;
-    bottom: 30px;
+    bottom: 0px;
     right: 0px;
     width: 20rem;
     background-color: rgb(228, 209, 243);
-    border-radius: 12px 0px 0px 12px;
+    border-radius: 1px 0px 0px 0px;
 }
 
 #share-link-box {
