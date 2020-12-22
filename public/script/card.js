@@ -912,7 +912,10 @@ check().then( async (res) => {
     // Brush
     // const brush = new fabric.PatternBrush(canvas);
     $('#brush-on').click(() => {
-        if (canvas.getActiveObject()) canvas.discardActiveObject().renderAll();
+        if (canvas.getActiveObject()) {
+            socket.emit('edit canvas', [{action: 'remove', object: canvas.getActiveObject().objId}, { action: 'create', object: [JSON.stringify(canvas.getActiveObject().toJSON())] }] );
+            canvas.discardActiveObject().renderAll();
+        }
         canvas.freeDrawingBrush.color = $('#color-fill').val();
         canvas.freeDrawingBrush.width = 5;
         canvas.isDrawingMode = true
@@ -1010,7 +1013,7 @@ $('#header').click(() => {
     hideSubmenu();
 });
 
-$('#wrapper').click(() => {
+$('#wrapper').click((e) => {
     hideSubmenu();
 });
 
