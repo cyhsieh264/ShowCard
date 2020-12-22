@@ -30,7 +30,7 @@ const check = async () => {
     const userInfo = await verifyUserToken(userToken);
     if (userToken && userInfo) {
         $('main').removeClass('hide');
-        return { owner: cardStatus.owner, title: cardStatus.title, user: userInfo };
+        return { owner: cardStatus.owner, ownername: cardStatus.ownername, title: cardStatus.title, user: userInfo };
     } else {
         location.replace('/login.html');
     }
@@ -117,6 +117,7 @@ check().then( async (res) => {
         $('#card-title').val(cardTitle);
         if (cardOwner != user.id) {
             $('#card-title').attr('readonly', 'readonly');
+            $('#card-title').val(cardTitle + `（${res.ownername}'s card）`)
             const userCanvasExistence = (await api.get('api/1.0/canvas/check', { params: { card: card, user: user.id } })).data.data.existence;
             if (!userCanvasExistence) {
                 await api.post('api/1.0/canvas/save', newCanvas);
@@ -127,6 +128,17 @@ check().then( async (res) => {
         const canvasLoad = (await api.get('api/1.0/canvas/load', { params: { card: card } })).data.data.step;
         parseObj(canvasLoad);
     }
+
+    // --- RENAME CARD ---
+    $('#card-title').change( async () => {
+        const title = $('#card-title').val();
+        await api.patch('api/1.0/card/rename', { card: card, title: title });
+        socket.emit('rename card', title);
+    });
+
+    socket.on('change title', title => {
+        $('#card-title').val(title + `（${res.ownername}'s card）`)
+    })
     
     // --- CANVAS EVENT ---
     socket.on('change canvas', (step) => parseObj(step));
@@ -902,11 +914,11 @@ window.addEventListener('load', () => {
     body.style.height = 'unset';
 });
 
-// --- RENAME CARD ---
-$('#card-title').change( async () => {
-    const title = $('#card-title').val();
-    await api.patch('api/1.0/card/rename', { card: card, title: title });
-});
+// // --- RENAME CARD ---
+// $('#card-title').change( async () => {
+//     const title = $('#card-title').val();
+//     await api.patch('api/1.0/card/rename', { card: card, title: title });
+// });
 
 // --- DOWNLOAD IMAGE ---
 $('#save').on('click', function () {
