@@ -899,10 +899,13 @@ check().then( async (res) => {
     });
     
     canvas.on('before:selection:cleared', e => {
+        canvas.bringToFront(e.target);
         socket.emit('edit canvas', [{action: 'remove', object: e.target.objId}, { action: 'create', object: [JSON.stringify(e.target.toJSON())] }] );
     });
 
     canvas.on('selection:updated', e => {
+        canvas.bringToFront(e.deselected[0]);
+        canvas.sendBackwards(e.deselected[0]);
         socket.emit('edit canvas', [{action: 'remove', object: e.deselected[0].objId}, { action: 'create', object: [JSON.stringify(e.deselected[0].toJSON())] }] );
     });
 
