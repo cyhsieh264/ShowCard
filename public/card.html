@@ -23,21 +23,46 @@
             <div class="toolbox" id="toolbox">
                 <div class="tool-wrapper" id="tool-wrapper">
                     Fill Color:<br>
-                    <input type="color" class="tool colorSelector" id="color-fill" value="#EED42B" data-tool-tip="Select Colour"><br>
+                    <input type="color" class="tool colorSelector" id="color-fill" value="#073763" data-tool-tip="Select Colour"><br>
                     Stroke Color:<br>
                     <input type="color" class="tool colorSelector" id="color-border" value="#FFFFFF" data-tool-tip="Select Colour"><br>
                     <div class="list-group list-group-flush">
-                        <div class="list-group-item list-group-item-action bg-light explore-tool" id="explore-tool">
-                            <img id="explore-image" class="menu-icon explore-tool" src="./images/icons/explore.png" alt="explore icon">Explore
-                        </div>
-                        <div class="list-group-item list-group-item-action bg-light" id="brush-tool">Brush</div>
-                        <div class="list-group-item list-group-item-action bg-light" id="shape-tool">Shape</div>
-                        <div class="list-group-item list-group-item-action bg-light" id="text-tool">Text</div>
+                        <a href="#" class="list-group-item list-group-item-action bg-light explore-tool" id="explore-tool">
+                            <!-- <img id="explore-image" class="menu-icon explore-tool" src="./images/icons/explore.png" alt="explore icon"> -->
+                            Explore
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light" id="undo-canvas">
+                            Undo
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light" id="redo-canvas">
+                            Redo
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light" id="brush-on">
+                            Brush On
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light" id="brush-off">
+                            Brush Off
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light" id="add-circle">
+                            Circle
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light" id="add-square">
+                            Square
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light" id="add-triangle">
+                            Triangle
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light" id="text-tool">
+                            Text
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light" id="rm-obj">
+                            Delete
+                        </a>
                     </div>
-                    <button class="btn btn-primary tool" id="undo-canvas">Undo</button>
-                    <button class="btn btn-primary tool" id="redo-canvas">Redo</button>
-                    <button class="btn btn-primary tool" id="rm-obj">Delete</button>
-                    <a id="save" href="#" download="aShareaDay.png" class="color-btn-green">Save Canvas</a>
+                    <!-- <button class="btn btn-primary tool" id="undo-canvas">Undo</button> -->
+                    <!-- <button class="btn btn-primary tool" id="redo-canvas">Redo</button> -->
+                    <!-- <button class="btn btn-primary tool" id="rm-obj">Delete</button> -->
+                    <a id="save" href="#" download="aShareaDay.png" class="color-btn-green"><br>Download</a>
                 </div>
                 <div class="hide tool-submenu explore-tool" id="explore-box">
                     <div class="d-flex explore-tool">
@@ -93,7 +118,7 @@
                     <div class="d-flex">
                         <div class="submenu-container">
                             <button class="btn btn-primary tool" id="add-circle">Circle</button>
-                            <button class="btn btn-primary tool" id="add-rect">Rect</button>
+                            <button class="btn btn-primary tool" id="add-square">Square</button>
                         </div>
                     </div>
                 </div>

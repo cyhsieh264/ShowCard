@@ -71,7 +71,7 @@ check().then( async (res) => {
         }
     });
     $('#msg').keypress(function(e) {
-        code = e.keyCode ? e.keyCode : e.which;
+        let code = e.keyCode ? e.keyCode : e.which;
         if ( $('#msg').val() && code == 13 ) {
             e.preventDefault();
             socket.emit('input msg', $('#msg').val())
@@ -128,7 +128,7 @@ check().then( async (res) => {
         const canvasLoad = (await api.get('api/1.0/canvas/load', { params: { card: card } })).data.data.step;
         parseObj(canvasLoad);
     }
-
+    
     // --- RENAME CARD ---
     $('#card-title').change( async () => {
         const title = $('#card-title').val();
@@ -170,10 +170,10 @@ check().then( async (res) => {
     $('#add-circle').click( async () => {
         canvas.isDrawingMode = false;
         const circle = new fabric.Circle({
-            left: 250, 
-            top: 200,
-            strokeWidth: 5,
-            radius: 60,
+            left: 270, 
+            top: 270,
+            strokeWidth: 3,
+            radius: 100,
             stroke: $('#color-border').val(),
             fill: $('#color-fill').val(),
             originX: 'center',
@@ -189,16 +189,37 @@ check().then( async (res) => {
         await uploadScreenshot();
     });
 
-    $('#add-rect').click( async () => {
+    $('#add-square').click( async () => {
         canvas.isDrawingMode = false;
         let rect = new fabric.Rect({
-            height: 100,
-            width: 200,
-            top: 200,
-            left: 300,
+            height: 180,
+            width: 180,
+            top: 170,
+            left: 170,
             fill: $('#color-fill').val(),
             stroke: $('#color-border').val(),
-            strokeWidth: 5,
+            strokeWidth: 3,
+            objId: generateId(),
+            user: user.name,
+            isBackground: false
+        });
+        canvas.add(rect);
+        canvas.setActiveObject(rect);
+        const object = rect.toJSON();
+        await newObject(object);
+        await uploadScreenshot();
+    });
+
+    $('#add-triangle').click( async () => {
+        canvas.isDrawingMode = false;
+        let rect = new fabric.Triangle({
+            height: 180,
+            width: 180,
+            top: 170,
+            left: 170,
+            fill: $('#color-fill').val(),
+            stroke: $('#color-border').val(),
+            strokeWidth: 3,
             objId: generateId(),
             user: user.name,
             isBackground: false
@@ -964,16 +985,17 @@ const submenuControl = (target) => {
     if (target.classList.contains('explore-tool')) {
         $('#explore-tool').css('cssText', 'background-color: #d9e0e6 !important;');
         $('#explore-box').removeClass('hide');
-    } else if (target.id == 'brush-tool' || target.id == 'brush-box') {
-        $('#brush-tool').css('cssText', 'background-color: #d9e0e6 !important;');
-        $('#brush-box').removeClass('hide');
-    } else if (target.id == 'shape-tool' || target.id == 'shape-box') {
-        $('#shape-tool').css('cssText', 'background-color: #d9e0e6 !important;');
-        $('#shape-box').removeClass('hide');
-    } else if (target.id == 'text-tool' || target.id == 'text-box') {
-        $('#text-tool').css('cssText', 'background-color: #d9e0e6 !important;');
-        $('#text-box').removeClass('hide');
     }
+    // } else if (target.id == 'brush-tool' || target.id == 'brush-box') {
+    //     $('#brush-tool').css('cssText', 'background-color: #d9e0e6 !important;');
+    //     $('#brush-box').removeClass('hide');
+    // } else if (target.id == 'shape-tool' || target.id == 'shape-box') {
+    //     $('#shape-tool').css('cssText', 'background-color: #d9e0e6 !important;');
+    //     $('#shape-box').removeClass('hide');
+    // } else if (target.id == 'text-tool' || target.id == 'text-box') {
+    //     $('#text-tool').css('cssText', 'background-color: #d9e0e6 !important;');
+    //     $('#text-box').removeClass('hide');
+    // }
 };
 
 $('#header').click(() => {

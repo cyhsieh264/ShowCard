@@ -4,9 +4,12 @@ const { writeLog } = require('../../util/util');
 const check = async(cardId) => {
     try {
         const result = await query('SELECT * FROM `card` WHERE `id` = ? LIMIT 1', cardId);
-        const user = await query('SELECT `name` FROM `user` WHERE `id` = ?', result[0].owner);
         if (result.length == 0) return { result: { existence: false } };
-        else return { result: { existence: true, owner: result[0].owner, ownername: user[0].name, title: result[0].title } };
+        let user;
+        if (result[0].owner) user = (await query('SELECT `name` FROM `user` WHERE `id` = ?', result[0].owner))[0].name;
+        else user = null;
+        if (result.length == 0) return { result: { existence: false } };
+        else return { result: { existence: true, owner: result[0].owner, ownername: user, title: result[0].title } };
     } catch (error) {
         writeLog(error.stack);
         return { error }

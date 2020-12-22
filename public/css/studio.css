@@ -27,6 +27,14 @@ main {
     width: 220px;
     margin: 20px;
     display: flexbox;
+    text-decoration: none;
+}
+
+.row-card:hover {
+    width: 220px;
+    margin: 20px;
+    display: flexbox;
+    text-decoration: underline rgb(224, 67, 67);
 }
 
 .row-card>h3 {
@@ -35,6 +43,7 @@ main {
 
 .row-card>img {
     width: 210px;
+    height: 210px;
 }
 
 .title {
