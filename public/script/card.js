@@ -277,6 +277,7 @@ check().then( async (res) => {
     // icon
 
     $('#christmas_hat').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/icons/christmas_hat.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
@@ -296,6 +297,7 @@ check().then( async (res) => {
     });
 
     $('#mistletoe_1').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/icons/mistletoe_1.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
@@ -315,6 +317,7 @@ check().then( async (res) => {
     });
 
     $('#christmas_presents').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/icons/christmas_presents.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
@@ -334,6 +337,7 @@ check().then( async (res) => {
     });
 
     $('#christmas_sock').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/icons/christmas_sock.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
@@ -353,6 +357,7 @@ check().then( async (res) => {
     });
 
     $('#candy_cane').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/icons/candy_cane.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
@@ -372,6 +377,7 @@ check().then( async (res) => {
     });
 
     $('#gingerbread_man').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/icons/gingerbread_man.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
@@ -391,6 +397,7 @@ check().then( async (res) => {
     });
 
     $('#mistletoe_2').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/icons/mistletoe_2.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
@@ -410,6 +417,7 @@ check().then( async (res) => {
     });
 
     $('#santa_claus_1').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/icons/santa_claus_1.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
@@ -429,6 +437,7 @@ check().then( async (res) => {
     });
 
     $('#santa_claus_2').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/icons/santa_claus_2.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
@@ -448,6 +457,7 @@ check().then( async (res) => {
     });
 
     $('#santa_claus_3').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/icons/santa_claus_3.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
@@ -467,6 +477,7 @@ check().then( async (res) => {
     });
 
     $('#christmas_greeting').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/icons/christmas_greeting.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
@@ -486,6 +497,7 @@ check().then( async (res) => {
     });
 
     $('#christmas_decoration_border').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/icons/christmas_decoration_border.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
@@ -505,6 +517,7 @@ check().then( async (res) => {
     });
 
     $('#christmas_light_border').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/icons/christmas_light_border.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
@@ -526,6 +539,7 @@ check().then( async (res) => {
     // background
 
     $('#color_background_1').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/backgrounds/color_background_1.png';
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
@@ -549,6 +563,7 @@ check().then( async (res) => {
     });
 
     $('#color_background_2').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/backgrounds/color_background_2.png';
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
@@ -572,6 +587,7 @@ check().then( async (res) => {
     });
 
     $('#color_background_3').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/backgrounds/color_background_3.png';
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
@@ -595,6 +611,7 @@ check().then( async (res) => {
     });
 
     $('#color_background_4').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/backgrounds/color_background_4.png';
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
@@ -618,6 +635,7 @@ check().then( async (res) => {
     });
 
     $('#background_1').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/backgrounds/background_1.jpg';
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
@@ -641,6 +659,7 @@ check().then( async (res) => {
     });
 
     $('#background_2').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/backgrounds/background_2.jpg';
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
@@ -664,6 +683,7 @@ check().then( async (res) => {
     });
 
     $('#background_3').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/backgrounds/background_3.jpg';
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
@@ -687,6 +707,7 @@ check().then( async (res) => {
     });
 
     $('#background_4').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/backgrounds/background_4.jpg';
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
@@ -710,6 +731,7 @@ check().then( async (res) => {
     });
 
     $('#background_5').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/backgrounds/background_5.jpg';
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
@@ -733,6 +755,7 @@ check().then( async (res) => {
     });
 
     $('#background_6').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/backgrounds/background_6.jpg';
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
@@ -756,6 +779,7 @@ check().then( async (res) => {
     });
 
     $('#background_7').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/backgrounds/background_7.jpg';
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
@@ -779,6 +803,7 @@ check().then( async (res) => {
     });
 
     $('#background_8').click(() => {
+        canvas.isDrawingMode = false;
         const url = '../images/assets/backgrounds/background_8.jpg';
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
@@ -923,14 +948,30 @@ check().then( async (res) => {
 
     $('#brush-off').click(() => canvas.isDrawingMode = false);
 
-    $('#color-fill').change(() => {
+    $('#color-fill').change( async () => {
         if (canvas.isDrawingMode) {
             canvas.freeDrawingBrush.color = $('#color-fill').val();
             canvas.freeDrawingBrush.width = 5;
-        } 
-        // else if (canvas.getActiveObject()) {
+        }
+        // } else if (canvas.getActiveObject()) {
         //     canvas.getActiveObject().set('fill', $('#color-fill').val());
         //     canvas.renderAll();
+        //     const object = canvas.getActiveObjects()[0].toJSON();
+        //     object.user = user.name;
+        //     const data = {
+        //         card_id: card,
+        //         user_id: user.id,
+        //         action: 'modify',
+        //         obj_id: object.objId,
+        //         obj_type: object.type,
+        //         object: JSON.stringify(object)
+        //     };
+        //     await api.post('api/1.0/canvas/save', data);
+        //     await uploadScreenshot();
+        //     object.opacity = 0.5;
+        //     object.selectable = false;
+        //     object.evented = false;
+        //     socket.emit('edit canvas', [{action: 'remove', object: object.objId}, { action: 'create', object: [JSON.stringify(object)] }] );
         // }
     });
 });
