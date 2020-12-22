@@ -8,7 +8,7 @@ const getUserCards = async (req, res) => {
         const data = {
             id: card.id,
             title: card.title,
-            picture: 'https://d20bzyreixm85i.cloudfront.net/' + card.picture,
+            picture: 'https://s3-showcard.s3-ap-northeast-1.amazonaws.com/' + card.picture,
             saved_at: card.saved_at
         };
         cards.push(data);

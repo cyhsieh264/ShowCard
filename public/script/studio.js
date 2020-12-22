@@ -10,7 +10,7 @@ const checkUser = async () => {
 
 checkUser().then( async (res) => {
     const user = res.id;
-    const userCards = (await axios.get('api/1.0/studio/user', { params: { user: user } })).data.data.cards;
+    const userCards = (await axios.get('api/1.0/studio/user', { headers: { 'Cache-Control': 'no-cache' }, params: { user: user } })).data.data.cards;
     userCards.map((card) => {
         let element = $('<a>');
         element.attr('class', 'row-card');
