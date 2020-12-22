@@ -885,16 +885,15 @@ check().then( async (res) => {
     // Lock Object
     canvas.on('mouse:down', e => {
         if (e.target != null && canvas.getActiveObjects().length != 0) {
-            e.target.on('mousedown', e => {                
-                if (e.transform) {
+            // e.target.on('mousedown', e2 => {             
+                // if (e2.transform) {
                     const editObject = fabric.util.object.clone(canvas.getActiveObject());
-                    editObject.set('opacity', 0.5);
                     editObject.opacity = 0.5;
                     editObject.selectable = false;
                     editObject.evented = false;
                     socket.emit('edit canvas', [{action: 'remove', object: e.target.objId}, { action: 'create', object: [JSON.stringify(editObject.toJSON())] }] );
-                }
-            });
+                // }
+            // });
         }
     });
     
@@ -921,9 +920,15 @@ check().then( async (res) => {
 
     $('#brush-off').click(() => canvas.isDrawingMode = false);
 
-    $('#color-fill').mousemove(() => {
-        canvas.freeDrawingBrush.color = $('#color-fill').val();
-        canvas.freeDrawingBrush.width = 5;
+    $('#color-fill').change(() => {
+        if (canvas.isDrawingMode) {
+            canvas.freeDrawingBrush.color = $('#color-fill').val();
+            canvas.freeDrawingBrush.width = 5;
+        } 
+        // else if (canvas.getActiveObject()) {
+        //     canvas.getActiveObject().set('fill', $('#color-fill').val());
+        //     canvas.renderAll();
+        // }
     });
 });
 
