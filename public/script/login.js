@@ -1,8 +1,3 @@
-const api = axios.create({
-    headers: { 'Content-Type': 'application/json' },
-    responseType: 'json'
-});
-
 const ifLogin = async () => {
     const data = await verifyUserToken(userToken);
     if (userToken && data) {
@@ -14,17 +9,12 @@ const ifLogin = async () => {
 
 ifLogin();
 
-$('#go-register').click(() => {
-    $('.signin-card').addClass('hide');
-    $('.signup-card').removeClass('hide');
-})
+const api = axios.create({
+    headers: { 'Content-Type': 'application/json' },
+    responseType: 'json'
+});
 
-$('#go-login').click(() => {
-    $('.signup-card').addClass('hide');
-    $('.signin-card').removeClass('hide');
-})
-
-$('#signin-btn').click(() => {
+const signin = () => {
     const history = localStorage.getItem('history') || '/';
     const email = $('#signin-email').val();
     const password = btoa($('#signin-password').val());
@@ -57,9 +47,9 @@ $('#signin-btn').click(() => {
         $('#signin-alert').removeClass('hide');
         $('#signin-alert-msg')[0].innerHTML = err.response.data.error;
     });
-});
+};
 
-$('#signup-btn').click(() => {
+const signup = () => {
     const history = localStorage.getItem('history') || '/';
     const email = $('#signup-email').val();
     const name = $('#signup-name').val();
@@ -121,6 +111,50 @@ $('#signup-btn').click(() => {
         $('#signup-alert').removeClass('hide');
         $('#signup-alert-msg')[0].innerHTML = err.response.data.error;
     });
+};
+
+$('#go-register').click(() => {
+    $('.signin-card').addClass('hide');
+    $('.signup-card').removeClass('hide');
+})
+
+$('#go-login').click(() => {
+    $('.signup-card').addClass('hide');
+    $('.signin-card').removeClass('hide');
+})
+
+$('#signin-btn').click(signin);
+
+$('#signin-email').keypress(function(e) {
+    let code = e.keyCode ? e.keyCode : e.which;
+    if ( code == 13 ) signin();
+});
+
+$('#signin-password').keypress(function(e) {
+    let code = e.keyCode ? e.keyCode : e.which;
+    if ( code == 13 ) signin();
+});
+
+$('#signup-btn').click(signup);
+
+$('#signup-email').keypress(function(e) {
+    let code = e.keyCode ? e.keyCode : e.which;
+    if ( code == 13 ) signup();
+});
+
+$('#signup-user').keypress(function(e) {
+    let code = e.keyCode ? e.keyCode : e.which;
+    if ( code == 13 ) signup();
+});
+
+$('#signup-password').keypress(function(e) {
+    let code = e.keyCode ? e.keyCode : e.which;
+    if ( code == 13 ) signup();
+});
+
+$('#signup-confirm-password').keypress(function(e) {
+    let code = e.keyCode ? e.keyCode : e.which;
+    if ( code == 13 ) signup();
 });
 
 $('#close-signin-alert').click(() => {

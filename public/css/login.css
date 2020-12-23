@@ -108,3 +108,122 @@ margin-left: 4px;
 .alert-error {
     background-color: rgb(223, 192, 192);
 }
+
+.login-guide {
+    font-size: 19px;
+}
+
+#go-register {
+    color: rgb(255, 255, 255);
+    text-decoration: underline white;
+    text-align: center;
+}
+
+#go-register:hover {
+    color: rgb(69, 80, 238);
+    text-decoration: underline rgb(69, 80, 238);
+}
+
+#go-login {
+    color: rgb(255, 255, 255);
+    text-decoration: underline white;
+    text-align: center;
+}
+
+#go-login:hover {
+    color: rgb(69, 80, 238);
+    text-decoration: underline rgb(69, 80, 238);
+}
+
+.input-icon {
+    width: 24px;
+}
+
+/* ======header====== */
+
+#logo-image {
+    width: 25px;
+}
+
+#logo {
+    color: #483558;
+    text-decoration: none;
+    margin-left: 80px;
+}
+
+#logo-text:hover {
+    text-decoration: none;
+}
+
+nav {
+    margin-right: 50px;
+}
+
+nav>div {
+    margin-right:30px;
+    color: #483558;
+    text-decoration: none;
+}
+
+#header {
+    font-size: large;
+    font-weight: 500;
+    -moz-align-items: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
+    -ms-justify-content: space-between;
+    justify-content: space-between;
+    background: #ffffff;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: default;
+    height: 4rem;
+    left: 0;
+    line-height: 4rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10001;
+    -webkit-box-shadow: 0px 0px 9px 3px rgba(41,41,41,.25);
+    -moz-box-shadow: 0px 0px 9px 3px rgba(41,41,41,.25);
+    box-shadow: 0px 0px 9px 3px rgba(41,41,41,.25); }
+
+#cover {
+    height: 600px;
+    text-align: center;
+    background-image: url("../../images/backgrounds/cover_background.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#main-title {
+    color: #483558;
+    font-size: 80px;
+    margin-top: 180px;
+    text-shadow: rgb(207, 206, 207) 0.1em 0.1em 0.2em
+}
+
+#slogan {
+    color: #483558;
+    font-size: 24px;
+}
+
+#new-card-btn {
+    color: #ffffff;
+    background-color: #483558;
+    border: none;
+    text-decoration: none;
+}
+
+#new-card-btn:hover {
+    background-color: #ffffff;
+    box-shadow: inset 0 0 0 1px #483558;
+    color: #483558 !important;
+}
+

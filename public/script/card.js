@@ -987,12 +987,6 @@ window.addEventListener('load', () => {
     body.style.height = 'unset';
 });
 
-// // --- RENAME CARD ---
-// $('#card-title').change( async () => {
-//     const title = $('#card-title').val();
-//     await api.patch('api/1.0/card/rename', { card: card, title: title });
-// });
-
 // --- DOWNLOAD IMAGE ---
 $('#save').on('click', function () {
     if (canvas.getActiveObject()) canvas.discardActiveObject().renderAll();

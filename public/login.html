@@ -13,6 +13,12 @@
         <script src="https://apis.google.com/js/platform.js" async defer></script>
     </head>
     <body class="hide">
+        <header id="header">
+            <a id="logo" href="/"><img id="logo-image" src="./images/icons/favicon.png" alt="Website Logo"> ShowCard </a>
+            <nav>
+                <div>Collaborate on your design</div>
+            </nav>
+        </header>
         <div class="container">
             <div class="d-flex justify-content-center h-100">
                 <div class="card signin-card">
@@ -23,13 +29,13 @@
                         <div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <span class="input-group-text"><img class="input-icon" src="./images/icons/email.png"><i class="fas fa-user"></i></span>
                                 </div>
                                 <input type="text" class="form-control" id="signin-email" placeholder="Email">
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                    <span class="input-group-text"><img class="input-icon" src="./images/icons/password.png"><i class="fas fa-key"></i></span>
                                 </div>
                                 <input type="password" class="form-control" id="signin-password" placeholder="Password">
                             </div>
@@ -46,12 +52,9 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <div class="d-flex justify-content-center links">
-                            Don't have an account? &nbsp;<a href="#" id="go-register">Sign Up</a>
+                        <div class="d-flex justify-content-center links login-guide">
+                            Don't have an account? &nbsp;<a href="#" id="go-register">Register Now</a>
                         </div>
-                        <!-- <div class="d-flex justify-content-center">
-                            <a href="#">Forgot your password?</a>
-                        </div> -->
                     </div>
                 </div>
                 <div class="card signup-card hide">
@@ -62,25 +65,25 @@
                         <div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <span class="input-group-text"><img class="input-icon" src="./images/icons/email.png"><i class="fas fa-user"></i></span>
                                 </div>
                                 <input type="text" class="form-control" id="signup-email" placeholder="Email">
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <span class="input-group-text"><img class="input-icon" src="./images/icons/user.png"><i class="fas fa-user"></i></span>
                                 </div>
                                 <input type="text" class="form-control" id="signup-name" placeholder="Name">
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                    <span class="input-group-text"><img class="input-icon" src="./images/icons/password.png"><i class="fas fa-key"></i></span>
                                 </div>
                                 <input type="password" class="form-control" id="signup-password" placeholder="Password">
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                    <span class="input-group-text"><img class="input-icon" src="./images/icons/password.png"><i class="fas fa-key"></i></span>
                                 </div>
                                 <input type="password" class="form-control" id="signup-confirm-password" placeholder="Confirm Password">
                             </div>
@@ -97,12 +100,9 @@
                         </div> 
                     </div>
                     <div class="card-footer">
-                        <div class="d-flex justify-content-center links">
+                        <div class="d-flex justify-content-center links login-guide">
                             Have an account? &nbsp;<a href="#" id="go-login">Sign In</a>
                         </div>
-                        <!-- <div class="d-flex justify-content-center">
-                            <a href="#">Forgot your password?</a>
-                        </div> -->
                     </div>
                 </div>
             </div>

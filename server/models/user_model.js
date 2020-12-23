@@ -26,7 +26,7 @@ const signup = async(data) => {
 const signin = async(email) => {
     try {
         const result = await query('SELECT `id`, `email`, `name`, `password` FROM `user` WHERE `email` = ?', email);
-        if (result.length == 0) return { error: { customError: 'Incorrect email or password' } }
+        if (result.length == 0) return { error: { customError: 'Email does not exist' } }
         return { result: result[0] };
     } catch (error) {
         writeLog(error.stack);

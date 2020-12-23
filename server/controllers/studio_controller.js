@@ -14,6 +14,7 @@ const getUserCards = async (req, res) => {
         cards.push(data);
     })
     if (error) return res.status(500).json({ error: 'Internal server error' });
+    res.setHeader('cache-control', 'no-cache, no-store, must-revalidate');
     return res.status(200).json({ data: { cards: cards } });
 };
 
