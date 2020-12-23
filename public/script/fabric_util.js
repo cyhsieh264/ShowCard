@@ -75,8 +75,7 @@ const removeBackground = () => {
 const parseObj = (data) => {
     data.map(step => {
         if (step.action == 'create') {
-            if (step.index) addObj(step.object, step.index);
-            else addObj(step.object, null)
+            addObj(step.object);
         } else if (step.action == 'remove') {
             removeObj(step.object);
         }
