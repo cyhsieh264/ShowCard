@@ -92,6 +92,11 @@ $('#signup-btn').click(() => {
         $('#signup-confirm-password').val('');
         return;
     }
+    if (name.includes('<script>')) {
+        $('#signup-alert').removeClass('hide');
+        $('#signup-alert-msg')[0].innerHTML = 'Invalid username';
+        return;
+    }
     const user = {
         email: email,
         name: name,
