@@ -11,7 +11,8 @@ const saveCanvas = async (req, res) => {
         action: canvas.action,
         obj_id: canvas.obj_id,
         obj_type: canvas.obj_type, 
-        object: canvas.object
+        object: canvas.object,
+        is_background: canvas.is_background
     };
     const { result, error } = await Canvas.save(data);
     if (error) return res.status(500).json({ error: 'Internal server error' });
@@ -26,21 +27,21 @@ const uploadScreenshot = async (req, res) => {
         region: AWS_REGION
     });
     const screenshot = canvas.screenshot;
-    if (screenshot) {
-        const s3 = new aws.S3();
-        const base64Data = new Buffer.from(screenshot.replace(/^data:image\/\w+;base64,/, ""), 'base64');
-        const params = {
-            Bucket: AWS_STORAGE_BUCKET_NAME,
-            Key: 'card_screenshot/' + canvas.card + '.jpg',
-            Body: base64Data,
-            ACL: 'public-read',
-            ContentEncoding: 'base64', 
-            ContentType: 'image/jpeg' 
-        };
-        s3.putObject(params, (err, data) => {
-            if (err) res.status(400).json({ data: { message: 'Screenshot Upload Failed' } });
-        });
-    }
+    // if (screenshot) {
+    //     const s3 = new aws.S3();
+    //     const base64Data = new Buffer.from(screenshot.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+    //     const params = {
+    //         Bucket: AWS_STORAGE_BUCKET_NAME,
+    //         Key: 'card_screenshot/' + canvas.card + '.jpg',
+    //         Body: base64Data,
+    //         ACL: 'public-read',
+    //         ContentEncoding: 'base64', 
+    //         ContentType: 'image/jpeg' 
+    //     };
+    //     s3.putObject(params, (err, data) => {
+    //         if (err) res.status(400).json({ data: { message: 'Screenshot Upload Failed' } });
+    //     });
+    // }
     return res.status(200).json({ data: { message: 'Success' } });
 };
 

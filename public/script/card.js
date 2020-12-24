@@ -151,7 +151,8 @@ check().then( async (res) => {
             action: 'create',
             obj_id: object.objId,
             obj_type: object.type,
-            object: JSON.stringify(object)
+            object: JSON.stringify(object),
+            is_background: object.isBackground
         };
         await api.post('api/1.0/canvas/save', data);
         socket.emit('edit canvas', [{ action: 'create', object: [JSON.stringify(object)] }] );
@@ -182,6 +183,7 @@ check().then( async (res) => {
             user: user.name,
             isBackground: false
         });
+        console.log(circle)
         canvas.add(circle);
         canvas.setActiveObject(circle);
         const object = circle.toJSON();
@@ -286,7 +288,8 @@ check().then( async (res) => {
                 width: 256,
                 height: 256,
                 objId: generateId(),
-                user: user.name
+                user: user.name,
+                isBackground: false
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -306,7 +309,8 @@ check().then( async (res) => {
                 width: 256,
                 height: 256,
                 objId: generateId(),
-                user: user.name
+                user: user.name,
+                isBackground: false
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -326,7 +330,8 @@ check().then( async (res) => {
                 width: 400,
                 height: 400,
                 objId: generateId(),
-                user: user.name
+                user: user.name,
+                isBackground: false
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -346,7 +351,8 @@ check().then( async (res) => {
                 width: 256,
                 height: 256,
                 objId: generateId(),
-                user: user.name
+                user: user.name,
+                isBackground: false
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -366,7 +372,8 @@ check().then( async (res) => {
                 width: 256,
                 height: 256,
                 objId: generateId(),
-                user: user.name
+                user: user.name,
+                isBackground: false
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -386,7 +393,8 @@ check().then( async (res) => {
                 width: 256,
                 height: 256,
                 objId: generateId(),
-                user: user.name
+                user: user.name,
+                isBackground: false
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -406,7 +414,8 @@ check().then( async (res) => {
                 width: 256,
                 height: 256,
                 objId: generateId(),
-                user: user.name
+                user: user.name,
+                isBackground: false
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -426,7 +435,8 @@ check().then( async (res) => {
                 width: 400,
                 height: 400,
                 objId: generateId(),
-                user: user.name
+                user: user.name,
+                isBackground: false
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -446,7 +456,8 @@ check().then( async (res) => {
                 width: 400,
                 height: 400,
                 objId: generateId(),
-                user: user.name
+                user: user.name,
+                isBackground: false
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -466,7 +477,8 @@ check().then( async (res) => {
                 width: 400,
                 height: 400,
                 objId: generateId(),
-                user: user.name
+                user: user.name,
+                isBackground: false
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -486,7 +498,8 @@ check().then( async (res) => {
                 width: 520,
                 height: 400,
                 objId: generateId(),
-                user: user.name
+                user: user.name,
+                isBackground: false
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -506,7 +519,8 @@ check().then( async (res) => {
                 width: 524,
                 height: 275,
                 objId: generateId(),
-                user: user.name
+                user: user.name,
+                isBackground: false
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -526,7 +540,8 @@ check().then( async (res) => {
                 width: 520,
                 height: 100,
                 objId: generateId(),
-                user: user.name
+                user: user.name,
+                isBackground: false
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -538,34 +553,9 @@ check().then( async (res) => {
 
     // === background === 
 
-    // check and remove former background
-
-    const removeFormerBackground = () => {
-        canvas.getObjects().every(async (obj) => {
-            if (obj.isBackground == true) {
-            //     const data = {
-            //         card_id: card,
-            //         user_id: user.id,
-            //         action: 'remove',
-            //         obj_id: obj.objId,
-            //         obj_type: obj.type,
-            //         object: JSON.stringify(obj.toJSON())
-            //     };
-            //     await api.post('api/1.0/canvas/save', data);
-                // await api.patch('api/1.0/canvas/background', { object: obj.objId });
-                canvas.remove(obj);
-                canvas.renderAll();
-                socket.emit('edit canvas', [{action: 'remove', object: obj.objId}] );
-                return false
-            } else {
-                return true
-            }
-        });
-    };
-
     const addBackground = (filename) => {
         canvas.isDrawingMode = false;
-        removeFormerBackground();
+        removePresentBackground();
         const url = `../images/assets/backgrounds/${filename}`;
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
@@ -611,7 +601,8 @@ check().then( async (res) => {
             action: 'modify',
             obj_id: object.objId,
             obj_type: object.type,
-            object: JSON.stringify(object)
+            object: JSON.stringify(object),
+            is_background: object.isBackground
         };
         await api.post('api/1.0/canvas/save', data);
         await uploadScreenshot();
@@ -637,7 +628,8 @@ check().then( async (res) => {
             action: 'remove',
             obj_id: object.objId,
             obj_type: object.type,
-            object: JSON.stringify(object)
+            object: JSON.stringify(object),
+            is_background: object.isBackground
         };
         await api.post('api/1.0/canvas/save', data);
         canvas.remove(target);
@@ -738,7 +730,8 @@ check().then( async (res) => {
         //         action: 'modify',
         //         obj_id: object.objId,
         //         obj_type: object.type,
-        //         object: JSON.stringify(object)
+        //         object: JSON.stringify(object),
+        //         is_background: object.isBackground
         //     };
         //     await api.post('api/1.0/canvas/save', data);
         //     await uploadScreenshot();
