@@ -49,10 +49,16 @@ check().then( async (res) => {
 
     // --- CHAT ---
     socket.on('join', message => {
-        $('.room').append(`<p>${message}</p>`)
+        let element = $('<div>');
+        element.attr('class', 'user-status');
+        element.html(message)
+        $('.room').append(element);
     });
     socket.on('leave', message => {
-        $('.room').append(`<p>${message}</p>`)
+        let element = $('<div>');
+        element.attr('class', 'user-status');
+        element.html(message)
+        $('.room').append(element);
     });
     socket.on('message', message => {
         $('.room').append(`<p>${message}</p>`)
@@ -173,9 +179,7 @@ check().then( async (res) => {
         const circle = new fabric.Circle({
             left: 270, 
             top: 270,
-            strokeWidth: 3,
             radius: 100,
-            stroke: $('#color-border').val(),
             fill: $('#color-fill').val(),
             originX: 'center',
             originY: 'center',
@@ -199,8 +203,6 @@ check().then( async (res) => {
             top: 170,
             left: 170,
             fill: $('#color-fill').val(),
-            stroke: $('#color-border').val(),
-            strokeWidth: 3,
             objId: generateId(),
             user: user.name,
             isBackground: false
@@ -220,8 +222,6 @@ check().then( async (res) => {
             top: 170,
             left: 170,
             fill: $('#color-fill').val(),
-            stroke: $('#color-border').val(),
-            strokeWidth: 3,
             objId: generateId(),
             user: user.name,
             isBackground: false
@@ -257,26 +257,7 @@ check().then( async (res) => {
         await uploadScreenshot();
     }); 
 
-    // $('#add-icon').click( async () => {
-    //     const url = '../images/assets/icons/planet.png';
-    //     fabric.Image.fromURL( url, async (item) => {
-    //         const icon = item.set({
-    //             left: 0,
-    //             top: 0, 
-    //             width: 150,
-    //             height: 150,
-    //             objId: generateId(),
-    //             user: user.name
-    //         });
-    //         canvas.add(icon);
-    //         canvas.setActiveObject(icon);
-    //         const object = icon.toJSON();
-    //         await newObject(object);
-    //         await uploadScreenshot();
-    //     });
-    // });
-
-    // icon
+    // === icon === 
 
     $('#christmas_hat').click(() => {
         canvas.isDrawingMode = false;
@@ -299,9 +280,9 @@ check().then( async (res) => {
         });
     });
 
-    $('#mistletoe_1').click(() => {
+    $('#mistletoe').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/mistletoe_1.png';
+        const url = '../images/assets/icons/mistletoe.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 150,
@@ -404,27 +385,6 @@ check().then( async (res) => {
         });
     });
 
-    $('#mistletoe_2').click(() => {
-        canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/mistletoe_2.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 150,
-                top: 150, 
-                width: 256,
-                height: 256,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
     $('#santa_claus_1').click(() => {
         canvas.isDrawingMode = false;
         const url = '../images/assets/icons/santa_claus_1.png';
@@ -454,48 +414,6 @@ check().then( async (res) => {
                 left: 70,
                 top: 100, 
                 width: 400,
-                height: 400,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#santa_claus_3').click(() => {
-        canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/santa_claus_3.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 70,
-                top: 100, 
-                width: 400,
-                height: 400,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#christmas_greeting').click(() => {
-        canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/christmas_greeting.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 10,
-                top: 80, 
-                width: 520,
                 height: 400,
                 objId: generateId(),
                 user: user.name,
@@ -551,6 +469,216 @@ check().then( async (res) => {
         });
     });
 
+    $('#heart').click(() => {
+        canvas.isDrawingMode = false;
+        const url = '../images/assets/icons/heart.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 0,
+                top: 80, 
+                width: 256,
+                height: 256,
+                objId: generateId(),
+                user: user.name,
+                isBackground: false
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#plane').click(() => {
+        canvas.isDrawingMode = false;
+        const url = '../images/assets/icons/plane.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 0,
+                top: 80, 
+                width: 256,
+                height: 256,
+                objId: generateId(),
+                user: user.name,
+                isBackground: false
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#sun').click(() => {
+        canvas.isDrawingMode = false;
+        const url = '../images/assets/icons/sun.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 0,
+                top: 80, 
+                width: 300,
+                height: 300,
+                objId: generateId(),
+                user: user.name,
+                isBackground: false
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#humanity').click(() => {
+        canvas.isDrawingMode = false;
+        const url = '../images/assets/icons/trophy.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 0,
+                top: 80, 
+                width: 450,
+                height: 450,
+                objId: generateId(),
+                user: user.name,
+                isBackground: false
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#beach').click(() => {
+        canvas.isDrawingMode = false;
+        const url = '../images/assets/icons/beach.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 0,
+                top: 80, 
+                width: 400,
+                height: 400,
+                objId: generateId(),
+                user: user.name,
+                isBackground: false
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#mountain').click(() => {
+        canvas.isDrawingMode = false;
+        const url = '../images/assets/icons/mountain.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 0,
+                top: 80, 
+                width: 450,
+                height: 450,
+                objId: generateId(),
+                user: user.name,
+                isBackground: false
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#photo').click(() => {
+        canvas.isDrawingMode = false;
+        const url = '../images/assets/icons/photo.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 0,
+                top: 80, 
+                width: 300,
+                height: 300,
+                objId: generateId(),
+                user: user.name,
+                isBackground: false
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#camera').click(() => {
+        canvas.isDrawingMode = false;
+        const url = '../images/assets/icons/photo.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 0,
+                top: 80, 
+                width: 256,
+                height: 256,
+                objId: generateId(),
+                user: user.name,
+                isBackground: false
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#trophy').click(() => {
+        canvas.isDrawingMode = false;
+        const url = '../images/assets/icons/trophy.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 0,
+                top: 80, 
+                width: 300,
+                height: 300,
+                objId: generateId(),
+                user: user.name,
+                isBackground: false
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
+    $('#leaf').click(() => {
+        canvas.isDrawingMode = false;
+        const url = '../images/assets/icons/leaf.png';
+        fabric.Image.fromURL( url, async (item) => {
+            const icon = item.set({
+                left: 0,
+                top: 80, 
+                width: 300,
+                height: 300,
+                objId: generateId(),
+                user: user.name,
+                isBackground: false
+            });
+            canvas.add(icon);
+            canvas.setActiveObject(icon);
+            const object = icon.toJSON();
+            await newObject(object);
+            await uploadScreenshot();
+        });
+    });
+
     // === background === 
 
     const addBackground = (filename) => {
@@ -581,6 +709,8 @@ check().then( async (res) => {
     $('#color_background_2').click((e) => addBackground(e.target.id + '.png'));
     $('#color_background_3').click((e) => addBackground(e.target.id + '.png'));
     $('#color_background_4').click((e) => addBackground(e.target.id + '.png'));
+    $('#color_background_5').click((e) => addBackground(e.target.id + '.png'));
+    $('#color_background_6').click((e) => addBackground(e.target.id + '.png'));
     $('#background_1').click((e) => addBackground(e.target.id + '.jpg'));
     $('#background_2').click((e) => addBackground(e.target.id + '.jpg'));
     $('#background_3').click((e) => addBackground(e.target.id + '.jpg'));
@@ -589,6 +719,10 @@ check().then( async (res) => {
     $('#background_6').click((e) => addBackground(e.target.id + '.jpg'));
     $('#background_7').click((e) => addBackground(e.target.id + '.jpg'));
     $('#background_8').click((e) => addBackground(e.target.id + '.jpg'));
+    $('#background_9').click((e) => addBackground(e.target.id + '.jpg'));
+    $('#background_10').click((e) => addBackground(e.target.id + '.jpg'));
+    $('#background_11').click((e) => addBackground(e.target.id + '.jpg'));
+    $('#background_12').click((e) => addBackground(e.target.id + '.jpg'));
 
     // Modify Object
     canvas.on('object:modified', async () => {
@@ -610,7 +744,8 @@ check().then( async (res) => {
     });
 
     // Remove Object
-    $('#rm-obj').click( async () => {
+
+    const removeObject = async () => {
         const target = canvas.getActiveObjects()[0];
         if (!target) {
             swal({
@@ -635,7 +770,9 @@ check().then( async (res) => {
         canvas.remove(target);
         await uploadScreenshot();
         socket.emit('edit canvas', [{action: 'remove', object: object.objId}] );
-    });
+    };
+
+    $('#rm-obj').click(removeObject);
 
     // Undo canvas
     $('#undo-canvas').click( async () => {
@@ -783,32 +920,21 @@ $('#share-link-btn').hover(() => {
 
 // --- SUBMENU ---
 const hideSubmenu = () => {
-    $('#explore-box').addClass('hide');
-    $('#explore-tool').css('background-color', '#f8f9fa');
-    $('#brush-box').addClass('hide');
-    $('#brush-tool').css('background-color', '#f8f9fa');
-    $('#shape-box').addClass('hide');
-    $('#shape-tool').css('background-color', '#f8f9fa');
-    $('#text-box').addClass('hide');
-    $('#text-tool').css('background-color', '#f8f9fa');
+    $('#explore-icon-box').addClass('hide');
+    $('#explore-icon-tool').css('background-color', '#f8f9fa');
+    $('#explore-background-box').addClass('hide');
+    $('#explore-background-tool').css('background-color', '#f8f9fa');
 };
 
 const submenuControl = (target) => {
     hideSubmenu();
-    if (target.classList.contains('explore-tool')) {
-        $('#explore-tool').css('cssText', 'background-color: #d9e0e6 !important;');
-        $('#explore-box').removeClass('hide');
+    if (target.classList.contains('explore-icon-tool')) {
+        $('#explore-icon-tool').css('cssText', 'background-color: #d9e0e6 !important;');
+        $('#explore-icon-box').removeClass('hide');
+    } else if (target.classList.contains('explore-background-tool')) {
+        $('#explore-background-tool').css('cssText', 'background-color: #d9e0e6 !important;');
+        $('#explore-background-box').removeClass('hide');
     }
-    // } else if (target.id == 'brush-tool' || target.id == 'brush-box') {
-    //     $('#brush-tool').css('cssText', 'background-color: #d9e0e6 !important;');
-    //     $('#brush-box').removeClass('hide');
-    // } else if (target.id == 'shape-tool' || target.id == 'shape-box') {
-    //     $('#shape-tool').css('cssText', 'background-color: #d9e0e6 !important;');
-    //     $('#shape-box').removeClass('hide');
-    // } else if (target.id == 'text-tool' || target.id == 'text-box') {
-    //     $('#text-tool').css('cssText', 'background-color: #d9e0e6 !important;');
-    //     $('#text-box').removeClass('hide');
-    // }
 };
 
 $('#header').click(() => {
@@ -821,14 +947,4 @@ $('#wrapper').click((e) => {
 
 $('#toolbox').click((e) => {
     submenuControl(e.target)
-});
-
-$(function() {
-    let $li = $('ul.tab-title li');
-    $($li. eq(0) .addClass('active').find('a').attr('href')).siblings('.tab-inner').hide();
-    $($li. eq(0) .css('cssText', 'border-bottom: 2px solid #BCBCBC;'));
-    $li.click(function() {
-        $($(this).find('a'). attr ('href')).show().siblings ('.tab-inner').hide();
-        $(this).addClass('active').css('cssText', 'border-bottom: 2px solid #BCBCBC;'). siblings ('.active').removeClass('active').css('cssText', 'border-bottom: 0px solid #BCBCBC;');
-    });
 });

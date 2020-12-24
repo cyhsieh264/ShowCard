@@ -22,14 +22,15 @@
         <main class="hide">
             <div class="toolbox" id="toolbox">
                 <div class="tool-wrapper" id="tool-wrapper">
-                    Fill Color:<br>
                     <input type="color" class="tool colorSelector" id="color-fill" value="#073763" data-tool-tip="Select Colour"><br>
-                    Stroke Color:<br>
-                    <input type="color" class="tool colorSelector" id="color-border" value="#FFFFFF" data-tool-tip="Select Colour"><br>
                     <div class="list-group list-group-flush">
-                        <a href="#" class="list-group-item list-group-item-action bg-light explore-tool" id="explore-tool">
-                            <!-- <img id="explore-image" class="menu-icon explore-tool" src="./images/icons/explore.png" alt="explore icon"> -->
-                            Explore
+                        <a href="#" class="list-group-item list-group-item-action bg-light explore-icon-tool" id="explore-icon-tool">
+                            <img class="menu-icon explore-icon-tool" src="./images/icons/explore.png" alt="icon">
+                            Icon
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action bg-light explore-background-tool" id="explore-background-tool">
+                            <img class="menu-icon explore-background-tool" src="./images/icons/explore.png" alt="background">
+                            Background
                         </a>
                         <a href="#" class="list-group-item list-group-item-action bg-light" id="undo-canvas">
                             Undo
@@ -59,73 +60,64 @@
                             Delete
                         </a>
                     </div>
-                    <!-- <button class="btn btn-primary tool" id="undo-canvas">Undo</button> -->
-                    <!-- <button class="btn btn-primary tool" id="redo-canvas">Redo</button> -->
-                    <!-- <button class="btn btn-primary tool" id="rm-obj">Delete</button> -->
-                    <a id="save" href="#" download="card_for_shirney.png" class="color-btn-green"><br>Download</a>
+                    <a id="save" href="#" download="card.png" class="color-btn-green"><br>Download</a>
                 </div>
-                <div class="hide tool-submenu explore-tool" id="explore-box">
-                    <div class="d-flex explore-tool">
-                        <div class="submenu-container explore-tool">
-                            <div class="explore-tool" id="tab-demo">
-                                <ul class="tab-title explore-tool">
-                                    <li class="explore-tool"><a class="explore-tool" href="#tab01">Icon</a></li>
-                                    <li class="explore-tool"><a class="explore-tool" href="#tab02">Background</a></li>
-                                </ul>
-                                    <div id="tab01" class="tab-inner explore-tool">
-                                        <img id="christmas_hat" class="explore-item explore-icon explore-tool" src="./images/assets/icons/christmas_hat.png" alt="christmas_hat">
-                                        <img id="mistletoe_1" class="explore-item explore-icon explore-tool" src="./images/assets/icons/mistletoe_1.png" alt="mistletoe_1">
-                                        <img id="christmas_presents" class="explore-item explore-icon explore-tool" src="./images/assets/icons/christmas_presents.png" alt="christmas_presents">
-                                        <img id="christmas_sock" class="explore-item explore-icon explore-tool" src="./images/assets/icons/christmas_sock.png" alt="christmas_sock">
-                                        <img id="candy_cane" class="explore-item explore-icon explore-tool" src="./images/assets/icons/candy_cane.png" alt="candy_cane">
-                                        <img id="gingerbread_man" class="explore-item explore-icon explore-tool" src="./images/assets/icons/gingerbread_man.png" alt="gingerbread_man">
-                                        <img id="mistletoe_2" class="explore-item explore-icon explore-tool" src="./images/assets/icons/mistletoe_2.png" alt="mistletoe_2">
-                                        <img id="santa_claus_1" class="explore-item explore-icon explore-tool" src="./images/assets/icons/santa_claus_1.png" alt="santa_claus_1">
-                                        <img id="santa_claus_2" class="explore-item explore-icon explore-tool" src="./images/assets/icons/santa_claus_2.png" alt="santa_claus_2">
-                                        <img id="santa_claus_3" class="explore-item explore-icon explore-tool" src="./images/assets/icons/santa_claus_3.png" alt="santa_claus_3">
-                                        <!-- <img id="christmas_greeting" class="explore-item explore-icon explore-tool" src="./images/assets/icons/christmas_greeting.png" alt="christmas_greeting"> -->
-                                        <img id="christmas_light_border" class="explore-item explore-icon explore-tool" src="./images/assets/icons/christmas_light_border.png" alt="christmas_light_border">
-                                        <img id="christmas_decoration_border" class="explore-item explore-icon explore-tool" src="./images/assets/icons/christmas_decoration_border.png" alt="christmas_decoration_border">
-                                        <!-- <img id="planet" class="explore-item explore-icon explore-tool" src="./images/assets/icons/planet.png" alt="planet"> -->
-                                    </div>
-                                    <div id="tab02" class="tab-inner explore-tool">
-                                        <img id="color_background_1" class="explore-item explore-icon explore-tool" src="./images/assets/backgrounds/color_background_1.png">
-                                        <img id="color_background_2" class="explore-item explore-icon explore-tool" src="./images/assets/backgrounds/color_background_2.png">
-                                        <img id="color_background_3" class="explore-item explore-icon explore-tool" src="./images/assets/backgrounds/color_background_3.png">
-                                        <img id="color_background_4" class="explore-item explore-icon explore-tool" src="./images/assets/backgrounds/color_background_4.png">
-                                        <img id="background_1" class="explore-item explore-icon explore-tool" src="./images/assets/backgrounds/background_1.jpg">
-                                        <img id="background_2" class="explore-item explore-icon explore-tool" src="./images/assets/backgrounds/background_2.jpg">
-                                        <img id="background_3" class="explore-item explore-icon explore-tool" src="./images/assets/backgrounds/background_3.jpg">
-                                        <img id="background_4" class="explore-item explore-icon explore-tool" src="./images/assets/backgrounds/background_4.jpg">
-                                        <img id="background_5" class="explore-item explore-icon explore-tool" src="./images/assets/backgrounds/background_5.jpg">
-                                        <img id="background_6" class="explore-item explore-icon explore-tool" src="./images/assets/backgrounds/background_6.jpg">
-                                        <img id="background_7" class="explore-item explore-icon explore-tool" src="./images/assets/backgrounds/background_7.jpg">
-                                        <img id="background_8" class="explore-item explore-icon explore-tool" src="./images/assets/backgrounds/background_8.jpg">
-                                    </div>
-                              </div>
+                <div class="hide tool-submenu explore-icon-tool" id="explore-icon-box">
+                    <div class="d-flex explore-icon-tool">
+                        <div class="submenu-container explore-icon-tool">
+                            <div class="explore-icon-tool" id="tab-demo">
+                                <div id="tab01" class="tab-inner explore-icon-tool">
+                                    <img id="christmas_hat" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/christmas_hat.png" alt="christmas_hat">
+                                    <img id="mistletoe" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/mistletoe.png" alt="mistletoe">
+                                    <img id="christmas_presents" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/christmas_presents.png" alt="christmas_presents">
+                                    <img id="christmas_sock" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/christmas_sock.png" alt="christmas_sock">
+                                    <img id="candy_cane" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/candy_cane.png" alt="candy_cane">
+                                    <img id="gingerbread_man" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/gingerbread_man.png" alt="gingerbread_man">
+                                    <img id="santa_claus_1" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/santa_claus_1.png" alt="santa_claus_1">
+                                    <img id="santa_claus_2" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/santa_claus_2.png" alt="santa_claus_2">
+                                    <img id="christmas_light_border" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/christmas_light_border.png" alt="christmas_light_border">
+                                    <img id="christmas_decoration_border" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/christmas_decoration_border.png" alt="christmas_decoration_border">
+                                    <img id="heart" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/heart.png" alt="heart">
+                                    <img id="plane" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/plane.png" alt="plane">
+                                    <img id="sun" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/sun.png" alt="sun">
+                                    <img id="humanity" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/humanity.png" alt="humanity">
+                                    <img id="beach" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/beach.png" alt="beach">
+                                    <img id="mountain" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/mountain.png" alt="mountain">
+                                    <img id="photo" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/photo.png" alt="photo">
+                                    <img id="camera" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/camera.png" alt="camera">
+                                    <img id="trophy" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/trophy.png" alt="trophy">
+                                    <img id="leaf" class="explore-item explore-icon explore-icon-tool" src="./images/assets/icons/leaf.png" alt="leaf">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="hide tool-submenu" id="brush-box">
-                    <div class="d-flex">
-                        <div class="submenu-container">
-                            <button class="btn btn-primary tool" id="brush-on">Brush on</button>
-                            <button class="btn btn-primary tool" id="brush-off">Brush off</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="hide tool-submenu" id="shape-box">
-                    <div class="d-flex">
-                        <div class="submenu-container">
-                            <button class="btn btn-primary tool" id="add-circle">Circle</button>
-                            <button class="btn btn-primary tool" id="add-square">Square</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="hide tool-submenu" id="text-box">
-                    <div class="d-flex">
-                        <div class="submenu-container">
-                            <button class="btn btn-primary tool" id="add-text">Text</button>
+
+                <div class="hide tool-submenu explore-background-tool" id="explore-background-box">
+                    <div class="d-flex explore-background-tool">
+                        <div class="submenu-container explore-background-tool">
+                            <div class="explore-background-tool" id="tab-demo">
+                                <div id="tab02" class="tab-inner explore-background-tool">
+                                    <img id="color_background_1" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/color_background_1_border.png">
+                                    <img id="color_background_2" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/color_background_2.png">
+                                    <img id="color_background_3" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/color_background_3.png">
+                                    <img id="color_background_4" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/color_background_4.png">
+                                    <img id="color_background_5" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/color_background_5.png">
+                                    <img id="color_background_6" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/color_background_6.png">
+                                    <img id="background_1" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/background_1.jpg">
+                                    <img id="background_2" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/background_2.jpg">
+                                    <img id="background_3" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/background_3.jpg">
+                                    <img id="background_4" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/background_4.jpg">
+                                    <img id="background_5" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/background_5.jpg">
+                                    <img id="background_6" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/background_6.jpg">
+                                    <img id="background_7" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/background_7.jpg">
+                                    <img id="background_8" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/background_8.jpg">
+                                    <img id="background_9" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/background_9.jpg">
+                                    <img id="background_10" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/background_10.jpg">
+                                    <img id="background_11" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/background_11.jpg">
+                                    <img id="background_12" class="explore-item explore-icon explore-background-tool" src="./images/assets/backgrounds/background_12.jpg">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -142,7 +134,20 @@
                     <div class="sidebar-heading"></div>
                     <div class="list-group list-group-flush" id="chat-box">
                         <div id="chat-room">
-                            <div class="room"></div>
+                            <div class="room">
+                                <div class="user-status">asdf Join The Room aaaaaaaaaaaaaaa</div>
+                                <div class="user-status">BBB join the room</div>
+                                <div class="user-self-chat">
+                                    <div class="user-self-name">AAA</div>
+                                    <div class="user-self-message">Hello aaaaaaaa</div>
+                                </div>
+                                <div class="user-other-chat">
+                                    <div class="user-other-name">BBB</div>
+                                    <div class="user-other-message">Nice to meet you! aaaaaaaaaaaaaaa</div>
+                                </div>
+                                <div class="user-status">AAA Leave The Room</div>
+                                <div class="user-status">BBB leave the room</div>
+                            </div>
                             <div class="send">
                                 <input type="text" id="msg" placeholder="        Type Your Message" />
                                 <img id="send-btn" src="./images/icons/send_btn.png" alt="send">

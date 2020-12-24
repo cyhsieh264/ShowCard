@@ -74,7 +74,7 @@ canvas {
 }
 
 #tool-wrapper {
-    width: 120px;
+    width: 155px;
 }
 
 .tool-submenu {
@@ -90,7 +90,8 @@ canvas {
 }
 
 .menu-icon {
-    width: 30px;
+    width: 25px;
+    margin: 3px;
 }
 
 .submenu-container {
@@ -112,6 +113,7 @@ canvas {
     width:180px; 
     min-height: 87vh;
     max-height: 88vh;
+    overflow-y: scroll;
 }
 
 #tab-demo > ul{ 
@@ -197,9 +199,9 @@ canvas {
 
 .room {
     margin: 13px;
-    margin-top: 7rem;
+    margin-top: 5.5rem;
     margin-right: 0px;
-    height: calc(100% - 14rem);
+    height: calc(100% - 11rem);
     overflow-y: scroll;
     /* scrollbar-base-color: red; */
 }
@@ -208,34 +210,43 @@ canvas {
     background: none;
 }
 
-.message-item {
-    margin: 10px 0px;
-}
-
-.join-message {
-    height: 50px;
-    min-width: 60px;
-    max-width: 70px;
-    float: unset;
-    background-color: #e9e8e8;
-}
-
-.self-message {
-    padding: 5px 15px;
-    min-height: 35px;
-    width: 85px;
-    background-color: rgb(244, 240, 248);
-    position: relative;
+.user-status {
+    background-color: #eeeeee;
+    padding: 5px 25px;
+    margin: 15px 5px;
+    margin-right: 19px;
     border-radius: 10px;
 }
 
-.other-message {
-    padding: 5px 15px;
-    min-height: 35px;
-    max-width: 80px;
-    background-color: #ebeff3;
-    position: relative;
+.user-self-chat {
+    align-items: flex-end;
+}
+
+.user-name {
+
+}
+
+.user-self-message {
+    background-color: #483558;
+    color: white;
+    padding: 5px 25px;
+    margin: 5px;
+    margin-right: -15px;
+    margin-left: 26px;
     border-radius: 10px;
+    width: auto;
+    display: inline-block;
+}
+
+.user-other-message {
+    background-color: #e2d1f0;
+    color: rgb(0, 0, 0);
+    padding: 5px 25px;
+    margin: 5px;
+    margin-right: 45px;
+    border-radius: 10px;
+    width: auto;
+    display: inline-block;
 }
 
 .send {
