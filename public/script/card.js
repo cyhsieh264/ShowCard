@@ -501,10 +501,10 @@ check().then( async (res) => {
         const url = '../images/assets/icons/christmas_decoration_border.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
-                left: 0,
+                left: 8,
                 top: 80, 
-                width: 530,
-                height: 300,
+                width: 524,
+                height: 275,
                 objId: generateId(),
                 user: user.name
             });
@@ -543,15 +543,15 @@ check().then( async (res) => {
     const removeFormerBackground = () => {
         canvas.getObjects().every(async (obj) => {
             if (obj.isBackground == true) {
-                const data = {
-                    card_id: card,
-                    user_id: user.id,
-                    action: 'remove',
-                    obj_id: obj.objId,
-                    obj_type: obj.type,
-                    object: JSON.stringify(obj.toJSON())
-                };
-                await api.post('api/1.0/canvas/save', data);
+            //     const data = {
+            //         card_id: card,
+            //         user_id: user.id,
+            //         action: 'remove',
+            //         obj_id: obj.objId,
+            //         obj_type: obj.type,
+            //         object: JSON.stringify(obj.toJSON())
+            //     };
+            //     await api.post('api/1.0/canvas/save', data);
                 // await api.patch('api/1.0/canvas/background', { object: obj.objId });
                 canvas.remove(obj);
                 canvas.renderAll();
