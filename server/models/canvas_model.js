@@ -61,67 +61,71 @@ const undo = async(card, user) => {
     const time = Date.now();
     try {
         await transaction();
-        let lastStep = await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? ORDER BY `id` DESC LIMIT 1', [card, user]);
-        if (lastStep[0].action == 'origin') {
+        let lastStep = (await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? ORDER BY `id` DESC LIMIT 1', [card, user]))[0];
+        if (lastStep.action == 'origin') {
             await commit();
             return { error: { customError: 'Already The Last Step' } };
         }
-        if (lastStep[0].action == 'recreate') {
+        if (lastStep.action == 'recreate') {
             const data = {
-                card_id: lastStep[0].card_id,
-                user_id: lastStep[0].user_id,
-                action: lastStep[0].action,
-                obj_id: lastStep[0].obj_id,
-                obj_type: lastStep[0].obj_type,
-                object: lastStep[0].object,
-                is_background: lastStep[0].is_background
+                card_id: lastStep.card_id,
+                user_id: lastStep.user_id,
+                action: lastStep.action,
+                obj_id: lastStep.obj_id,
+                obj_type: lastStep.obj_type,
+                object: lastStep.object,
+                is_background: lastStep.is_background
             };
             await query('INSERT INTO `canvas_undo` SET ?', data);
-            await query('DELETE FROM `canvas_done` WHERE `id` = ?', lastStep[0].id);
+            await query('DELETE FROM `canvas_done` WHERE `id` = ?', lastStep.id);
             await commit();
             return undo(card, user);
         }
         // 如果同步加上順序的資訊，在這要做一次query，取得順序，然後塞進result
         let result;
-        if (lastStep[0].is_background == true) {
-            // 如果上一步是background，還要query出再上一個user background
-            const lastUserBackground = await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? AND `is_background` = ? ORDER BY `id` DESC LIMIT 2', [card, user, true]);
-            if (lastUserBackground.length == 1) {
+        if (lastStep.is_background == true) {
+            // 如果上一步是background，還要再確認先前的background狀態
+            const formerBackground = await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `is_background` = ? ORDER BY `id` DESC LIMIT 2', [card, true]);
+            const formerUserBackground = (await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? AND `is_background` = ? ORDER BY `id` DESC LIMIT 2', [card, user, true]))[1];
+            if (formerBackground.length == 1) {  // 沒有formerBackground[1]
                 result = [
-                    {action: 'remove', object: lastStep[0].obj_id}
+                    {action: 'remove', object: lastStep.obj_id}
                 ];
-            } 
-            else {              
+            } else if (formerUserBackground) {
                 result = [
-                    {action: 'create', object: [lastUserBackground[1].object]}
+                    {action: 'create', object: [formerUserBackground.object]}  // 去到前端後，在新增之前會自動移除當前background
+                ];
+            } else {  // 有formerBackground[1]，而且user已經沒有前一步
+                result = [
+                    {action: 'create', object: [formerBackground[0].object]}  // 去到前端後，在新增之前會自動移除當前background
                 ];
             }
-        } else if (lastStep[0].action == 'create') {
+        } else if (lastStep.action == 'create') {
             result = [
-                {action: 'remove', object: lastStep[0].obj_id}
+                {action: 'remove', object: lastStep.obj_id}
             ];
-        } else if (lastStep[0].action == 'remove') {
+        } else if (lastStep.action == 'remove') {
             result = [
-                {action: 'create', object: [lastStep[0].object]}
+                {action: 'create', object: [lastStep.object]}
             ];
         } else {
-            const objLastStep = await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? AND `obj_id` = ? ORDER BY `id` DESC LIMIT 2', [card, user, lastStep[0].obj_id]);
+            const objLastStep = await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? AND `obj_id` = ? ORDER BY `id` DESC LIMIT 2', [card, user, lastStep.obj_id]);
             result = [
-                {action: 'remove', object: lastStep[0].obj_id},
+                {action: 'remove', object: lastStep.obj_id},
                 {action: 'create', object: [objLastStep[1].object]}
             ];
         }
         const data = {
-            card_id: lastStep[0].card_id,
-            user_id: lastStep[0].user_id,
-            action: lastStep[0].action,
-            obj_id: lastStep[0].obj_id,
-            obj_type: lastStep[0].obj_type,
-            object: lastStep[0].object,
-            is_background: lastStep[0].is_background
+            card_id: lastStep.card_id,
+            user_id: lastStep.user_id,
+            action: lastStep.action,
+            obj_id: lastStep.obj_id,
+            obj_type: lastStep.obj_type,
+            object: lastStep.object,
+            is_background: lastStep.is_background
         };
         await query('INSERT INTO `canvas_undo` SET ?', data);
-        await query('DELETE FROM `canvas_done` WHERE `id` = ?', lastStep[0].id);
+        await query('DELETE FROM `canvas_done` WHERE `id` = ?', lastStep.id);
         await query('SELECT `saved_at` FROM `card` WHERE `id` = ? FOR UPDATE', card);
         await query('UPDATE `card` SET `saved_at` = ? WHERE `id` = ?', [time, card]);
         await commit();
