@@ -37,7 +37,7 @@ const addObj = (data) => {
     fabric.util.enlivenObjects(objects, (enlivenedObjects) => { 
         enlivenedObjects.map(obj => {
             if (obj.isBackground == true) {
-                removeBackground();
+                // removeBackground();
                 canvas.add(obj);
                 canvas.sendToBack(obj);
             } else {
@@ -60,17 +60,17 @@ const removeObj = (objId) => {
     });
 };
 
-const removeBackground = () => { 
-    canvas.getObjects().every((obj) => {
-        if (obj.isBackground == true) {
-            canvas.remove(obj);
-            canvas.renderAll();
-            return false
-        } else {
-            return true
-        }
-    });
-};
+// const removeBackground = () => { 
+//     canvas.getObjects().every((obj) => {
+//         if (obj.isBackground == true) {
+//             canvas.remove(obj);
+//             canvas.renderAll();
+//             return false
+//         } else {
+//             return true
+//         }
+//     });
+// };
 
 const parseObj = (data) => {
     data.map(step => {

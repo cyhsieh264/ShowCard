@@ -536,11 +536,37 @@ check().then( async (res) => {
         });
     });
 
-    // background
+    // === background === 
 
-    $('#color_background_1').click(() => {
+    // check and remove former background
+
+    const removeFormerBackground = () => {
+        canvas.getObjects().every(async (obj) => {
+            if (obj.isBackground == true) {
+                const data = {
+                    card_id: card,
+                    user_id: user.id,
+                    action: 'remove',
+                    obj_id: obj.objId,
+                    obj_type: obj.type,
+                    object: JSON.stringify(obj.toJSON())
+                };
+                await api.post('api/1.0/canvas/save', data);
+                // await api.patch('api/1.0/canvas/background', { object: obj.objId });
+                canvas.remove(obj);
+                canvas.renderAll();
+                socket.emit('edit canvas', [{action: 'remove', object: obj.objId}] );
+                return false
+            } else {
+                return true
+            }
+        });
+    };
+
+    const addBackground = (filename) => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/backgrounds/color_background_1.png';
+        removeFormerBackground();
+        const url = `../images/assets/backgrounds/${filename}`;
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
                 left: 0,
@@ -553,278 +579,26 @@ check().then( async (res) => {
                 user: user.name,
                 isBackground: true
             });
-            removeBackground();
             canvas.add(background);
             canvas.sendToBack(background);
             const object = background.toJSON();
             await newObject(object);
             await uploadScreenshot();
         });
-    });
+    };
 
-    $('#color_background_2').click(() => {
-        canvas.isDrawingMode = false;
-        const url = '../images/assets/backgrounds/color_background_2.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const background = item.set({
-                left: 0,
-                top: 0, 
-                width: 540,
-                height: 540,
-                evented: false,
-                selected: false,
-                objId: generateId(),
-                user: user.name,
-                isBackground: true
-            });
-            removeBackground();
-            canvas.add(background);
-            canvas.sendToBack(background);
-            const object = background.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#color_background_3').click(() => {
-        canvas.isDrawingMode = false;
-        const url = '../images/assets/backgrounds/color_background_3.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const background = item.set({
-                left: 0,
-                top: 0, 
-                width: 540,
-                height: 540,
-                evented: false,
-                selected: false,
-                objId: generateId(),
-                user: user.name,
-                isBackground: true
-            });
-            removeBackground();
-            canvas.add(background);
-            canvas.sendToBack(background);
-            const object = background.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#color_background_4').click(() => {
-        canvas.isDrawingMode = false;
-        const url = '../images/assets/backgrounds/color_background_4.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const background = item.set({
-                left: 0,
-                top: 0, 
-                width: 540,
-                height: 540,
-                evented: false,
-                selected: false,
-                objId: generateId(),
-                user: user.name,
-                isBackground: true
-            });
-            removeBackground();
-            canvas.add(background);
-            canvas.sendToBack(background);
-            const object = background.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#background_1').click(() => {
-        canvas.isDrawingMode = false;
-        const url = '../images/assets/backgrounds/background_1.jpg';
-        fabric.Image.fromURL( url, async (item) => {
-            const background = item.set({
-                left: 0,
-                top: 0, 
-                width: 540,
-                height: 540,
-                evented: false,
-                selected: false,
-                objId: generateId(),
-                user: user.name,
-                isBackground: true
-            });
-            removeBackground();
-            canvas.add(background);
-            canvas.sendToBack(background);
-            const object = background.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#background_2').click(() => {
-        canvas.isDrawingMode = false;
-        const url = '../images/assets/backgrounds/background_2.jpg';
-        fabric.Image.fromURL( url, async (item) => {
-            const background = item.set({
-                left: 0,
-                top: 0, 
-                width: 540,
-                height: 540,
-                evented: false,
-                selected: false,
-                objId: generateId(),
-                user: user.name,
-                isBackground: true
-            });
-            removeBackground();
-            canvas.add(background);
-            canvas.sendToBack(background);
-            const object = background.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#background_3').click(() => {
-        canvas.isDrawingMode = false;
-        const url = '../images/assets/backgrounds/background_3.jpg';
-        fabric.Image.fromURL( url, async (item) => {
-            const background = item.set({
-                left: 0,
-                top: 0, 
-                width: 540,
-                height: 540,
-                evented: false,
-                selected: false,
-                objId: generateId(),
-                user: user.name,
-                isBackground: true
-            });
-            removeBackground();
-            canvas.add(background);
-            canvas.sendToBack(background);
-            const object = background.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#background_4').click(() => {
-        canvas.isDrawingMode = false;
-        const url = '../images/assets/backgrounds/background_4.jpg';
-        fabric.Image.fromURL( url, async (item) => {
-            const background = item.set({
-                left: 0,
-                top: 0, 
-                width: 540,
-                height: 540,
-                evented: false,
-                selected: false,
-                objId: generateId(),
-                user: user.name,
-                isBackground: true
-            });
-            removeBackground();
-            canvas.add(background);
-            canvas.sendToBack(background);
-            const object = background.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#background_5').click(() => {
-        canvas.isDrawingMode = false;
-        const url = '../images/assets/backgrounds/background_5.jpg';
-        fabric.Image.fromURL( url, async (item) => {
-            const background = item.set({
-                left: 0,
-                top: 0, 
-                width: 540,
-                height: 540,
-                evented: false,
-                selected: false,
-                objId: generateId(),
-                user: user.name,
-                isBackground: true
-            });
-            removeBackground();
-            canvas.add(background);
-            canvas.sendToBack(background);
-            const object = background.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#background_6').click(() => {
-        canvas.isDrawingMode = false;
-        const url = '../images/assets/backgrounds/background_6.jpg';
-        fabric.Image.fromURL( url, async (item) => {
-            const background = item.set({
-                left: 0,
-                top: 0, 
-                width: 540,
-                height: 540,
-                evented: false,
-                selected: false,
-                objId: generateId(),
-                user: user.name,
-                isBackground: true
-            });
-            removeBackground();
-            canvas.add(background);
-            canvas.sendToBack(background);
-            const object = background.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#background_7').click(() => {
-        canvas.isDrawingMode = false;
-        const url = '../images/assets/backgrounds/background_7.jpg';
-        fabric.Image.fromURL( url, async (item) => {
-            const background = item.set({
-                left: 0,
-                top: 0, 
-                width: 540,
-                height: 540,
-                evented: false,
-                selected: false,
-                objId: generateId(),
-                user: user.name,
-                isBackground: true
-            });
-            removeBackground();
-            canvas.add(background);
-            canvas.sendToBack(background);
-            const object = background.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#background_8').click(() => {
-        canvas.isDrawingMode = false;
-        const url = '../images/assets/backgrounds/background_8.jpg';
-        fabric.Image.fromURL( url, async (item) => {
-            const background = item.set({
-                left: 0,
-                top: 0, 
-                width: 540,
-                height: 540,
-                evented: false,
-                selected: false,
-                objId: generateId(),
-                user: user.name,
-                isBackground: true
-            });
-            removeBackground();
-            canvas.add(background);
-            canvas.sendToBack(background);
-            const object = background.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
+    $('#color_background_1').click((e) => addBackground(e.target.id + '.png'));
+    $('#color_background_2').click((e) => addBackground(e.target.id + '.png'));
+    $('#color_background_3').click((e) => addBackground(e.target.id + '.png'));
+    $('#color_background_4').click((e) => addBackground(e.target.id + '.png'));
+    $('#background_1').click((e) => addBackground(e.target.id + '.jpg'));
+    $('#background_2').click((e) => addBackground(e.target.id + '.jpg'));
+    $('#background_3').click((e) => addBackground(e.target.id + '.jpg'));
+    $('#background_4').click((e) => addBackground(e.target.id + '.jpg'));
+    $('#background_5').click((e) => addBackground(e.target.id + '.jpg'));
+    $('#background_6').click((e) => addBackground(e.target.id + '.jpg'));
+    $('#background_7').click((e) => addBackground(e.target.id + '.jpg'));
+    $('#background_8').click((e) => addBackground(e.target.id + '.jpg'));
 
     // Modify Object
     canvas.on('object:modified', async () => {
