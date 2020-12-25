@@ -35,3 +35,6 @@ $('#new-card-btn').on('click', () => {
         })
         .catch((error) => { console.error(error) });
 });
+
+$('.carousel').carousel();
+

@@ -5,13 +5,9 @@ const socketCon = (io) => {
         console.log('a user connected');
         const handshake = socket.handshake;
         socket.join(handshake.auth.cid);
-        // socket.broadcast.in(handshake.auth.cid).emit('join', [`${handshake.auth.username}  join the room`, (new Date()).toLocaleString()]);
-        socket.broadcast.in(handshake.auth.cid).emit('join', `${handshake.auth.username}  join the room!`);
+        socket.broadcast.in(handshake.auth.cid).emit('join', `${handshake.auth.username}   Has Joined The Room`);
         socket.on('input msg', (msg) => {
-            // socket.emit('message', [`You :   ${msg} `, (new Date()).toLocaleString()]);
-            socket.emit('message', `You :   ${msg} `);
-            // socket.broadcast.in(handshake.auth.cid).emit('message', [`${handshake.auth.username} :   ${msg} `, (new Date()).toLocaleString()]);
-            socket.broadcast.in(handshake.auth.cid).emit('message', `${handshake.auth.username} :   ${msg} `);
+            socket.broadcast.in(handshake.auth.cid).emit('message', [handshake.auth.username, msg]);
         });
         socket.on('rename card', (title) => {
             socket.broadcast.in(handshake.auth.cid).emit('change title', title);
@@ -22,19 +18,10 @@ const socketCon = (io) => {
         socket.on('disconnect', () => {
             console.log('user disconnected');
             Card.reduceMember(handshake.auth.cid);
-            // socket.broadcast.in(handshake.auth.cid).emit('leave', [`${handshake.auth.username}  leave the room`, (new Date()).toLocaleString()]);
-            socket.broadcast.in(handshake.auth.cid).emit('leave', `${handshake.auth.username}  leave the room!`);
+            socket.broadcast.in(handshake.auth.cid).emit('leave', `${handshake.auth.username}  Left The Room`);
         });
     });
 };
-
-// const errorHandling = (io, data) => {
-//     io.use(function (socket, next) {
-//         const err = new Error();
-//         err.data = data;
-//         next(err);
-//     });
-// };
 
 module.exports = {
     socketCon

@@ -22,9 +22,60 @@
         <main class="hide">
             <div class="toolbox" id="toolbox">
                 <div class="tool-wrapper" id="tool-wrapper">
-                    <input type="color" class="tool colorSelector" id="color-fill" value="#073763" data-tool-tip="Select Colour"><br>
                     <div class="list-group list-group-flush">
-                        <a href="#" class="list-group-item list-group-item-action bg-light explore-icon-tool" id="explore-icon-tool">
+                        <div class="tool-box-title">TOOLBOX</div>
+                        <div class="tool-box-block">
+                            <a href="#" class="list-group-item list-group-item-action bg-light" id="undo-canvas">
+                                Undo
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action bg-light" id="redo-canvas">
+                                Redo
+                            </a>
+                        </div>
+                        <div class="tool-box-block">
+                            <a href="#" class="list-group-item list-group-item-action bg-light explore-icon-tool" id="explore-icon-tool">
+                                <img class="menu-icon explore-icon-tool" src="./images/icons/explore.png" alt="icon">
+                                Icon
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action bg-light explore-background-tool" id="explore-background-tool">
+                                <img class="menu-icon explore-background-tool" src="./images/icons/explore.png" alt="background">
+                                Background
+                            </a>
+                        </div>
+                        <div class="tool-box-block">
+                            <a href="#" class="list-group-item list-group-item-action bg-light" id="color">
+                                <input type="color" class="tool colorSelector" id="color-fill" value="#073763" data-tool-tip="Select Colour">
+                                <div>Color</div>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action bg-light" id="brush-on">
+                                Brush On
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action bg-light" id="brush-off">
+                                Brush Off
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action bg-light" id="add-circle">
+                                Circle
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action bg-light" id="add-square">
+                                Square
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action bg-light" id="add-triangle">
+                                Triangle
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action bg-light" id="add-text">
+                                Text
+                            </a>
+                        </div>
+                        <div class="tool-box-block">
+                            <a href="#" class="list-group-item list-group-item-action bg-light" id="rm-obj">
+                                Delete
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action bg-light" download="card.png" id="save">
+                                Download
+                            </a>
+                        </div>
+
+                        <!-- <a href="#" class="list-group-item list-group-item-action bg-light explore-icon-tool" id="explore-icon-tool">
                             <img class="menu-icon explore-icon-tool" src="./images/icons/explore.png" alt="icon">
                             Icon
                         </a>
@@ -60,7 +111,8 @@
                             Delete
                         </a>
                     </div>
-                    <a id="save" href="#" download="card.png" class="color-btn-green"><br>Download</a>
+                    <a id="save" href="#" download="card.png" class="color-btn-green"><br>Download</a> -->
+                    </div>
                 </div>
                 <div class="hide tool-submenu explore-icon-tool" id="explore-icon-box">
                     <div class="d-flex explore-icon-tool">
@@ -126,6 +178,8 @@
                 <div id="page-content-wrapper">
                     <div class="container-fluid">
                         <input id="card-title" type="text" value="Untitled">
+                        <div class="card-title-description" id="self-title-description">( The Title Is Editable )</div>
+                        <div class="card-title-description hide" id="other-title-description">( Only Card Owner Can Edit The Title )</div>
                         <canvas id="canvas"></canvas>     
                     </div>
                 </div>     
@@ -134,22 +188,7 @@
                     <div class="sidebar-heading"></div>
                     <div class="list-group list-group-flush" id="chat-box">
                         <div id="chat-room">
-                            <div class="room">
-                                <div class="user-status">asdf Join The Room</div>
-                                <div class="user-status">BBB join the room</div>
-                                <div class="self-chat">
-                                    <div class="user-self-name">AAA</div>
-                                    <div class="user-self-message">Helloaaaaaaaaaaaaa</div>
-                                    <!-- <span class="user-self-time">23:21</span> -->
-                                </div>
-                                <div class="other-chat">
-                                    <div class="user-other-name">BBB</div>
-                                    <div class="user-other-message">Nice to meet you!aaaaaaaaaaaaa</div>
-                                    <!-- <span class="user-other-time">23:23</span> -->
-                                </div>
-                                <div class="user-status">AAA Leave The Room</div>
-                                <div class="user-status">BBB leave the room</div>
-                            </div>
+                            <div class="room"></div>
                             <div class="send">
                                 <input type="text" id="msg" placeholder="        Type Your Message" />
                                 <img id="send-btn" src="./images/icons/send_btn.png" alt="send">

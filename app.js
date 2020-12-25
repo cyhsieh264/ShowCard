@@ -31,10 +31,6 @@ const io = require('socket.io')(http);
 const { socketCon } = require('./server/sockets/socketcon');
 socketCon(io);
 
-// // Peerjs
-// const { PeerServer } = require('peer');
-// const peerServer = PeerServer({ port: PORT_PEER_SERVER, path: '/call' });
-
 // API routes
 app.use('/api/' + API_VERSION,
     [

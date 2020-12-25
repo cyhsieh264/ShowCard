@@ -48,25 +48,54 @@ check().then( async (res) => {
     });
 
     // --- CHAT ---
-    socket.on('join', message => {
+
+    const roomBroadcast = (message) => {
         let element = $('<div>');
         element.attr('class', 'user-status');
         element.html(message)
         $('.room').append(element);
-    });
-    socket.on('leave', message => {
-        let element = $('<div>');
-        element.attr('class', 'user-status');
-        element.html(message)
-        $('.room').append(element);
-    });
-    socket.on('message', message => {
-        $('.room').append(`<p>${message}</p>`)
-    });
+    };
+
+    const sendMessage = () => {
+        socket.emit('input msg', $('#msg').val());
+        let selfElement = $('<div>');
+        selfElement.attr('class', 'self-chat');
+        let selfNameElement = $('<div>');
+        selfNameElement.attr('class', 'user-self-name');
+        selfNameElement.html(user.name);
+        selfElement.append(selfNameElement);
+        let selfMassageElement = $('<div>');
+        selfMassageElement.attr('class', 'user-self-message');
+        selfMassageElement.html($('#msg').val());
+        selfElement.append(selfMassageElement);
+        $('.room').append(selfElement);
+        $('#msg').val('');
+    };
+
+    const receiveMessage = (message) => {
+        let otherElement = $('<div>');
+        otherElement.attr('class', 'other-chat');
+        let otherNameElement = $('<div>');
+        otherNameElement.attr('class', 'user-other-name');
+        otherNameElement.html(message[0]);
+        otherElement.append(otherNameElement);
+        let otherMassageElement = $('<div>');
+        otherMassageElement.attr('class', 'user-other-message');
+        otherMassageElement.html(message[1]);
+        otherElement.append(otherMassageElement);
+        $('.room').append(otherElement);
+        $('#msg').val('');
+    };
+
+    socket.on('join', message => roomBroadcast(message));
+
+    socket.on('leave', message => roomBroadcast(message));
+
+    socket.on('message', message => receiveMessage(message));
+
     $('#send-btn').click( () => {
         if ($('#msg').val()) {
-            socket.emit('input msg', $('#msg').val())
-            $('#msg').val('')
+            sendMessage();
         } else {
             swal({
                 title: 'Notification',
@@ -76,12 +105,12 @@ check().then( async (res) => {
             });
         }
     });
+
     $('#msg').keypress(function(e) {
         let code = e.keyCode ? e.keyCode : e.which;
         if ( $('#msg').val() && code == 13 ) {
             e.preventDefault();
-            socket.emit('input msg', $('#msg').val())
-            $('#msg').val('')
+            sendMessage();
         } else if ( !$('#msg').val() && code == 13 ) {
             swal({
                 title: 'Notification',
@@ -123,7 +152,10 @@ check().then( async (res) => {
         $('#card-title').val(cardTitle);
         if (cardOwner != user.id) {
             $('#card-title').attr('readonly', 'readonly');
-            $('#card-title').val(cardTitle + `（${res.ownername}'s card）`)
+            $('#card-title').val(cardTitle);
+            $('#self-title-description').addClass('hide');
+            $('#other-title-description').removeClass('hide');
+            roomBroadcast(`Welcome To ${res.ownername}'s Card`);
             const userCanvasExistence = (await api.get('api/1.0/canvas/check', { params: { card: card, user: user.id } })).data.data.existence;
             if (!userCanvasExistence) {
                 await api.post('api/1.0/canvas/save', newCanvas);
@@ -433,9 +465,9 @@ check().then( async (res) => {
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 8,
-                top: 80, 
+                top: 20, 
                 width: 524,
-                height: 275,
+                height: 245,
                 objId: generateId(),
                 user: user.name,
                 isBackground: false
@@ -453,8 +485,8 @@ check().then( async (res) => {
         const url = '../images/assets/icons/christmas_light_border.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
-                left: 0,
-                top: 80, 
+                left: 10,
+                top: 20, 
                 width: 520,
                 height: 100,
                 objId: generateId(),
@@ -474,10 +506,10 @@ check().then( async (res) => {
         const url = '../images/assets/icons/heart.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
-                left: 0,
-                top: 80, 
-                width: 256,
-                height: 256,
+                left: 120,
+                top: 120, 
+                width: 300,
+                height: 300,
                 objId: generateId(),
                 user: user.name,
                 isBackground: false
@@ -495,8 +527,8 @@ check().then( async (res) => {
         const url = '../images/assets/icons/plane.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
-                left: 0,
-                top: 80, 
+                left: 140,
+                top: 140, 
                 width: 256,
                 height: 256,
                 objId: generateId(),
@@ -516,8 +548,8 @@ check().then( async (res) => {
         const url = '../images/assets/icons/sun.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
-                left: 0,
-                top: 80, 
+                left: 120,
+                top: 120, 
                 width: 300,
                 height: 300,
                 objId: generateId(),
@@ -534,11 +566,11 @@ check().then( async (res) => {
 
     $('#humanity').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/trophy.png';
+        const url = '../images/assets/icons/humanity.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
-                left: 0,
-                top: 80, 
+                left: 40,
+                top: 40, 
                 width: 450,
                 height: 450,
                 objId: generateId(),
@@ -558,8 +590,8 @@ check().then( async (res) => {
         const url = '../images/assets/icons/beach.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
-                left: 0,
-                top: 80, 
+                left: 70,
+                top: 70, 
                 width: 400,
                 height: 400,
                 objId: generateId(),
@@ -579,8 +611,8 @@ check().then( async (res) => {
         const url = '../images/assets/icons/mountain.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
-                left: 0,
-                top: 80, 
+                left: 45,
+                top: 45, 
                 width: 450,
                 height: 450,
                 objId: generateId(),
@@ -600,8 +632,8 @@ check().then( async (res) => {
         const url = '../images/assets/icons/photo.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
-                left: 0,
-                top: 80, 
+                left: 120,
+                top: 120, 
                 width: 300,
                 height: 300,
                 objId: generateId(),
@@ -618,11 +650,11 @@ check().then( async (res) => {
 
     $('#camera').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/photo.png';
+        const url = '../images/assets/icons/camera.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
-                left: 0,
-                top: 80, 
+                left: 140,
+                top: 140, 
                 width: 256,
                 height: 256,
                 objId: generateId(),
@@ -642,8 +674,8 @@ check().then( async (res) => {
         const url = '../images/assets/icons/trophy.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
-                left: 0,
-                top: 80, 
+                left: 120,
+                top: 120, 
                 width: 300,
                 height: 300,
                 objId: generateId(),
@@ -663,8 +695,8 @@ check().then( async (res) => {
         const url = '../images/assets/icons/leaf.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
-                left: 0,
-                top: 80, 
+                left: 120,
+                top: 120, 
                 width: 300,
                 height: 300,
                 objId: generateId(),
