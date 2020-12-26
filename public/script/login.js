@@ -17,7 +17,7 @@ const api = axios.create({
 const signin = () => {
     const history = localStorage.getItem('history') || '/';
     const email = $('#signin-email').val();
-    const password = btoa($('#signin-password').val());
+    const password = $('#signin-password').val();
     if (!email) {
         $('#signin-alert').removeClass('hide');
         $('#signin-alert-msg')[0].innerHTML = 'Email is required';
@@ -53,8 +53,8 @@ const signup = () => {
     const history = localStorage.getItem('history') || '/';
     const email = $('#signup-email').val();
     const name = $('#signup-name').val();
-    const password = btoa($('#signup-password').val());
-    const confirmPassword = btoa($('#signup-confirm-password').val());
+    const password = $('#signup-password').val();
+    const confirmPassword = $('#signup-confirm-password').val();
     if (!email) {
         $('#signup-alert').removeClass('hide');
         $('#signup-alert-msg')[0].innerHTML = 'Email is required';
@@ -73,6 +73,11 @@ const signup = () => {
     if (!password) {
         $('#signup-alert').removeClass('hide');
         $('#signup-alert-msg')[0].innerHTML = 'Password is required';
+        return;
+    }
+    if (password.match(/^(?=.*\d)(?=.*[a-z]).{8,30}$/) == null) {
+        $('#signup-alert').removeClass('hide');
+        $('#signup-alert-msg')[0].innerHTML = 'Password must be at least eight characters long and a mix of letters and numbers';
         return;
     }
     if (password != confirmPassword) {

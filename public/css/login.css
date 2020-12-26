@@ -21,8 +21,8 @@ background-color: rgba(0,0,0,0.5) !important;
 }
 
 .signup-card{
-height: 530px;
-margin-top: auto;
+height: 600px;
+margin-top: 5rem;
 margin-bottom: auto;
 width: 400px;
 background-color: rgba(0,0,0,0.5) !important;
@@ -114,25 +114,25 @@ margin-left: 4px;
 }
 
 #go-register {
-    color: rgb(255, 255, 255);
-    text-decoration: underline white;
+    color: #FFC312;
+    text-decoration: underline #FFC312;
     text-align: center;
 }
 
 #go-register:hover {
-    color: rgb(69, 80, 238);
-    text-decoration: underline rgb(69, 80, 238);
+    color: #fffaeb;
+    text-decoration: underline #fffaeb;
 }
 
 #go-login {
-    color: rgb(255, 255, 255);
-    text-decoration: underline white;
+    color: #FFC312;
+    text-decoration: underline #FFC312;
     text-align: center;
 }
 
 #go-login:hover {
-    color: rgb(69, 80, 238);
-    text-decoration: underline rgb(69, 80, 238);
+    color: #fffaeb;
+    text-decoration: underline #fffaeb;
 }
 
 .input-icon {

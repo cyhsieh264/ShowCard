@@ -13,6 +13,7 @@ main {
 .page-container {
     display: flex;
     height: 100%;
+    background-color: #fdfdfd;
 }
 
 .description-container {
@@ -21,22 +22,29 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     background-color: rgb(228, 228, 228);
     position: fixed;
 }
 
 .description-container > h1 {
+    font-size: 38px;
     color: #483558;
     font-weight: bold;
 }
 
 .studio-container {
     width: calc(100% - 20rem);
-    height: calc(100vh + 4rem);
-    margin: auto;
+    margin: auto 0px;
     top: 0;
     bottom: 0;
     margin-left: 20rem;
+}
+
+#studio-icon {
+    width: 160px;
+    margin: 30px;
+    margin-top: 0;
 }
 
 /* row-card element */
