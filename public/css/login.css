@@ -1,7 +1,7 @@
 @import "common.css";
 
 html,body{
-background-image: url('../images/backgrounds/cover_background.jpg');
+background-image: url('../images/backgrounds/login_background.jpg');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
@@ -163,6 +163,7 @@ nav>div {
     margin-right:30px;
     color: #483558;
     text-decoration: none;
+    font-weight: 300;
 }
 
 #header {
@@ -193,37 +194,3 @@ nav>div {
     -webkit-box-shadow: 0px 0px 9px 3px rgba(41,41,41,.25);
     -moz-box-shadow: 0px 0px 9px 3px rgba(41,41,41,.25);
     box-shadow: 0px 0px 9px 3px rgba(41,41,41,.25); }
-
-#cover {
-    height: 600px;
-    text-align: center;
-    background-image: url("../../images/backgrounds/login_background.jpg");
-    background-size: 100%;
-    background-repeat: no-repeat;
-}
-
-#main-title {
-    color: #483558;
-    font-size: 80px;
-    margin-top: 180px;
-    text-shadow: rgb(207, 206, 207) 0.1em 0.1em 0.2em
-}
-
-#slogan {
-    color: #483558;
-    font-size: 24px;
-}
-
-#new-card-btn {
-    color: #ffffff;
-    background-color: #483558;
-    border: none;
-    text-decoration: none;
-}
-
-#new-card-btn:hover {
-    background-color: #ffffff;
-    box-shadow: inset 0 0 0 1px #483558;
-    color: #483558 !important;
-}
-

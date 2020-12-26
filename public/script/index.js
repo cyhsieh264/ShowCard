@@ -2,6 +2,7 @@ const displayUser = async () => {
     const userName = (await verifyUserToken(userToken)).name;
     if (userToken && userName) {
         $('#login').addClass('hide');
+        $('#start-with-showcard').addClass('hide');
         $('#user').removeClass('hide');
         $('#logout').removeClass('hide');
         $('#user')[0].innerHTML = `${userName}`;
@@ -11,7 +12,11 @@ const displayUser = async () => {
 displayUser()
 
 $('#login').click(() => {
-    localStorage.setItem('history', '/studio.html')
+    localStorage.setItem('history', '/studio.html');
+});
+
+$('#login-btn').click(() => {
+    localStorage.setItem('history', '/studio.html');
 });
 
 $('#logout').click(() => {

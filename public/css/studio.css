@@ -1,32 +1,53 @@
 @import "common.css";
 @import "index.css";
 
+body {
+    background-color: #fdfdfd !important;
+}
+
 main {
     padding-top: 4rem;
+    height: 100vh;
 }
 
-#studio {
-    width: 100%;
-    display: inline;
-    float: left;
-}
-
-.container {
-    text-align: center;
-    overflow-x: auto;
-    white-space: nowrap;
+.page-container {
     display: flex;
-    height: 45vh;
-    align-items: center;
+    height: 100%;
 }
+
+.description-container {
+    width: 20rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f5f5f5;
+    position: fixed;
+}
+
+.description-container > h1 {
+    color: #483558;
+    font-weight: bold;
+}
+
+.studio-container {
+    width: calc(100% - 20rem);
+    height: 100vh;
+    margin-left: 20rem;
+}
+
+/* row-card element */
+
 .row-card-wrapper{
     display: flex;
+    flex-wrap: wrap;
+    background-color: #f5f5f5;
+    justify-content: center;
 }
 
 .row-card {
     width: 220px;
     margin: 20px;
-    display: flexbox;
     text-decoration: none;
 }
 
@@ -54,13 +75,4 @@ main {
     text-align: center;
     display: inline-flex;
     min-width: 320px;
-}
-
-#template-container {
-    border-top: 2px #483558 solid;
-    padding-top: 15px;
-}
-
-#card-owner {
-    color: #483558;
 }
