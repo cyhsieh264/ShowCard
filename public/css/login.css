@@ -197,7 +197,7 @@ nav>div {
 #cover {
     height: 600px;
     text-align: center;
-    background-image: url("../../images/backgrounds/cover_background.jpg");
+    background-image: url("../../images/backgrounds/login_background.jpg");
     background-size: 100%;
     background-repeat: no-repeat;
 }
