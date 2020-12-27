@@ -958,10 +958,12 @@ $('#share-link-btn').hover(() => {
 
 // --- SUBMENU ---
 const hideSubmenu = () => {
+    $('.list-group-item').addClass('tool-item');
     $('#explore-icon-box').addClass('hide');
     $('#explore-icon-tool').css('background-color', '#f8f9fa');
     $('#explore-background-box').addClass('hide');
     $('#explore-background-tool').css('background-color', '#f8f9fa');
+    $('#color').removeClass('tool-item');
 };
 
 const submenuControl = (target) => {
@@ -969,9 +971,11 @@ const submenuControl = (target) => {
     if (target.classList.contains('explore-icon-tool')) {
         $('#explore-icon-tool').css('cssText', 'background-color: #d9e0e6 !important;');
         $('#explore-icon-box').removeClass('hide');
+        $('.list-group-item').removeClass('tool-item');
     } else if (target.classList.contains('explore-background-tool')) {
         $('#explore-background-tool').css('cssText', 'background-color: #d9e0e6 !important;');
         $('#explore-background-box').removeClass('hide');
+        $('.list-group-item').removeClass('tool-item');
     }
 };
 
@@ -986,3 +990,15 @@ $('#wrapper').click((e) => {
 $('#toolbox').click((e) => {
     submenuControl(e.target)
 });
+
+// $(document).ready(function(){
+//     $('[data-toggle="popover"]').popover({
+//         placement : 'right',
+//         html : true,
+//         title : 'TIPS <a href="#" class="close" data-dismiss="alert">&times;</a>',
+//         content: 'You may select a color <br> before creating elements'
+//     });
+//     $(document).on("click", ".popover .close" , function(){
+//         $(this).parents(".popover").popover('hide');
+//     });
+// });
