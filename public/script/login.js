@@ -43,7 +43,7 @@ const signin = () => {
         const res = response.data.data
         const token = res.user_token;
         localStorage.setItem('user_token', token);
-        location.replace(history);
+        // location.replace(history);
     }).catch((err) => {
         $('#signin-alert').removeClass('hide');
         $('#signin-alert-msg')[0].innerHTML = err.response.data.error;
