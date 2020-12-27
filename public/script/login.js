@@ -40,18 +40,16 @@ const signin = () => {
     };
     api.post('api/1.0/user/signin', user)
     .then((response) => {
-        console.log(response)
         const res = response.data.data
         const token = res.user_token;
         localStorage.setItem('user_token', token);
-        // location.replace(history);
+        location.replace(history);
     }).catch((err) => {
         $('#signin-alert').removeClass('hide');
         $('#signin-alert-msg')[0].innerHTML = err.response.data.error;
     });
 };
 
-// const googleSignin = (googleUser) => {
 function googleSignin(googleUser) {
     console.log(googleUser);
     const user = {

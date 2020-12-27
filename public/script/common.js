@@ -10,6 +10,7 @@ const verifyUserToken = (token) => {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 const result = JSON.parse(xhr.responseText);
+                console.log(result);
                 if (result.data) resolve(result.data.payload);
                 else resolve(false);
             }
