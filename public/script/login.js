@@ -51,6 +51,7 @@ const signin = () => {
 };
 
 function googleSignin(googleUser) {
+    const history = localStorage.getItem('history') || '/';
     const user = {
         provider: 'google',
         token: googleUser.getAuthResponse().id_token
