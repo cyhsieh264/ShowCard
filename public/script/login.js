@@ -63,7 +63,7 @@ function googleSignin(googleUser) {
         const res = response.data.data
         const token = res.user_token;
         localStorage.setItem('user_token', token);
-        location.replace(history);
+        // location.replace(history);
     }).catch((err) => {
         console.log(err)
         $('#signin-alert').removeClass('hide');

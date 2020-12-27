@@ -4,6 +4,7 @@ const getUserCards = async (req, res) => {
     const userId = req.query.user;
     const { result, error } = await Studio.getUserCards(userId);
     let cards = [];
+    if (result.length == 0) return res.status(200).json({ data: { cards: cards } });
     result.map((card) => {
         const data = {
             id: card.id,

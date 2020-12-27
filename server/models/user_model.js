@@ -47,7 +47,6 @@ const googleSignin = async(userInfo) => {
                 active: true
             };
             const { result, error } = await signup(data);
-            console.log(result)
             if (error) return {error: 'Sign in failed'};
             return { result: { id: result.insertId, email: userInfo.email, name: userInfo.name } };
         } else {

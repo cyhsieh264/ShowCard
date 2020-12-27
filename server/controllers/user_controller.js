@@ -46,6 +46,23 @@ const nativeSignin = async (email, password) => {
     return { result: result };
 };
 
+const fetchGoogleInfo = (googleToken) => {
+    return new Promise((resolve, reject) => {
+        let url = `https://oauth2.googleapis.com/tokeninfo?id_token=${googleToken}`;
+        fetch(url)
+            .then(fetchResult => {
+                return fetchResult.json();
+            })
+            .then(jsonInfo => {
+                let googleInfo = {
+                    name: jsonInfo.name,
+                    email: jsonInfo.email
+                };
+                resolve(googleInfo);
+            });
+    });
+};
+
 const googleSignin = async (token) => {
     const googleInfo = await fetchGoogleInfo(token);
     if (!googleInfo.email) return { error: 'Sign in failed', status: 500 };
@@ -65,11 +82,11 @@ const signin = async (req, res) => {
             result = await googleSignin(data.token);
             break;
         default:
-            result = {error: 'Wrong Request'};
+            result = { error: 'Wrong Request' };
     }
     if (result.error) {
         const statusCode = result.status ? result.status : 403;
-        return res.status(statusCode).json({error: result.error});
+        return res.status(statusCode).json({ error: result.error });
     }
     const userToken = jwt.sign({
         id: result.id,
@@ -88,23 +105,6 @@ const verify = async (req, res) => {
     } catch {
         res.status(200).json( { message: 'Invalid user token' } );
     }
-};
-
-const fetchGoogleInfo = (googleToken) => {
-    return new Promise((resolve, reject) => {
-        let url = `https://oauth2.googleapis.com/tokeninfo?id_token=${googleToken}`;
-        fetch(url)
-            .then(fetchResult => {
-                return fetchResult.json();
-            })
-            .then(jsonInfo => {
-                let googleInfo = {
-                    name: jsonInfo.name,
-                    email: jsonInfo.email
-                };
-                resolve(googleInfo);
-            });
-    });
 };
 
 module.exports = {
