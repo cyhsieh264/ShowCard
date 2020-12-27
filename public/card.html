@@ -23,55 +23,59 @@
             <div class="toolbox" id="toolbox">
                 <div class="tool-wrapper" id="tool-wrapper">
                     <div class="list-group list-group-flush">
-                        <div class="tool-box-title">TOOLBOX</div>
+                        <!-- <div class="tool-box-title">TOOLBOX</div> -->
                         <div class="tool-box-block">
-                            <a href="#" class="list-group-item list-group-item-action bg-light" id="undo-canvas">
-                                Undo
+                            <a href="#" class="list-group-item list-group-item-action bg-light" title="Undo" id="undo-canvas">
+                                <img class="menu-icon" src="./images/icons/tool_undo.png" alt="icon">
                             </a>
                             <a href="#" class="list-group-item list-group-item-action bg-light" id="redo-canvas">
-                                Redo
+                                <img class="menu-icon" src="./images/icons/tool_redo.png" alt="icon">
+                                <!-- <span class="menu-text">Redo</span> -->
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action bg-light" id="rm-obj">
+                                <img class="menu-icon" src="./images/icons/tool_delete.png" alt="icon">
+                                <!-- <span class="menu-text">Delete</span> -->
                             </a>
                         </div>
                         <div class="tool-box-block">
                             <a href="#" class="list-group-item list-group-item-action bg-light explore-icon-tool" id="explore-icon-tool">
-                                <img class="menu-icon explore-icon-tool" src="./images/icons/explore.png" alt="icon">
-                                Icon
+                                <img class="menu-icon explore-icon-tool" src="./images/icons/tool_icon.png" alt="icon">
+                                <!-- <span class="menu-text explore-icon-tool">Icon</span> -->
                             </a>
                             <a href="#" class="list-group-item list-group-item-action bg-light explore-background-tool" id="explore-background-tool">
-                                <img class="menu-icon explore-background-tool" src="./images/icons/explore.png" alt="background">
-                                Background
+                                <img class="menu-icon explore-background-tool" src="./images/icons/tool_background.png" alt="icon">
+                                <!-- <span class="menu-text explore-background-tool">Background</span> -->
                             </a>
                         </div>
                         <div class="tool-box-block">
                             <a href="#" class="list-group-item list-group-item-action bg-light" id="color">
-                                <input type="color" class="tool colorSelector" id="color-fill" value="#073763" data-tool-tip="Select Colour">
-                                <div>Color</div>
+                                <input type="color" class="tool" id="color-fill" value="#facd89" data-tool-tip="Select Colour">
                             </a>
-                            <a href="#" class="list-group-item list-group-item-action bg-light" id="brush-on">
-                                Brush On
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action bg-light" id="brush-off">
-                                Brush Off
+                            <a href="#" class="list-group-item list-group-item-action bg-light" id="brush">
+                                <img class="menu-icon" id="brush-image" src="./images/icons/tool_brush.png" alt="icon">
+                                <span class="menu-text hide" id="brush-text">Brush On</span>
                             </a>
                             <a href="#" class="list-group-item list-group-item-action bg-light" id="add-circle">
-                                Circle
+                                <img class="menu-icon" src="./images/icons/tool_circle.png" alt="icon">
+                                <!-- <span class="menu-text">Circle</span> -->
                             </a>
                             <a href="#" class="list-group-item list-group-item-action bg-light" id="add-square">
-                                Square
+                                <img class="menu-icon" src="./images/icons/tool_square.png" alt="icon">
+                                <!-- <span class="menu-text">Square</span> -->
                             </a>
                             <a href="#" class="list-group-item list-group-item-action bg-light" id="add-triangle">
-                                Triangle
+                                <img class="menu-icon" src="./images/icons/tool_triangle.png" alt="icon">
+                                <!-- <span class="menu-text">Triangle</span> -->
                             </a>
                             <a href="#" class="list-group-item list-group-item-action bg-light" id="add-text">
-                                Text
+                                <img class="menu-icon" src="./images/icons/tool_text.png" alt="icon">
+                                <!-- <span class="menu-text">Text</span> -->
                             </a>
                         </div>
                         <div class="tool-box-block">
-                            <a href="#" class="list-group-item list-group-item-action bg-light" id="rm-obj">
-                                Delete
-                            </a>
                             <a href="#" class="list-group-item list-group-item-action bg-light" download="card.png" id="save">
-                                Download
+                                <img class="menu-icon" src="./images/icons/tool_download.png" alt="icon">
+                                <!-- <span class="menu-text">Download</span> -->
                             </a>
                         </div>
 

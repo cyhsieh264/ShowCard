@@ -2,7 +2,6 @@ const Card = require('../models/card_model');
 
 const socketCon = (io) => {
     io.on('connection', (socket) => {
-        console.log('a user connected');
         const handshake = socket.handshake;
         socket.join(handshake.auth.cid);
         socket.broadcast.in(handshake.auth.cid).emit('join', `${handshake.auth.username}   Has Joined The Room`);
@@ -16,7 +15,6 @@ const socketCon = (io) => {
             socket.broadcast.in(handshake.auth.cid).emit('change canvas', canvas);
         });
         socket.on('disconnect', () => {
-            console.log('user disconnected');
             Card.reduceMember(handshake.auth.cid);
             socket.broadcast.in(handshake.auth.cid).emit('leave', `${handshake.auth.username}  Left The Room`);
         });

@@ -219,7 +219,6 @@ check().then( async (res) => {
             user: user.name,
             isBackground: false
         });
-        console.log(circle)
         canvas.add(circle);
         canvas.setActiveObject(circle);
         const object = circle.toJSON();
@@ -870,18 +869,25 @@ check().then( async (res) => {
 
     // --- CANVAS TOOLBOX ---
     // Brush
-    // const brush = new fabric.PatternBrush(canvas);
-    $('#brush-on').click(() => {
+    $('#brush').click(() => {
         if (canvas.getActiveObject()) {
             socket.emit('edit canvas', [{action: 'remove', object: canvas.getActiveObject().objId}, { action: 'create', object: [JSON.stringify(canvas.getActiveObject().toJSON())] }] );
             canvas.discardActiveObject().renderAll();
         }
-        canvas.freeDrawingBrush.color = $('#color-fill').val();
-        canvas.freeDrawingBrush.width = 5;
-        canvas.isDrawingMode = true
+        const value = $('#brush-text').html();
+        if (value == 'Brush On') {
+            $('#brush-text').html('Brush Off');
+            $('#brush-image').attr('src', './images/icons/tool_brush_on.png');
+            canvas.freeDrawingBrush.color = $('#color-fill').val();
+            canvas.freeDrawingBrush.width = 5;
+            canvas.isDrawingMode = true;
+        }
+        if (value == 'Brush Off') {
+            canvas.isDrawingMode = false;
+            $('#brush-text').html('Brush On');
+            $('#brush-image').attr('src', './images/icons/tool_brush.png');
+        }
     });
-
-    $('#brush-off').click(() => canvas.isDrawingMode = false);
 
     $('#color-fill').change( async () => {
         if (canvas.isDrawingMode) {
