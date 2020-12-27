@@ -50,7 +50,8 @@ const signin = () => {
     });
 };
 
-const googleSignin = (googleUser) => {
+// const googleSignin = (googleUser) => {
+function googleSignin(googleUser) {
     console.log(googleUser);
     const user = {
         provider: 'google',
