@@ -80,6 +80,7 @@ main {
 .row-card>img {
     width: 210px;
     height: 210px;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .title {
