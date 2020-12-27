@@ -63,15 +63,7 @@ function googleSignin(googleUser) {
         const res = response.data.data
         const token = res.user_token;
         localStorage.setItem('user_token', token);
-        swal({
-            title: 'Notification',
-            text: 'Sign In Successfully',
-            type: 'warning',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then(() => {
-            location.replace(history);
-        });
+        location.replace(history);
     }).catch((err) => {
         console.log(err)
         $('#signin-alert').removeClass('hide');

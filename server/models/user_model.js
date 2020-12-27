@@ -48,14 +48,12 @@ const googleSignin = async(userInfo) => {
             };
             const { result, error } = await signup(data);
             console.log(result)
-            console.log(error)
             if (error) return {error: 'Sign in failed'};
             return { result: { id: result.insertId, email: userInfo.email, name: userInfo.name } };
         } else {
             return { result: queryResult[0] };
         }
     } catch (error) {
-        console.log(error)
         writeLog(error.stack);
         return { error };
     }

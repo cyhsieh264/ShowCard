@@ -1,10 +1,6 @@
 @import "common.css";
 @import "index.css";
 
-main {
-    background-color: #dfdfdf;
-}
-
 #oops {
     color: #483558;
     font-size: 80px;
