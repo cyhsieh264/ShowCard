@@ -2,6 +2,7 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 const salt = parseInt(process.env.BCRYPT_SALT);
 const jwt = require('jsonwebtoken');
+const fetch = require('node-fetch');
 const User = require('../models/user_model');
 const { verifyToken } = require('../../util/util');
 
@@ -10,7 +11,7 @@ const signup = async (req, res) => {
         return res.status(400).json({ error: 'Sign up information is incomplete' });
     }
     const data = {
-        provider: 'native',
+        provider: req.body.provider,
         email: req.body.email,
         name: req.body.name,
         password: bcrypt.hashSync(req.body.password, salt),
@@ -30,17 +31,45 @@ const signup = async (req, res) => {
     return res.status(200).json({ data: { user_token: userToken } });
 };
 
-const signin = async (req, res) => {
-    if ( !req.body.email || !req.body.password ) {
-        return res.status(400).json({ error: 'Sign in information is incomplete' });
+const nativeSignin = async (email, password) => {
+    if ( !email || !password ) {
+        return {error: 'Sign in information is incomplete', status: 400};
     }
-    const { result, error } = await User.signin(req.body.email);
+    const { result, error } = await User.nativeSignin(email);
     if (error) {
-        if (error.customError) return res.status(403).json({ error: error.customError });
-        return res.status(500).json({ error: 'Sign in failed' });
+        if (error.customError) return { error: error.customError, status: 403};
+        return { error: 'Sign in failed', status: 500 };
     }
-    if (!bcrypt.compareSync(req.body.password, result.password)) {
-        return res.status(403).json({ error: 'Incorrect email or password' });
+    if (!bcrypt.compareSync(password, result.password)) {
+        return { error: 'Incorrect email or password', status: 403};
+    }
+    return { result: result };
+};
+
+const googleSignin = async (token) => {
+    const googleInfo = await fetchGoogleInfo(token);
+    if (!googleInfo.email) return { error: 'Sign in failed', status: 500 };
+    const { result, error } = await User.googleSignin(googleInfo);
+    if (error) return { error: 'Sign in failed', status: 500 };
+    return { result: result };
+};
+
+const signin = async (req, res) => {
+    const data = req.body;
+    let result;
+    switch (data.provider) {
+        case 'native':
+            result = await nativeSignin(data.email, data.password);
+            break;
+        case 'google':
+            result = await googleSignin(data.token);
+            break;
+        default:
+            result = {error: 'Wrong Request'};
+    }
+    if (result.error) {
+        const statusCode = result.status ? result.status : 403;
+        return res.status(statusCode).json({error: result.error});
     }
     const userToken = jwt.sign({
         id: result.id,
@@ -59,6 +88,23 @@ const verify = async (req, res) => {
     } catch {
         res.status(200).json( { message: 'Invalid user token' } );
     }
+};
+
+const fetchGoogleInfo = (googleToken) => {
+    return new Promise((resolve, reject) => {
+        let url = `https://oauth2.googleapis.com/tokeninfo?id_token=${googleToken}`;
+        fetch(url)
+            .then(fetchResult => {
+                return fetchResult.json();
+            })
+            .then(jsonInfo => {
+                let googleInfo = {
+                    name: jsonInfo.name,
+                    email: jsonInfo.email
+                };
+                resolve(googleInfo);
+            });
+    });
 };
 
 module.exports = {
