@@ -190,3 +190,7 @@ $('#close-signin-alert').click(() => {
 $('#close-signup-alert').click(() => {
     $('#signup-alert').addClass('hide');
 });
+
+window.onbeforeunload = function (e) {
+    gapi.auth2.getAuthInstance().signOut();
+};
