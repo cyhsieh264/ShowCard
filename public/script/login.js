@@ -52,22 +52,21 @@ const signin = () => {
 
 function googleSignin(googleUser) {
     const history = localStorage.getItem('history') || '/';
-    console.log(googleUser)
     const user = {
         provider: 'google',
         token: googleUser.getAuthResponse().id_token
     };
-    // api.post('api/1.0/user/signin', user)
-    // .then((response) => {
-    //     const res = response.data.data
-    //     const token = res.user_token;
-    //     localStorage.setItem('user_token', token);
-    //     location.replace(history);
-    // }).catch((err) => {
-    //     console.log(err)
-    //     $('#signin-alert').removeClass('hide');
-    //     $('#signin-alert-msg')[0].innerHTML = err.response.data.error;
-    // });
+    api.post('api/1.0/user/signin', user)
+    .then((response) => {
+        const res = response.data.data
+        const token = res.user_token;
+        localStorage.setItem('user_token', token);
+        location.replace(history);
+    }).catch((err) => {
+        console.log(err)
+        $('#signin-alert').removeClass('hide');
+        $('#signin-alert-msg')[0].innerHTML = err.response.data.error;
+    });
 };
 
 const signup = () => {
