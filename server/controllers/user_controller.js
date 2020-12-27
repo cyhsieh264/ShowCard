@@ -43,7 +43,7 @@ const nativeSignin = async (email, password) => {
     if (!bcrypt.compareSync(password, result.password)) {
         return { error: 'Incorrect email or password', status: 403};
     }
-    return { result: result };
+    return result;
 };
 
 const fetchGoogleInfo = (googleToken) => {
@@ -68,7 +68,7 @@ const googleSignin = async (token) => {
     if (!googleInfo.email) return { error: 'Sign in failed', status: 500 };
     const { result, error } = await User.googleSignin(googleInfo);
     if (error) return { error: 'Sign in failed', status: 500 };
-    return { result: result };
+    return result;
 };
 
 const signin = async (req, res) => {
