@@ -191,6 +191,14 @@ $('#close-signup-alert').click(() => {
     $('#signup-alert').addClass('hide');
 });
 
+window.onload = function (e) {
+    gapi.load('auth2', function() {
+        gapi.auth2.init();
+    });
+};
+
 window.onbeforeunload = function (e) {
-    gapi.auth2.getAuthInstance().signOut();
+    gapi.auth2.getAuthInstance().signOut().then( function () {
+        auth2.disconnect();
+    });
 };
