@@ -51,12 +51,14 @@ const signin = () => {
 };
 
 const googleSignin = (googleUser) => {
+    console.log(googleUser);
     const user = {
         provider: 'google',
         token: googleUser.getAuthResponse().id_token
     };
     api.post('api/1.0/user/signin', user)
     .then((response) => {
+        console.log(response);
         const res = response.data.data
         const token = res.user_token;
         localStorage.setItem('user_token', token);
@@ -71,8 +73,8 @@ const googleSignin = (googleUser) => {
         });
     }).catch((err) => {
         console.log(err)
-        $('#signup-alert').removeClass('hide');
-        $('#signup-alert-msg')[0].innerHTML = err.response.data.error;
+        $('#signin-alert').removeClass('hide');
+        $('#signin-alert-msg')[0].innerHTML = err.response.data.error;
     });
 };
 
