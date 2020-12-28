@@ -223,7 +223,6 @@ canvas {
     margin-right: 0px;
     height: calc(100% - 11rem);
     overflow-y: scroll;
-    /* scrollbar-base-color: red; */
 }
 
 .room::-webkit-scrollbar-track {
@@ -253,10 +252,13 @@ canvas {
 .user-self-message {
     background-color: #483558;
     color: white;
-    padding: 5px 20px;
+    padding: 5px 15px;
     border-radius: 10px;
     width: auto;
+    max-width: 10.5rem;
     display: inline-block;
+    word-break: break-word;
+    text-align: start;
 }
 
 .user-self-time {
@@ -280,11 +282,14 @@ canvas {
 .user-other-message {
     background-color: #e2d1f0;
     color: rgb(0, 0, 0);
-    padding: 5px 20px;
+    padding: 5px 15px;
     margin-left: 5px;
     border-radius: 10px;
     width: auto;
+    max-width: 10.5rem;
     display: inline-block;
+    word-break: break-word;
+    text-align: start;
 }
 
 .user-other-time {

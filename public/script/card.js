@@ -54,6 +54,7 @@ check().then( async (res) => {
         element.attr('class', 'user-status');
         element.html(message)
         $('.room').append(element);
+        $('.room')[0].scrollTop = $('.room')[0].scrollHeight;
     };
 
     const sendMessage = () => {
@@ -69,6 +70,7 @@ check().then( async (res) => {
         selfMassageElement.html($('#msg').val());
         selfElement.append(selfMassageElement);
         $('.room').append(selfElement);
+        $('.room')[0].scrollTop = $('.room')[0].scrollHeight;
         $('#msg').val('');
     };
 
@@ -84,6 +86,7 @@ check().then( async (res) => {
         otherMassageElement.html(message[1]);
         otherElement.append(otherMassageElement);
         $('.room').append(otherElement);
+        $('.room')[0].scrollTop = $('.room')[0].scrollHeight;
     };
 
     socket.on('join', message => roomBroadcast(message));
