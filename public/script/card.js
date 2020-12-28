@@ -84,7 +84,6 @@ check().then( async (res) => {
         otherMassageElement.html(message[1]);
         otherElement.append(otherMassageElement);
         $('.room').append(otherElement);
-        $('#msg').val('');
     };
 
     socket.on('join', message => roomBroadcast(message));
