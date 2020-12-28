@@ -4,7 +4,7 @@ const socketCon = (io) => {
     io.on('connection', (socket) => {
         const handshake = socket.handshake;
         socket.join(handshake.auth.cid);
-        socket.broadcast.in(handshake.auth.cid).emit('join', `${handshake.auth.username}   Has Joined The Room`);
+        socket.broadcast.in(handshake.auth.cid).emit('join', `${handshake.auth.username}   Joined The Room`);
         socket.on('input msg', (msg) => {
             socket.broadcast.in(handshake.auth.cid).emit('message', [handshake.auth.username, msg]);
         });
