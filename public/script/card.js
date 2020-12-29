@@ -293,10 +293,7 @@ checkCardStatus().then( async (res) => {
             width: 300,
             textAlign: 'center',
             fill: $('#color-fill').val(), 
-            fontFamily: 'Delicious',   // 字型
-            // fontStyle: 'italic',  // 斜體
-            // fontSize: 20, // 字型大小
-            // fontWeight: 800, // 字型粗細
+            fontFamily: 'Delicious',
             objId: generateId(),
             user: user.name,
             isBackground: false
@@ -310,18 +307,18 @@ checkCardStatus().then( async (res) => {
 
     // === icon === 
 
-    $('#christmas_hat').click(() => {
+    const addIcon = (filename, width, height, left, top) => {
         canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/christmas_hat.png';
+        const url = `../images/assets/icons/${filename}`;
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
-                left: 150,
-                top: 150, 
-                width: 256,
-                height: 256,
+                left: left,
+                top: top, 
+                width: width,
+                height: height,
                 objId: generateId(),
                 user: user.name,
-                isBackground: false
+                isBackground: true
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -329,413 +326,35 @@ checkCardStatus().then( async (res) => {
             await newObject(object);
             await uploadScreenshot();
         });
-    });
+    };
 
-    $('#mistletoe').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/mistletoe.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 150,
-                top: 150, 
-                width: 256,
-                height: 256,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#christmas_presents').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/christmas_presents.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 70,
-                top: 100, 
-                width: 400,
-                height: 400,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#christmas_sock').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/christmas_sock.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 150,
-                top: 150, 
-                width: 256,
-                height: 256,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#candy_cane').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/candy_cane.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 150,
-                top: 150, 
-                width: 256,
-                height: 256,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#gingerbread_man').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/gingerbread_man.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 150,
-                top: 150, 
-                width: 256,
-                height: 256,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#santa_claus_1').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/santa_claus_1.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 70,
-                top: 100, 
-                width: 400,
-                height: 400,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#santa_claus_2').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/santa_claus_2.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 70,
-                top: 100, 
-                width: 400,
-                height: 400,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#christmas_decoration_border').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/christmas_decoration_border.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 8,
-                top: 20, 
-                width: 524,
-                height: 245,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#christmas_light_border').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/christmas_light_border.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 10,
-                top: 20, 
-                width: 520,
-                height: 100,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#heart').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/heart.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 120,
-                top: 120, 
-                width: 300,
-                height: 300,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#plane').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/plane.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 140,
-                top: 140, 
-                width: 256,
-                height: 256,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#sun').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/sun.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 120,
-                top: 120, 
-                width: 300,
-                height: 300,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#humanity').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/humanity.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 40,
-                top: 40, 
-                width: 450,
-                height: 450,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#beach').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/beach.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 70,
-                top: 70, 
-                width: 400,
-                height: 400,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#mountain').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/mountain.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 45,
-                top: 45, 
-                width: 450,
-                height: 450,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#photo').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/photo.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 120,
-                top: 120, 
-                width: 300,
-                height: 300,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#camera').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/camera.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 140,
-                top: 140, 
-                width: 256,
-                height: 256,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#trophy').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/trophy.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 120,
-                top: 120, 
-                width: 300,
-                height: 300,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
-
-    $('#leaf').click(() => {
-        canvas.isDrawingMode = false;
-        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/leaf.png';
-        fabric.Image.fromURL( url, async (item) => {
-            const icon = item.set({
-                left: 120,
-                top: 120, 
-                width: 300,
-                height: 300,
-                objId: generateId(),
-                user: user.name,
-                isBackground: false
-            });
-            canvas.add(icon);
-            canvas.setActiveObject(icon);
-            const object = icon.toJSON();
-            await newObject(object);
-            await uploadScreenshot();
-        });
-    });
+    $('#christmas_hat').click((e) => addIcon(e.target.id + '.png', 256, 256, 150, 150)); 
+    $('#mistletoe').click((e) => addIcon(e.target.id + '.png', 256, 256, 150, 150));
+    $('#christmas_presents').click((e) => addIcon(e.target.id + '.png', 400, 400, 70, 100));
+    $('#christmas_sock').click((e) => addIcon(e.target.id + '.png', 256, 256, 150, 150));
+    $('#candy_cane').click((e) => addIcon(e.target.id + '.png', 256, 256, 150, 150));
+    $('#gingerbread_man').click((e) => addIcon(e.target.id + '.png', 256, 256, 150, 150));
+    $('#santa_claus_1').click((e) => addIcon(e.target.id + '.png', 400, 400, 70, 100));
+    $('#santa_claus_2').click((e) => addIcon(e.target.id + '.png', 400, 400, 70, 100));
+    $('#christmas_decoration_border').click((e) => addIcon(e.target.id + '.png', 524, 245, 8, 20));
+    $('#christmas_light_border').click((e) => addIcon(e.target.id + '.png', 520, 100, 10, 20));
+    $('#heart').click((e) => addIcon(e.target.id + '.png', 300, 300, 120, 120));
+    $('#plane').click((e) => addIcon(e.target.id + '.png', 256, 256, 140, 140));
+    $('#sun').click((e) => addIcon(e.target.id + '.png', 300, 300, 120, 120));
+    $('#humanity').click((e) => addIcon(e.target.id + '.png', 450, 450, 40, 40));
+    $('#beach').click((e) => addIcon(e.target.id + '.png', 400, 400, 70, 70));
+    $('#mountain').click((e) => addIcon(e.target.id + '.png', 450, 450, 45, 45));
+    $('#photo').click((e) => addIcon(e.target.id + '.png', 300, 300, 120, 120));
+    $('#camera').click((e) => addIcon(e.target.id + '.png', 256, 256, 140, 140));
+    $('#trophy').click((e) => addIcon(e.target.id + '.png', 300, 300, 120, 120));
+    $('#leaf').click((e) => addIcon(e.target.id + '.png', 300, 300, 120, 120));
 
     // === background === 
 
     const addBackground = (filename) => {
         canvas.isDrawingMode = false;
         removePresentBackground();
-        const url = `https://d20bzyreixm85i.cloudfront.net/images/assets/backgrounds/${filename}`;
+        const url = `../images/assets/backgrounds/${filename}`;
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
                 left: 0,
@@ -909,28 +528,30 @@ checkCardStatus().then( async (res) => {
         if (canvas.isDrawingMode) {
             canvas.freeDrawingBrush.color = $('#color-fill').val();
             canvas.freeDrawingBrush.width = 5;
+        } else if (canvas.getActiveObject()) {
+            let colorKey;
+            if (canvas.getActiveObject().type == 'path') colorKey = 'stroke';
+            else colorKey = 'fill';
+            canvas.getActiveObject().set(colorKey, $('#color-fill').val());
+            canvas.renderAll();
+            const object = canvas.getActiveObjects()[0].toJSON();
+            object.user = user.name;
+            const data = {
+                card_id: card,
+                user_id: user.id,
+                action: 'modify',
+                obj_id: object.objId,
+                obj_type: object.type,
+                object: JSON.stringify(object),
+                is_background: object.isBackground
+            };
+            await api.post('api/1.0/canvas/save', data);
+            await uploadScreenshot();
+            object.opacity = 0.5;
+            object.selectable = false;
+            object.evented = false;
+            socket.emit('edit canvas', [{action: 'remove', object: object.objId}, { action: 'create', object: [JSON.stringify(object)] }] );
         }
-        // } else if (canvas.getActiveObject()) {
-        //     canvas.getActiveObject().set('fill', $('#color-fill').val());
-        //     canvas.renderAll();
-        //     const object = canvas.getActiveObjects()[0].toJSON();
-        //     object.user = user.name;
-        //     const data = {
-        //         card_id: card,
-        //         user_id: user.id,
-        //         action: 'modify',
-        //         obj_id: object.objId,
-        //         obj_type: object.type,
-        //         object: JSON.stringify(object),
-        //         is_background: object.isBackground
-        //     };
-        //     await api.post('api/1.0/canvas/save', data);
-        //     await uploadScreenshot();
-        //     object.opacity = 0.5;
-        //     object.selectable = false;
-        //     object.evented = false;
-        //     socket.emit('edit canvas', [{action: 'remove', object: object.objId}, { action: 'create', object: [JSON.stringify(object)] }] );
-        // }
     });
 });
 
@@ -1006,15 +627,3 @@ $('#wrapper').click((e) => {
 $('#toolbox').click((e) => {
     submenuControl(e.target)
 });
-
-// $(document).ready(function(){
-//     $('[data-toggle="popover"]').popover({
-//         placement : 'right',
-//         html : true,
-//         title : 'TIPS <a href="#" class="close" data-dismiss="alert">&times;</a>',
-//         content: 'You may select a color <br> before creating elements'
-//     });
-//     $(document).on("click", ".popover .close" , function(){
-//         $(this).parents(".popover").popover('hide');
-//     });
-// });
