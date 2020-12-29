@@ -1,7 +1,7 @@
 @import "common.css";
 
 html,body{
-background-image: url('../images/backgrounds/login_background.jpg');
+background-image: url('https://d20bzyreixm85i.cloudfront.net/images/backgrounds/login_background.jpg');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;

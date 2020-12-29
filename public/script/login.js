@@ -63,7 +63,6 @@ function googleSignin(googleUser) {
         localStorage.setItem('user_token', token);
         location.replace(history);
     }).catch((err) => {
-        console.log(err)
         $('#signin-alert').removeClass('hide');
         $('#signin-alert-msg')[0].innerHTML = err.response.data.error;
     });
@@ -133,7 +132,6 @@ const signup = () => {
             location.replace(history);
         });
     }).catch((err) => {
-        console.log(err)
         $('#signup-alert').removeClass('hide');
         $('#signup-alert-msg')[0].innerHTML = err.response.data.error;
     });

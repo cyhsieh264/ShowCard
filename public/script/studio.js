@@ -27,8 +27,8 @@ checkUser().then( async (res) => {
 });
 
 $('#new-card').hover(() => {
-    $('#new-card-image').attr('src', './images/icons/newcard_hover.png')}, () => {
-        $('#new-card-image').attr('src', './images/icons/newcard.png')
+    $('#new-card-image').attr('src', 'https://d20bzyreixm85i.cloudfront.net/images/icons/newcard_hover.png')}, () => {
+        $('#new-card-image').attr('src', 'https://d20bzyreixm85i.cloudfront.net/images/icons/newcard.png')
     }
 );
 

@@ -24,7 +24,7 @@ const uploadScreenshot = () => {
     })
 };
 
-const check = async () => {
+const checkCardStatus = async () => {
     const cardStatus = (await api.get('api/1.0/card/check', { params: { card: card } })).data.data;
     if (cardStatus.existence == false) location.replace('/404.html');
     const userInfo = await verifyUserToken(userToken);
@@ -36,7 +36,7 @@ const check = async () => {
     }
 };
 
-check().then( async (res) => {
+checkCardStatus().then( async (res) => {
     const cardOwner = res.owner;
     const user = res.user;
     const socket = io({
@@ -97,6 +97,15 @@ check().then( async (res) => {
 
     $('#send-btn').click( () => {
         if ($('#msg').val()) {
+            if (($('#msg').val()).includes('<script>')) {
+                swal({
+                    title: 'Notification',
+                    text: 'Invalid Input',
+                    type: 'warning',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
             sendMessage();
         } else {
             swal({
@@ -111,6 +120,15 @@ check().then( async (res) => {
     $('#msg').keypress(function(e) {
         let code = e.keyCode ? e.keyCode : e.which;
         if ( $('#msg').val() && code == 13 ) {
+            if (($('#msg').val()).includes('<script>')) {
+                swal({
+                    title: 'Notification',
+                    text: 'Invalid Input',
+                    type: 'warning',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
             e.preventDefault();
             sendMessage();
         } else if ( !$('#msg').val() && code == 13 ) {
@@ -294,7 +312,7 @@ check().then( async (res) => {
 
     $('#christmas_hat').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/christmas_hat.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/christmas_hat.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 150,
@@ -315,7 +333,7 @@ check().then( async (res) => {
 
     $('#mistletoe').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/mistletoe.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/mistletoe.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 150,
@@ -336,7 +354,7 @@ check().then( async (res) => {
 
     $('#christmas_presents').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/christmas_presents.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/christmas_presents.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 70,
@@ -357,7 +375,7 @@ check().then( async (res) => {
 
     $('#christmas_sock').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/christmas_sock.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/christmas_sock.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 150,
@@ -378,7 +396,7 @@ check().then( async (res) => {
 
     $('#candy_cane').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/candy_cane.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/candy_cane.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 150,
@@ -399,7 +417,7 @@ check().then( async (res) => {
 
     $('#gingerbread_man').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/gingerbread_man.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/gingerbread_man.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 150,
@@ -420,7 +438,7 @@ check().then( async (res) => {
 
     $('#santa_claus_1').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/santa_claus_1.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/santa_claus_1.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 70,
@@ -441,7 +459,7 @@ check().then( async (res) => {
 
     $('#santa_claus_2').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/santa_claus_2.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/santa_claus_2.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 70,
@@ -462,7 +480,7 @@ check().then( async (res) => {
 
     $('#christmas_decoration_border').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/christmas_decoration_border.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/christmas_decoration_border.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 8,
@@ -483,7 +501,7 @@ check().then( async (res) => {
 
     $('#christmas_light_border').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/christmas_light_border.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/christmas_light_border.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 10,
@@ -504,7 +522,7 @@ check().then( async (res) => {
 
     $('#heart').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/heart.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/heart.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 120,
@@ -525,7 +543,7 @@ check().then( async (res) => {
 
     $('#plane').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/plane.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/plane.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 140,
@@ -546,7 +564,7 @@ check().then( async (res) => {
 
     $('#sun').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/sun.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/sun.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 120,
@@ -567,7 +585,7 @@ check().then( async (res) => {
 
     $('#humanity').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/humanity.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/humanity.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 40,
@@ -588,7 +606,7 @@ check().then( async (res) => {
 
     $('#beach').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/beach.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/beach.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 70,
@@ -609,7 +627,7 @@ check().then( async (res) => {
 
     $('#mountain').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/mountain.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/mountain.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 45,
@@ -630,7 +648,7 @@ check().then( async (res) => {
 
     $('#photo').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/photo.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/photo.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 120,
@@ -651,7 +669,7 @@ check().then( async (res) => {
 
     $('#camera').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/camera.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/camera.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 140,
@@ -672,7 +690,7 @@ check().then( async (res) => {
 
     $('#trophy').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/trophy.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/trophy.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 120,
@@ -693,7 +711,7 @@ check().then( async (res) => {
 
     $('#leaf').click(() => {
         canvas.isDrawingMode = false;
-        const url = '../images/assets/icons/leaf.png';
+        const url = 'https://d20bzyreixm85i.cloudfront.net/images/assets/icons/leaf.png';
         fabric.Image.fromURL( url, async (item) => {
             const icon = item.set({
                 left: 120,
@@ -717,7 +735,7 @@ check().then( async (res) => {
     const addBackground = (filename) => {
         canvas.isDrawingMode = false;
         removePresentBackground();
-        const url = `../images/assets/backgrounds/${filename}`;
+        const url = `https://d20bzyreixm85i.cloudfront.net/images/assets/backgrounds/${filename}`;
         fabric.Image.fromURL( url, async (item) => {
             const background = item.set({
                 left: 0,
@@ -846,15 +864,11 @@ check().then( async (res) => {
     // Lock Object
     canvas.on('mouse:down', e => {
         if (e.target != null && canvas.getActiveObjects().length != 0) {
-            // e.target.on('mousedown', e2 => {             
-                // if (e2.transform) {
-                    const editObject = fabric.util.object.clone(canvas.getActiveObject());
-                    editObject.opacity = 0.5;
-                    editObject.selectable = false;
-                    editObject.evented = false;
-                    socket.emit('edit canvas', [{action: 'remove', object: e.target.objId}, { action: 'create', object: [JSON.stringify(editObject.toJSON())] }] );
-                // }
-            // });
+            const editObject = fabric.util.object.clone(canvas.getActiveObject());
+            editObject.opacity = 0.5;
+            editObject.selectable = false;
+            editObject.evented = false;
+            socket.emit('edit canvas', [{action: 'remove', object: e.target.objId}, { action: 'create', object: [JSON.stringify(editObject.toJSON())] }] );
         }
     });
     
@@ -879,7 +893,7 @@ check().then( async (res) => {
         const value = $('#brush-text').html();
         if (value == 'Brush On') {
             $('#brush-text').html('Brush Off');
-            $('#brush-image').attr('src', './images/icons/tool_brush_on.png');
+            $('#brush-image').attr('src', 'https://d20bzyreixm85i.cloudfront.net/images/icons/tool_brush_on.png');
             canvas.freeDrawingBrush.color = $('#color-fill').val();
             canvas.freeDrawingBrush.width = 5;
             canvas.isDrawingMode = true;
@@ -887,7 +901,7 @@ check().then( async (res) => {
         if (value == 'Brush Off') {
             canvas.isDrawingMode = false;
             $('#brush-text').html('Brush On');
-            $('#brush-image').attr('src', './images/icons/tool_brush.png');
+            $('#brush-image').attr('src', 'https://d20bzyreixm85i.cloudfront.net/images/icons/tool_brush.png');
         }
     });
 
@@ -926,7 +940,7 @@ const body = document.getElementsByTagName('body')[0];
 body.style.height = '100vh';
 window.addEventListener('load', () => {
     loader.style.display = 'none';
-    body.style.backgroundImage = "url('../../images/backgrounds/card_background.jpg')";
+    body.style.backgroundImage = "url('https://d20bzyreixm85i.cloudfront.net/images/backgrounds/card_background.jpg')";
     body.style.backgroundSize = '70%';
     body.style.height = 'unset';
 });
@@ -953,8 +967,8 @@ $('#share-link-btn').click(() => {
 $('#share-link-input').val(location.href);
 
 $('#share-link-btn').hover(() => {
-    $('#share-link-copy').attr('src', './images/icons/copy_hover.png')}, () => {
-        $('#share-link-copy').attr('src', './images/icons/copy.png')
+    $('#share-link-copy').attr('src', 'https://d20bzyreixm85i.cloudfront.net/images/icons/copy_hover.png')}, () => {
+        $('#share-link-copy').attr('src', 'https://d20bzyreixm85i.cloudfront.net/images/icons/copy.png')
     }
 );
 
