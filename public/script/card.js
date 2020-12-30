@@ -310,7 +310,7 @@ checkCardStatus().then( async (res) => {
                 height: height,
                 objId: generateId(),
                 user: user.name,
-                isBackground: true
+                isBackground: false
             });
             canvas.add(icon);
             canvas.setActiveObject(icon);
@@ -345,25 +345,6 @@ checkCardStatus().then( async (res) => {
             await uploadScreenshot();
         });
     };
-
-    // $('#color_background_1').click((e) => addBackground(e.target.id + '.png'));
-    // $('#color_background_2').click((e) => addBackground(e.target.id + '.png'));
-    // $('#color_background_3').click((e) => addBackground(e.target.id + '.png'));
-    // $('#color_background_4').click((e) => addBackground(e.target.id + '.png'));
-    // $('#color_background_5').click((e) => addBackground(e.target.id + '.png'));
-    // $('#color_background_6').click((e) => addBackground(e.target.id + '.png'));
-    // $('#background_1').click((e) => addBackground(e.target.id + '.jpg'));
-    // $('#background_2').click((e) => addBackground(e.target.id + '.jpg'));
-    // $('#background_3').click((e) => addBackground(e.target.id + '.jpg'));
-    // $('#background_4').click((e) => addBackground(e.target.id + '.jpg'));
-    // $('#background_5').click((e) => addBackground(e.target.id + '.jpg'));
-    // $('#background_6').click((e) => addBackground(e.target.id + '.jpg'));
-    // $('#background_7').click((e) => addBackground(e.target.id + '.jpg'));
-    // $('#background_8').click((e) => addBackground(e.target.id + '.jpg'));
-    // $('#background_9').click((e) => addBackground(e.target.id + '.jpg'));
-    // $('#background_10').click((e) => addBackground(e.target.id + '.jpg'));
-    // $('#background_11').click((e) => addBackground(e.target.id + '.jpg'));
-    // $('#background_12').click((e) => addBackground(e.target.id + '.jpg'));
 
     // Modify Object
     canvas.on('object:modified', async () => {
@@ -629,67 +610,6 @@ $('#share-link-input').val(location.href);
 
 $('#share-link-btn').hover(() => {
     $('#share-link-copy').attr('src', 'https://d20bzyreixm85i.cloudfront.net/images/icons/copy_hover.png')}, () => {
-        $('#share-link-copy').attr('src', 'https://d20bzyreixm85i.cloudfront.net/images/icons/copy.png')
+        $('#share-link-copy').attr('src', 'https://d20bzyreixm85i.cloudfront.net/images/icons/copy.png');
     }
 );
-
-// // --- SUBMENU ---
-
-// const fetchAssets = async (category) => {
-//     const assets = (await api.get(`api/1.0/asset/${category}`)).data.data.assets;
-//     return assets;
-// };
-
-// const hideSubmenu = () => {
-//     $('.list-group-item').addClass('tool-item');
-//     $('#explore-icon-box').addClass('hide');
-//     $('#explore-icon-tool').css('background-color', '#f8f9fa');
-//     $('#explore-background-box').addClass('hide');
-//     $('#explore-background-tool').css('background-color', '#f8f9fa');
-//     $('#color').removeClass('tool-item');
-// };
-
-// const submenuControl = async (target) => {
-//     hideSubmenu();
-//     if (target.classList.contains('explore-icon-tool')) {
-//         $('#explore-icon-tool').css('cssText', 'background-color: #d9e0e6 !important;');
-//         $('#explore-icon-box').removeClass('hide');
-//         $('.list-group-item').removeClass('tool-item');
-//         const iconAmount = (document.getElementById('asset-icon')).getElementsByClassName('explore-item').length;
-//         if (iconAmount == 0) {
-//             const assets = await fetchAssets('icon');
-//             assets.map((asset) => {
-//                 let element = $('<img>');
-//                 element.attr('id', asset.title);
-//                 element.attr('class', 'explore-item explore-icon explore-icon-tool');
-//                 element.attr('src', `https://d20bzyreixm85i.cloudfront.net/images/assets/icons/${asset.title + asset.format}`);
-//                 element.attr('data-format', asset.format);
-//                 element.attr('data-width', asset.width);
-//                 element.attr('data-height', asset.height);
-//                 element.attr('data-left', asset.left);
-//                 element.attr('data-top', asset.top);
-//                 $('#asset-icon').append(element);
-//             });
-//         }
-//         // $('#explore-icon-tool').css('cssText', 'background-color: #d9e0e6 !important;');
-//         // $('#explore-icon-box').removeClass('hide');
-//         // $('.list-group-item').removeClass('tool-item');
-
-//     } else if (target.classList.contains('explore-background-tool')) {
-//         $('#explore-background-tool').css('cssText', 'background-color: #d9e0e6 !important;');
-//         $('#explore-background-box').removeClass('hide');
-//         $('.list-group-item').removeClass('tool-item');
-//     }
-// };
-
-// $('#header').click(() => {
-//     hideSubmenu();
-// });
-
-// $('#wrapper').click((e) => {
-//     hideSubmenu();
-// });
-
-// $('#toolbox').click((e) => {
-//     submenuControl(e.target)
-// });
