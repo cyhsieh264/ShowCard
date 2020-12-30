@@ -320,27 +320,6 @@ checkCardStatus().then( async (res) => {
         });
     };
 
-    $('#christmas_hat').click((e) => addIcon(e.target.id + '.png', 256, 256, 150, 150)); 
-    $('#mistletoe').click((e) => addIcon(e.target.id + '.png', 256, 256, 150, 150));
-    $('#christmas_presents').click((e) => addIcon(e.target.id + '.png', 400, 400, 70, 100));
-    $('#christmas_sock').click((e) => addIcon(e.target.id + '.png', 256, 256, 150, 150));
-    $('#candy_cane').click((e) => addIcon(e.target.id + '.png', 256, 256, 150, 150));
-    $('#gingerbread_man').click((e) => addIcon(e.target.id + '.png', 256, 256, 150, 150));
-    $('#santa_claus_1').click((e) => addIcon(e.target.id + '.png', 400, 400, 70, 100));
-    $('#santa_claus_2').click((e) => addIcon(e.target.id + '.png', 400, 400, 70, 100));
-    $('#christmas_decoration_border').click((e) => addIcon(e.target.id + '.png', 524, 245, 8, 20));
-    $('#christmas_light_border').click((e) => addIcon(e.target.id + '.png', 520, 100, 10, 20));
-    $('#heart').click((e) => addIcon(e.target.id + '.png', 300, 300, 120, 120));
-    $('#plane').click((e) => addIcon(e.target.id + '.png', 256, 256, 140, 140));
-    $('#sun').click((e) => addIcon(e.target.id + '.png', 300, 300, 120, 120));
-    $('#humanity').click((e) => addIcon(e.target.id + '.png', 450, 450, 40, 40));
-    $('#beach').click((e) => addIcon(e.target.id + '.png', 400, 400, 70, 70));
-    $('#mountain').click((e) => addIcon(e.target.id + '.png', 450, 450, 45, 45));
-    $('#photo').click((e) => addIcon(e.target.id + '.png', 300, 300, 120, 120));
-    $('#camera').click((e) => addIcon(e.target.id + '.png', 256, 256, 140, 140));
-    $('#trophy').click((e) => addIcon(e.target.id + '.png', 300, 300, 120, 120));
-    $('#leaf').click((e) => addIcon(e.target.id + '.png', 300, 300, 120, 120));
-
     // === background === 
 
     const addBackground = (filename) => {
@@ -367,24 +346,24 @@ checkCardStatus().then( async (res) => {
         });
     };
 
-    $('#color_background_1').click((e) => addBackground(e.target.id + '.png'));
-    $('#color_background_2').click((e) => addBackground(e.target.id + '.png'));
-    $('#color_background_3').click((e) => addBackground(e.target.id + '.png'));
-    $('#color_background_4').click((e) => addBackground(e.target.id + '.png'));
-    $('#color_background_5').click((e) => addBackground(e.target.id + '.png'));
-    $('#color_background_6').click((e) => addBackground(e.target.id + '.png'));
-    $('#background_1').click((e) => addBackground(e.target.id + '.jpg'));
-    $('#background_2').click((e) => addBackground(e.target.id + '.jpg'));
-    $('#background_3').click((e) => addBackground(e.target.id + '.jpg'));
-    $('#background_4').click((e) => addBackground(e.target.id + '.jpg'));
-    $('#background_5').click((e) => addBackground(e.target.id + '.jpg'));
-    $('#background_6').click((e) => addBackground(e.target.id + '.jpg'));
-    $('#background_7').click((e) => addBackground(e.target.id + '.jpg'));
-    $('#background_8').click((e) => addBackground(e.target.id + '.jpg'));
-    $('#background_9').click((e) => addBackground(e.target.id + '.jpg'));
-    $('#background_10').click((e) => addBackground(e.target.id + '.jpg'));
-    $('#background_11').click((e) => addBackground(e.target.id + '.jpg'));
-    $('#background_12').click((e) => addBackground(e.target.id + '.jpg'));
+    // $('#color_background_1').click((e) => addBackground(e.target.id + '.png'));
+    // $('#color_background_2').click((e) => addBackground(e.target.id + '.png'));
+    // $('#color_background_3').click((e) => addBackground(e.target.id + '.png'));
+    // $('#color_background_4').click((e) => addBackground(e.target.id + '.png'));
+    // $('#color_background_5').click((e) => addBackground(e.target.id + '.png'));
+    // $('#color_background_6').click((e) => addBackground(e.target.id + '.png'));
+    // $('#background_1').click((e) => addBackground(e.target.id + '.jpg'));
+    // $('#background_2').click((e) => addBackground(e.target.id + '.jpg'));
+    // $('#background_3').click((e) => addBackground(e.target.id + '.jpg'));
+    // $('#background_4').click((e) => addBackground(e.target.id + '.jpg'));
+    // $('#background_5').click((e) => addBackground(e.target.id + '.jpg'));
+    // $('#background_6').click((e) => addBackground(e.target.id + '.jpg'));
+    // $('#background_7').click((e) => addBackground(e.target.id + '.jpg'));
+    // $('#background_8').click((e) => addBackground(e.target.id + '.jpg'));
+    // $('#background_9').click((e) => addBackground(e.target.id + '.jpg'));
+    // $('#background_10').click((e) => addBackground(e.target.id + '.jpg'));
+    // $('#background_11').click((e) => addBackground(e.target.id + '.jpg'));
+    // $('#background_12').click((e) => addBackground(e.target.id + '.jpg'));
 
     // Modify Object
     canvas.on('object:modified', async () => {
@@ -545,6 +524,75 @@ checkCardStatus().then( async (res) => {
             socket.emit('edit canvas', [{action: 'remove', object: object.objId}, { action: 'create', object: [JSON.stringify(object)] }] );
         }
     });
+
+    // --- SUBMENU ---
+
+    const fetchAssets = async (category) => {
+        const assets = (await api.get(`api/1.0/asset/${category}`)).data.data.assets;
+        return assets;
+    };
+
+    const hideSubmenu = () => {
+        $('.list-group-item').addClass('tool-item');
+        $('#explore-icon-box').addClass('hide');
+        $('#explore-icon-tool').css('background-color', '#f8f9fa');
+        $('#explore-background-box').addClass('hide');
+        $('#explore-background-tool').css('background-color', '#f8f9fa');
+        $('#color').removeClass('tool-item');
+    };
+
+    const submenuControl = async (target) => {
+        hideSubmenu();
+        if (target.classList.contains('explore-icon-tool')) {
+            $('#explore-icon-tool').css('cssText', 'background-color: #d9e0e6 !important;');
+            $('#explore-icon-box').removeClass('hide');
+            $('.list-group-item').removeClass('tool-item');
+            const iconAmount = (document.getElementById('asset-icon')).getElementsByClassName('explore-item').length;
+            if (iconAmount == 0) {
+                const assets = await fetchAssets('icon');
+                assets.map((asset) => {
+                    let element = $('<img>');
+                    element.attr('id', asset.title);
+                    element.attr('class', 'explore-item explore-icon-tool');
+                    element.attr('src', `https://d20bzyreixm85i.cloudfront.net/images/assets/icons/${asset.title+asset.format}`);
+                    $('#asset-icon').append(element);
+                    document.getElementById(asset.title).addEventListener('click', function () {
+                        addIcon(asset.title + asset.format, asset.width, asset.height, asset.left, asset.top);
+                    });
+                });
+            }
+        } else if (target.classList.contains('explore-background-tool')) {
+            $('#explore-background-tool').css('cssText', 'background-color: #d9e0e6 !important;');
+            $('#explore-background-box').removeClass('hide');
+            $('.list-group-item').removeClass('tool-item');
+            const backgroundAmount = (document.getElementById('asset-background')).getElementsByClassName('explore-item').length;
+            if (backgroundAmount == 0) {
+                const assets = await fetchAssets('background');
+                assets.map((asset) => {
+                    let element = $('<img>');
+                    element.attr('id', asset.title);
+                    element.attr('class', 'explore-item explore-background-tool');
+                    element.attr('src', `https://d20bzyreixm85i.cloudfront.net/images/assets/backgrounds/${asset.title+asset.format}`);
+                    $('#asset-background').append(element);
+                    document.getElementById(asset.title).addEventListener('click', function () {
+                        addBackground(asset.title + asset.format);
+                    });
+                });
+            }
+        }
+    };
+
+    $('#header').click(() => {
+        hideSubmenu();
+    });
+
+    $('#wrapper').click((e) => {
+        hideSubmenu();
+    });
+
+    $('#toolbox').click((e) => {
+        submenuControl(e.target)
+    });
 });
 
 // --- PRELOADER ---
@@ -585,37 +633,63 @@ $('#share-link-btn').hover(() => {
     }
 );
 
-// --- SUBMENU ---
-const hideSubmenu = () => {
-    $('.list-group-item').addClass('tool-item');
-    $('#explore-icon-box').addClass('hide');
-    $('#explore-icon-tool').css('background-color', '#f8f9fa');
-    $('#explore-background-box').addClass('hide');
-    $('#explore-background-tool').css('background-color', '#f8f9fa');
-    $('#color').removeClass('tool-item');
-};
+// // --- SUBMENU ---
 
-const submenuControl = (target) => {
-    hideSubmenu();
-    if (target.classList.contains('explore-icon-tool')) {
-        $('#explore-icon-tool').css('cssText', 'background-color: #d9e0e6 !important;');
-        $('#explore-icon-box').removeClass('hide');
-        $('.list-group-item').removeClass('tool-item');
-    } else if (target.classList.contains('explore-background-tool')) {
-        $('#explore-background-tool').css('cssText', 'background-color: #d9e0e6 !important;');
-        $('#explore-background-box').removeClass('hide');
-        $('.list-group-item').removeClass('tool-item');
-    }
-};
+// const fetchAssets = async (category) => {
+//     const assets = (await api.get(`api/1.0/asset/${category}`)).data.data.assets;
+//     return assets;
+// };
 
-$('#header').click(() => {
-    hideSubmenu();
-});
+// const hideSubmenu = () => {
+//     $('.list-group-item').addClass('tool-item');
+//     $('#explore-icon-box').addClass('hide');
+//     $('#explore-icon-tool').css('background-color', '#f8f9fa');
+//     $('#explore-background-box').addClass('hide');
+//     $('#explore-background-tool').css('background-color', '#f8f9fa');
+//     $('#color').removeClass('tool-item');
+// };
 
-$('#wrapper').click((e) => {
-    hideSubmenu();
-});
+// const submenuControl = async (target) => {
+//     hideSubmenu();
+//     if (target.classList.contains('explore-icon-tool')) {
+//         $('#explore-icon-tool').css('cssText', 'background-color: #d9e0e6 !important;');
+//         $('#explore-icon-box').removeClass('hide');
+//         $('.list-group-item').removeClass('tool-item');
+//         const iconAmount = (document.getElementById('asset-icon')).getElementsByClassName('explore-item').length;
+//         if (iconAmount == 0) {
+//             const assets = await fetchAssets('icon');
+//             assets.map((asset) => {
+//                 let element = $('<img>');
+//                 element.attr('id', asset.title);
+//                 element.attr('class', 'explore-item explore-icon explore-icon-tool');
+//                 element.attr('src', `https://d20bzyreixm85i.cloudfront.net/images/assets/icons/${asset.title + asset.format}`);
+//                 element.attr('data-format', asset.format);
+//                 element.attr('data-width', asset.width);
+//                 element.attr('data-height', asset.height);
+//                 element.attr('data-left', asset.left);
+//                 element.attr('data-top', asset.top);
+//                 $('#asset-icon').append(element);
+//             });
+//         }
+//         // $('#explore-icon-tool').css('cssText', 'background-color: #d9e0e6 !important;');
+//         // $('#explore-icon-box').removeClass('hide');
+//         // $('.list-group-item').removeClass('tool-item');
 
-$('#toolbox').click((e) => {
-    submenuControl(e.target)
-});
+//     } else if (target.classList.contains('explore-background-tool')) {
+//         $('#explore-background-tool').css('cssText', 'background-color: #d9e0e6 !important;');
+//         $('#explore-background-box').removeClass('hide');
+//         $('.list-group-item').removeClass('tool-item');
+//     }
+// };
+
+// $('#header').click(() => {
+//     hideSubmenu();
+// });
+
+// $('#wrapper').click((e) => {
+//     hideSubmenu();
+// });
+
+// $('#toolbox').click((e) => {
+//     submenuControl(e.target)
+// });

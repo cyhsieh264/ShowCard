@@ -128,49 +128,11 @@ canvas {
 
 /* submenu tab */
 
-#tab-demo { 
+.explore-tab { 
     width:180px; 
     min-height: 87vh;
     max-height: 88vh;
     overflow-y: scroll;
-}
-
-#tab-demo > ul{ 
-    display:block; 
-    margin:0;
-    list-style:none;
-}
-
-.tab-title{
-    list-style:none;
-    padding-inline-start: 0;
-    font-size: 14px;
-}
-
-#tab-demo > ul > li{ 
-    display:inline-block; 
-    vertical-align:top;
-    margin: 5px -1px -1px 0; 
-    height:25px; 
-    line-height:25px; 
-    padding:0 15px;
-    list-style:none; 
-    box-sizing:border-box;
-}
-
-#tab-demo >  ul > li a{ 
-    color: #483558;
-    text-decoration:none;
-}
-
-#tab-demo > ul > li.active{ 
-    border-bottom:1px solid #fff; 
-    background:#fff;
-}
-
-#tab-demo > .tab-inner{ 
-    clear:both; 
-    color:#483558;
 }
 
 .tab-inner{ 
