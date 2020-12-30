@@ -150,11 +150,6 @@ checkCardStatus().then( async (res) => {
         obj_type: null,
         object: null
     };
-    const setUserColor = async (num) => {
-        const colors = ['#6e6b64', '#1a326b', '#8c355e', '#cc9543', '#58ad49', '#f5e8cb', '#402745', '#6bc2a6', '#b2bad1', '#f5940c'];
-        const index = num % 10;
-        localStorage.setItem('color_'+card, colors[index]);
-    };
     if (!cardOwner) {
         const cardTitle = (await api.get('api/1.0/card/title', { params: { user: user.id } })).data.data.title;
         $('#card-title').val(cardTitle);
@@ -166,7 +161,6 @@ checkCardStatus().then( async (res) => {
         await api.post('api/1.0/card/create', newCard);
         await api.post('api/1.0/canvas/save', newCanvas);
         await uploadScreenshot();
-        await setUserColor(1);
     } else {
         const cardTitle = res.title;
         $('#card-title').val(cardTitle);
@@ -181,8 +175,6 @@ checkCardStatus().then( async (res) => {
                 await api.post('api/1.0/canvas/save', newCanvas);
             }
         }
-        const memberCount = (await api.patch('api/1.0/card/addmember', { card: card })).data.data.count;
-        await setUserColor(memberCount);
         const canvasLoad = (await api.get('api/1.0/canvas/load', { params: { card: card } })).data.data.step;
         parseObj(canvasLoad);
     }

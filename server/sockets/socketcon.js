@@ -1,5 +1,3 @@
-const Card = require('../models/card_model');
-
 const socketCon = (io) => {
     io.on('connection', (socket) => {
         const handshake = socket.handshake;
@@ -15,7 +13,6 @@ const socketCon = (io) => {
             socket.broadcast.in(handshake.auth.cid).emit('change canvas', canvas);
         });
         socket.on('disconnect', () => {
-            Card.reduceMember(handshake.auth.cid);
             socket.broadcast.in(handshake.auth.cid).emit('leave', `${handshake.auth.username}  Has Left`);
         });
     });

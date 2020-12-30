@@ -6,10 +6,9 @@ const {
     enrollCard,
     createCard,
     renameCard,
-    getTitle,
-    addMember
+    getTitle
 } = require('../controllers/card_controller');
-  
+
 router.route('/card/check')
     .get(wrapAsync(checkCard));
 
@@ -24,8 +23,5 @@ router.route('/card/create')
 
 router.route('/card/rename')
     .patch(wrapAsync(renameCard));
-
-router.route('/card/addmember')
-    .patch(wrapAsync(addMember));
 
 module.exports = router;

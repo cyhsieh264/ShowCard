@@ -24,7 +24,6 @@ const createCard = async (req, res) => {
         created_at: time,
         saved_at: time,
         shared: true,
-        member_count: 1,
         picture: `card_screenshot/${card.id}.jpg`
     };
     const { result, error } = await Card.create(data);
@@ -47,18 +46,10 @@ const getTitle = async (req, res) => {
     return res.status(200).json({ data: { title: result.title } });
 };
 
-const addMember = async (req, res) => {
-    const cardId = req.body.card;
-    const { result, error } = await Card.addMember(cardId);
-    if (error) return res.status(500).json({ error: 'Internal server error' });
-    return res.status(200).json({ data: { count: result } });
-};
-
 module.exports = {
     checkCard,
     enrollCard,
     createCard,
     renameCard,
-    getTitle,
-    addMember
+    getTitle
 };
