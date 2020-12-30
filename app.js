@@ -37,7 +37,8 @@ app.use('/api/' + API_VERSION,
         require('./server/routes/user_route'),
         require('./server/routes/studio_route'),
         require('./server/routes/card_route'),
-        require('./server/routes/canvas_route')
+        require('./server/routes/canvas_route'),
+        require('./server/routes/asset_route')
     ]
 );
 
@@ -48,7 +49,6 @@ app.use(function (req, res, next) {
 
 // Error handling
 app.use(function (err, req, res, next) {
-    console.log(err); // 之後刪掉
     const { stack } = err;
     writeLog(stack);
     res.status(500).json({ error: 'Internal server error' });
