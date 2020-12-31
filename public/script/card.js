@@ -537,9 +537,7 @@ checkCardStatus().then( async (res) => {
                     element.attr('class', 'explore-item explore-icon-tool');
                     element.attr('src', `https://d20bzyreixm85i.cloudfront.net/images/assets/icons/${asset.title+asset.format}`);
                     $('#asset-icon').append(element);
-                    document.getElementById(asset.title).addEventListener('click', function () {
-                        addIcon(asset.title + asset.format, asset.width, asset.height, asset.left, asset.top);
-                    });
+                    document.getElementById(asset.title).addEventListener('click', () => addIcon(asset.title + asset.format, asset.width, asset.height, asset.left, asset.top));
                 });
             }
         } else if (target.classList.contains('explore-background-tool')) {
@@ -553,11 +551,10 @@ checkCardStatus().then( async (res) => {
                     let element = $('<img>');
                     element.attr('id', asset.title);
                     element.attr('class', 'explore-item explore-background-tool');
-                    element.attr('src', `https://d20bzyreixm85i.cloudfront.net/images/assets/backgrounds/${asset.title+asset.format}`);
+                    if (asset.title == 'color_background_1') element.attr('src', `https://d20bzyreixm85i.cloudfront.net/images/assets/backgrounds/color_background_1_border'${asset.format}`);
+                    else element.attr('src', `https://d20bzyreixm85i.cloudfront.net/images/assets/backgrounds/${asset.title+asset.format}`);
                     $('#asset-background').append(element);
-                    document.getElementById(asset.title).addEventListener('click', function () {
-                        addBackground(asset.title + asset.format);
-                    });
+                    document.getElementById(asset.title).addEventListener('click', () => addBackground(asset.title + asset.format));
                 });
             }
         }
