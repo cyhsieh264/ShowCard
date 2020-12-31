@@ -12,9 +12,12 @@
   "dependencies": {
     "aws-sdk": "^2.813.0",
     "bcrypt": "^5.0.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "mocha": "^8.2.1",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.1",
     "socket.io": "^3.0.3"
