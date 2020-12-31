@@ -16,6 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `asset`
+--
+
+DROP TABLE IF EXISTS `asset`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `asset` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `file_format` varchar(10) DEFAULT NULL,
+  `category` varchar(30) DEFAULT NULL,
+  `width` int(11) DEFAULT NULL,
+  `height` int(11) DEFAULT NULL,
+  `left_position` int(11) DEFAULT NULL,
+  `top_position` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `asset`
+--
+
+LOCK TABLES `asset` WRITE;
+/*!40000 ALTER TABLE `asset` DISABLE KEYS */;
+INSERT INTO `asset` VALUES (1,'color_background_1','.png','background',540,540,0,0),(2,'color_background_2','.png','background',540,540,0,0),(3,'color_background_3','.png','background',540,540,0,0),(4,'color_background_4','.png','background',540,540,0,0),(5,'color_background_5','.png','background',540,540,0,0),(6,'color_background_6','.png','background',540,540,0,0),(7,'background_1','.jpg','background',540,540,0,0),(8,'background_2','.jpg','background',540,540,0,0),(9,'background_3','.jpg','background',540,540,0,0),(10,'background_4','.jpg','background',540,540,0,0),(11,'background_5','.jpg','background',540,540,0,0),(12,'background_6','.jpg','background',540,540,0,0),(13,'background_7','.jpg','background',540,540,0,0),(14,'background_8','.jpg','background',540,540,0,0),(15,'background_9','.jpg','background',540,540,0,0),(16,'background_10','.jpg','background',540,540,0,0),(17,'background_11','.jpg','background',540,540,0,0),(18,'background_12','.jpg','background',540,540,0,0),(19,'christmas_hat','.png','icon',256,256,150,150),(20,'mistletoe','.png','icon',256,256,150,150),(21,'christmas_presents','.png','icon',400,400,70,100),(22,'christmas_sock','.png','icon',256,256,150,150),(23,'candy_cane','.png','icon',256,256,150,150),(24,'gingerbread_man','.png','icon',256,256,150,150),(25,'santa_claus_1','.png','icon',400,400,70,100),(26,'santa_claus_2','.png','icon',400,400,70,100),(27,'christmas_decoration_border','.png','icon',524,245,8,20),(28,'christmas_light_border','.png','icon',520,100,10,20),(29,'heart','.png','icon',300,300,120,120),(30,'plane','.png','icon',256,256,140,140),(31,'sun','.png','icon',300,300,120,120),(32,'humanity','.png','icon',450,450,40,40),(33,'beach','.png','icon',400,400,70,70),(34,'mountain','.png','icon',450,450,45,45),(35,'photo','.png','icon',300,300,120,120),(36,'camera','.png','icon',256,256,140,140),(37,'trophy','.png','icon',300,300,120,120),(38,'leaf','.png','icon',300,300,120,120);
+/*!40000 ALTER TABLE `asset` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `canvas_done`
 --
 
@@ -30,6 +60,7 @@ CREATE TABLE `canvas_done` (
   `obj_id` varchar(255) DEFAULT NULL,
   `obj_type` varchar(255) DEFAULT NULL,
   `object` longtext,
+  `is_background` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `card_id` (`card_id`),
   KEY `user_id` (`user_id`),
@@ -62,6 +93,7 @@ CREATE TABLE `canvas_undo` (
   `obj_id` varchar(255) DEFAULT NULL,
   `obj_type` varchar(255) DEFAULT NULL,
   `object` longtext,
+  `is_background` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `card_id` (`card_id`),
   KEY `user_id` (`user_id`),
@@ -93,7 +125,6 @@ CREATE TABLE `card` (
   `created_at` bigint(20) DEFAULT NULL,
   `saved_at` bigint(20) DEFAULT NULL,
   `shared` tinyint(1) DEFAULT NULL,
-  `member_count` int(11) DEFAULT NULL,
   `picture` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `owner` (`owner`),
@@ -108,31 +139,6 @@ CREATE TABLE `card` (
 LOCK TABLES `card` WRITE;
 /*!40000 ALTER TABLE `card` DISABLE KEYS */;
 /*!40000 ALTER TABLE `card` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `template`
---
-
-DROP TABLE IF EXISTS `template`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `template` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
-  `objects` longtext,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `template`
---
-
-LOCK TABLES `template` WRITE;
-/*!40000 ALTER TABLE `template` DISABLE KEYS */;
-INSERT INTO `template` VALUES (1,'Santa Claus On The Way','\"[\'{\"type\":\"image\",\"version\":\"4.2.0\",\"originX\":\"left\",\"originY\":\"top\",\"left\":0,\"top\":0,\"width\":540,\"height\":540,\"fill\":\"rgb(0,0,0)\",\"stroke\":null,\"strokeWidth\":0,\"strokeDashArray\":null,\"strokeLineCap\":\"butt\",\"strokeDashOffset\":0,\"strokeLineJoin\":\"miter\",\"strokeMiterLimit\":4,\"scaleX\":1,\"scaleY\":1,\"angle\":0,\"flipX\":false,\"flipY\":false,\"opacity\":1,\"shadow\":null,\"visible\":true,\"backgroundColor\":\"\",\"fillRule\":\"nonzero\",\"paintFirst\":\"fill\",\"globalCompositeOperation\":\"source-over\",\"skewX\":0,\"skewY\":0,\"evented\":false,\"selectable\":true,\"objId\":\"r68z16iddato6mm\",\"user\":\"admin\",\"isBackground\":true,\"src\":\"http://localhost:3000/images/assets/backgrounds/color_background_2.png\",\"crossOrigin\":null,\"filters\":[]}\', \'{\"type\":\"image\",\"version\":\"4.2.0\",\"originX\":\"left\",\"originY\":\"top\",\"left\":291.07,\"top\":295.07,\"width\":400,\"height\":400,\"fill\":\"rgb(0,0,0)\",\"stroke\":null,\"strokeWidth\":0,\"strokeDashArray\":null,\"strokeLineCap\":\"butt\",\"strokeDashOffset\":0,\"strokeLineJoin\":\"miter\",\"strokeMiterLimit\":4,\"scaleX\":0.58,\"scaleY\":0.58,\"angle\":0,\"flipX\":false,\"flipY\":false,\"opacity\":1,\"shadow\":null,\"visible\":true,\"backgroundColor\":\"\",\"fillRule\":\"nonzero\",\"paintFirst\":\"fill\",\"globalCompositeOperation\":\"source-over\",\"skewX\":0,\"skewY\":0,\"evented\":true,\"selectable\":true,\"objId\":\"spqki0mzwzodqv\",\"user\":\"admin\",\"src\":\"http://localhost:3000/images/assets/icons/christmas_presents.png\",\"crossOrigin\":null,\"filters\":[]}\', \'{\"type\":\"image\",\"version\":\"4.2.0\",\"originX\":\"left\",\"originY\":\"top\",\"left\":7,\"top\":2,\"width\":520,\"height\":100,\"fill\":\"rgb(0,0,0)\",\"stroke\":null,\"strokeWidth\":0,\"strokeDashArray\":null,\"strokeLineCap\":\"butt\",\"strokeDashOffset\":0,\"strokeLineJoin\":\"miter\",\"strokeMiterLimit\":4,\"scaleX\":1,\"scaleY\":1,\"angle\":0,\"flipX\":false,\"flipY\":false,\"opacity\":1,\"shadow\":null,\"visible\":true,\"backgroundColor\":\"\",\"fillRule\":\"nonzero\",\"paintFirst\":\"fill\",\"globalCompositeOperation\":\"source-over\",\"skewX\":0,\"skewY\":0,\"evented\":true,\"selectable\":true,\"objId\":\"uq6o3zmbm3qp1fh\",\"user\":\"admin\",\"src\":\"http://localhost:3000/images/assets/icons/christmas_light_border.png\",\"crossOrigin\":null,\"filters\":[]}\', \'{\"type\":\"image\",\"version\":\"4.2.0\",\"originX\":\"left\",\"originY\":\"top\",\"left\":8,\"top\":284.81,\"width\":400,\"height\":400,\"fill\":\"rgb(0,0,0)\",\"stroke\":null,\"strokeWidth\":0,\"strokeDashArray\":null,\"strokeLineCap\":\"butt\",\"strokeDashOffset\":0,\"strokeLineJoin\":\"miter\",\"strokeMiterLimit\":4,\"scaleX\":0.64,\"scaleY\":0.64,\"angle\":0,\"flipX\":false,\"flipY\":false,\"opacity\":1,\"shadow\":null,\"visible\":true,\"backgroundColor\":\"\",\"fillRule\":\"nonzero\",\"paintFirst\":\"fill\",\"globalCompositeOperation\":\"source-over\",\"skewX\":0,\"skewY\":0,\"evented\":true,\"selectable\":true,\"objId\":\"ws9cc5uznzaqydm\",\"user\":\"admin\",\"src\":\"http://localhost:3000/images/assets/icons/santa_claus_1.png\",\"crossOrigin\":null,\"filters\":[]}\', \'{\"type\":\"image\",\"version\":\"4.2.0\",\"originX\":\"left\",\"originY\":\"top\",\"left\":38,\"top\":183,\"width\":256,\"height\":256,\"fill\":\"rgb(0,0,0)\",\"stroke\":null,\"strokeWidth\":0,\"strokeDashArray\":null,\"strokeLineCap\":\"butt\",\"strokeDashOffset\":0,\"strokeLineJoin\":\"miter\",\"strokeMiterLimit\":4,\"scaleX\":0.28,\"scaleY\":0.28,\"angle\":0,\"flipX\":false,\"flipY\":false,\"opacity\":1,\"shadow\":null,\"visible\":true,\"backgroundColor\":\"\",\"fillRule\":\"nonzero\",\"paintFirst\":\"fill\",\"globalCompositeOperation\":\"source-over\",\"skewX\":0,\"skewY\":0,\"evented\":true,\"selectable\":true,\"objId\":\"icrwzn36clp8vg\",\"user\":\"admin\",\"src\":\"http://localhost:3000/images/assets/icons/mistletoe_1.png\",\"crossOrigin\":null,\"filters\":[]}\', \'{\"type\":\"textbox\",\"version\":\"4.2.0\",\"originX\":\"left\",\"originY\":\"top\",\"left\":100.23,\"top\":198.14,\"width\":477.38,\"height\":45.2,\"fill\":\"#071b3b\",\"stroke\":null,\"strokeWidth\":1,\"strokeDashArray\":null,\"strokeLineCap\":\"butt\",\"strokeDashOffset\":0,\"strokeLineJoin\":\"miter\",\"strokeMiterLimit\":4,\"scaleX\":0.89,\"scaleY\":0.89,\"angle\":0,\"flipX\":false,\"flipY\":false,\"opacity\":1,\"shadow\":null,\"visible\":true,\"backgroundColor\":\"\",\"fillRule\":\"nonzero\",\"paintFirst\":\"fill\",\"globalCompositeOperation\":\"source-over\",\"skewX\":0,\"skewY\":0,\"text\":\"MERRY CHRISTMAS\",\"textAlign\":\"center\",\"textLines\":[\"MERRY CHRISTMAS\"],\"fontFamily\":\"Delicious\",\"evented\":true,\"selectable\":true,\"objId\":\"jkz6lkfe14krkba\",\"user\":\"admin\",\"isBackground\":false,\"styles\":{}}\'\n]\"'),(2,'X\'mas Greeting','\"[\'{\"type\":\"image\",\"version\":\"4.2.0\",\"originX\":\"left\",\"originY\":\"top\",\"left\":0,\"top\":0,\"width\":540,\"height\":540,\"fill\":\"rgb(0,0,0)\",\"stroke\":null,\"strokeWidth\":0,\"strokeDashArray\":null,\"strokeLineCap\":\"butt\",\"strokeDashOffset\":0,\"strokeLineJoin\":\"miter\",\"strokeMiterLimit\":4,\"scaleX\":1,\"scaleY\":1,\"angle\":0,\"flipX\":false,\"flipY\":false,\"opacity\":1,\"shadow\":null,\"visible\":true,\"backgroundColor\":\"\",\"fillRule\":\"nonzero\",\"paintFirst\":\"fill\",\"globalCompositeOperation\":\"source-over\",\"skewX\":0,\"skewY\":0,\"evented\":false,\"selectable\":true,\"objId\":\"e40n6t1nrqc993c\",\"user\":\"admin\",\"isBackground\":true,\"src\":\"http://localhost:3000/images/assets/backgrounds/background_1.jpg\",\"crossOrigin\":null,\"filters\":[]}\', \'{\"type\":\"image\",\"version\":\"4.2.0\",\"originX\":\"left\",\"originY\":\"top\",\"left\":418.69,\"top\":21,\"width\":256,\"height\":256,\"fill\":\"rgb(0,0,0)\",\"stroke\":null,\"strokeWidth\":0,\"strokeDashArray\":null,\"strokeLineCap\":\"butt\",\"strokeDashOffset\":0,\"strokeLineJoin\":\"miter\",\"strokeMiterLimit\":4,\"scaleX\":0.34,\"scaleY\":0.34,\"angle\":0,\"flipX\":false,\"flipY\":false,\"opacity\":1,\"shadow\":null,\"visible\":true,\"backgroundColor\":\"\",\"fillRule\":\"nonzero\",\"paintFirst\":\"fill\",\"globalCompositeOperation\":\"source-over\",\"skewX\":0,\"skewY\":0,\"evented\":true,\"selectable\":true,\"objId\":\"o5x9ccfkemmbzhm\",\"user\":\"admin\",\"src\":\"http://localhost:3000/images/assets/icons/mistletoe_1.png\",\"crossOrigin\":null,\"filters\":[]}\', \'{\"type\":\"image\",\"version\":\"4.2.0\",\"originX\":\"left\",\"originY\":\"top\",\"left\":18,\"top\":130,\"width\":520,\"height\":400,\"fill\":\"rgb(0,0,0)\",\"stroke\":null,\"strokeWidth\":0,\"strokeDashArray\":null,\"strokeLineCap\":\"butt\",\"strokeDashOffset\":0,\"strokeLineJoin\":\"miter\",\"strokeMiterLimit\":4,\"scaleX\":1,\"scaleY\":1,\"angle\":0,\"flipX\":false,\"flipY\":false,\"opacity\":1,\"shadow\":null,\"visible\":true,\"backgroundColor\":\"\",\"fillRule\":\"nonzero\",\"paintFirst\":\"fill\",\"globalCompositeOperation\":\"source-over\",\"skewX\":0,\"skewY\":0,\"evented\":true,\"selectable\":true,\"objId\":\"7nvb6jjydw99olz\",\"user\":\"admin\",\"src\":\"http://localhost:3000/images/assets/icons/christmas_greeting.png\",\"crossOrigin\":null,\"filters\":[]}\', \'{\"type\":\"textbox\",\"version\":\"4.2.0\",\"originX\":\"left\",\"originY\":\"top\",\"left\":53,\"top\":342.62,\"width\":300,\"height\":97.63,\"fill\":\"#171507\",\"stroke\":null,\"strokeWidth\":1,\"strokeDashArray\":null,\"strokeLineCap\":\"butt\",\"strokeDashOffset\":0,\"strokeLineJoin\":\"miter\",\"strokeMiterLimit\":4,\"scaleX\":1.17,\"scaleY\":1.17,\"angle\":0,\"flipX\":false,\"flipY\":false,\"opacity\":1,\"shadow\":null,\"visible\":true,\"backgroundColor\":\"\",\"fillRule\":\"nonzero\",\"paintFirst\":\"fill\",\"globalCompositeOperation\":\"source-over\",\"skewX\":0,\"skewY\":0,\"text\":\"Merry\\\\nChristmas\",\"textAlign\":\"center\",\"textLines\":[\"Merry\",\"Christmas\"],\"fontFamily\":\"Delicious\",\"evented\":true,\"selectable\":true,\"objId\":\"d30kibqt2oq9y1u\",\"user\":\"admin\",\"isBackground\":false,\"styles\":{}}\'\n]\"');
-/*!40000 ALTER TABLE `template` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -152,7 +158,7 @@ CREATE TABLE `user` (
   `active` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,7 +167,6 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'native','chiayi@test.com','ChiaYi','$2b$08$UruwzOTX2RGbH59gG.0ASeHw480nfAozBdtKH6LyPeOhlHfUK14FK',1608537332705,1),(2,'native','bba@test.com','bba','$2b$08$DTb46W28ClF1hJil0OKAhe2LAf.I3gPmVpHF4X7xNuBMhUO1DBHzm',1608537669130,1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -174,4 +179,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-21 16:09:14
+-- Dump completed on 2020-12-31 12:01:13
