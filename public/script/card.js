@@ -551,7 +551,7 @@ checkCardStatus().then( async (res) => {
                     let element = $('<img>');
                     element.attr('id', asset.title);
                     element.attr('class', 'explore-item explore-background-tool');
-                    if (asset.title == 'color_background_1') element.attr('src', `https://d20bzyreixm85i.cloudfront.net/images/assets/backgrounds/color_background_1_border'${asset.format}`);
+                    if (asset.title == 'color_background_1') element.attr('src', `https://d20bzyreixm85i.cloudfront.net/images/assets/backgrounds/color_background_1_border${asset.format}`);
                     else element.attr('src', `https://d20bzyreixm85i.cloudfront.net/images/assets/backgrounds/${asset.title+asset.format}`);
                     $('#asset-background').append(element);
                     document.getElementById(asset.title).addEventListener('click', () => addBackground(asset.title + asset.format));
