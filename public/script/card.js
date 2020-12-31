@@ -476,7 +476,7 @@ checkCardStatus().then( async (res) => {
         }
     });
 
-    $('#color-fill').change( async () => {
+    $('#color-fill').on('input', async () => {
         if (canvas.isDrawingMode) {
             canvas.freeDrawingBrush.color = $('#color-fill').val();
             canvas.freeDrawingBrush.width = 5;
