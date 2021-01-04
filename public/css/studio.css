@@ -1,5 +1,5 @@
 @import "common.css";
-@import "index.css";
+/* @import "index.css"; */
 
 body {
     background-color: #fdfdfd !important;
@@ -30,7 +30,7 @@ main {
 .description-container > h1 {
     font-size: 38px;
     color: #483558;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .studio-container {

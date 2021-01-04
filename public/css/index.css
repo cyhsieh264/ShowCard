@@ -4,7 +4,7 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600");
 
 /* Typography */
-html {
+/* html {
 font-size: 13pt; }
 @media screen and (max-width: 1680px) {
     html {
@@ -24,35 +24,35 @@ body, input, select, textarea {
 font-family: "Raleway", Arial, Helvetica, sans-serif;
 font-weight: 400;
 font-size: 1rem;
-line-height: 1.65; }
+line-height: 1.65; } */
 
-a {
+/* a {
 -moz-transition: color 0.2s ease-in-out;
 -webkit-transition: color 0.2s ease-in-out;
 -ms-transition: color 0.2s ease-in-out;
 transition: color 0.2s ease-in-out;
 text-decoration: underline; }
 a:hover {
-    text-decoration: none; }
+    text-decoration: none; } */
 
-strong, b {
-font-weight: 600; }
+/* strong, b {
+font-weight: 600; } */
 
-em, i {
+/* em, i {
 font-style: italic; }
 
 p {
-margin: 0 0 2rem 0; }
+margin: 0 0 2rem 0; } */
 
-header.special {
+/* header.special {
 text-align: center;
 margin-bottom: 4rem; }
 header.special p {
     max-width: 75%;
     margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto; } */
 
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h3, h4, h5, h6 {
 font-weight: 300;
 line-height: 1.5;
 text-transform: uppercase;
@@ -91,12 +91,12 @@ h2 {
     line-height: 1.5; }
 
 h3 {
-    font-size: 1.25rem; } }
-sub {
+    font-size: 1.25rem; } } */
+/* sub {
 font-size: 0.8rem;
 position: relative;
-top: 0.5rem; }
-
+top: 0.5rem; } */
+/* 
 sup {
 font-size: 0.8rem;
 position: relative;
@@ -114,9 +114,9 @@ border: solid 1px;
 font-family: "Courier New", monospace;
 font-size: 0.9rem;
 margin: 0 0.25rem;
-padding: 0.25rem 0.65rem; }
+padding: 0.25rem 0.65rem; } */
 
-pre {
+/* pre {
 -webkit-overflow-scrolling: touch;
 font-family: "Courier New", monospace;
 font-size: 0.9rem;
@@ -132,12 +132,12 @@ border: 0;
 border-bottom: solid 1px;
 margin: 2rem 0; }
 hr.major {
-    margin: 4rem 0; }
+    margin: 4rem 0; } */
 
-input, select, textarea {
-color: #555555; }
+/* input, select, textarea {
+color: #555555; } */
 
-a {
+/* a {
 color: #ce1b28; }
 
 strong, b {
@@ -154,20 +154,20 @@ background: rgba(0, 0, 0, 0.075);
 border-color: rgba(0, 0, 0, 0.25); }
 
 hr {
-border-bottom-color: rgba(0, 0, 0, 0.25); }
+border-bottom-color: rgba(0, 0, 0, 0.25); } */
 
-/* Inner */
+/* Inner
 .inner {
 margin: 0 auto;
 width: 75rem;
 max-width: calc(100% - 6rem); }
 @media screen and (max-width: 480px) {
 .inner {
-max-width: calc(100% - 3rem); } }
+max-width: calc(100% - 3rem); } } */
 
 /* Custom */
 
-#logo-image {
+/* #logo-image {
     width: 25px;
 }
 
@@ -223,7 +223,7 @@ nav>a:hover {
     -webkit-box-shadow: 0px 0px 9px 3px rgba(41,41,41,.25);
     -moz-box-shadow: 0px 0px 9px 3px rgba(41,41,41,.25);
     box-shadow: 0px 0px 9px 3px rgba(41,41,41,.25); 
-}
+} */
 
 /* cover */
 
@@ -318,9 +318,9 @@ footer .copyright{
     min-width: 100%
 }
 
-body {
+/* body {
     background-color: #fafafa;
-}
+} */
 
 .flex {
     -webkit-box-flex: 1;

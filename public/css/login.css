@@ -1,10 +1,15 @@
-@import "common.css";
+@import url(font-awesome.min.css);
+@import url("https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600");
 
 html,body{
 background-image: url('https://d20bzyreixm85i.cloudfront.net/images/backgrounds/login_background.jpg');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
+}
+
+.hide{
+	display: none;
 }
 
 .container{
@@ -169,6 +174,7 @@ nav>div {
 #header {
     font-size: large;
     font-weight: 500;
+    font-family: "Raleway", Arial, Helvetica, sans-serif;
     -moz-align-items: center;
     -webkit-align-items: center;
     -ms-align-items: center;
