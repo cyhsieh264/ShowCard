@@ -16,7 +16,8 @@ const mysqlConfig = {
         host: DB_HOST,
         user: DB_USERNAME,
         password: DB_PASSWORD,
-        database: DB_DATABASE_TEST
+        database: DB_DATABASE_TEST,
+        useConnectionPooling: true
     }
 };
 
@@ -29,7 +30,7 @@ const promiseRollback = promisify(mysqlCon.rollback).bind(mysqlCon);
 const promiseEnd = promisify(mysqlCon.end).bind(mysqlCon);
 
 module.exports={
-	core: mysql,
+    core: mysql,
     query: promiseQuery,
     transaction: promiseTransaction,
     commit: promiseCommit,
