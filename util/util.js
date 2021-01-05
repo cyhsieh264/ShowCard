@@ -27,13 +27,8 @@ const verifyToken = (token) => {
     });
 };
 
-const addTest = (a, b) => {
-    return a+b;
-};
-
 module.exports = {
     wrapAsync,
     writeLog,
-    verifyToken,
-    addTest
+    verifyToken
 };
