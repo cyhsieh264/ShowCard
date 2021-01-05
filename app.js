@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { NODE_ENV, PORT, PORT_TEST, PORT_PEER_SERVER, API_VERSION } = process.env;
+const { NODE_ENV, PORT, PORT_TEST, API_VERSION } = process.env;
 const port = NODE_ENV === 'test' ? PORT_TEST : PORT;
 const { writeLog } = require('./util/util');
 
