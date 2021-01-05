@@ -187,7 +187,7 @@ checkCardStatus().then( async (res) => {
     });
 
     socket.on('change title', title => {
-        $('#card-title').val(title + `（${res.ownername}'s card）`)
+        $('#card-title').val(title);
     })
     
     // --- CANVAS EVENT ---
