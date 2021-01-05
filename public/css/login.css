@@ -1,113 +1,112 @@
 @import url(font-awesome.min.css);
 @import url("https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600");
 
-html,body{
-background-image: url('https://d20bzyreixm85i.cloudfront.net/images/backgrounds/login_background.jpg');
-background-size: cover;
-background-repeat: no-repeat;
-height: 100%;
+html,
+body {
+    background-image: url("https://d20bzyreixm85i.cloudfront.net/images/backgrounds/login_background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
 }
 
-.hide{
-	display: none;
+.hide {
+    display: none;
 }
 
-.container{
-height: 100%;
-align-content: center;
+.container {
+    height: 100%;
+    align-content: center;
 }
 
-.signin-card{
-height: 430px;
-margin-top: auto;
-margin-bottom: auto;
-width: 400px;
-background-color: rgba(0,0,0,0.5) !important;
+.signin-card {
+    height: 430px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-.signup-card{
-height: 600px;
-margin-top: 5rem;
-margin-bottom: auto;
-width: 400px;
-background-color: rgba(0,0,0,0.5) !important;
+.signup-card {
+    height: 600px;
+    margin-top: 5rem;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-.social_icon span{
-font-size: 60px;
-margin-left: 10px;
-color: #FFC312;
+.social_icon span {
+    font-size: 60px;
+    margin-left: 10px;
+    color: #ffc312;
 }
 
-.social_icon span:hover{
-color: white;
-cursor: pointer;
+.social_icon span:hover {
+    color: white;
+    cursor: pointer;
 }
 
-.card-header{
-padding: 1.25rem 1.25rem;
-border-bottom: 0px;
+.card-header {
+    padding: 1.25rem 1.25rem;
+    border-bottom: 0px;
 }
 
-.card-header h3{
-color: white;
+.card-header h3 {
+    color: white;
 }
 
 .card-footer {
-padding: .75 rem;
-background-color: rgba(0,0,0,.03);
-border-top: 0px;
+    padding: 0.75 rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 0px;
 }
 
-.social_icon{
-position: absolute;
-right: 20px;
-top: -45px;
+.social_icon {
+    position: absolute;
+    right: 20px;
+    top: -45px;
 }
 
-.input-group-prepend span{
-width: 50px;
-background-color: #FFC312;
-color: black;
-border:0 !important;
+.input-group-prepend span {
+    width: 50px;
+    background-color: #ffc312;
+    color: black;
+    border: 0 !important;
 }
 
-input:focus{
-outline: 0 0 0 0  !important;
-box-shadow: 0 0 0 0 !important;
-
+input:focus {
+    outline: 0 0 0 0 !important;
+    box-shadow: 0 0 0 0 !important;
 }
 
-.remember{
-color: white;
+.remember {
+    color: white;
 }
 
-.remember input
-{
-width: 20px;
-height: 20px;
-margin-left: 15px;
-margin-right: 5px;
+.remember input {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    margin-right: 5px;
 }
 
-.login_btn{
-color: black;
-background-color: #FFC312;
-width: 358px;
-margin-bottom: 20px;
+.login_btn {
+    color: black;
+    background-color: #ffc312;
+    width: 358px;
+    margin-bottom: 20px;
 }
 
-.login_btn:hover{
-color: black;
-background-color: white;
+.login_btn:hover {
+    color: black;
+    background-color: white;
 }
 
-.links{
-color: white;
+.links {
+    color: white;
 }
 
-.links a{
-margin-left: 4px;
+.links a {
+    margin-left: 4px;
 }
 
 .alert-error {
@@ -119,8 +118,8 @@ margin-left: 4px;
 }
 
 #go-register {
-    color: #FFC312;
-    text-decoration: underline #FFC312;
+    color: #ffc312;
+    text-decoration: underline #ffc312;
     text-align: center;
 }
 
@@ -130,8 +129,8 @@ margin-left: 4px;
 }
 
 #go-login {
-    color: #FFC312;
-    text-decoration: underline #FFC312;
+    color: #ffc312;
+    text-decoration: underline #ffc312;
     text-align: center;
 }
 
@@ -144,7 +143,7 @@ margin-left: 4px;
     width: 24px;
 }
 
-/* ======header====== */
+/* header */
 
 #logo-image {
     width: 25px;
@@ -164,8 +163,8 @@ nav {
     margin-right: 50px;
 }
 
-nav>div {
-    margin-right:30px;
+nav > div {
+    margin-right: 30px;
     color: #483558;
     text-decoration: none;
     font-weight: 300;
@@ -197,6 +196,7 @@ nav>div {
     top: 0;
     width: 100%;
     z-index: 10001;
-    -webkit-box-shadow: 0px 0px 9px 3px rgba(41,41,41,.25);
-    -moz-box-shadow: 0px 0px 9px 3px rgba(41,41,41,.25);
-    box-shadow: 0px 0px 9px 3px rgba(41,41,41,.25); }
+    -webkit-box-shadow: 0px 0px 9px 3px rgba(41, 41, 41, 0.25);
+    -moz-box-shadow: 0px 0px 9px 3px rgba(41, 41, 41, 0.25);
+    box-shadow: 0px 0px 9px 3px rgba(41, 41, 41, 0.25);
+}

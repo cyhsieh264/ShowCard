@@ -1,12 +1,12 @@
 @import "common.css";
-/* @import "index.css"; */
 
-body,main {
+body,
+main {
     height: 100vh;
 }
 
 canvas {
-    box-shadow: 3px 3px 3px 2px rgba(41,41,41,.25); 
+    box-shadow: 3px 3px 3px 2px rgba(41, 41, 41, 0.25);
     width: 100%;
 }
 
@@ -68,7 +68,7 @@ canvas {
 
 #toolbox {
     background-color: #ffffff;
-    box-shadow: 2px 2px 2px 2px rgba(41,41,41,.25); 
+    box-shadow: 2px 2px 2px 2px rgba(41, 41, 41, 0.25);
     text-align: center;
     padding-top: 4rem;
     height: 100%;
@@ -128,14 +128,14 @@ canvas {
 
 /* submenu tab */
 
-.explore-tab { 
-    width:180px; 
+.explore-tab {
+    width: 180px;
     min-height: 87vh;
     max-height: 88vh;
     overflow-y: scroll;
 }
 
-.tab-inner{ 
+.tab-inner {
     min-height: 86vh;
     max-height: 87vh;
     display: contents;
@@ -155,7 +155,8 @@ canvas {
     border-radius: 8px 0px 0px 8px;
     height: 50px;
     margin-top: 50vh;
-    box-shadow: 2px 2px 2px rgba(41,41,41,.25), 2px 2px 2px rgba(41,41,41,.25), 2px 2px 2px rgba(41,41,41,.25);
+    box-shadow: 2px 2px 2px rgba(41, 41, 41, 0.25), 2px 2px 2px rgba(41, 41, 41, 0.25),
+        2px 2px 2px rgba(41, 41, 41, 0.25);
     width: 100px;
     background-color: #faf4f4;
 }
@@ -175,7 +176,7 @@ canvas {
     width: 18rem;
     height: calc(100vh - 4rem);
     background-color: rgb(254, 255, 255);
-    margin: 1rem 1rem 1rem 1rem; 
+    margin: 1rem 1rem 1rem 1rem;
     border-radius: 10px;
 }
 
@@ -203,7 +204,7 @@ canvas {
     display: flex;
     align-items: flex-end;
     flex-direction: column;
-    margin: 0px 19px 15px 50px; 
+    margin: 0px 19px 15px 50px;
 }
 
 .user-self-name {
@@ -233,7 +234,7 @@ canvas {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    margin: 0px 50px 15px 0px; 
+    margin: 0px 50px 15px 0px;
 }
 
 .user-other-name {
@@ -267,7 +268,7 @@ canvas {
     width: 18rem;
 }
 
-.send>input {
+.send > input {
     width: 13.5rem;
     height: 35px;
     border-radius: 10px;
