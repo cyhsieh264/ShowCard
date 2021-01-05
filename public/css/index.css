@@ -97,6 +97,14 @@ footer .copyright {
     color: #ffffff;
 }
 
+footer a {
+    color: gainsboro;
+}
+
+footer a:hover {
+    color: rgb(236, 202, 232);
+}
+
 /* carousel */
 
 .stretch-card > .card {
