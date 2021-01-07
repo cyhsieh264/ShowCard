@@ -103,7 +103,7 @@ const verify = async (req, res) => {
         const payload = await verifyToken(token);
         return res.status(200).json({ data: { payload } })
     } catch {
-        res.status(200).json( { message: 'Invalid user token' } );
+        return res.status(200).json( { message: 'Invalid user token' } );
     }
 };
 
