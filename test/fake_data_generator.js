@@ -1,43 +1,55 @@
 require('dotenv').config();
 const {NODE_ENV} = process.env;
-const bcrypt = require('bcrypt');
-const { assets } = require('./fake_data');
-const { query, end } = require('../server/models/mysqlcon');
-const salt = parseInt(process.env.BCRYPT_SALT);
+const { assets, objects } = require('./fake_data');
+const { query, transaction, commit, end } = require('../server/models/mysqlcon');
 
-async function _createFakeAsset () {
-    return await query('INSERT INTO `asset` (title, file_format, category, width, height, left_position, top_position) VALUES ?', [assets.map(asset => Object.values(asset))]);
-}
+const _createFakeAsset = async () => {
+    await transaction();
+    await query('INSERT INTO `asset` (title, file_format, category, width, height, left_position, top_position) VALUES ?', [assets.map(asset => Object.values(asset))]);
+    await commit();
+    return;
+};
 
-async function createFakeData() {
+const _createFakeCanvas = async () => {
+    await transaction();
+    await query('SET FOREIGN_KEY_CHECKS = ?', false);
+    await query('INSERT INTO `canvas_done` (card_id, user_id, action, obj_id, obj_type, object, is_background) VALUES ?', [objects.map(object => Object.values(object))]);
+    await query('SET FOREIGN_KEY_CHECKS = ?', true);
+    await commit();
+    return;
+};
+
+const createFakeData = () => {
     if (NODE_ENV !== 'test') {
         console.log('Not in test env');
         return;
     }
-    return await _createFakeAsset()
+    return _createFakeAsset()
+        .then(_createFakeCanvas)
         .catch(console.log);
-}
+};
 
-async function truncateFakeData() {
+const truncateFakeData = () => {
     if (NODE_ENV !== 'test') {
         console.log('Not in test env');
         return;
     }
-    const setForeignKey = (status) => {
-        return query('SET FOREIGN_KEY_CHECKS = ?', status);
+    const truncateTable = async (table) => {
+        await transaction();
+        await query('SET FOREIGN_KEY_CHECKS = ?', false);
+        await query(`TRUNCATE TABLE ${table}`);
+        await query('SET FOREIGN_KEY_CHECKS = ?', true);
+        await commit();
+        return;
     };
-    const truncateTable = (table) => {
-        return query(`TRUNCATE TABLE ${table}`);
-    };
-    return setForeignKey(0)
-        .then(truncateTable('asset'))
-        .then(setForeignKey(1))
+    return truncateTable('asset')
+        .then(truncateTable('canvas_done'))
         .catch(console.log);
-}
+};
 
-function closeConnection() {
+const closeConnection = () => {
     return end();
-}
+};
 
 // execute when called directly.
 if (require.main === module) {

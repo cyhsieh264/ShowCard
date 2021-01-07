@@ -46,6 +46,82 @@ const assets = [
     }
 ];
 
+const objects = [
+    {
+        card_id: '7h2c9vp2esgnh3d',
+        user_id: 1,
+        action: 'origin',
+        obj_id: null,
+        obj_type: null,
+        object: null,
+        is_background: null
+    },
+    {
+        card_id: '7h2c9vp2esgnh3d',
+        user_id: 2,
+        action: 'origin',
+        obj_id: null,
+        obj_type: null,
+        object: null,
+        is_background: null
+    },
+    {
+        card_id: '7h2c9vp2esgnh3d',
+        user_id: 1,
+        action: 'create',
+        obj_id: 'aaa',
+        obj_type: 'circle',
+        object: "{'object':'aaa1'}",
+        is_background: false
+    },
+    {
+        card_id: '7h2c9vp2esgnh3d',
+        user_id: 2,
+        action: 'create',
+        obj_id: 'bbb',
+        obj_type: 'path',
+        object: "{'object':'bbb1'}",
+        is_background: false
+    },
+    {
+        card_id: '7h2c9vp2esgnh3d',
+        user_id: 1,
+        action: 'modify',
+        obj_id: 'aaa',
+        obj_type: 'circle',
+        object: "{'object':'aaa2'}",
+        is_background: false
+    },
+    {
+        card_id: '7h2c9vp2esgnh3d',
+        user_id: 1,
+        action: 'recreate',
+        obj_id: 'bbb',
+        obj_type: 'path',
+        object: "{'object':'bbb1'}",
+        is_background: false
+    },
+    {
+        card_id: '7h2c9vp2esgnh3d',
+        user_id: 1,
+        action: 'modify',
+        obj_id: 'bbb',
+        obj_type: 'path',
+        object: "{'object':'bbb2'}",
+        is_background: false
+    },
+    {
+        card_id: '7h2c9vp2esgnh3d',
+        user_id: 2,
+        action: 'remove',
+        obj_id: 'aaa',
+        obj_type: 'circle',
+        object: "{'object':'aaa2'}",
+        is_background: false
+    }
+]
+
 module.exports = {
-    assets
+    assets,
+    objects
 };

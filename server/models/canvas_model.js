@@ -41,7 +41,7 @@ const check = async(card, user) => {
         else return { result: true };
     } catch (error) {
         writeLog(error.stack);
-        return { error }
+        return { error };
     }
 };
 
@@ -53,7 +53,7 @@ const load = async(cardId) => {
         return { result: result };
     } catch (error) {
         writeLog(error.stack);
-        return { error }
+        return { error };
     }
 };
 
