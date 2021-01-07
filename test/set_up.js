@@ -2,7 +2,7 @@
 const chai = require('chai');
 // const chaiHttp = require('chai-http');
 const {NODE_ENV} = process.env;
-// const {truncateFakeData, createFakeData} = require('./fake_data_generator');
+const {truncateFakeData, createFakeData} = require('./fake_data_generator');
 
 // chai.use(chaiHttp);
 
@@ -13,8 +13,8 @@ before(async () => {
     if (NODE_ENV !== 'test') {
         throw 'Not in test env';
     }
-    // await truncateFakeData();
-    // await createFakeData();
+    await truncateFakeData();
+    await createFakeData();
 });
 
 module.exports = {

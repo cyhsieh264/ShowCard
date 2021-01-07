@@ -81,23 +81,21 @@ const undo = async(card, user) => {
             await commit();
             return undo(card, user);
         }
-        // 如果同步加上順序的資訊，在這要做一次query，取得順序，然後塞進result
         let result;
         if (lastStep.is_background == true) {
-            // 如果上一步是background，還要再確認先前的background狀態
             const formerBackground = await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `is_background` = ? ORDER BY `id` DESC LIMIT 2', [card, true]);
             const formerUserBackground = (await query('SELECT * FROM `canvas_done` WHERE `card_id` = ? AND `user_id` = ? AND `is_background` = ? ORDER BY `id` DESC LIMIT 2', [card, user, true]))[1];
-            if (formerBackground.length == 1) {  // 沒有formerBackground[1]
+            if (formerBackground.length == 1) {  
                 result = [
                     {action: 'remove', object: lastStep.obj_id}
                 ];
             } else if (formerUserBackground) {
                 result = [
-                    {action: 'create', object: [formerUserBackground.object]}  // 去到前端後，在新增之前會自動移除當前background
+                    {action: 'create', object: [formerUserBackground.object]}  
                 ];
-            } else {  // 有formerBackground[1]，而且user已經沒有前一步
+            } else { 
                 result = [
-                    {action: 'create', object: [formerBackground[0].object]}  // 去到前端後，在新增之前會自動移除當前background
+                    {action: 'create', object: [formerBackground[0].object]}  
                 ];
             }
         } else if (lastStep.action == 'create') {
