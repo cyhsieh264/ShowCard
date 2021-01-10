@@ -1,42 +1,49 @@
-# [ShowCard](https://showcard.online/ "ShowCard") 
+# [ShowCard](https://showcard.online/ "ShowCard") #
 A Graphic design platform for creating E-card, integrated with useful canvas tools and co-working mechanism.
 <br><br/>
 [![demo_cover](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "demo")](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "demo")
-<br><br/>
-## Website
-**WebSite URL:** <br><br/>
-https://showcard.online <br><br/>
+<br>
+## Website ##
+**WebSite URL:**<br>
+https://showcard.online <br>
 
-**Test Account:** <br><br/>
-E-mail: guest@showcard.com <br><br/>
+**Test Account:** <br>
+E-mail: guest@showcard.com<br>
 Password: guest3579
-## Technologies
-**Back-End** <br><br/>
+## Technologies ##
+**Back-End**
 - Node.js / Express.js
 - RESTful API
-**Front-End** <br><br/>
+
+**Front-End**
 - HTML
 - CSS
 - JavaScript
 - Bootstrap
 - AJAX
-**Cloud Service (AWS)** <br><br/>
+
+**Cloud Service (AWS)**
 - Elastic Compute Cloud (EC2)
 - Simple Storage Service (S3)
 - Relational Database Service (RDS)
 - CloudFront
-**Database** <br><br/>
+
+**Database**
 - MySQL
-**WebSocket** <br><br/>
+
+**WebSocket** 
 - Socket.IO
-**Networking** <br><br/>
+
+**Networking** 
 - HTTP & HTTPS
 - Domain Name System
 - Nginx
-**Test** <br><br/>
+
+**Test** 
 - Mocha
 - Chai
-**Others** <br><br/>
+
+**Others** 
 - Design Pattern: MVC
 - OAuth: Google Login API
 ## Architecture
