@@ -142,7 +142,7 @@ main {
 }
 
 .home-content-description {
-    width: 450px;
+    width: 100%;
     padding: 1rem;
     display: flex;
     flex-direction: column;
