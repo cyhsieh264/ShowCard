@@ -76,8 +76,8 @@ main {
 /* carousel */
 
 .card-title {
-    font-size: 21px;
-    font-weight: 350;
+    font-size: 22px;
+    font-weight: 380;
 }
 
 .stretch-card > .card {
@@ -128,7 +128,8 @@ main {
 /* content */
 
 .feature-title {
-    font-size: 50px;
+    padding-top: 1.5rem;
+    font-size: 44px;
     font-weight: 380;
 }
 
