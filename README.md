@@ -1,15 +1,16 @@
 # ShowCard #
 A Graphic design platform for creating E-card, integrated with useful canvas tools and co-working mechanism.
-
-Try It Now → 
-<a href="https://showcard.online" target="_blank">https://showcard.online</a>
-
-[![demo_cover](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "demo")](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "demo")
-
+<br><br/>
+**WebSite:** <br>
+https://showcard.online
+<br><br/>
 **Test Account:** <br>
 E-mail: guest@showcard.com<br>
-Password: guest3579<br>
+Password: guest3579
+<br><br/>
 
+[![demo_cover](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "demo")](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "demo")
+<br><br/>
 ## Table of Contents ##
 - [Technologies](#Technologies)
 - [Architecture](#Architecture)
