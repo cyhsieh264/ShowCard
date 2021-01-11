@@ -1,7 +1,7 @@
 # ShowCard (<a href="https://showcard.online" target="_blank"> Link </a>) #
 A Graphic design platform for creating E-card, integrated with useful canvas tools and co-working mechanism.
 <br><br/>
-[![demo_cover](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "demo")](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "demo")
+[![demo_cover](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "ShowCard Demo")](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "ShowCard Demo")
 <br><br/>
 **WebSite:** <br>
 https://showcard.online
@@ -54,21 +54,21 @@ Password: guest3579
 - Design Pattern: MVC
 - OAuth: Google Login API
 ## Architecture
-picture url
+[![ShowCard Architecture](https://d20bzyreixm85i.cloudfront.net/demo/demo_architecture.png "ShowCard Architecture")](https://d20bzyreixm85i.cloudfront.net/demo/demo_architecture.png "ShowCard Architecture")
 ## Database Schema ##
-picture url
+[![ShowCard Database Schema](https://d20bzyreixm85i.cloudfront.net/demo/demo_database.png "ShowCard Database Schema")](https://d20bzyreixm85i.cloudfront.net/demo/demo_database.png "ShowCard Database Schema")
 ## Features ##
 - **Canvas Editor With Useful Tools** <br><br/>
-[![demo_cover](https://d20bzyreixm85i.cloudfront.net/demo/demo_1.gif "demo1")](https://d20bzyreixm85i.cloudfront.net/demo/demo_1.gif "demo1")
+[![ShowCard Feature1](https://d20bzyreixm85i.cloudfront.net/demo/demo_1.gif "ShowCard Feature1")](https://d20bzyreixm85i.cloudfront.net/demo/demo_1.gif "ShowCard Feature1")
 <br><br/>
 - **Real-Time Chat & Collaboration** <br><br/>
-[![demo_cover](https://d20bzyreixm85i.cloudfront.net/demo/demo_2.gif "demo2")](https://d20bzyreixm85i.cloudfront.net/demo/demo_2.gif "demo2")
+[![ShowCard Feature2](https://d20bzyreixm85i.cloudfront.net/demo/demo_2.gif "ShowCard Feature2")](https://d20bzyreixm85i.cloudfront.net/demo/demo_2.gif "ShowCard Feature2")
 <br><br/>
 - **Multi-User Undo & Redo** <br><br/>
-[![demo_cover](https://d20bzyreixm85i.cloudfront.net/demo/demo_3.gif "demo3")](https://d20bzyreixm85i.cloudfront.net/demo/demo_3.gif "demo3")
+[![ShowCard Feature3](https://d20bzyreixm85i.cloudfront.net/demo/demo_3.gif "ShowCard Feature3")](https://d20bzyreixm85i.cloudfront.net/demo/demo_3.gif "ShowCard Feature3")
 <br><br/>
 - **Personal Studio & Free Download** <br><br/>
-[![demo_cover](https://d20bzyreixm85i.cloudfront.net/demo/demo_4.gif "demo4")](https://d20bzyreixm85i.cloudfront.net/demo/demo_4.gif "demo4")
+[![ShowCard Feature1](https://d20bzyreixm85i.cloudfront.net/demo/demo_4.gif "ShowCard Feature4")](https://d20bzyreixm85i.cloudfront.net/demo/demo_4.gif "ShowCard Feature4")
 <br><br/>
 ## Contact
 
