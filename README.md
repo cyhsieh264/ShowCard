@@ -9,7 +9,7 @@ https://showcard.online
 **Test Account:** <br>
 E-mail: guest@showcard.com<br>
 Password: guest3579
-<br><br/>
+
 ## Table of Contents ##
 - [Technologies](#Technologies)
 - [Architecture](#Architecture)
