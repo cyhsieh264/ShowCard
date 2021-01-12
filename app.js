@@ -10,18 +10,6 @@ app.use(express.static('public'));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: false, limit: '50mb'} ));
 
-// CORS
-app.use((req, res, next) => {
-    const allowedOrigins = ['https://showcard.online', 'https://showcard.online'];
-    const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    }
-    next();
-});
-
 // Json Setting
 app.set('json spaces', 2);
 
