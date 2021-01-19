@@ -1,6 +1,5 @@
 # <a href="https://showcard.online" target="_blank"> ShowCard </a> #
 A Graphic design platform for creating E-card, integrated with canvas editor and collaboration mechanism. Supported real-time chat and multi-user's operation of undo and redo. 
-
 <br><br/>
 [![demo_cover](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "ShowCard Demo")](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "ShowCard Demo")
 <br><br/>
