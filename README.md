@@ -1,5 +1,6 @@
 # <a href="https://showcard.online" target="_blank"> ShowCard </a> #
-A Graphic design platform for creating E-card, integrated with useful canvas tools and co-working mechanism.
+A Graphic design platform for creating E-card, integrated with canvas editor and collaboration mechanism. Supported real-time chat and multi-user's operation of undo and redo. 
+
 <br><br/>
 [![demo_cover](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "ShowCard Demo")](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "ShowCard Demo")
 <br><br/>
@@ -58,7 +59,7 @@ Password: guest3579
 ## Database Schema ##
 [![ShowCard Database Schema](https://d20bzyreixm85i.cloudfront.net/demo/demo_database.png "ShowCard Database Schema")](https://d20bzyreixm85i.cloudfront.net/demo/demo_database.png "ShowCard Database Schema")
 ## Features ##
-- **Canvas Editor With Useful Tools** <br><br/>
+- **Canvas Editor With Useful Tools & Free Assets** <br><br/>
 [![ShowCard Feature1](https://d20bzyreixm85i.cloudfront.net/demo/demo_1.gif "ShowCard Feature1")](https://d20bzyreixm85i.cloudfront.net/demo/demo_1.gif "ShowCard Feature1")
 <br><br/>
 - **Real-Time Chat & Collaboration** <br><br/>
