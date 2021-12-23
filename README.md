@@ -1,7 +1,7 @@
 # <a href="https://showcard.online" target="_blank"> ShowCard </a> #
 A Graphic design platform for creating E-card, integrated with canvas editor and collaboration mechanism. Supported real-time chat and multi-user's operation of undo and redo. 
 <br><br/>
-[![demo_cover](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "ShowCard Demo")](https://d20bzyreixm85i.cloudfront.net/demo/demo.gif "ShowCard Demo")
+[![demo_cover](https://i.imgur.com/qJ9pRML.gif "ShowCard Demo")](https://i.imgur.com/qJ9pRML.gif "ShowCard Demo")
 <br><br/>
 **WebSite:** <br>
 https://showcard.online
@@ -59,16 +59,16 @@ Password: guest3579
 [![ShowCard Database Schema](https://d20bzyreixm85i.cloudfront.net/demo/demo_database.png "ShowCard Database Schema")](https://d20bzyreixm85i.cloudfront.net/demo/demo_database.png "ShowCard Database Schema")
 ## Features ##
 - **Canvas Editor With Useful Tools & Free Assets** <br><br/>
-[![ShowCard Feature1](https://d20bzyreixm85i.cloudfront.net/demo/demo_1.gif "ShowCard Feature1")](https://d20bzyreixm85i.cloudfront.net/demo/demo_1.gif "ShowCard Feature1")
+[![ShowCard Feature1](https://i.imgur.com/pZ1ZMaF.gifv "ShowCard Feature1")](https://i.imgur.com/pZ1ZMaF.gifv "ShowCard Feature1")
 <br><br/>
 - **Real-Time Chat & Collaboration** <br><br/>
-[![ShowCard Feature2](https://d20bzyreixm85i.cloudfront.net/demo/demo_2.gif "ShowCard Feature2")](https://d20bzyreixm85i.cloudfront.net/demo/demo_2.gif "ShowCard Feature2")
+[![ShowCard Feature2](https://i.imgur.com/piRjjoO.gif "ShowCard Feature2")](https://i.imgur.com/piRjjoO.gif "ShowCard Feature2")
 <br><br/>
 - **Multi-User Undo & Redo** <br><br/>
-[![ShowCard Feature3](https://d20bzyreixm85i.cloudfront.net/demo/demo_3.gif "ShowCard Feature3")](https://d20bzyreixm85i.cloudfront.net/demo/demo_3.gif "ShowCard Feature3")
+[![ShowCard Feature3](https://i.imgur.com/HBS7isq.gif "ShowCard Feature3")](https://i.imgur.com/HBS7isq.gif "ShowCard Feature3")
 <br><br/>
 - **Personal Studio & Free Download** <br><br/>
-[![ShowCard Feature1](https://d20bzyreixm85i.cloudfront.net/demo/demo_4.gif "ShowCard Feature4")](https://d20bzyreixm85i.cloudfront.net/demo/demo_4.gif "ShowCard Feature4")
+[![ShowCard Feature1](https://i.imgur.com/vNev1jT.gif "ShowCard Feature4")](https://i.imgur.com/vNev1jT.gif "ShowCard Feature4")
 <br><br/>
 ## Contact
 
