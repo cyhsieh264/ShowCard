@@ -1,14 +1,8 @@
-# <a href="https://showcard.online" target="_blank"> ShowCard </a> #
+# ShowCard #
 A Graphic design platform for creating E-card, integrated with canvas editor and collaboration mechanism. Supported real-time chat and multi-user's operation of undo and redo. 
 <br><br/>
 [![demo_cover](https://i.imgur.com/qJ9pRML.gif "ShowCard Demo")](https://i.imgur.com/qJ9pRML.gif "ShowCard Demo")
 <br><br/>
-**WebSite:** <br>
-https://showcard.online
-<br><br/>
-**Test Account:** <br>
-E-mail: guest@showcard.com<br>
-Password: guest3579
 
 ## Table of Contents ##
 - [Technologies](#Technologies)
@@ -59,7 +53,7 @@ Password: guest3579
 [![ShowCard Database Schema](https://d20bzyreixm85i.cloudfront.net/demo/demo_database.png "ShowCard Database Schema")](https://d20bzyreixm85i.cloudfront.net/demo/demo_database.png "ShowCard Database Schema")
 ## Features ##
 - **Canvas Editor With Useful Tools & Free Assets** <br><br/>
-[![ShowCard Feature1](https://i.imgur.com/pZ1ZMaF.gifv "ShowCard Feature1")](https://i.imgur.com/pZ1ZMaF.gifv "ShowCard Feature1")
+[![ShowCard Feature1](https://i.imgur.com/pZ1ZMaF.gif "ShowCard Feature1")](https://i.imgur.com/pZ1ZMaF.gif "ShowCard Feature1")
 <br><br/>
 - **Real-Time Chat & Collaboration** <br><br/>
 [![ShowCard Feature2](https://i.imgur.com/piRjjoO.gif "ShowCard Feature2")](https://i.imgur.com/piRjjoO.gif "ShowCard Feature2")
