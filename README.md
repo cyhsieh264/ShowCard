@@ -45,12 +45,12 @@ A Graphic design platform for creating E-card, integrated with canvas editor and
 - Chai
 
 **Others** 
-- Design Pattern: MVC
+- Architectural Pattern: MVC
 - OAuth: Google Login API
 ## Architecture
-[![ShowCard Architecture](https://d20bzyreixm85i.cloudfront.net/demo/demo_architecture.png "ShowCard Architecture")](https://d20bzyreixm85i.cloudfront.net/demo/demo_architecture.png "ShowCard Architecture")
+[![ShowCard Architecture](https://i.imgur.com/nYdASV0.png "ShowCard Architecture")](https://i.imgur.com/nYdASV0.png "ShowCard Architecture")
 ## Database Schema ##
-[![ShowCard Database Schema](https://d20bzyreixm85i.cloudfront.net/demo/demo_database.png "ShowCard Database Schema")](https://d20bzyreixm85i.cloudfront.net/demo/demo_database.png "ShowCard Database Schema")
+[![ShowCard Database Schema](https://i.imgur.com/elTsOHx.png "ShowCard Database Schema")](https://i.imgur.com/elTsOHx.png "ShowCard Database Schema")
 ## Features ##
 - **Canvas Editor With Useful Tools & Free Assets** <br><br/>
 [![ShowCard Feature1](https://i.imgur.com/pZ1ZMaF.gif "ShowCard Feature1")](https://i.imgur.com/pZ1ZMaF.gif "ShowCard Feature1")
